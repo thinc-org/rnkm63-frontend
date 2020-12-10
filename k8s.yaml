@@ -6,18 +6,15 @@ metadata:
   namespace: 'default'
   labels:
     app: 'rnkm63-frontend'
-    stage: 'dev'
 spec:
   replicas: 3
   selector:
     matchLabels:
       app: 'rnkm63-frontend'
-      stage: 'dev'
   template:
     metadata:
       labels:
         app: 'rnkm63-frontend'
-        stage: 'dev'
     spec:
       containers:
         - name: 'frontend-sha256-1'
@@ -30,7 +27,6 @@ metadata:
   namespace: 'default'
   labels:
     app: 'rnkm63-frontend'
-    stage: 'dev'
 spec:
   scaleTargetRef:
     kind: 'Deployment'

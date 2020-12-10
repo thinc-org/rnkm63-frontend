@@ -13,3 +13,7 @@ steps:
       - --image=gcr.io/rnkm63/frontend:$BRANCH_NAME
       - --location=asia-southeast1-b
       - --cluster=rnkm63
+      - --namespace=dev
+
+images:
+  - 'gcr.io/rnkm63/frontend:$BRANCH_NAME'
