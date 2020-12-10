@@ -1,0 +1,15 @@
+steps:
+  # build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/rnkm63/frontend:$BRANCH_NAME', '.']
+    # push container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/rnkm63/frontend:$BRANCH_NAME']
+    # deploy container image to GKE
+  - name: 'gcr.io/cloud-builders/gke-deploy'
+    args:
+      - run
+      - --filename=k8s.yaml
+      - --image=gcr.io/rnkm63/frontend:$BRANCH_NAME
+      - --location=asia-southeast1-b
+      - --cluster=rnkm63
