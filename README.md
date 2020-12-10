@@ -1,6 +1,22 @@
-# Getting Started with Create React App
+# RNKM63 - frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+rnkm63-frontend-project
+
+## Table of Contents
+
+- [Deployment](#deployment)
+- [Available Scripts](#available-scripts)
+- [Learn More](#learn-more)
+
+## Deployment
+
+On staging, it will automatically deploy after the commit was push to `dev` branch.
+
+- you can see the `dev` branch look in [https://dev.rubnongkaomai.com](https://dev.rubnongkaomai.com)
+
+On production, it will automatically deploy after the commit was push to `master` branch.
+
+- you can see the `master` branch look in [https://rubnongkaomai.com](https://dev.rubnongkaomai.com)
 
 ## Available Scripts
 
