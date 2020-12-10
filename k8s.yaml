@@ -1,0 +1,41 @@
+---
+apiVersion: 'apps/v1'
+kind: 'Deployment'
+metadata:
+  name: 'rnkm63-frontend'
+  namespace: 'default'
+  labels:
+    app: 'rnkm63-frontend'
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: 'rnkm63-frontend'
+  template:
+    metadata:
+      labels:
+        app: 'rnkm63-frontend'
+    spec:
+      containers:
+        - name: 'frontend-sha256-1'
+          image: 'gcr.io/rnkm63/frontend:latest'
+---
+apiVersion: 'autoscaling/v2beta1'
+kind: 'HorizontalPodAutoscaler'
+metadata:
+  name: 'rnkm63-frontend-hpa-pzgm'
+  namespace: 'default'
+  labels:
+    app: 'rnkm63-frontend'
+spec:
+  scaleTargetRef:
+    kind: 'Deployment'
+    name: 'rnkm63-frontend'
+    apiVersion: 'apps/v1'
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+    - type: 'Resource'
+      resource:
+        name: 'cpu'
+        targetAverageUtilization: 80
