@@ -4,7 +4,7 @@ import "./Form.css";
 import { useTranslation } from "react-i18next";
 import { Loading } from "../../common";
 
-function FormLocaleHOC() {
+function FormSuspenseHOC() {
   return (
     <React.Suspense fallback={Loading}>
       <Form />
@@ -13,7 +13,7 @@ function FormLocaleHOC() {
 }
 
 function Form() {
-  const { t, i18n } = useTranslation("form");
+  const { t } = useTranslation("form");
   return (
     <div className="Form">
       <h1>{t("title")}</h1>
@@ -21,4 +21,4 @@ function Form() {
   );
 }
 
-export default FormLocaleHOC;
+export default FormSuspenseHOC;

@@ -2,9 +2,9 @@ import React from "react";
 import "./Profile.css";
 
 import { useTranslation } from "react-i18next";
-import { Loading, Error } from "../../common";
+import { Loading } from "../../common";
 
-function ProfileLocaleHOC() {
+function ProfileSuspenseHOC() {
   return (
     <React.Suspense fallback={Loading}>
       <Profile />
@@ -13,7 +13,7 @@ function ProfileLocaleHOC() {
 }
 
 function Profile() {
-  const { t, i18n } = useTranslation("profile");
+  const { t } = useTranslation("profile");
   return (
     <div className="Profile">
       <h1>{t("someSampleText")}</h1>
@@ -21,4 +21,4 @@ function Profile() {
   );
 }
 
-export default ProfileLocaleHOC;
+export default ProfileSuspenseHOC;
