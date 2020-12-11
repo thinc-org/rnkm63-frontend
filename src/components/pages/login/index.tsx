@@ -2,10 +2,11 @@ import React from "react";
 import "./Login.css";
 
 import { useTranslation } from "react-i18next";
+import { Loading } from "../../common";
 
 function LoginLocaleHOC() {
   return (
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback={Loading}>
       <Login />
     </React.Suspense>
   );

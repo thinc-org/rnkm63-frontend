@@ -2,10 +2,11 @@ import React from "react";
 import "./Profile.css";
 
 import { useTranslation } from "react-i18next";
+import { Loading, Error } from "../../common";
 
 function ProfileLocaleHOC() {
   return (
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback={Loading}>
       <Profile />
     </React.Suspense>
   );

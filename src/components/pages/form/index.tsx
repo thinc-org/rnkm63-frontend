@@ -2,10 +2,11 @@ import React from "react";
 import "./Form.css";
 
 import { useTranslation } from "react-i18next";
+import { Loading } from "../../common";
 
 function FormLocaleHOC() {
   return (
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback={Loading}>
       <Form />
     </React.Suspense>
   );

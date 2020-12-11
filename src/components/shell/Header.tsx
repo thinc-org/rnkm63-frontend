@@ -1,11 +1,13 @@
 import React from "react";
 import "./Header.css";
 
+import { Loading } from "../common";
+
 import LanguageSwitcher from "./misc/LanguageSwitcher";
 
 function HeaderLocaleHOC() {
   return (
-    <React.Suspense fallback="loading">
+    <React.Suspense fallback={Loading}>
       <Header />
     </React.Suspense>
   );
