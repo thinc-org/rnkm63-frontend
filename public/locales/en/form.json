@@ -1,5 +1,6 @@
 {
   "title": "Register",
   "submit": "Submit Information",
-  "submitNote": "Note: You cannot edit information after you submit."
+  "submitNote": "Note: You cannot edit information after you submit.",
+  "upload": "Upload"
 }
