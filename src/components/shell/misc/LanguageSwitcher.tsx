@@ -1,7 +1,6 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import { useTranslation } from "react-i18next";
-import { Card } from "@material-ui/core";
+import React from 'react'
+import Button from '@material-ui/core/Button'
+import { useTranslation } from 'react-i18next'
 
 function LanguageSwitcher() {
   const { t, i18n } = useTranslation('shell')
