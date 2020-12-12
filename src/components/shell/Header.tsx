@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Loading } from "../common";
 import LanguageSwitcher from "./misc/LanguageSwitcher";
+import LogOutButton from "./misc/LogOutButton";
 import THINCLogo from "../../local/thincLogo.png";
 import { UserContext } from "../../contexts/UserContext";
 import { withSuspense } from '../hoc'
