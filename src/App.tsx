@@ -8,6 +8,7 @@ import { Profile, Form, Login, NotFound } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
 
+import background from './local/Background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
