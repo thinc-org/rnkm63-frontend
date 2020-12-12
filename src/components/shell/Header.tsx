@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Loading } from "../common";
 import LanguageSwitcher from "./misc/LanguageSwitcher";
+import LogOutButton from "./misc/LogOutButton";
 import THINCLogo from "../../local/thincLogo.png";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -28,9 +29,7 @@ function Header() {
         <img src={THINCLogo} alt="" className={classes.thincLogo} />
         <Box flexDirection="row" justifyContent="flex-start">
           <LanguageSwitcher />
-          <Button variant="contained" color="primary">
-            ออกจากระบบ
-          </Button>
+          <LogOutButton />
         </Box>
       </Box>
     </div>
