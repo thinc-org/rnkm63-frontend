@@ -8,7 +8,7 @@ function LanguageSwitcher() {
 
   const switchLng = React.useCallback(() => {
     if (i18n.language === "en") {
-      -i18n.changeLanguage("th");
+      i18n.changeLanguage("th");
     } else {
       i18n.changeLanguage("en");
     }
