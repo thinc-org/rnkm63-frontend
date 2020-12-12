@@ -2,5 +2,6 @@
   "title": "Register",
   "submit": "Submit Information",
   "submitNote": "Note: You cannot edit information after you submit.",
-  "upload": "Upload"
+  "uploadTextButton": "Upload photo",
+  "uploadReason": "You have to upload the new picture"
 }

@@ -3,49 +3,10 @@ import { useState } from "react";
 import { Button, Container, makeStyles } from "@material-ui/core";
 import Image from "./Image";
 import FormInput from "./FormInput";
+import { indexStyle } from "./style/styles";
 import { useTranslation } from "react-i18next";
 
 import { Box } from '@material-ui/core'
-
-const useStyles = makeStyles((theme: any) => ({
-  submitButton: {
-    background: "#44AD53",
-    borderRadius: "40px",
-    width: "100%",
-    maxWidth: "434px",
-    display: "block",
-    margin: "auto",
-    "&:hover": {
-      backgroundColor: "#44AD53",
-    },
-  },
-  formInput: {
-    background: "#5c5c5c",
-    [theme.breakpoints.up("sm")]: {
-      display: "inline",
-      marginLeft: "20px",
-      flexGrow: 1,
-    },
-  },
-  content: {
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-      justifyContent: "center",
-    },
-  },
-  submitNote: {
-    display: "block",
-    textAlign: "center",
-    margin: "0px",
-  },
-  container: {
-    [theme.breakpoints.up("sm")]: {
-      paddingLeft: "50px",
-      paddingRight: "50px",
-    },
-    background: "#929292",
-  },
-}));
 
 function Form() {
   const [imageUrl, setImageUrl] = useState(
@@ -55,8 +16,9 @@ function Form() {
     name: "Genshin",
     surname: "Impact",
   });
-  const style = useStyles();
+  const style = indexStyle();
   const { t, i18n } = useTranslation("form");
+
   return (
     <Container maxWidth="lg" classes={{ root: style.container }}>
       <p>{t("title")}</p>
