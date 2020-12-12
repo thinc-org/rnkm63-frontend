@@ -10,13 +10,12 @@ import { withSuspense } from '../hoc'
 
 const useStyles = makeStyles({
   header: {
-    marginTop: "20px",
+    marginTop: '20px',
   },
   thincLogo: {},
-});
+})
 function Header() {
-  const classes = useStyles();
-  const user = React.useContext(UserContext)[0];
+  const classes = useStyles()
   return (
     <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
