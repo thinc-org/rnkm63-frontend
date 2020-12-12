@@ -1,25 +1,27 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Header, Footer } from "./components/shell";
-import { Profile, Form, Login, NotFound } from "./components/pages";
+import { Header, Footer } from './components/shell'
+import { Profile, Form, Login, NotFound } from './components/pages'
 
-import { UserProvider } from "./contexts/UserContext";
-import { Container, Box, makeStyles } from "@material-ui/core";
+import { UserProvider } from './contexts/UserContext'
+import { Container, Box, makeStyles } from '@material-ui/core'
 
+import background from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
-    minHeight: "100vh",
-    display: "flex",
-    flexDirection: "column",
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundImage: `url(${background})`,
   },
   PageContainer: {
     flex: 1,
   },
-});
+})
 
 function App() {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <UserProvider>
       <Router>
@@ -45,7 +47,7 @@ function App() {
         </Box>
       </Router>
     </UserProvider>
-  );
+  )
 }
 
-export default App;
+export default App
