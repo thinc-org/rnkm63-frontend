@@ -1,8 +1,9 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, ThemeProvider, Typography } from "@material-ui/core";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import SGCUIcon from "../../local/sgcuIcon.png";
 import THINCIcon from "../../local/thincIcon.png";
+import { createMuiTheme } from "@material-ui/core/styles";
 const useStyles = makeStyles({
   root: {
     background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
@@ -29,6 +30,13 @@ const useStyles = makeStyles({
     color: "#8D8D8D",
     textAlign: "center",
     fontSize: "10px",
+    fontFamily: "Kanit",
+  },
+  footerFontLastLine: {
+    color: "#8D8D8D",
+    textAlign: "center",
+    fontSize: "10px",
+    fontFamily: "Kanit",
     marginBottom: "9px",
   },
 });
@@ -46,11 +54,15 @@ function Footer() {
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
         </Box>
-        <Typography variant="body1" className={classes.footerFont}>
-          งานรับน้องก้าวใหม่ ปีการศึกษา 2563
-          องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย สงวนลิขสิทธิ์ © 2563
-          Thinc.
-        </Typography>
+        <ThemeProvider theme={theme}>
+          <Typography variant="body1" className={classes.footerFont}>
+            งานรับน้องก้าวใหม่ ปีการศึกษา 2563
+            องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+          </Typography>
+          <Typography variant="body1" className={classes.footerFontLastLine}>
+            สงวนลิขสิทธิ์ © 2563 Thinc.
+          </Typography>
+        </ThemeProvider>
       </Box>
     </Box>
   )
