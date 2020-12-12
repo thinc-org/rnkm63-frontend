@@ -7,7 +7,9 @@ function LanguageSwitcher() {
   const { t, i18n } = useTranslation('shell')
 
   const switchLng = React.useCallback(() => {
-    if (i18n.language.startsWith('th')) {
+    if (i18n.language === "en") {
+      i18n.changeLanguage("th");
+    } else {
       i18n.changeLanguage('en')
     } else {
       i18n.changeLanguage('th')
