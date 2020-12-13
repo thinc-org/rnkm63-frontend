@@ -1,7 +1,8 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
-import SGCUIcon from '../../local/sgcuIcon.png'
-import THINCIcon from '../../local/thincIcon.png'
+
+const SGCUIcon = 'images/sgcu_icon.png'
+const THINCIcon = 'images/thinc_icon.png'
 
 const useStyles = makeStyles({
   root: {

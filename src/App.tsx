@@ -3,12 +3,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
 import theme from './config/theme'
-
 import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
-import BackgroundImg from './local/background.png'
+
+const BackgroundImg = '/images/background.png'
 
 const useStyles = makeStyles({
   AppContainer: {

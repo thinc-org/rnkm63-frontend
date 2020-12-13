@@ -3,16 +3,10 @@ import React from 'react'
 import { Loading } from '../common'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
-import THINCLogo from '../../local/thincLogo.png'
 import { withSuspense } from '../hoc'
 
-function HeaderSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Header />
-    </React.Suspense>
-  )
-}
+const THINCLogo = '/images/thinc_logo.png'
+
 const useStyles = makeStyles({
   header: {
     marginTop: '20px',
