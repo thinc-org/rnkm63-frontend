@@ -5,7 +5,7 @@ import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
 import theme from './config/theme'
 
 import { Header, Footer } from './components/shell'
-import { Profile, Form, Login, NotFound } from './components/pages'
+import { Profile, Form, Login, NotFound, NotFreshy } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
 import BackgroundImg from './local/background.png'
@@ -35,6 +35,7 @@ function App() {
                 <Switch>
                   <Route path="/login" exact component={Login} />
                   <Route path="/form" exact component={Form} />
+                  <Route path="/not104" exact component={NotFreshy} />
                   <Route path="/" exact component={Profile} />
                   <Route component={NotFound} />
                 </Switch>
