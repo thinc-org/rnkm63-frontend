@@ -7,14 +7,13 @@ import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
-
-import background from './local/Background.png'
+import BackgroundImg from './local/Background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: `url(/background.png)`,
+    backgroundImage: `url(${BackgroundImg})`,
   },
   PageContainer: {
     flex: 1,
