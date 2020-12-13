@@ -38,7 +38,7 @@ function Login() {
     <>
       {
         //a demo of how you might redirect if the user is already logged in
-        user && <Redirect to="/" />
+        !!user && <Redirect to="/" />
       }
       <Box>
         <h1>{t('title')}</h1>
