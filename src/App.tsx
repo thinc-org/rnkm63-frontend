@@ -7,7 +7,7 @@ import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
-import BackgroundImg from './local/Background.png'
+import BackgroundImg from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
