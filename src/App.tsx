@@ -7,13 +7,12 @@ import { Profile, Form, Login, NotFound } from './components/pages'
 import { UserProvider } from './contexts/UserContext'
 import { Container, Box, makeStyles } from '@material-ui/core'
 
-import background from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: `url(${background})`,
+    backgroundImage: `url(/background.png)`,
   },
   PageContainer: {
     flex: 1,
