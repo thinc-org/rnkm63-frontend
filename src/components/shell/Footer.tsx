@@ -3,6 +3,8 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SGCUIcon from '../../local/sgcuIcon.png'
 import THINCIcon from '../../local/thincIcon.png'
+import { Loading } from '../common'
+import { withSuspense } from '../hoc'
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -39,6 +41,13 @@ const useStyles = makeStyles({
     marginBottom: '9px',
   },
 })
+function HeaderSuspenseHOC() {
+  return (
+    <React.Suspense fallback={Loading}>
+      <Footer />
+    </React.Suspense>
+  )
+}
 function Footer() {
   const classes = useStyles()
   const { t } = useTranslation('footer')
@@ -62,4 +71,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default withSuspense(Footer)
