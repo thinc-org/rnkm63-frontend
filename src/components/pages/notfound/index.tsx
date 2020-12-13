@@ -3,22 +3,58 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core'
 
 import { useTranslation } from 'react-i18next'
 import sadthincIcon from '../../../local/sadthinc.png'
+import theme from '../../../config/theme'
 function NotFound() {
   const { t } = useTranslation('notfound')
   const useStyles = makeStyles({
-    text: {
-      color: 'white',
-      fontFamily: 'Rubik',
-      fontSize: '60px',
+    [theme.breakpoints.down('sm')]: {
+      textHeader: {
+        color: 'white',
+        fontFamily: 'Rubik',
+        fontSize: '28px',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Rubik',
+        fontSize: '16px',
+      },
+      image: {
+        width: '171px',
+        height: '220px',
+      },
+      button: {
+        marginTop: '20px',
+        width: '283px',
+        height: '45px',
+        backgroundColor: '#44AD53',
+        borderRadius: '40px',
+      },
+      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
     },
-    button: {
-      marginTop: '20px',
-      width: '210px',
-      height: '40px',
-      backgroundColor: '#44AD53',
-      borderRadius: '40px',
+    [theme.breakpoints.up('sm')]: {
+      textHeader: {
+        color: 'white',
+        fontFamily: 'Rubik',
+        fontSize: '60px',
+      },
+      text: {
+        color: 'white',
+        fontFamily: 'Rubik',
+        fontSize: '34px',
+      },
+      image: {
+        width: '206px',
+        height: '266px',
+      },
+      button: {
+        marginTop: '20px',
+        width: '210px',
+        height: '40px',
+        backgroundColor: '#44AD53',
+        borderRadius: '40px',
+      },
+      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
     },
-    buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
   })
   const classes = useStyles()
   return (
@@ -29,8 +65,8 @@ function NotFound() {
       marginTop="70px"
       alignItems="center"
     >
-      <img src={sadthincIcon} width="206px" height="266px"></img>
-      <Typography className={classes.text}>Error 404</Typography>
+      <img src={sadthincIcon} className={classes.image}></img>
+      <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>
       <Button variant="contained" className={classes.button}>
         <Typography className={classes.buttonText}>Back to Home</Typography>
