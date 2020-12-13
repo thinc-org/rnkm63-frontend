@@ -3,8 +3,6 @@ import './Profile.css'
 
 import { useTranslation } from 'react-i18next'
 
-import { withSuspense } from '../../hoc'
-
 function Profile() {
   const { t } = useTranslation('profile')
   return (
@@ -14,4 +12,4 @@ function Profile() {
   )
 }
 
-export default withSuspense(Profile)
+export default Profile

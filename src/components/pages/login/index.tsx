@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect } from 'react-router-dom'
 
-import { withSuspense } from '../../hoc'
 import { Error } from '../../common'
 import { UserContext, UserType } from '../../../contexts/UserContext'
 
@@ -50,4 +49,4 @@ function Login() {
   )
 }
 
-export default withSuspense(Login)
+export default Login

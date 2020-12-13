@@ -3,8 +3,6 @@ import './NotFound.css'
 
 import { useTranslation } from 'react-i18next'
 
-import { withSuspense } from '../../hoc'
-
 function NotFound() {
   const { t } = useTranslation('notfound')
   return (
@@ -14,4 +12,4 @@ function NotFound() {
   )
 }
 
-export default withSuspense(NotFound)
+export default NotFound

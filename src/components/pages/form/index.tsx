@@ -3,8 +3,6 @@ import './Form.css'
 
 import { useTranslation } from 'react-i18next'
 
-import { withSuspense } from '../../hoc'
-
 function Form() {
   const { t } = useTranslation('form')
   return (
@@ -14,4 +12,4 @@ function Form() {
   )
 }
 
-export default withSuspense(Form)
+export default Form
