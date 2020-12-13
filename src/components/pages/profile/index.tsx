@@ -1,24 +1,17 @@
-import React from "react";
-import "./Profile.css";
+import React from 'react'
+import './Profile.css'
 
-import { useTranslation } from "react-i18next";
-import { Loading } from "../../common";
+import { useTranslation } from 'react-i18next'
 
-function ProfileSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Profile />
-    </React.Suspense>
-  );
-}
+import { withSuspense } from '../../hoc'
 
 function Profile() {
-  const { t } = useTranslation("profile");
+  const { t } = useTranslation('profile')
   return (
     <div className="Profile">
-      <h1>{t("someSampleText")}</h1>
+      <h1>{t('someSampleText')}</h1>
     </div>
-  );
+  )
 }
 
-export default ProfileSuspenseHOC;
+export default withSuspense(Profile)

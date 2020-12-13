@@ -1,27 +1,19 @@
-import React from "react";
-import "./Login.css";
-import Button from "@material-ui/core/Button";
-import { useTranslation } from "react-i18next";
-import { Link, useHistory } from "react-router-dom";
+import React from 'react'
+import './Login.css'
+import Button from '@material-ui/core/Button'
+import { useTranslation } from 'react-i18next'
+import { Link, useHistory } from 'react-router-dom'
 
-import { Loading, Error } from "../../common";
-
-import { UserContext, UserType } from "../../../contexts/UserContext";
-
-function LoginSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Login />
-    </React.Suspense>
-  );
-}
+import { withSuspense } from '../../hoc'
+import { Error } from '../../common'
+import { UserContext, UserType } from '../../../contexts/UserContext'
 
 function Login() {
-  const { t } = useTranslation("login");
+  const { t } = useTranslation('login')
 
-  const [user, setUser] = React.useContext(UserContext);
+  const [user, setUser] = React.useContext(UserContext)
 
-  const history = useHistory();
+  const history = useHistory()
   /*
     Here, you have a user object in the user variable.
     And a setUser function that can set the user object
@@ -32,18 +24,18 @@ function Login() {
 
   // Once you got the user object from the server, just pass it to onSigninComplete
   const onSigninComplete = (user: UserType) => {
-    setUser(user); //set the user into the context
-    history.push("/"); //redirect to home
-  };
+    setUser(user) //set the user into the context
+    history.push('/') //redirect to home
+  }
 
   //this is a mock function to 'login'.
   const mockSetUser = () => {
     onSigninComplete({
-      name: "hello",
-      id: "123",
+      name: 'hello',
+      id: '123',
       age: 10,
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -60,13 +52,13 @@ function Login() {
         )
       }
       <div className="Login">
-        <h1>{t("title")}</h1>
+        <h1>{t('title')}</h1>
         <Button onClick={mockSetUser} variant="contained" color="primary">
           Mock set user
         </Button>
       </div>
     </>
-  );
+  )
 }
 
-export default LoginSuspenseHOC;
+export default withSuspense(Login)

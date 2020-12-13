@@ -1,24 +1,17 @@
-import React from "react";
-import "./Form.css";
+import React from 'react'
+import './Form.css'
 
-import { useTranslation } from "react-i18next";
-import { Loading } from "../../common";
+import { useTranslation } from 'react-i18next'
 
-function FormSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Form />
-    </React.Suspense>
-  );
-}
+import { withSuspense } from '../../hoc'
 
 function Form() {
-  const { t } = useTranslation("form");
+  const { t } = useTranslation('form')
   return (
     <div className="Form">
-      <h1>{t("title")}</h1>
+      <h1>{t('title')}</h1>
     </div>
-  );
+  )
 }
 
-export default FormSuspenseHOC;
+export default withSuspense(Form)

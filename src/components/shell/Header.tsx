@@ -1,17 +1,10 @@
 import React from 'react'
 import './Header.css'
 import { Link } from 'react-router-dom'
-import { Loading } from '../common'
+
+import { withSuspense } from '../hoc'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import { UserContext } from '../../contexts/UserContext'
-
-function HeaderSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Header />
-    </React.Suspense>
-  )
-}
 
 function Header() {
   const user = React.useContext(UserContext)[0]
@@ -35,4 +28,4 @@ function Header() {
   )
 }
 
-export default HeaderSuspenseHOC
+export default withSuspense(Header)

@@ -1,24 +1,17 @@
-import React from "react";
-import "./NotFound.css";
+import React from 'react'
+import './NotFound.css'
 
-import { useTranslation } from "react-i18next";
-import { Loading } from "../../common";
+import { useTranslation } from 'react-i18next'
 
-function NotFoundSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <NotFound />
-    </React.Suspense>
-  );
-}
+import { withSuspense } from '../../hoc'
 
 function NotFound() {
-  const { t } = useTranslation("notfound");
+  const { t } = useTranslation('notfound')
   return (
     <div className="NotFound">
-      <h1>{t("title")}</h1>
+      <h1>{t('title')}</h1>
     </div>
-  );
+  )
 }
 
-export default NotFoundSuspenseHOC;
+export default withSuspense(NotFound)
