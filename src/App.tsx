@@ -29,18 +29,10 @@ function App() {
           <Header />
           <Container className={classes.PageContainer}>
             <Switch>
-              <Route path="/login" exact>
-                <Login />
-              </Route>
-              <Route path="/form" exact>
-                <Form />
-              </Route>
-              <Route path="/" exact>
-                <Profile />
-              </Route>
-              <Route>
-                <NotFound />
-              </Route>
+              <Route path="/login" exact component={Login} />
+              <Route path="/form" exact component={Form} />
+              <Route path="/" exact component={Profile} />
+              <Route component={NotFound} />
             </Switch>
           </Container>
           <Footer />
