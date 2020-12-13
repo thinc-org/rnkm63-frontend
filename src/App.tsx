@@ -8,6 +8,7 @@ import { UserProvider } from './contexts/UserContext'
 import { Container, Box, makeStyles } from '@material-ui/core'
 
 import background from './local/background.png'
+
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
