@@ -1,15 +1,24 @@
 import React from 'react'
-import './Header.css'
 import { Link } from 'react-router-dom'
+
+import { Box, makeStyles } from '@material-ui/core'
 
 import { withSuspense } from '../hoc'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import { UserContext } from '../../contexts/UserContext'
 
+const useStyles = makeStyles({
+  Header: {
+    minHeight: '8vh',
+    border: '2px solid red',
+  },
+})
+
 function Header() {
   const { user } = React.useContext(UserContext)
+  const classes = useStyles()
   return (
-    <div className="Header">
+    <Box className={classes.Header}>
       <h1>HEADER GOES HERE</h1>
 
       {
@@ -24,7 +33,7 @@ function Header() {
         )
       }
       <LanguageSwitcher />
-    </div>
+    </Box>
   )
 }
 

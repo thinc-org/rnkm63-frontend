@@ -1,14 +1,14 @@
 import React from 'react'
-import './NotFound.css'
+import { Box } from '@material-ui/core'
 
 import { useTranslation } from 'react-i18next'
 
 function NotFound() {
   const { t } = useTranslation('notfound')
   return (
-    <div className="NotFound">
+    <Box>
       <h1>{t('title')}</h1>
-    </div>
+    </Box>
   )
 }
 

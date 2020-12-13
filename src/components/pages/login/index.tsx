@@ -1,6 +1,5 @@
 import React from 'react'
-import './Login.css'
-import Button from '@material-ui/core/Button'
+import { Button, Box } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
@@ -41,12 +40,12 @@ function Login() {
         //a demo of how you might redirect if the user is already logged in
         user && <Redirect to="/" />
       }
-      <div className="Login">
+      <Box>
         <h1>{t('title')}</h1>
         <Button onClick={mockSetUser} variant="contained" color="primary">
           Mock set user
         </Button>
-      </div>
+      </Box>
     </>
   )
 }
