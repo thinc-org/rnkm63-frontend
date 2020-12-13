@@ -15,10 +15,10 @@ function App() {
           <Header />
           <div className="PageContainer">
             <Switch>
-              <Route path="/login">
+              <Route path="/login" exact>
                 <Login />
               </Route>
-              <Route path="/form">
+              <Route path="/form" exact>
                 <Form />
               </Route>
               <Route path="/" exact>
