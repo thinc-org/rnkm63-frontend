@@ -4,12 +4,12 @@ import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
-import { UserContext, UserType } from '../../../contexts/UserContext'
+import { UserContext, User } from '../../../contexts/UserContext'
 
 function Login() {
   const { t } = useTranslation('login')
 
-  const [user, setUser] = React.useContext(UserContext)
+  const { user, setUser } = React.useContext(UserContext)
   /*
     Here, you have a user object in the user variable.
     And a setUser function that can set the user object
@@ -19,7 +19,7 @@ function Login() {
   */
 
   // Once you got the user object from the server, just pass it to onSigninComplete
-  const onSigninComplete = React.useCallback((user: UserType) => {
+  const onSigninComplete = React.useCallback((user: User) => {
     setUser(user) //set the user into the context
   }, [])
 

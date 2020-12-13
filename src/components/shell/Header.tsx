@@ -7,7 +7,7 @@ import LanguageSwitcher from './misc/LanguageSwitcher'
 import { UserContext } from '../../contexts/UserContext'
 
 function Header() {
-  const [user] = React.useContext(UserContext)
+  const { user } = React.useContext(UserContext)
   return (
     <div className="Header">
       <h1>HEADER GOES HERE</h1>

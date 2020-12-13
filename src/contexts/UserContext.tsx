@@ -1,25 +1,24 @@
-import React from "react";
+import React from 'react'
 
-export type UserType = {
-  name: string;
-  id: string;
-  age?: number;
-} | null;
+interface IUser {
+  name: string
+  id: string
+  age?: number
+}
 
-export type SetUserType = (user: UserType) => void;
+export type User = IUser | null
 
-type UserContextType = [UserType, SetUserType];
+export type SetUser = (user: User) => void
 
-export const UserContext = React.createContext<UserContextType>([
-  null,
-  (u: UserType) => {},
-]);
+interface UserConstruct {
+  user: User
+  setUser: SetUser
+}
 
-export function UserProvider({ children }: { children: React.ReactElement }) {
-  const [user, setUser] = React.useState<UserType>(null);
-  return (
-    <UserContext.Provider value={[user, setUser]}>
-      {children}
-    </UserContext.Provider>
-  );
+export const UserContext = React.createContext({} as UserConstruct)
+
+export function UserProvider(props: any) {
+  const [user, setUser] = React.useState<User>(null)
+  const value = { user, setUser }
+  return <UserContext.Provider value={value} {...props} />
 }
