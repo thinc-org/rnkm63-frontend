@@ -3,5 +3,14 @@
   "submit": "Submit Information",
   "submitNote": "Note: You cannot edit information after you submit.",
   "uploadTextButton": "Upload photo",
-  "uploadReason": "You have to upload the new picture"
+  "uploadReason": "You have to upload the new picture",
+  "confirmCrop": "Confirm",
+  "cropDescription": [
+    "Do not use group photo",
+    "Do not use filter",
+    "Do not have any objects cover your face",
+    "Do not tilt your head or body too much",
+    "Do not use photo’s size over 300 KB",
+    "The ratio between your face and the whole photo should be about 1 : 3"
+  ]
 }

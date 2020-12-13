@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 function FormInput(props: any) {
   return (
@@ -7,13 +7,13 @@ function FormInput(props: any) {
       <p>{props.userData.surname}</p>
       <button
         onClick={() => {
-          props.setUserData({ ...props.userData, name: "Honkai" });
+          props.setUserData({ ...props.userData, name: 'Honkai' })
         }}
       >
         set data (test)
       </button>
     </>
-  );
+  )
 }
 
-export default FormInput;
+export default FormInput

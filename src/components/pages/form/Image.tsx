@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useRef, useState } from 'react'
 import {
   Button,
   Slide,
@@ -7,112 +7,68 @@ import {
   IconButton,
   DialogContentText,
   Typography,
-} from "@material-ui/core";
-import { useTranslation } from "react-i18next";
-import { TransitionProps } from "@material-ui/core/transitions/transition";
-import ReactCrop from "react-image-crop";
-import CloseIcon from "@material-ui/icons/Close";
-import { imageStyle } from "./style/styles";
-import "react-image-crop/dist/ReactCrop.css";
+  Container,
+} from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
+import { TransitionProps } from '@material-ui/core/transitions/transition'
+import CloseIcon from '@material-ui/icons/Close'
+import { imageStyle } from './style/styles'
+import getCroppedImg from './utils/imageHelper'
+import Cropper from 'react-easy-crop'
 
-const pixelRatio = 1;
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
 ) {
-  return <Slide direction="down" ref={ref} {...props} />;
-});
+  return <Slide direction="down" ref={ref} {...props} />
+})
 
 function Picture(props: React.PropsWithRef<any>) {
-  const imgRef = useRef();
-  const previewCanvasRef = useRef(null);
+  const { t, i18n } = useTranslation('form')
 
-  const { t, i18n } = useTranslation("form");
-
-  const [upImg, setUpImg] = useState("");
-  const [finalImg, setFinalImg] = useState("");
-
-  const [cropState, setCropState] = useState(false);
-  const [completedCrop, setCompletedCrop] = useState({} as ReactCrop.Crop);
+  const [upImg, setUpImg] = useState('')
+  const [cropState, setCropState] = useState(false)
   const [crop, setCrop] = useState({
-    unit: "px",
-    width: 150,
-    height: 200,
-    aspect: 3 / 4,
-  } as ReactCrop.Crop);
+    x: 0,
+    y: 0,
+  })
 
-  const classes = imageStyle();
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
-  const onLoad = useCallback((img) => {
-    imgRef.current = img;
-  }, []);
+  const classes = imageStyle()
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () => setUpImg(reader.result as string));
-      reader.readAsDataURL(e.target.files[0]);
-      setCropState(true);
+      const reader = new FileReader()
+      reader.addEventListener('load', () => setUpImg(reader.result as string))
+      reader.readAsDataURL(e.target.files[0])
+      setCropState(true)
     }
-  };
+  }
 
-  const makePreviewCanvas = () => {
-    console.log(completedCrop, previewCanvasRef.current, imgRef.current);
-    console.log("Pass");
-
-    if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
-      return;
-    }
-
-    const image: any = imgRef.current;
-    const canvas: any = previewCanvasRef.current;
-    const crop: any = completedCrop;
-
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas.getContext("2d");
-
-    canvas.width = crop.width * pixelRatio;
-    canvas.height = crop.height * pixelRatio;
-
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = "high";
-
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width,
-      crop.height
-    );
-
-    const imgUrl = canvas.toDataURL("image/jpeg");
-    props.setImageUrl(imgUrl);
-    setFinalImg(imgUrl);
-  };
+  const onCropComplete = useCallback((_, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
 
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        alignContent: "center",
-        flexDirection: "column",
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
         margin: 0,
       }}
     >
       <Dialog
         open={cropState}
+        maxWidth="sm"
+        fullWidth={true}
         TransitionComponent={Transition}
         keepMounted
         onClose={() => setCropState(false)}
       >
-        <DialogTitle disableTypography>
+        <DialogTitle>
           <IconButton
             aria-label="close"
             className={classes.closeButton}
@@ -120,55 +76,61 @@ function Picture(props: React.PropsWithRef<any>) {
           >
             <CloseIcon />
           </IconButton>
-          <DialogTitle>
-            <Typography>{"Hello World"}</Typography>
-          </DialogTitle>
+          <DialogTitle>{'Hello World'}</DialogTitle>
         </DialogTitle>
 
-        <ReactCrop
-          src={upImg}
-          crop={crop}
-          onImageLoaded={onLoad}
-          onChange={(c) => setCrop(c)}
-          onComplete={(c) => setCompletedCrop(c)}
-          locked
-        ></ReactCrop>
-        <DialogContentText>{"Hello World"}</DialogContentText>
+        <div className={classes.cropContainer}>
+          <Cropper
+            image={upImg}
+            crop={crop}
+            zoom={zoom}
+            zoomSpeed={0.1}
+            maxZoom={5}
+            zoomWithScroll={true}
+            aspect={3 / 4}
+            onCropChange={setCrop}
+            onCropComplete={onCropComplete}
+            onZoomChange={setZoom}
+          />
+        </div>
+        <DialogContentText className={classes.dialogText}>
+          <ul className={classes.unorderList}>
+            {t('cropDescription', {
+              returnObjects: true,
+              joinArrays: '|',
+            })
+              .split('|')
+              .map((value) => (
+                <li>{value}</li>
+              ))}
+          </ul>
+        </DialogContentText>
         <Button
           variant="contained"
           color="primary"
           className={classes.submitButton}
-          onClick={() => {
-            makePreviewCanvas();
-            setCropState(false);
+          onClick={async () => {
+            const image = await getCroppedImg(upImg, croppedAreaPixels)
+            setCropState(false)
+            props.setImageUrl(image)
           }}
         >
-          {"ยืนยันรูปภาพ"}
+          {t('confirmCrop')}
         </Button>
       </Dialog>
-      <div>
-        <canvas
-          ref={previewCanvasRef}
-          // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
-          style={{
-            display: "none",
-            width: Math.round(completedCrop?.width ?? 0),
-            height: Math.round(completedCrop?.height ?? 0),
-          }}
-        />
-      </div>
-      {finalImg ? (
+
+      {props.imageUrl ? (
         <div>
-          <img src={finalImg} className={classes.image}></img>
+          <img src={props.imageUrl} className={classes.image}></img>
         </div>
       ) : (
         <div className={classes.image}></div>
       )}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
         <input
@@ -176,7 +138,7 @@ function Picture(props: React.PropsWithRef<any>) {
           className={classes.input}
           id="contained-button-file"
           onChange={onSelectFile}
-          onClick={(e) => (e.currentTarget.value = "")}
+          onClick={(e) => (e.currentTarget.value = '')}
           type="file"
         />
         <label htmlFor="contained-button-file">
@@ -186,13 +148,13 @@ function Picture(props: React.PropsWithRef<any>) {
             className={classes.button}
             component="span"
           >
-            {t("uploadTextButton")}
+            {t('uploadTextButton')}
           </Button>
         </label>
-        <p className={classes.reasonText}>{t("uploadReason")}</p>
+        <p className={classes.reasonText}>{t('uploadReason')}</p>
       </div>
     </div>
-  );
+  )
 }
 
-export default Picture;
+export default Picture
