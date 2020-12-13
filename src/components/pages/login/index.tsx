@@ -19,9 +19,12 @@ function Login() {
   */
 
   // Once you got the user object from the server, just pass it to onSigninComplete
-  const onSigninComplete = React.useCallback((user: User) => {
-    setUser(user) //set the user into the context
-  }, [])
+  const onSigninComplete = React.useCallback(
+    (u: User) => {
+      setUser(u) //set the user into the context
+    },
+    [setUser]
+  )
 
   //this is a mock function to 'login'.
   const mockSetUser = () => {
