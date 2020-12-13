@@ -2,7 +2,7 @@ import React from 'react'
 import './Login.css'
 import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 import { withSuspense } from '../../hoc'
 import { Error } from '../../common'
@@ -12,8 +12,6 @@ function Login() {
   const { t } = useTranslation('login')
 
   const [user, setUser] = React.useContext(UserContext)
-
-  const history = useHistory()
   /*
     Here, you have a user object in the user variable.
     And a setUser function that can set the user object
@@ -25,7 +23,6 @@ function Login() {
   // Once you got the user object from the server, just pass it to onSigninComplete
   const onSigninComplete = (user: UserType) => {
     setUser(user) //set the user into the context
-    history.push('/') //redirect to home
   }
 
   //this is a mock function to 'login'.
@@ -40,16 +37,8 @@ function Login() {
   return (
     <>
       {
-        //a demo of how you might show an error if the user is already logged in
-        user && (
-          <div>
-            <Error
-              title={`You're already logged in as ${user.name}`}
-              detail="bruh"
-            />
-            <Link to="/">Go Back</Link>
-          </div>
-        )
+        //a demo of how you might redirect if the user is already logged in
+        user && <Redirect to="/" />
       }
       <div className="Login">
         <h1>{t('title')}</h1>
