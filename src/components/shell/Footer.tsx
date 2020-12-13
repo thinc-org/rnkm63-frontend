@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 function Footer() {
   const classes = useStyles()
   return (
-    <div className={classes.footer}>
+    <Box className={classes.footer}>
       <Box display="flex" flexDirection="column" marginTop="15px">
         <Box
           display="flex"
@@ -61,7 +61,7 @@ function Footer() {
           สงวนลิขสิทธิ์ © 2563 Thinc.
         </Typography>
       </Box>
-    </div>
+    </Box>
   )
 }
 

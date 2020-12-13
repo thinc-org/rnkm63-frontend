@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   return (
-    <div className={classes.header}>
+    <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <img src={THINCLogo} alt="" className={classes.thincLogo} />
         <Box flexDirection="row" justifyContent="flex-start">
@@ -30,7 +30,7 @@ function Header() {
           <LogOutButton />
         </Box>
       </Box>
-    </div>
+    </Box>
   )
 }
 
