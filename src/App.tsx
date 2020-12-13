@@ -1,19 +1,33 @@
-import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Header, Footer } from "./components/shell";
-import { Profile, Form, Login, NotFound } from "./components/pages";
+import { Header, Footer } from './components/shell'
+import { Profile, Form, Login, NotFound } from './components/pages'
 
-import { UserProvider } from "./contexts/UserContext";
+import { UserProvider } from './contexts/UserContext'
+import { Container, Box, makeStyles } from '@material-ui/core'
+
+import background from './local/background.png'
+const useStyles = makeStyles({
+  AppContainer: {
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+    backgroundImage: `url(${background})`,
+  },
+  PageContainer: {
+    flex: 1,
+  },
+})
 
 function App() {
+  const classes = useStyles()
   return (
     <UserProvider>
       <Router>
-        <div className="AppContainer">
+        <Box className={classes.AppContainer}>
           <Header />
-          <div className="PageContainer">
+          <Container className={classes.PageContainer}>
             <Switch>
               <Route path="/login" exact>
                 <Login />
@@ -28,12 +42,12 @@ function App() {
                 <NotFound />
               </Route>
             </Switch>
-          </div>
+          </Container>
           <Footer />
-        </div>
+        </Box>
       </Router>
     </UserProvider>
-  );
+  )
 }
 
-export default App;
+export default App

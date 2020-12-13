@@ -1,20 +1,20 @@
-import React from "react";
-import "./Header.css";
-import { Link } from "react-router-dom";
-import { Loading } from "../common";
-import LanguageSwitcher from "./misc/LanguageSwitcher";
-import { UserContext } from "../../contexts/UserContext";
+import React from 'react'
+import './Header.css'
+import { Link } from 'react-router-dom'
+import { Loading } from '../common'
+import LanguageSwitcher from './misc/LanguageSwitcher'
+import { UserContext } from '../../contexts/UserContext'
 
 function HeaderSuspenseHOC() {
   return (
     <React.Suspense fallback={Loading}>
       <Header />
     </React.Suspense>
-  );
+  )
 }
 
 function Header() {
-  const user = React.useContext(UserContext)[0];
+  const user = React.useContext(UserContext)[0]
   return (
     <div className="Header">
       <h1>HEADER GOES HERE</h1>
@@ -32,7 +32,7 @@ function Header() {
       }
       <LanguageSwitcher />
     </div>
-  );
+  )
 }
 
-export default HeaderSuspenseHOC;
+export default HeaderSuspenseHOC
