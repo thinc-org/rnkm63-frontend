@@ -1,14 +1,15 @@
 import React from 'react'
-import './Form.css'
 
 import { useTranslation } from 'react-i18next'
+
+import { Box } from '@material-ui/core'
 
 function Form() {
   const { t } = useTranslation('form')
   return (
-    <div className="Form">
+    <Box>
       <h1>{t('title')}</h1>
-    </div>
+    </Box>
   )
 }
 

@@ -2,6 +2,7 @@ import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import SGCUIcon from '../../local/sgcuIcon.png'
 import THINCIcon from '../../local/thincIcon.png'
+
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
