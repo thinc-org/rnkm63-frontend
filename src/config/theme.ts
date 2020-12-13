@@ -26,6 +26,9 @@ const theme = createMuiTheme({
     warning: {
       main: '#F2C94C', //yellow
     },
+    secondary: {
+      main: '#D34949',
+    },
     text: {
       primary: '#FFFFFF', //white
       secondary: '#000000', //black
