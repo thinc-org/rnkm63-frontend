@@ -6,13 +6,6 @@ import LogOutButton from './misc/LogOutButton'
 import THINCLogo from '../../local/thincLogo.png'
 import { withSuspense } from '../hoc'
 
-function HeaderSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Header />
-    </React.Suspense>
-  )
-}
 const useStyles = makeStyles({
   header: {
     marginTop: '20px',
