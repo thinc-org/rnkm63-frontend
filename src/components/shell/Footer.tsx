@@ -1,5 +1,6 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import SGCUIcon from '../../local/sgcuIcon.png'
 import THINCIcon from '../../local/thincIcon.png'
 const useStyles = makeStyles({
@@ -40,6 +41,7 @@ const useStyles = makeStyles({
 })
 function Footer() {
   const classes = useStyles()
+  const { t } = useTranslation('footer')
   return (
     <Box className={classes.footer}>
       <Box display="flex" flexDirection="column" marginTop="15px">
@@ -53,11 +55,7 @@ function Footer() {
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
-          งานรับน้องก้าวใหม่ ปีการศึกษา 2563
-          องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย
-        </Typography>
-        <Typography variant="body1" className={classes.footerFontLastLine}>
-          สงวนลิขสิทธิ์ © 2563 Thinc.
+          {t('title')}
         </Typography>
       </Box>
     </Box>
