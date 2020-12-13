@@ -1,7 +1,12 @@
 import React from "react";
 import "./Error.css";
 
-function Error({ title, detail }: { title: string; detail: string }) {
+interface IError {
+  title: string;
+  detail: string;
+}
+
+function Error({ title, detail }: IError) {
   return (
     <div className="ErrorContainer">
       <h1>Error!!</h1>
