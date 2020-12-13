@@ -2,9 +2,8 @@ import React from 'react'
 import './Login.css'
 import Button from '@material-ui/core/Button'
 import { useTranslation } from 'react-i18next'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
-import { Error } from '../../common'
 import { UserContext, UserType } from '../../../contexts/UserContext'
 
 function Login() {
