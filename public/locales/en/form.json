@@ -5,6 +5,10 @@
   "uploadTextButton": "Upload",
   "uploadReason": "You have to upload the new picture",
   "confirmCrop": "Confirm",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "confirmDialogTitle": "Do you want to confirm?",
+  "confirmDescription": "you cannot go back and edit once you hit the confirm button",
   "cropDescription": [
     "Do not use group photo",
     "Do not use filter",

@@ -79,6 +79,66 @@ const indexStyle = makeStyles((theme: any) => ({
       fontSize: '12px',
     },
   },
+  dialog: {
+    background: 'white',
+    color: 'black',
+    width: '327px',
+    paddingBottom: theme.spacing(2),
+    paddingTop: theme.spacing(1),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(3),
+      paddingTop: theme.spacing(4),
+      width: '474px',
+    },
+  },
+  dialogTitle: {
+    textAlign: 'center',
+    fontWeight: 700,
+    fontSize: '20px',
+    margin: 0,
+  },
+  dialogContent: {
+    textAlign: 'center',
+    fontWeight: 300,
+    fontFamily: font,
+    fontSize: '16px',
+    margin: 0,
+    marginBottom: theme.spacing(2),
+  },
+  cancelButton: {
+    width: '129px',
+    heigth: '27px',
+    color: 'white',
+    background: '#D34949',
+    borderRadius: '20px',
+    fontSize: '14px',
+    fontWeight: 700,
+    '&:hover': {
+      backgroundColor: '#D34949',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '207px',
+    },
+  },
+  confirmButton: {
+    width: '129px',
+    heigth: '27px',
+    color: 'white',
+    background: '#44AD53',
+    borderRadius: '20px',
+    fontSize: '14px',
+    fontWeight: 700,
+    '&:hover': {
+      backgroundColor: '#44AD53',
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '207px',
+    },
+  },
+  dialogAction: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+  },
 }))
 
 const imageStyle = makeStyles((theme: Theme) =>
