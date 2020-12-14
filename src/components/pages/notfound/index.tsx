@@ -35,11 +35,13 @@ function NotFound() {
         color: 'white',
         fontFamily: 'Rubik',
         fontSize: '60px',
+        fontWeight: 700,
       },
       text: {
         color: 'white',
         fontFamily: 'Rubik',
         fontSize: '34px',
+        fontWeight: 500,
       },
       image: {
         width: '206px',
@@ -52,7 +54,12 @@ function NotFound() {
         backgroundColor: '#44AD53',
         borderRadius: '40px',
       },
-      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
+      buttonText: {
+        color: 'white',
+        fontFamily: 'Rubik',
+        fontSize: '18px',
+        fontWeight: 700,
+      },
     },
   })
   const classes = useStyles()
