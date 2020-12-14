@@ -1,23 +1,29 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core'
 
+const font = (props: { lang: String }) =>
+  props.lang.startsWith('th') ? 'Kanit' : 'Rubik'
 const indexStyle = makeStyles((theme: any) => ({
-  submitButton: {
-    background: '#44AD53',
-    borderRadius: '40px',
-    width: '100%',
-    maxWidth: '434px',
-    display: 'block',
-    margin: 'auto',
-    '&:hover': {
-      backgroundColor: '#44AD53',
+  container: {
+    fontFamily: font,
+    padding: theme.spacing(1),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
+
+    [theme.breakpoints.up('sm')]: {
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
     },
   },
-  formInput: {
-    background: '#5c5c5c',
+  title: {
+    fontSize: '60px',
+    fontWeight: 500,
+    color: 'white',
+    margin: 0,
+    marginBottom: theme.spacing(4),
+    height: '100px',
+    display: 'none',
     [theme.breakpoints.up('sm')]: {
-      display: 'inline',
-      marginLeft: '20px',
-      flexGrow: 1,
+      display: 'block',
     },
   },
   content: {
@@ -26,17 +32,52 @@ const indexStyle = makeStyles((theme: any) => ({
       justifyContent: 'center',
     },
   },
+  image: {
+    paddingBottom: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      width: '207px',
+    },
+  },
+  formInput: {
+    background: '#5c5c5c',
+    [theme.breakpoints.up('sm')]: {
+      display: 'inline',
+      marginLeft: theme.spacing(2.5),
+      flexGrow: 1,
+    },
+  },
+  submitButton: {
+    background: '#44AD53',
+    borderRadius: '40px',
+    width: '100%',
+    display: 'block',
+    margin: 'auto',
+    marginTop: theme.spacing(6),
+    fontFamily: font,
+    color: 'white',
+    fontSize: '18px',
+    fontWeight: 700,
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: '#44AD53',
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(5),
+      width: '434px',
+    },
+  },
   submitNote: {
     display: 'block',
     textAlign: 'center',
+    color: '#F2C94C',
+    fontWeight: 400,
+    fontSize: '10px',
     margin: '0px',
-  },
-  container: {
+    marginTop: theme.spacing(1.5),
     [theme.breakpoints.up('sm')]: {
-      paddingLeft: '50px',
-      paddingRight: '50px',
+      marginTop: theme.spacing(2),
+      fontSize: '12px',
     },
-    background: '#929292',
   },
 }))
 
@@ -47,10 +88,24 @@ const imageStyle = makeStyles((theme: Theme) =>
     },
     button: {
       backgroundColor: '#1D324D',
-      border: '1px solid #C6C6C6',
-      borderRadius: '20.2141px',
+      border: '1px solid white',
+      color: 'white',
       margin: 'auto',
-      width: '200px',
+      fontFamily: font,
+      textTransform: 'none',
+      width: '150px',
+      height: '42px',
+      fontWeight: 400,
+      fontSize: '18px',
+      borderRadius: '40px',
+
+      [theme.breakpoints.up('sm')]: {
+        width: '207px',
+        height: '45px',
+        fontWeight: 700,
+        fontSize: '14px',
+        borderRadius: '20px',
+      },
       '&:hover': {
         backgroundColor: '#1D324D',
       },
@@ -68,13 +123,25 @@ const imageStyle = makeStyles((theme: Theme) =>
       borderRadius: '30px',
       borderColor: 'red',
       borderWidth: '5px',
+      background: '#C4C4C4',
+      marginBottom: theme.spacing(1),
       width: '150px',
       height: '200px',
-      background: '#C4C4C4',
-      marginBottom: '15px',
+      [theme.breakpoints.up('sm')]: {
+        width: '207px',
+        height: '276px',
+        marginBottom: theme.spacing(2.5),
+      },
     },
     reasonText: {
       color: '#EB5757',
+      fontWeight: 400,
+      fontSize: '14px',
+      marginTop: theme.spacing(1),
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '12px',
+        marginTop: theme.spacing(2),
+      },
     },
     closeButton: {
       margin: 0,
@@ -90,10 +157,10 @@ const imageStyle = makeStyles((theme: Theme) =>
       alignItems: 'center',
       alignSelf: 'center',
       width: '70%',
-      height: 300,
+      height: '300px',
       background: '#333',
       [theme.breakpoints.down('xs')]: {
-        height: 200,
+        height: '200px',
       },
     },
     dialogText: {

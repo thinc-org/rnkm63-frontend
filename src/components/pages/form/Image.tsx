@@ -38,7 +38,7 @@ function Image(props: React.PropsWithRef<any>) {
   const [zoom, setZoom] = useState(1)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
 
-  const classes = imageStyle()
+  const classes = imageStyle({ lang: i18n.language })
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
