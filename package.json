@@ -14,6 +14,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-image-crop": "^8.1.2",
     "@types/react-router-dom": "^5.1.6",
+    "formik": "^2.2.6",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.0.21",
@@ -25,7 +26,8 @@
     "react-scripts": "4.0.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
