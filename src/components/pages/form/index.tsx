@@ -14,7 +14,7 @@ import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 
 function Form() {
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageBlob, setImageBlob] = useState('')
   const [userData, setUserData] = useState({
     name: 'Genshin',
     surname: 'Impact',
@@ -39,7 +39,7 @@ function Form() {
       <p className={style.title}>{t('title')}</p>
       <div className={style.content}>
         <div className={style.image}>
-          <Image imageUrl={imageUrl} setImageUrl={setImageUrl} />
+          <Image imageBlob={imageBlob} setImageBlob={setImageBlob} />
         </div>
         <div className={style.formInput}>
           <FormInput userData={userData} setUserData={setUserData} />

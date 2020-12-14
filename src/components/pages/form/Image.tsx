@@ -11,12 +11,23 @@ import {
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
+import { getCroppedImg, getResizedImage } from './utils/imageHelper'
+import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
 import { imageStyle } from './style'
-import getCroppedImg from './utils/imageHelper'
-import Cropper from 'react-easy-crop'
+
+interface resultImg {
+  blob: Blob
+  urlFile: string
+}
+
+interface resizeImg {
+  uri: Blob
+  widthImg: number
+  heightImg: number
+}
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & { children?: React.ReactElement<any, any> },
@@ -36,19 +47,28 @@ function Image(props: React.PropsWithRef<any>) {
   })
 
   const [zoom, setZoom] = useState(1)
+  const [maxZoom, setMaxZoom] = useState(4)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+  const [finalImg, setFinalImg] = useState('')
 
-  const classes = imageStyle({ lang: i18n.language })
+  const style = imageStyle({ lang: i18n.language })
 
-  const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader()
       reader.addEventListener('load', () => setUpImg(reader.result as string))
-      reader.readAsDataURL(e.target.files[0])
+
+      const { uri, widthImg, heightImg }: resizeImg = (await getResizedImage(
+        e.target.files[0]
+      )) as resizeImg
+
+      reader.readAsDataURL(uri)
+
       setCrop({
         x: 0,
         y: 0,
       })
+      setMaxZoom(Math.min(widthImg / 180, heightImg / 240))
       setZoom(1)
     }
   }
@@ -70,20 +90,24 @@ function Image(props: React.PropsWithRef<any>) {
         open={cropState}
         maxWidth="sm"
         fullWidth={true}
+        PaperProps={{
+          classes: { root: style.dialog },
+        }}
         TransitionComponent={Transition}
         keepMounted
         onClose={() => setCropState(false)}
+        style={{ backdropFilter: 'blur(8px)' }}
       >
         <DialogTitle>
           <IconButton
             aria-label="close"
-            className={classes.closeButton}
+            className={style.closeButton}
             onClick={() => setCropState(false)}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        <DialogTitle className={classes.dialogTitle}>
+        <DialogTitle className={style.dialogTitle}>
           {t('dialogTitle')}
         </DialogTitle>
 
@@ -98,13 +122,13 @@ function Image(props: React.PropsWithRef<any>) {
                 alignContent: 'center',
               }}
             >
-              <div className={classes.cropContainer}>
+              <div className={style.cropContainer}>
                 <Cropper
                   image={upImg}
                   crop={crop}
                   zoom={zoom}
                   zoomSpeed={0.1}
-                  maxZoom={4}
+                  maxZoom={maxZoom}
                   aspect={3 / 4}
                   onCropChange={setCrop}
                   onCropComplete={onCropComplete}
@@ -112,27 +136,27 @@ function Image(props: React.PropsWithRef<any>) {
                 />
               </div>
             </div>
-            <div className={classes.zoomSlider}>
-              <ZoomOutIcon style={{ paddingRight: '10px' }} />
+            <div className={style.zoomSlider}>
+              <ZoomOutIcon style={{ paddingRight: '10px', color: 'black' }} />
               <Slider
                 defaultValue={1}
                 value={zoom}
                 min={1}
-                max={4}
+                max={maxZoom}
                 step={0.1}
                 onChange={(_, newValue) => {
                   setZoom(newValue as number)
                 }}
               />
-              <ZoomInIcon style={{ paddingLeft: '10px' }} />
+              <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
             </div>
           </React.Fragment>
         ) : (
-          <div className={classes.cropContainer}>
+          <div className={style.cropContainer}>
             <div style={{ width: '100%', height: '100%' }}>
               <input
                 accept="image/*"
-                className={classes.input}
+                className={style.input}
                 id="contained-button-file"
                 onChange={onSelectFile}
                 onClick={(e) => (e.currentTarget.value = '')}
@@ -154,7 +178,7 @@ function Image(props: React.PropsWithRef<any>) {
             </div>
           </div>
         )}
-        <DialogContentText className={classes.dialogText}>
+        <DialogContentText className={style.dialogText}>
           <ul>
             {t('cropDescription', {
               returnObjects: true,
@@ -162,33 +186,34 @@ function Image(props: React.PropsWithRef<any>) {
             })
               .split('|')
               .map((value) => (
-                <li>{value}</li>
+                <li key={value}>{value}</li>
               ))}
           </ul>
         </DialogContentText>
         <Button
           variant="contained"
           color="primary"
-          className={classes.submitButton}
+          className={style.submitButton}
           onClick={async () => {
             if (!upImg) {
               return
             }
-            const image = await getCroppedImg(upImg, croppedAreaPixels)
+            const img: resultImg = await getCroppedImg(upImg, croppedAreaPixels)
             setCropState(false)
-            props.setImageUrl(image)
+            setFinalImg(img.urlFile)
+            props.setImageBlob(img.blob)
           }}
         >
           {t('confirmCrop')}
         </Button>
       </Dialog>
 
-      {!!props.imageUrl ? (
+      {!!finalImg ? (
         <div>
-          <img src={props.imageUrl} className={classes.image}></img>
+          <img src={finalImg} className={style.image} alt=""></img>
         </div>
       ) : (
-        <div className={classes.image}></div>
+        <div className={style.image}></div>
       )}
       <div
         style={{
@@ -200,7 +225,7 @@ function Image(props: React.PropsWithRef<any>) {
         <Button
           variant="contained"
           color="primary"
-          className={classes.button}
+          className={style.button}
           onClick={() => {
             setCropState(true)
             setUpImg('')
@@ -208,7 +233,7 @@ function Image(props: React.PropsWithRef<any>) {
         >
           {t('uploadTextButton')}
         </Button>
-        <p className={classes.reasonText}>{t('uploadReason')}</p>
+        <p className={style.reasonText}>{t('uploadReason')}</p>
       </div>
     </Box>
   )

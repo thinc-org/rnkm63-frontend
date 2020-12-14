@@ -1,3 +1,6 @@
+import { compressAccurately, urltoBlob } from 'image-conversion'
+import Resizer from 'react-image-file-resizer'
+
 const createImage = (url: any) =>
   new Promise((resolve, reject) => {
     const image = new Image()
@@ -7,8 +10,49 @@ const createImage = (url: any) =>
     image.src = url
   })
 
+const limitFileKB = 300
+
 function getRadianAngle(degreeValue: any) {
   return (degreeValue * Math.PI) / 180
+}
+
+export async function getResizedImage(img: File) {
+  const tmpImg: HTMLImageElement = (await createImage(
+    URL.createObjectURL(img)
+  )) as HTMLImageElement
+
+  let heightImg = tmpImg.height
+  let widthImg = tmpImg.width
+
+  const heightMin = 240
+  const widthMin = 180
+
+  if (heightImg <= heightMin) {
+    const ratio = heightMin / heightImg
+    heightImg *= ratio
+    widthImg *= ratio
+  }
+
+  if (widthImg <= widthMin) {
+    const ratio = widthMin / widthImg
+    heightImg *= ratio
+    widthImg *= ratio
+  }
+
+  return new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      img,
+      widthImg,
+      heightImg,
+      'jpeg',
+      100,
+      0,
+      (uri) => {
+        resolve({ uri, widthImg, heightImg })
+      },
+      'blob'
+    )
+  })
 }
 
 /**
@@ -17,7 +61,7 @@ function getRadianAngle(degreeValue: any) {
  * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
  * @param {number} rotation - optional rotation parameter
  */
-export default async function getCroppedImg(
+export async function getCroppedImg(
   imageSrc: any,
   pixelCrop: any,
   rotation = 0
@@ -27,7 +71,7 @@ export default async function getCroppedImg(
   const ctx: any = canvas.getContext('2d')
 
   const maxSize = Math.max(image.width, image.height)
-  const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2))
+  const safeArea = maxSize
 
   // set each dimensions to double largest dimension to allow for a safe area for the
   // image to rotate in without being clipped by canvas context
@@ -59,12 +103,20 @@ export default async function getCroppedImg(
   )
 
   // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
+  const base64 = canvas.toDataURL('image/jpeg')
+  const blob = await urltoBlob(base64)
+
+  const compressImg = await compressAccurately(blob, limitFileKB)
+  // console.log('Before compress: ', checkImageSize(base64), limitFileKB * 1024)
+  // console.log('After compress: ', compressImg.size, limitFileKB * 1024)
+  // console.log('Result: ', compressImg)
 
   // As a blob
-  return new Promise((resolve) => {
-    canvas.toBlob((file: any) => {
-      resolve(URL.createObjectURL(file))
-    }, 'image/jpeg')
-  })
+  return { urlFile: URL.createObjectURL(compressImg), blob: compressImg }
+}
+
+export function checkImageSize(img: string) {
+  const buffer = Buffer.from(img.substring(img.indexOf(',') + 1))
+
+  return buffer.length
 }

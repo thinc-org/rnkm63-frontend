@@ -18,10 +18,12 @@
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.0.21",
+    "image-conversion": "^2.1.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-easy-crop": "^3.3.1",
     "react-i18next": "^11.8.3",
+    "react-image-file-resizer": "^0.3.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "typescript": "^4.0.3",
@@ -54,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@types/sharp": "^0.26.1",
     "husky": "^4.3.5",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
