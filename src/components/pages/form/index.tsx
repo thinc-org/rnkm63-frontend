@@ -1,12 +1,10 @@
 import React from 'react'
 import { useState } from 'react'
-import { Button, Container, makeStyles } from '@material-ui/core'
+import { Button, Container } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
 import { indexStyle } from './style/styles'
 import { useTranslation } from 'react-i18next'
-
-import { Box } from '@material-ui/core'
 
 function Form() {
   const [imageUrl, setImageUrl] = useState('')

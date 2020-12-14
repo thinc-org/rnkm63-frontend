@@ -50,7 +50,7 @@ const imageStyle = makeStyles((theme: Theme) =>
       border: '1px solid #C6C6C6',
       borderRadius: '20.2141px',
       margin: 'auto',
-      width: '150px',
+      width: '200px',
       '&:hover': {
         backgroundColor: '#1D324D',
       },
@@ -58,7 +58,7 @@ const imageStyle = makeStyles((theme: Theme) =>
     submitButton: {
       margin: theme.spacing(2),
       alignSelf: 'center',
-      width: '60%',
+      width: '70%',
       backgroundColor: '#44AD53',
       '&:hover': {
         background: '#44AD53',
@@ -90,22 +90,36 @@ const imageStyle = makeStyles((theme: Theme) =>
       alignItems: 'center',
       alignSelf: 'center',
       width: '70%',
-      height: 400,
+      height: 300,
       background: '#333',
-      [theme.breakpoints.down('sm')]: {
-        height: 400,
+      [theme.breakpoints.down('xs')]: {
+        height: 200,
       },
     },
-    unorderList: {},
     dialogText: {
       color: 'black',
-      width: '70%',
+      width: '75%',
       alignSelf: 'center',
       fontWeight: 500,
-      fontSize: '16px',
-      lineHeight: '24px',
+      fontSize: '18px',
+      lineHeight: '32px',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '13px',
+        lineHeight: '24px',
+      },
     },
     dialog: {},
+    dialogTitle: {
+      display: 'flex',
+      alignSelf: 'center',
+    },
+    zoomSlider: {
+      display: 'flex',
+      alignSelf: 'center',
+      alignItems: 'center',
+      width: '75%',
+      paddingTop: '18px',
+    },
   })
 )
 
