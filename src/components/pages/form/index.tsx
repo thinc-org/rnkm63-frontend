@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
-import { indexStyle } from './style/styles'
+import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 
 function Form() {
