@@ -5,12 +5,11 @@ import { useTranslation } from 'react-i18next'
 import sadthincIcon from '../../../local/sadthinc.png'
 import theme from '../../../config/theme'
 function NotFreshy() {
-  const { t } = useTranslation('not104')
+  const { t } = useTranslation(['not104', 'tohomebutton'])
   const useStyles = makeStyles({
     [theme.breakpoints.down('sm')]: {
       textHeader: {
         color: 'white',
-        fontFamily: 'Rubik',
         fontSize: '22px',
       },
       image: {
@@ -24,13 +23,14 @@ function NotFreshy() {
         backgroundColor: '#44AD53',
         borderRadius: '40px',
       },
-      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
+      buttonText: { color: 'white', fontSize: '18px' },
     },
     [theme.breakpoints.up('sm')]: {
       textHeader: {
         color: 'white',
-        fontFamily: 'Rubik',
         fontSize: '60px',
+        fontWeight: '700',
+        fontFamily: 'Rubik',
       },
       image: {
         width: '206px',
@@ -43,7 +43,7 @@ function NotFreshy() {
         backgroundColor: '#44AD53',
         borderRadius: '40px',
       },
-      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
+      buttonText: { color: 'white', fontSize: '18px' },
     },
   })
   const classes = useStyles()
@@ -57,8 +57,10 @@ function NotFreshy() {
     >
       <img src={sadthincIcon} className={classes.image}></img>
       <Typography className={classes.textHeader}>{t('title')}</Typography>
-      <Button variant="contained" className={classes.button}>
-        <Typography className={classes.buttonText}>Back to Home</Typography>
+      <Button variant="contained" className={classes.button} color="primary">
+        <Typography className={classes.buttonText}>
+          {t('tohomebutton:title')}
+        </Typography>
       </Button>
     </Box>
   )

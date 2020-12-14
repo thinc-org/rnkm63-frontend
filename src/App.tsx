@@ -13,9 +13,13 @@ import BackgroundImg from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
+    minWidth: '100vw',
     display: 'flex',
     flexDirection: 'column',
     backgroundImage: `url(${BackgroundImg})`,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
   PageContainer: {
     flex: 1,

@@ -9,12 +9,10 @@ function NotFound() {
     [theme.breakpoints.down('sm')]: {
       textHeader: {
         color: 'white',
-        fontFamily: 'Rubik',
         fontSize: '28px',
       },
       text: {
         color: 'white',
-        fontFamily: 'Rubik',
         fontSize: '16px',
       },
       image: {
@@ -28,7 +26,7 @@ function NotFound() {
         backgroundColor: '#44AD53',
         borderRadius: '40px',
       },
-      buttonText: { color: 'white', fontFamily: 'Rubik', fontSize: '18px' },
+      buttonText: { color: 'white', fontSize: '18px' },
     },
     [theme.breakpoints.up('sm')]: {
       textHeader: {
@@ -74,7 +72,7 @@ function NotFound() {
       <img src={sadthincIcon} className={classes.image}></img>
       <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>
-      <Button variant="contained" className={classes.button}>
+      <Button variant="contained" className={classes.button} color="primary">
         <Typography className={classes.buttonText}>
           {t('tohomebutton:title')}
         </Typography>
