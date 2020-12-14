@@ -1,8 +1,8 @@
 {
   "title": "Register",
-  "submit": "Submit Information",
+  "submit": "Submit",
   "submitNote": "Note: You cannot edit information after you submit.",
-  "uploadTextButton": "Upload photo",
+  "uploadTextButton": "Upload",
   "uploadReason": "You have to upload the new picture",
   "confirmCrop": "Confirm",
   "cropDescription": [

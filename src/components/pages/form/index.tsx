@@ -12,14 +12,13 @@ function Form() {
     name: 'Genshin',
     surname: 'Impact',
   })
-  const style = indexStyle()
   const { t, i18n } = useTranslation('form')
-
+  const style = indexStyle({ lang: i18n.language })
   return (
     <Container maxWidth="lg" classes={{ root: style.container }}>
-      <p>{t('title')}</p>
+      <p className={style.title}>{t('title')}</p>
       <div className={style.content}>
-        <div>
+        <div className={style.image}>
           <Image imageUrl={imageUrl} setImageUrl={setImageUrl} />
         </div>
         <div className={style.formInput}>
