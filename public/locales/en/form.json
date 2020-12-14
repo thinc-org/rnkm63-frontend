@@ -12,5 +12,6 @@
     "Do not tilt your head or body too much",
     "Do not use photo’s size over 300 KB",
     "The ratio between your face and the whole photo should be about 1 : 3"
-  ]
+  ],
+  "dialogTitle": "Edit Image"
 }

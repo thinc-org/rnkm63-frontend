@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   Button,
   Slide,
@@ -6,12 +6,14 @@ import {
   DialogTitle,
   IconButton,
   DialogContentText,
-  Typography,
-  Container,
+  Slider,
+  Box,
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
 import CloseIcon from '@material-ui/icons/Close'
+import ZoomInIcon from '@material-ui/icons/ZoomIn'
+import ZoomOutIcon from '@material-ui/icons/ZoomOut'
 import { imageStyle } from './style/styles'
 import getCroppedImg from './utils/imageHelper'
 import Cropper from 'react-easy-crop'
@@ -23,7 +25,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="down" ref={ref} {...props} />
 })
 
-function Picture(props: React.PropsWithRef<any>) {
+function Image(props: React.PropsWithRef<any>) {
   const { t, i18n } = useTranslation('form')
 
   const [upImg, setUpImg] = useState('')
@@ -43,7 +45,11 @@ function Picture(props: React.PropsWithRef<any>) {
       const reader = new FileReader()
       reader.addEventListener('load', () => setUpImg(reader.result as string))
       reader.readAsDataURL(e.target.files[0])
-      setCropState(true)
+      setCrop({
+        x: 0,
+        y: 0,
+      })
+      setZoom(1)
     }
   }
 
@@ -52,7 +58,7 @@ function Picture(props: React.PropsWithRef<any>) {
   }, [])
 
   return (
-    <div
+    <Box
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -76,25 +82,80 @@ function Picture(props: React.PropsWithRef<any>) {
           >
             <CloseIcon />
           </IconButton>
-          <DialogTitle>{'Hello World'}</DialogTitle>
+        </DialogTitle>
+        <DialogTitle className={classes.dialogTitle}>
+          {t('dialogTitle')}
         </DialogTitle>
 
-        <div className={classes.cropContainer}>
-          <Cropper
-            image={upImg}
-            crop={crop}
-            zoom={zoom}
-            zoomSpeed={0.1}
-            maxZoom={5}
-            zoomWithScroll={true}
-            aspect={3 / 4}
-            onCropChange={setCrop}
-            onCropComplete={onCropComplete}
-            onZoomChange={setZoom}
-          />
-        </div>
+        {!!upImg ? (
+          <React.Fragment>
+            <div
+              style={{
+                height: '100%',
+                width: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignContent: 'center',
+              }}
+            >
+              <div className={classes.cropContainer}>
+                <Cropper
+                  image={upImg}
+                  crop={crop}
+                  zoom={zoom}
+                  zoomSpeed={0.1}
+                  maxZoom={4}
+                  aspect={3 / 4}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </div>
+            </div>
+            <div className={classes.zoomSlider}>
+              <ZoomOutIcon style={{ paddingRight: '10px' }} />
+              <Slider
+                defaultValue={1}
+                value={zoom}
+                min={1}
+                max={4}
+                step={0.1}
+                onChange={(_, newValue) => {
+                  setZoom(newValue as number)
+                }}
+              />
+              <ZoomInIcon style={{ paddingLeft: '10px' }} />
+            </div>
+          </React.Fragment>
+        ) : (
+          <div className={classes.cropContainer}>
+            <div style={{ width: '100%', height: '100%' }}>
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                onChange={onSelectFile}
+                onClick={(e) => (e.currentTarget.value = '')}
+                type="file"
+              />
+              <label htmlFor="contained-button-file">
+                <Button
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    color: 'white',
+                    verticalAlign: 'center',
+                  }}
+                  component="span"
+                >
+                  {'Click to Upload Image'}
+                </Button>
+              </label>
+            </div>
+          </div>
+        )}
         <DialogContentText className={classes.dialogText}>
-          <ul className={classes.unorderList}>
+          <ul>
             {t('cropDescription', {
               returnObjects: true,
               joinArrays: '|',
@@ -110,6 +171,9 @@ function Picture(props: React.PropsWithRef<any>) {
           color="primary"
           className={classes.submitButton}
           onClick={async () => {
+            if (!upImg) {
+              return
+            }
             const image = await getCroppedImg(upImg, croppedAreaPixels)
             setCropState(false)
             props.setImageUrl(image)
@@ -119,7 +183,7 @@ function Picture(props: React.PropsWithRef<any>) {
         </Button>
       </Dialog>
 
-      {props.imageUrl ? (
+      {!!props.imageUrl ? (
         <div>
           <img src={props.imageUrl} className={classes.image}></img>
         </div>
@@ -133,28 +197,21 @@ function Picture(props: React.PropsWithRef<any>) {
           flexDirection: 'column',
         }}
       >
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="contained-button-file"
-          onChange={onSelectFile}
-          onClick={(e) => (e.currentTarget.value = '')}
-          type="file"
-        />
-        <label htmlFor="contained-button-file">
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.button}
-            component="span"
-          >
-            {t('uploadTextButton')}
-          </Button>
-        </label>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={() => {
+            setCropState(true)
+            setUpImg('')
+          }}
+        >
+          {t('uploadTextButton')}
+        </Button>
         <p className={classes.reasonText}>{t('uploadReason')}</p>
       </div>
-    </div>
+    </Box>
   )
 }
 
-export default Picture
+export default Image
