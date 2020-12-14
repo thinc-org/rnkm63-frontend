@@ -14,7 +14,7 @@ import { TransitionProps } from '@material-ui/core/transitions/transition'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
-import { imageStyle } from './style/styles'
+import { imageStyle } from './style'
 import getCroppedImg from './utils/imageHelper'
 import Cropper from 'react-easy-crop'
 
