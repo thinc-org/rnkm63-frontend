@@ -1,7 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Container, Box, makeStyles } from '@material-ui/core'
+import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
+import theme from './config/theme'
 
 import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
@@ -25,22 +26,24 @@ function App() {
   const classes = useStyles()
   return (
     <UserProvider>
-      <Router>
-        <Box className={classes.AppContainer}>
-          <Header />
-          <Container className={classes.PageContainer}>
-            <React.Suspense fallback={Loading}>
-              <Switch>
-                <Route path="/login" exact component={Login} />
-                <Route path="/form" exact component={Form} />
-                <Route path="/" exact component={Profile} />
-                <Route component={NotFound} />
-              </Switch>
-            </React.Suspense>
-          </Container>
-          <Footer />
-        </Box>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Box className={classes.AppContainer} color="text.primary">
+            <Header />
+            <Container className={classes.PageContainer}>
+              <React.Suspense fallback={<Loading />}>
+                <Switch>
+                  <Route path="/login" exact component={Login} />
+                  <Route path="/form" exact component={Form} />
+                  <Route path="/" exact component={Profile} />
+                  <Route component={NotFound} />
+                </Switch>
+              </React.Suspense>
+            </Container>
+            <Footer />
+          </Box>
+        </Router>
+      </ThemeProvider>
     </UserProvider>
   )
 }

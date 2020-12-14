@@ -14,6 +14,14 @@ const theme = createMuiTheme({
     },
   },
   //#44AD53 is green color.
-  palette: { primary: { main: '#44AD53' } },
+  palette: {
+    type: 'dark',
+    primary: {
+      main: '#44AD53',
+    },
+    text: {
+      primary: '#eee',
+    },
+  },
 })
 export default theme
