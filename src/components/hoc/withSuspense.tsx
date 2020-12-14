@@ -6,7 +6,7 @@ export default function withSuspense<P>(
 ): React.FC<P> {
   return (props: P) => {
     return (
-      <React.Suspense fallback={Loading}>
+      <React.Suspense fallback={<Loading />}>
         <Component {...props} />
       </React.Suspense>
     )

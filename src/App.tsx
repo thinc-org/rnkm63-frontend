@@ -31,7 +31,7 @@ function App() {
           <Box className={classes.AppContainer} color="text.primary">
             <Header />
             <Container className={classes.PageContainer}>
-              <React.Suspense fallback={Loading}>
+              <React.Suspense fallback={<Loading />}>
                 <Switch>
                   <Route path="/login" exact component={Login} />
                   <Route path="/form" exact component={Form} />
