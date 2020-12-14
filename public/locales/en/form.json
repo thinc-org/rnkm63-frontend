@@ -18,11 +18,11 @@
     "The ratio between your face and the whole photo should be about 1 : 3"
   ],
   "dialogTitle": "Edit Image",
-  "nametitle": "Title",
+  "prefix": "Title",
   "mr": "Mr.",
   "ms": "Ms.",
-  "firstname": "First name",
-  "lastname": "Last name",
+  "realname": "First name",
+  "surname": "Last name",
   "nickname": "Nickname (Thai only)",
   "religion": "Religion",
   "bd": "Bhuddhism",
@@ -34,5 +34,5 @@
   "rns": "Rather not say",
   "tel": "Phone number",
   "emertel": "Emergency contact",
-  "relation": "Relationship"
+  "emergencyConnection": "Relationship"
 }

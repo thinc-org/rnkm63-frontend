@@ -48,20 +48,20 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const RegisterSchema = Yup.object().shape({
-  firstname: Yup.string().required('This field is required.'),
-  nametitle: Yup.string().required('This field is required.'),
+  realname: Yup.string().required('This field is required.'),
+  prefix: Yup.string().required('This field is required.'),
   lastname: Yup.string().required('This field is required.'),
   nickname: Yup.string().required('This field is required.'),
   religion: Yup.string().required('This field is required.'),
   tel: Yup.number()
     .required('This field is required.')
     .min(9, 'This field is required.'),
-  fb: Yup.string().required('This field is required.'),
-  lineid: Yup.string().required('This field is required.'),
-  emertel: Yup.number()
+  facebook: Yup.string().required('This field is required.'),
+  lineID: Yup.string().required('This field is required.'),
+  emergencyTel: Yup.number()
     .required('This field is required.')
     .min(9, 'This field is required.'),
-  relation: Yup.string().required('This field is required.'),
+  emergencyConnection: Yup.string().required('This field is required.'),
 })
 
 function FormInput(props: any) {
@@ -70,16 +70,16 @@ function FormInput(props: any) {
   const style = indexStyle({ lang: i18n.language })
   const formik = useFormik({
     initialValues: {
-      nametitle: '',
-      firstname: '',
+      prefix: '',
+      realname: '',
       lastname: '',
       nickname: '',
       religion: '',
       tel: '',
-      fb: '',
-      lineid: '',
-      emertel: '',
-      relation: '',
+      facebook: '',
+      lineID: '',
+      emergencyTel: '',
+      emergencyConnection: '',
     },
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
@@ -92,20 +92,18 @@ function FormInput(props: any) {
       <form onSubmit={formik.handleSubmit} className={classes.root}>
         <div className={classes.inside}>
           <FormControl className={classes.formControl}>
-            <FormLabel className={classes.label}>{t('nametitle')}</FormLabel>
+            <FormLabel className={classes.label}>{t('prefix')}</FormLabel>
             <Select
               native
               className={classes.selectbox}
               //size="small"
-              name="nametitle"
-              value={formik.values.nametitle}
-              error={
-                formik.touched.nametitle && Boolean(formik.errors.nametitle)
-              }
+              name="prefix"
+              value={formik.values.prefix}
+              error={formik.touched.prefix && Boolean(formik.errors.prefix)}
               variant="outlined"
               onChange={formik.handleChange}
             >
-              {/* helperText={formik.touched.nametitle && formik.errors.nametitle} */}
+              {/* helperText={formik.touched.prefix && formik.errors.prefix} */}
               <option aria-label="None" value="" />
               <option value={'Mr.'}>{t('mr')}</option>
               <option value={'Ms.'}>{t('ms')}</option>
@@ -113,18 +111,16 @@ function FormInput(props: any) {
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <FormLabel className={classes.label}>{t('firstname')}</FormLabel>
+            <FormLabel className={classes.label}>{t('realname')}</FormLabel>
             <TextField
-              name="firstname"
-              id="firstname"
+              name="realname"
+              id="realname"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.firstname}
+              value={formik.values.realname}
               onChange={formik.handleChange}
-              error={
-                formik.touched.firstname && Boolean(formik.errors.firstname)
-              }
-              helperText={formik.touched.firstname && formik.errors.firstname}
+              error={formik.touched.realname && Boolean(formik.errors.realname)}
+              helperText={formik.touched.realname && formik.errors.realname}
               variant="outlined"
             />
           </FormControl>
@@ -139,7 +135,7 @@ function FormInput(props: any) {
               value={formik.values.lastname}
               onChange={formik.handleChange}
               error={formik.touched.lastname && Boolean(formik.errors.lastname)}
-              helperText={formik.touched.firstname && formik.errors.firstname}
+              helperText={formik.touched.realname && formik.errors.realname}
               variant="outlined"
             />
           </FormControl>
@@ -202,14 +198,14 @@ function FormInput(props: any) {
           <FormControl className={classes.formControl}>
             <FormLabel className={classes.label}>Facebook</FormLabel>
             <TextField
-              name="fb"
-              id="fb"
+              name="facebook"
+              id="facebook"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.fb}
+              value={formik.values.facebook}
               onChange={formik.handleChange}
-              error={formik.touched.fb && Boolean(formik.errors.fb)}
-              helperText={formik.touched.fb && formik.errors.fb}
+              error={formik.touched.facebook && Boolean(formik.errors.facebook)}
+              helperText={formik.touched.facebook && formik.errors.facebook}
               variant="outlined"
             />
           </FormControl>
@@ -217,44 +213,57 @@ function FormInput(props: any) {
           <FormControl className={classes.formControl}>
             <FormLabel className={classes.label}>LINE ID</FormLabel>
             <TextField
-              name="lineid"
-              id="lineid"
+              name="lineID"
+              id="lineID"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.lineid}
+              value={formik.values.lineID}
               onChange={formik.handleChange}
-              error={formik.touched.lineid && Boolean(formik.errors.lineid)}
-              helperText={formik.touched.lineid && formik.errors.lineid}
+              error={formik.touched.lineID && Boolean(formik.errors.lineID)}
+              helperText={formik.touched.lineID && formik.errors.lineID}
               variant="outlined"
             />
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <FormLabel className={classes.label}>{t('emertel')}</FormLabel>
+            <FormLabel className={classes.label}>{t('emergencyTel')}</FormLabel>
             <TextField
-              name="emertel"
-              id="emertel"
+              name="emergencyTel"
+              id="emergencyTel"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.emertel}
+              value={formik.values.emergencyTel}
               onChange={formik.handleChange}
-              error={formik.touched.emertel && Boolean(formik.errors.emertel)}
-              helperText={formik.touched.emertel && formik.errors.emertel}
+              error={
+                formik.touched.emergencyTel &&
+                Boolean(formik.errors.emergencyTel)
+              }
+              helperText={
+                formik.touched.emergencyTel && formik.errors.emergencyTel
+              }
               variant="outlined"
             />
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <FormLabel className={classes.label}>{t('relation')}</FormLabel>
+            <FormLabel className={classes.label}>
+              {t('emergencyConnection')}
+            </FormLabel>
             <TextField
-              name="relation"
-              id="relation"
+              name="emergencyConnection"
+              id="emergencyConnection"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.relation}
+              value={formik.values.emergencyConnection}
               onChange={formik.handleChange}
-              error={formik.touched.relation && Boolean(formik.errors.relation)}
-              helperText={formik.touched.relation && formik.errors.relation}
+              error={
+                formik.touched.emergencyConnection &&
+                Boolean(formik.errors.emergencyConnection)
+              }
+              helperText={
+                formik.touched.emergencyConnection &&
+                formik.errors.emergencyConnection
+              }
               variant="outlined"
             />
           </FormControl>
