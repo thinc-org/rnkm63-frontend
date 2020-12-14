@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const RegisterSchema = Yup.object().shape({
   realname: Yup.string().required('This field is required.'),
   prefix: Yup.string().required('This field is required.'),
-  lastname: Yup.string().required('This field is required.'),
+  surname: Yup.string().required('This field is required.'),
   nickname: Yup.string().required('This field is required.'),
   religion: Yup.string().required('This field is required.'),
   tel: Yup.number()
@@ -72,7 +72,7 @@ function FormInput(props: any) {
     initialValues: {
       prefix: '',
       realname: '',
-      lastname: '',
+      surname: '',
       nickname: '',
       religion: '',
       tel: '',
@@ -126,15 +126,15 @@ function FormInput(props: any) {
           </FormControl>
 
           <FormControl className={classes.formControl}>
-            <FormLabel className={classes.label}>{t('lastname')}</FormLabel>
+            <FormLabel className={classes.label}>{t('surname')}</FormLabel>
             <TextField
-              name="lastname"
-              id="lastname"
+              name="surname"
+              id="surname"
               // className={classes.inputbox}
               size="small"
-              value={formik.values.lastname}
+              value={formik.values.surname}
               onChange={formik.handleChange}
-              error={formik.touched.lastname && Boolean(formik.errors.lastname)}
+              error={formik.touched.surname && Boolean(formik.errors.surname)}
               helperText={formik.touched.realname && formik.errors.realname}
               variant="outlined"
             />
