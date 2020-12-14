@@ -31,14 +31,12 @@ const useStyles = makeStyles({
     color: '#8D8D8D',
     textAlign: 'center',
     fontSize: '10px',
-    fontFamily: 'Kanit',
   },
-  footerFontLastLine: {
+  footerFont2: {
     color: '#8D8D8D',
     textAlign: 'center',
     fontSize: '10px',
-    fontFamily: 'Kanit',
-    marginBottom: '9px',
+    marginBottom: '12px',
   },
 })
 function HeaderSuspenseHOC() {
@@ -64,7 +62,10 @@ function Footer() {
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
-          {t('title')}
+          {t('firstline')}
+        </Typography>
+        <Typography variant="body1" className={classes.footerFont2}>
+          {t('secondline')}
         </Typography>
       </Box>
     </Box>

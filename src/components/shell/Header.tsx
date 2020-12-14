@@ -1,28 +1,45 @@
-import { Box, Button, makeStyles } from "@material-ui/core";
-import React from "react";
-import { Link } from "react-router-dom";
-import { Loading } from "../common";
-import LanguageSwitcher from "./misc/LanguageSwitcher";
-import LogOutButton from "./misc/LogOutButton";
-import THINCLogo from "../../local/thincLogo.png";
-import { UserContext } from "../../contexts/UserContext";
+import {
+  Box,
+  ListItem,
+  ListItemProps,
+  makeStyles,
+  useMediaQuery,
+} from '@material-ui/core'
+import React from 'react'
+import LanguageSwitcher from './misc/LanguageSwitcher'
+import LogOutButton from './misc/LogOutButton'
 import { withSuspense } from '../hoc'
-
+import theme from '../../config/theme'
 const useStyles = makeStyles({
-  header: {
-    marginTop: '20px',
+  [theme.breakpoints.down('sm')]: {
+    header: {
+      marginTop: '20px',
+    },
+    thincLogo: {
+      maxWidth: '50%',
+      maxHeight: '50%',
+    },
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
   },
-  thincLogo: {},
 })
+function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
+  return <ListItem button component="a" {...props} />
+}
 function Header() {
   const classes = useStyles()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
   return (
     <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <img src={THINCLogo} alt="" className={classes.thincLogo} />
         <Box flexDirection="row" justifyContent="flex-start">
           <LanguageSwitcher />
-          <LogOutButton />
+          {matches && <LogOutButton />}
         </Box>
       </Box>
     </Box>
