@@ -1,11 +1,10 @@
 import React from 'react'
 import { Box, Button, makeStyles, Typography } from '@material-ui/core'
-
 import { useTranslation } from 'react-i18next'
 import sadthincIcon from '../../../local/sadthinc.png'
 import theme from '../../../config/theme'
 function NotFound() {
-  const { t } = useTranslation('notfound')
+  const { t } = useTranslation(['notfound', 'tohomebutton'])
   const useStyles = makeStyles({
     [theme.breakpoints.down('sm')]: {
       textHeader: {
@@ -69,7 +68,9 @@ function NotFound() {
       <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>
       <Button variant="contained" className={classes.button}>
-        <Typography className={classes.buttonText}>Back to Home</Typography>
+        <Typography className={classes.buttonText}>
+          {t('tohomebutton:title')}
+        </Typography>
       </Button>
     </Box>
   )
