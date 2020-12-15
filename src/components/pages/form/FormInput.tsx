@@ -10,6 +10,9 @@ import FormControl from '@material-ui/core/FormControl'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import FormLabel from '@material-ui/core/FormLabel'
+import theme from '../../../config/theme'
+import Link from '@material-ui/core/Link'
+import FormHelperText from '@material-ui/core/FormHelperText'
 
 const RegisterSchema = Yup.object().shape({
   realname: Yup.string().required('required'),
@@ -32,6 +35,15 @@ const RegisterSchema = Yup.object().shape({
 })
 
 const useStyles = makeStyles((theme) => ({
+  overrides: {
+    MuiInput: {
+      formControl: {
+        'label + &': {
+          marginTop: '0px',
+        },
+      },
+    },
+  },
   root: {
     padding: theme.spacing(1),
     [theme.breakpoints.down('md')]: {
@@ -49,21 +61,33 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   inside: {
-    margin: '10px',
+    margin: theme.spacing(1),
     // marginRight:"20px"
   },
   particular: {
-    margin: '10px',
+    margin: theme.spacing(0.5),
+    background: theme.palette.primary.main,
+    //borderColor:"#D3D3D3"
   },
-  selectbox: {
-    height: '40px',
+  particular_select: {
+    margin: theme.spacing(0.5),
+    background: theme.palette.primary.main,
+    height: '2.58rem',
   },
   label: {
-    marginBottom: '5px',
+    margin: theme.spacing(0.5),
+    color: theme.palette.text.primary,
   },
   formControl: {
-    margin: theme.spacing(1),
+    margin: theme.spacing(0.5),
     minWidth: 120,
+  },
+  choice: {
+    color: theme.palette.text.secondary,
+  },
+  error: {
+    color: theme.palette.error.main,
+    marginLeft: theme.spacing(0.5),
   },
 }))
 
@@ -82,29 +106,31 @@ const FORM_RELIGION_FIELD_OPTIONS = [
   { value: 'rns', text: 'rns' },
 ]
 
+const INITIAL_VALUE = {
+  prefix: '',
+  realname: '',
+  surname: '',
+  nickname: '',
+  religion: '',
+  tel: '',
+  facebook: '',
+  lineID: '',
+  emergencyTel: '',
+  emergencyConnection: '',
+  disease: '',
+  allergyMedicine: '',
+  usedMedicine: '',
+  foodRestriction: '',
+  disability: '',
+}
+
 function FormInput(props: any) {
   const classes = useStyles()
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
 
   const formik = useFormik({
-    initialValues: {
-      prefix: '',
-      realname: '',
-      surname: '',
-      nickname: '',
-      religion: '',
-      tel: '',
-      facebook: '',
-      lineID: '',
-      emergencyTel: '',
-      emergencyConnection: '',
-      disease: '',
-      allergyMedicine: '',
-      usedMedicine: '',
-      foodRestriction: '',
-      disability: '',
-    },
+    initialValues: INITIAL_VALUE,
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2))
@@ -113,6 +139,17 @@ function FormInput(props: any) {
 
   return (
     <Box>
+      <p
+        style={{
+          color: '#FABD03',
+          margin: theme.spacing(2),
+          marginTop: '0rem',
+          marginBottom: '0rem',
+          fontSize: '1.25rem',
+        }}
+      >
+        *Do not leave any fields blank. (“-” if empty)
+      </p>
       <form onSubmit={formik.handleSubmit} className={classes.root}>
         <Box className={classes.inside}>
           <FormSelectField
@@ -160,6 +197,20 @@ function FormInput(props: any) {
             touched={formik.touched.religion}
             options={FORM_RELIGION_FIELD_OPTIONS}
           />
+          <p
+            style={{
+              color: '#FABD03',
+              margin: theme.spacing(2),
+              marginTop: '0rem',
+              marginBottom: '0rem',
+              fontSize: '0.75rem',
+            }}
+          >
+            Note: If you don’t have Thai nickname, please contact{' '}
+            <Link href="https://www.facebook.com/chulafreshmen">
+              CU for Freshman
+            </Link>
+          </p>
         </Box>
 
         <Box className={classes.inside}>
@@ -292,7 +343,8 @@ const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
   const { t } = useTranslation('form')
   const classes = useStyles()
   return (
-    <FormControl className={className}>
+    <FormControl className={classes.formControl}>
+      <FormLabel className={classes.label}>{t(name)}</FormLabel>
       <TextField
         name={name}
         id={id}
@@ -300,9 +352,14 @@ const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
         value={value}
         onChange={handleChange}
         error={touched && Boolean(error)}
-        helperText={touched && error && t(error)}
-        label={t(name)}
+        //helperText={touched && error && t(error)}
+        className={classes.particular}
+        //label={t(name)}
+        variant="outlined"
       />
+      <FormHelperText className={classes.error}>
+        {touched && error && t(error)}
+      </FormHelperText>
     </FormControl>
   )
 })
@@ -323,14 +380,15 @@ const FormSelectField = React.memo(function FormSelectField(
   const { t } = useTranslation('form')
   const classes = useStyles()
   return (
-    <FormControl className={className}>
+    <FormControl className={classes.formControl}>
       <FormLabel className={classes.label}>{t(name)}</FormLabel>
       <Select
         native
-        className={classes.selectbox}
+        className={classes.particular_select}
         id={id}
         name={name}
         value={value}
+        variant="outlined"
         error={touched && Boolean(error)}
         onChange={handleChange}
       >
@@ -350,7 +408,11 @@ const FormSelectFieldOption = React.memo(function FormSelectFieldOption(
   props: IFormSelectFieldOption
 ) {
   const { t } = useTranslation('form')
-  return <option value={props.value}>{t(props.text)}</option>
+  return (
+    <option style={{ color: 'black' }} value={props.value}>
+      {t(props.text)}
+    </option>
+  )
 })
 
 export default FormInput
