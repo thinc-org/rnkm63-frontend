@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   countdownDetail: {
     fontSize: '34px',
     marginTop: '77px',
-    marginBottom: '27px',
+    marginBottom: '25px',
     lineHeight: '22px',
   },
   countdownTimer: {
@@ -28,13 +28,24 @@ const useStyles = makeStyles({
       marginTop: '20px',
     },
   },
-  '@media screen and (max-width: 320px)': {},
+  '@media screen and (max-width: 320px)': {
+    countdownDetail: {
+      fontSize: '14px',
+      lineHeight: '28px',
+      marginTop: '35px',
+      marginBottom: '9px',
+    },
+    countdownTimer: {
+      fontSize: '18px',
+      lineHeight: '28px',
+    },
+  },
 })
 
 export const Countdown = (props: any) => {
   const classes = useStyles()
 
-  const { t, i18n } = useTranslation('profile')
+  const { t } = useTranslation('profile')
   const endTime = new Date('2020-12-20').valueOf()
   const time = new Date().valueOf() + 7 * 1000 * 60 * 60
   const timeLeft = (endTime - time) / 1000

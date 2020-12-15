@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   imageSize: {},
   value: {
     display: 'inline-block',
-    width: '481px',
+    width: '417px',
     verticalAlign: 'top',
     marginTop: '20px',
   },
@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     lineHeight: '27px',
     fontSize: '18px',
     letterSpacing: '0.007em',
+    fontWeight: 'bold',
   },
   valueDetails: {
     color: 'white',
@@ -49,6 +50,7 @@ const useStyles = makeStyles({
     margin: '-28px 0px',
     textAlign: 'left',
     fontSize: '12px',
+    display: 'table',
   },
   '@media screen and (max-width: 720px)': {
     profile: {
@@ -56,7 +58,7 @@ const useStyles = makeStyles({
     },
     image: {
       marginTop: '18px',
-      marginBottom: '-18px',
+      marginBottom: '-14px',
     },
     title: {
       fontSize: '22px',
@@ -73,7 +75,33 @@ const useStyles = makeStyles({
       fontSize: '12px',
     },
   },
-  '@media screen and (max-width: 320px)': {},
+  '@media screen and (max-width: 320px)': {
+    profile: {
+      width: '80%',
+    },
+    image: {
+      width: '150px',
+      height: '200px',
+    },
+    imageSize: {
+      width: '150px',
+      height: '200px',
+    },
+    title: {
+      fontSize: '18px',
+      lineHeight: '17px',
+    },
+    valueDetails: {
+      fontSize: '16px',
+      marginBottom: '18px',
+      lineHeight: '17px',
+    },
+    baanWarning: {
+      marginTop: '-12px',
+      fontSize: '8px',
+      width: '70%',
+    },
+  },
 })
 
 function Profile(props: any) {
@@ -103,7 +131,7 @@ function Profile(props: any) {
             {i18n.language.startsWith('en') ? 'Baan arai' : 'บ้านอะไร'}
           </h3>
           <h4 className={classes.baanWarning}>
-            {1 + 1 === 2 ? t('baanWarning') : ''}
+            {1 + 2 === 2 ? t('baanWarning') : ''}
           </h4>
         </div>
       </div>
