@@ -258,23 +258,21 @@ function FormInput(props: any) {
   )
 }
 
-function FormPrefixField(
-  props: IFormField<
-    String,
-    React.ChangeEvent<{ name?: string | undefined; value: any }>
-  >
-) {
-  return <FormSelectField {...props} options={FORM_PREFIX_FIELD_OPTIONS} />
-}
-
-interface IFormField<T, E> {
+interface IFormField<V, E> {
   id: string
   name: string
-  value: T
+  value: V
   handleChange: (event: E) => void
   error: string | undefined
   touched: Boolean | undefined
+  className?: string
 }
+
+interface IFormTextField
+  extends IFormField<
+    String,
+    React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  > {}
 
 interface IFormSelectFieldOption {
   value: string
@@ -289,104 +287,70 @@ interface IFormSelectField
   options: IFormSelectFieldOption[]
 }
 
-interface IFormTextField
-  extends IFormField<
-    String,
-    React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  > {}
+const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
+  const { id, name, value, handleChange, error, touched, className } = props
+  const { t } = useTranslation('form')
+  const classes = useStyles()
+  return (
+    <FormControl className={className}>
+      <TextField
+        name={name}
+        id={id}
+        size="small"
+        value={value}
+        onChange={handleChange}
+        error={touched && Boolean(error)}
+        helperText={touched && error && t(error)}
+        label={t(name)}
+      />
+    </FormControl>
+  )
+})
 
-interface ITranslationAndStyles {
-  t: Function
-  classes: any
-}
+const FormSelectField = React.memo(function FormSelectField(
+  props: IFormSelectField
+) {
+  const {
+    id,
+    name,
+    value,
+    handleChange,
+    error,
+    touched,
+    className,
+    options,
+  } = props
+  const { t } = useTranslation('form')
+  const classes = useStyles()
+  return (
+    <FormControl className={className}>
+      <FormLabel className={classes.label}>{t(name)}</FormLabel>
+      <Select
+        native
+        className={classes.selectbox}
+        id={id}
+        name={name}
+        value={value}
+        error={touched && Boolean(error)}
+        onChange={handleChange}
+      >
+        <option aria-label="None" value="" />
+        {options.map((option) => (
+          <FormSelectFieldOption
+            key={`${option.value}-${option.text}`}
+            {...option}
+          />
+        ))}
+      </Select>
+    </FormControl>
+  )
+})
 
-function withTranslationAndStyles<P>(
-  Component: React.ComponentType<P & ITranslationAndStyles>
-): React.FC<P> {
-  return (props: P) => {
-    const classes = useStyles()
-    const { t } = useTranslation('form')
-    return <Component {...props} t={t} classes={classes} />
-  }
-}
-
-class FormTextFieldC extends React.PureComponent<
-  IFormTextField & ITranslationAndStyles
-> {
-  constructor(props: IFormTextField & ITranslationAndStyles) {
-    super(props)
-  }
-  render() {
-    const {
-      id,
-      name,
-      value,
-      handleChange,
-      error,
-      touched,
-      t,
-      classes,
-    } = this.props
-    return (
-      <FormControl className={classes.formControl}>
-        <TextField
-          name={name}
-          id={id}
-          size="small"
-          value={value}
-          onChange={handleChange}
-          error={touched && Boolean(error)}
-          helperText={touched && error && t(error)}
-          label={t(name)}
-        />
-      </FormControl>
-    )
-  }
-}
-
-class FormSelectFieldC extends React.PureComponent<
-  IFormSelectField & ITranslationAndStyles
-> {
-  constructor(props: IFormSelectField & ITranslationAndStyles) {
-    super(props)
-  }
-  render() {
-    const {
-      id,
-      name,
-      value,
-      handleChange,
-      error,
-      touched,
-      options,
-      t,
-      classes,
-    } = this.props
-    return (
-      <FormControl className={classes.formControl}>
-        <FormLabel className={classes.label}>{t(name)}</FormLabel>
-        <Select
-          native
-          className={classes.selectbox}
-          id={id}
-          name={name}
-          value={value}
-          error={touched && Boolean(error)}
-          onChange={handleChange}
-        >
-          <option aria-label="None" value="" />
-          {options.map((option) => (
-            <option value={option.value}>{t(option.text)}</option>
-          ))}
-        </Select>
-      </FormControl>
-    )
-  }
-}
-
-const FormSelectField = withTranslationAndStyles<IFormSelectField>(
-  FormSelectFieldC
-)
-const FormTextField = withTranslationAndStyles<IFormTextField>(FormTextFieldC)
+const FormSelectFieldOption = React.memo(function FormSelectFieldOption(
+  props: IFormSelectFieldOption
+) {
+  const { t } = useTranslation('form')
+  return <option value={props.value}>{t(props.text)}</option>
+})
 
 export default FormInput
