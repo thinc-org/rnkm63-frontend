@@ -3,7 +3,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import SGCUIcon from '../../local/sgcuIcon.png'
 import THINCIcon from '../../local/thincIcon.png'
-import { Loading } from '../common'
 import { withSuspense } from '../hoc'
 const useStyles = makeStyles({
   root: {

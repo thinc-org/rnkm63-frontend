@@ -14,6 +14,6 @@ const useStyles = makeStyles({
 })
 function SadThincIcon() {
   const classes = useStyles()
-  return <img src={sadThinc} className={classes.image} />
+  return <img src={sadThinc} alt="" className={classes.image} />
 }
 export default SadThincIcon

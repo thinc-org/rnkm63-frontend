@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  makeStyles,
-  Button,
-  Container,
-  ButtonGroup,
-  Box,
-} from '@material-ui/core'
+import { makeStyles, Button, Container } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 
@@ -66,7 +60,7 @@ const useStyles = makeStyles({
 })
 
 function LanguageSwitcher() {
-  const { t, i18n } = useTranslation('shell')
+  const { i18n } = useTranslation('shell')
   const classes = useStyles()
   const language = i18n.language
 

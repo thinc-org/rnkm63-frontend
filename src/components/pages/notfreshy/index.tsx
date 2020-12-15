@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import { Box, makeStyles, Typography } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
