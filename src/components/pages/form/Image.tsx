@@ -8,6 +8,7 @@ import {
   DialogContentText,
   Slider,
   Box,
+  Typography,
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
@@ -113,7 +114,7 @@ function Image(props: React.PropsWithRef<any>) {
 
         {!!upImg ? (
           <React.Fragment>
-            <div
+            <Box
               style={{
                 height: '100%',
                 width: '100%',
@@ -122,7 +123,7 @@ function Image(props: React.PropsWithRef<any>) {
                 alignContent: 'center',
               }}
             >
-              <div className={style.cropContainer}>
+              <Box className={style.cropContainer}>
                 <Cropper
                   image={upImg}
                   crop={crop}
@@ -134,9 +135,9 @@ function Image(props: React.PropsWithRef<any>) {
                   onCropComplete={onCropComplete}
                   onZoomChange={setZoom}
                 />
-              </div>
-            </div>
-            <div className={style.zoomSlider}>
+              </Box>
+            </Box>
+            <Box className={style.zoomSlider}>
               <ZoomOutIcon style={{ paddingRight: '10px', color: 'black' }} />
               <Slider
                 defaultValue={1}
@@ -149,11 +150,11 @@ function Image(props: React.PropsWithRef<any>) {
                 }}
               />
               <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
-            </div>
+            </Box>
           </React.Fragment>
         ) : (
-          <div className={style.cropContainer}>
-            <div style={{ width: '100%', height: '100%' }}>
+          <Box className={style.cropContainer}>
+            <Box style={{ width: '100%', height: '100%' }}>
               <input
                 accept="image/*"
                 className={style.input}
@@ -175,8 +176,8 @@ function Image(props: React.PropsWithRef<any>) {
                   {'Click to Upload Image'}
                 </Button>
               </label>
-            </div>
-          </div>
+            </Box>
+          </Box>
         )}
         <DialogContentText className={style.dialogText}>
           <ul>
@@ -209,13 +210,13 @@ function Image(props: React.PropsWithRef<any>) {
       </Dialog>
 
       {!!finalImg ? (
-        <div>
+        <Box>
           <img src={finalImg} className={style.image} alt=""></img>
-        </div>
+        </Box>
       ) : (
-        <div className={style.image}></div>
+        <Box className={style.image}></Box>
       )}
-      <div
+      <Box
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -233,8 +234,10 @@ function Image(props: React.PropsWithRef<any>) {
         >
           {t('uploadTextButton')}
         </Button>
-        <p className={style.reasonText}>{t('uploadReason')}</p>
-      </div>
+        <Typography className={style.reasonText}>
+          {t('uploadReason')}
+        </Typography>
+      </Box>
     </Box>
   )
 }
