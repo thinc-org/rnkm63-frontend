@@ -54,6 +54,7 @@ const imageStyle = makeStyles((theme: Theme) =>
     reasonText: {
       fontWeight: 400,
       fontSize: '0.875rem',
+      color: theme.palette.error.main,
       marginTop: theme.spacing(1),
       [theme.breakpoints.up('sm')]: {
         fontSize: '0.75rem',

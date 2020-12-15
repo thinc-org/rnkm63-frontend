@@ -14,26 +14,6 @@ import theme from '../../../config/theme'
 import Link from '@material-ui/core/Link'
 import FormHelperText from '@material-ui/core/FormHelperText'
 
-const RegisterSchema = Yup.object().shape({
-  realname: Yup.string().required('required'),
-  prefix: Yup.string().required('required'),
-  surname: Yup.string().required('required'),
-  nickname: Yup.string()
-    .required('required')
-    .matches(/^[ก-๛]+$/, 'notthai'),
-  religion: Yup.string().required('required'),
-  tel: Yup.string().required('required'),
-  facebook: Yup.string().required('required'),
-  lineID: Yup.string().required('required'),
-  emergencyTel: Yup.string().required('required'),
-  emergencyConnection: Yup.string().required('required'),
-  disease: Yup.string().required('required'),
-  allergyMedicine: Yup.string().required('required'),
-  usedMedicine: Yup.string().required('required'),
-  foodRestriction: Yup.string().required('required'),
-  disability: Yup.string().required('required'),
-})
-
 const useStyles = makeStyles((theme) => ({
   overrides: {
     MuiInput: {
@@ -128,17 +108,10 @@ function FormInput(props: any) {
   const classes = useStyles()
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
-
-  const formik = useFormik({
-    initialValues: INITIAL_VALUE,
-    validationSchema: RegisterSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2))
-    },
-  })
+  const formik = props.formik
 
   return (
-    <Box>
+    <>
       <p
         style={{
           color: '#FABD03',
@@ -150,162 +123,157 @@ function FormInput(props: any) {
       >
         *Do not leave any fields blank. (“-” if empty)
       </p>
-      <form onSubmit={formik.handleSubmit} className={classes.root}>
-        <Box className={classes.inside}>
-          <FormSelectField
-            id="prefix"
-            name="prefix"
-            value={formik.values.prefix}
-            handleChange={formik.handleChange}
-            error={formik.errors.prefix}
-            touched={formik.touched.prefix}
-            options={FORM_PREFIX_FIELD_OPTIONS}
-          />
-          <FormTextField
-            id="realname"
-            name="realname"
-            value={formik.values.realname}
-            handleChange={formik.handleChange}
-            error={formik.errors.realname}
-            touched={formik.touched.realname}
-          />
+      <Box className={classes.inside}>
+        <FormSelectField
+          id="prefix"
+          name="prefix"
+          value={formik.values.prefix}
+          handleChange={formik.handleChange}
+          error={formik.errors.prefix}
+          touched={formik.touched.prefix}
+          options={FORM_PREFIX_FIELD_OPTIONS}
+        />
+        <FormTextField
+          id="realname"
+          name="realname"
+          value={formik.values.realname}
+          handleChange={formik.handleChange}
+          error={formik.errors.realname}
+          touched={formik.touched.realname}
+        />
 
-          <FormTextField
-            id="surname"
-            name="surname"
-            value={formik.values.surname}
-            handleChange={formik.handleChange}
-            error={formik.errors.surname}
-            touched={formik.touched.surname}
-          />
+        <FormTextField
+          id="surname"
+          name="surname"
+          value={formik.values.surname}
+          handleChange={formik.handleChange}
+          error={formik.errors.surname}
+          touched={formik.touched.surname}
+        />
 
-          <FormTextField
-            id="nickname"
-            name="nickname"
-            value={formik.values.nickname}
-            handleChange={formik.handleChange}
-            error={formik.errors.nickname}
-            touched={formik.touched.nickname}
-          />
+        <FormTextField
+          id="nickname"
+          name="nickname"
+          value={formik.values.nickname}
+          handleChange={formik.handleChange}
+          error={formik.errors.nickname}
+          touched={formik.touched.nickname}
+        />
 
-          <FormSelectField
-            id="religion"
-            name="religion"
-            value={formik.values.religion}
-            handleChange={formik.handleChange}
-            error={formik.errors.religion}
-            touched={formik.touched.religion}
-            options={FORM_RELIGION_FIELD_OPTIONS}
-          />
-          <p
-            style={{
-              color: '#FABD03',
-              margin: theme.spacing(2),
-              marginTop: '0rem',
-              marginBottom: '0rem',
-              fontSize: '0.75rem',
-            }}
-          >
-            Note: If you don’t have Thai nickname, please contact{' '}
-            <Link href="https://www.facebook.com/chulafreshmen">
-              CU for Freshman
-            </Link>
-          </p>
-        </Box>
+        <FormSelectField
+          id="religion"
+          name="religion"
+          value={formik.values.religion}
+          handleChange={formik.handleChange}
+          error={formik.errors.religion}
+          touched={formik.touched.religion}
+          options={FORM_RELIGION_FIELD_OPTIONS}
+        />
+        <p
+          style={{
+            color: '#FABD03',
+            margin: theme.spacing(2),
+            marginTop: '0rem',
+            marginBottom: '0rem',
+            fontSize: '0.75rem',
+          }}
+        >
+          Note: If you don’t have Thai nickname, please contact{' '}
+          <Link href="https://www.facebook.com/chulafreshmen">
+            CU for Freshman
+          </Link>
+        </p>
+      </Box>
 
-        <Box className={classes.inside}>
-          <FormTextField
-            id="tel"
-            name="tel"
-            value={formik.values.tel}
-            handleChange={formik.handleChange}
-            error={formik.errors.tel}
-            touched={formik.touched.tel}
-          />
+      <Box className={classes.inside}>
+        <FormTextField
+          id="tel"
+          name="tel"
+          value={formik.values.tel}
+          handleChange={formik.handleChange}
+          error={formik.errors.tel}
+          touched={formik.touched.tel}
+        />
 
-          <FormTextField
-            id="facebook"
-            name="facebook"
-            value={formik.values.facebook}
-            handleChange={formik.handleChange}
-            error={formik.errors.facebook}
-            touched={formik.touched.facebook}
-          />
+        <FormTextField
+          id="facebook"
+          name="facebook"
+          value={formik.values.facebook}
+          handleChange={formik.handleChange}
+          error={formik.errors.facebook}
+          touched={formik.touched.facebook}
+        />
 
-          <FormTextField
-            id="lineID"
-            name="lineID"
-            value={formik.values.lineID}
-            handleChange={formik.handleChange}
-            error={formik.errors.lineID}
-            touched={formik.touched.lineID}
-          />
+        <FormTextField
+          id="lineID"
+          name="lineID"
+          value={formik.values.lineID}
+          handleChange={formik.handleChange}
+          error={formik.errors.lineID}
+          touched={formik.touched.lineID}
+        />
 
-          <FormTextField
-            id="emergencyTel"
-            name="emergencyTel"
-            value={formik.values.emergencyTel}
-            handleChange={formik.handleChange}
-            error={formik.errors.emergencyTel}
-            touched={formik.touched.emergencyTel}
-          />
-          <FormTextField
-            id="emergencyConnection"
-            name="emergencyConnection"
-            value={formik.values.emergencyConnection}
-            handleChange={formik.handleChange}
-            error={formik.errors.emergencyConnection}
-            touched={formik.touched.emergencyConnection}
-          />
-        </Box>
+        <FormTextField
+          id="emergencyTel"
+          name="emergencyTel"
+          value={formik.values.emergencyTel}
+          handleChange={formik.handleChange}
+          error={formik.errors.emergencyTel}
+          touched={formik.touched.emergencyTel}
+        />
+        <FormTextField
+          id="emergencyConnection"
+          name="emergencyConnection"
+          value={formik.values.emergencyConnection}
+          handleChange={formik.handleChange}
+          error={formik.errors.emergencyConnection}
+          touched={formik.touched.emergencyConnection}
+        />
+      </Box>
 
-        <Box className={classes.inside}>
-          <FormTextField
-            id="disease"
-            name="disease"
-            value={formik.values.disease}
-            handleChange={formik.handleChange}
-            error={formik.errors.disease}
-            touched={formik.touched.disease}
-          />
-          <FormTextField
-            id="allergyMedicine"
-            name="allergyMedicine"
-            value={formik.values.allergyMedicine}
-            handleChange={formik.handleChange}
-            error={formik.errors.allergyMedicine}
-            touched={formik.touched.allergyMedicine}
-          />
-          <FormTextField
-            id="usedMedicine"
-            name="usedMedicine"
-            value={formik.values.usedMedicine}
-            handleChange={formik.handleChange}
-            error={formik.errors.usedMedicine}
-            touched={formik.touched.usedMedicine}
-          />
-          <FormTextField
-            id="foodRestriction"
-            name="foodRestriction"
-            value={formik.values.foodRestriction}
-            handleChange={formik.handleChange}
-            error={formik.errors.foodRestriction}
-            touched={formik.touched.foodRestriction}
-          />
-          <FormTextField
-            id="disability"
-            name="disability"
-            value={formik.values.disability}
-            handleChange={formik.handleChange}
-            error={formik.errors.disability}
-            touched={formik.touched.disability}
-          />
-        </Box>
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
-        </Button>
-      </form>
-    </Box>
+      <Box className={classes.inside}>
+        <FormTextField
+          id="disease"
+          name="disease"
+          value={formik.values.disease}
+          handleChange={formik.handleChange}
+          error={formik.errors.disease}
+          touched={formik.touched.disease}
+        />
+        <FormTextField
+          id="allergyMedicine"
+          name="allergyMedicine"
+          value={formik.values.allergyMedicine}
+          handleChange={formik.handleChange}
+          error={formik.errors.allergyMedicine}
+          touched={formik.touched.allergyMedicine}
+        />
+        <FormTextField
+          id="usedMedicine"
+          name="usedMedicine"
+          value={formik.values.usedMedicine}
+          handleChange={formik.handleChange}
+          error={formik.errors.usedMedicine}
+          touched={formik.touched.usedMedicine}
+        />
+        <FormTextField
+          id="foodRestriction"
+          name="foodRestriction"
+          value={formik.values.foodRestriction}
+          handleChange={formik.handleChange}
+          error={formik.errors.foodRestriction}
+          touched={formik.touched.foodRestriction}
+        />
+        <FormTextField
+          id="disability"
+          name="disability"
+          value={formik.values.disability}
+          handleChange={formik.handleChange}
+          error={formik.errors.disability}
+          touched={formik.touched.disability}
+        />
+      </Box>
+    </>
   )
 }
 

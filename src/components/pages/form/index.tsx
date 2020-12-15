@@ -14,33 +14,32 @@ import FormInput from './FormInput'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
-
+import { useFormik } from 'formik'
+import { registerSchema } from './utils/registerSchema'
 function Form() {
   const [imageBlob, setImageBlob] = useState('')
-  const [userData, setUserData] = useState({
-    name: 'Genshin',
-    surname: 'Impact',
-  })
   const [confirmOpen, setConfirmOpen] = useState(false)
 
-  const { t, i18n } = useTranslation('form')
-  const style = indexStyle({ lang: i18n.language })
+  const { t } = useTranslation('form')
+  const style = indexStyle()
   const history = useHistory()
+  let userData = {}
+
   const complete = React.useCallback(() => {
     history.push('/form/complete')
   }, [history])
 
-  const validate = React.useCallback(() => {
-    //validate here
-    return true
-  }, [])
-
-  const confirm = React.useCallback(() => {
-    if (validate()) setConfirmOpen(true)
-  }, [setConfirmOpen, validate])
+  const confirm = React.useCallback(
+    //validate image here
+    (value) => {
+      userData = value
+      setConfirmOpen(true)
+    },
+    [setConfirmOpen, userData]
+  )
 
   const submit = React.useCallback(() => {
-    //fetch data here
+    //fetch userData here
     complete()
   }, [])
 
@@ -48,23 +47,47 @@ function Form() {
     setConfirmOpen(false)
   }, [setConfirmOpen])
 
+  const formik = useFormik({
+    initialValues: {
+      prefix: '',
+      realname: '',
+      surname: '',
+      nickname: '',
+      religion: '',
+      tel: '',
+      facebook: '',
+      lineID: '',
+      emergencyTel: '',
+      emergencyConnection: '',
+      disease: '',
+      allergyMedicine: '',
+      usedMedicine: '',
+      foodRestriction: '',
+      disability: '',
+    },
+    validationSchema: registerSchema,
+    onSubmit: confirm,
+  })
+
   return (
     <Box className={style.container}>
-      <Typography className={style.title}>{t('title')}</Typography>
-      <Box className={style.content}>
-        <Box className={style.image}>
-          <Image imageBlob={imageBlob} setImageBlob={setImageBlob} />
+      <form onSubmit={formik.handleSubmit}>
+        <Typography className={style.title}>{t('title')}</Typography>
+        <Box className={style.content}>
+          <Box className={style.image}>
+            <Image imageBlob={imageBlob} setImageBlob={setImageBlob} />
+          </Box>
+          <Box className={style.formInput}>
+            <FormInput formik={formik} />
+          </Box>
         </Box>
-        <Box className={style.formInput}>
-          <FormInput userData={userData} setUserData={setUserData} />
+        <Box>
+          <Button classes={{ root: style.submitButton }} type="submit">
+            {t('submit')}
+          </Button>
+          <p className={style.submitNote}>{t('submitNote')}</p>
         </Box>
-      </Box>
-      <Box>
-        <Button classes={{ root: style.submitButton }} onClick={confirm}>
-          {t('submit')}
-        </Button>
-        <p className={style.submitNote}>{t('submitNote')}</p>
-      </Box>
+      </form>
 
       <Dialog
         open={confirmOpen}

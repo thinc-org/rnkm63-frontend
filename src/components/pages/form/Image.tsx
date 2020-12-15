@@ -52,7 +52,7 @@ function Image(props: React.PropsWithRef<any>) {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const [finalImg, setFinalImg] = useState('')
 
-  const style = imageStyle({ lang: i18n.language })
+  const style = imageStyle()
 
   const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
