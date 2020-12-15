@@ -10,9 +10,7 @@ const useStyles = makeStyles({
     fontSize: '3.75em',
     fontWeight: 700,
     [theme.breakpoints.down('sm')]: {
-      textHeader: {
-        fontSize: '1.375em',
-      },
+      fontSize: '1.375em',
     },
   },
 })
