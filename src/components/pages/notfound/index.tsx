@@ -3,6 +3,7 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import sadthincIcon from '../../../local/sadthinc.png'
 import theme from '../../../config/theme'
+import SadThincIcon from '../../shell/misc/SadThincIcon'
 const useStyles = makeStyles({
   [theme.breakpoints.down('sm')]: {
     textHeader: {
@@ -69,7 +70,7 @@ function NotFound() {
       marginTop="70px"
       alignItems="center"
     >
-      <img src={sadthincIcon} className={classes.image}></img>
+      <SadThincIcon />
       <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>
       <Button variant="contained" className={classes.button} color="primary">
