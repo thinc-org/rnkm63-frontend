@@ -44,5 +44,7 @@
   "required": "Please complete this field.",
   "notthai": "Please write your nickname in Thai.",
   "lineID": "LINE ID",
-  "facebook": "Facebook"
+  "facebook": "Facebook",
+  "requireNote": "*Do not leave any fields blank. (“-” if empty)",
+  "nicknameNote": "Note: If you don’t have Thai nickname, please contact "
 }

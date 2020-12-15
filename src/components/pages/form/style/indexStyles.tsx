@@ -43,7 +43,6 @@ const indexStyle = makeStyles((theme: any) => ({
     width: '100%',
     display: 'block',
     margin: 'auto',
-    marginTop: theme.spacing(6),
     fontSize: '1.125rem',
     fontWeight: 700,
     textTransform: 'none',
@@ -51,7 +50,6 @@ const indexStyle = makeStyles((theme: any) => ({
       background: theme.palette.success.main,
     },
     [theme.breakpoints.up('sm')]: {
-      marginTop: theme.spacing(5),
       width: '434px',
     },
   },

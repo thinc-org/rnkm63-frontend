@@ -27,13 +27,13 @@ const formStyle = makeStyles((theme) => ({
     },
   },
   inside: {
-    margin: theme.spacing(1),
-    // marginRight:"20px"
+    marginBottom: theme.spacing(6),
   },
   particular: {
     margin: theme.spacing(0.5),
+    borderRadius: '5px',
     background: theme.palette.primary.main,
-    //borderColor:"#D3D3D3"
+    // border:"0.5px solid #C6C6C6"
   },
   particular_select: {
     margin: theme.spacing(0.5),
@@ -45,8 +45,9 @@ const formStyle = makeStyles((theme) => ({
     color: theme.palette.text.primary,
   },
   formControl: {
-    margin: theme.spacing(0.5),
-    minWidth: 120,
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
+    width: '100%',
   },
   choice: {
     color: theme.palette.text.secondary,

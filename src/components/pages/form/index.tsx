@@ -85,7 +85,9 @@ function Form() {
           <Button classes={{ root: style.submitButton }} type="submit">
             {t('submit')}
           </Button>
-          <p className={style.submitNote}>{t('submitNote')}</p>
+          <Typography className={style.submitNote}>
+            {t('submitNote')}
+          </Typography>
         </Box>
       </form>
 
