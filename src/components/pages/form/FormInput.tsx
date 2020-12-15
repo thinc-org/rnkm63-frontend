@@ -329,7 +329,6 @@ class FormTextFieldC extends React.PureComponent<
     } = this.props
     return (
       <FormControl className={classes.formControl}>
-        <FormLabel className={classes.FormLabel}>{t(name)}</FormLabel>
         <TextField
           name={name}
           id={id}
@@ -338,7 +337,7 @@ class FormTextFieldC extends React.PureComponent<
           onChange={handleChange}
           error={touched && Boolean(error)}
           helperText={touched && error && t(error)}
-          variant="outlined"
+          label={t(name)}
         />
       </FormControl>
     )
@@ -373,7 +372,6 @@ class FormSelectFieldC extends React.PureComponent<
           name={name}
           value={value}
           error={touched && Boolean(error)}
-          variant="outlined"
           onChange={handleChange}
         >
           <option aria-label="None" value="" />
