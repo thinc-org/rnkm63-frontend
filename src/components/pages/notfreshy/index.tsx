@@ -3,6 +3,7 @@ import { Box, Button, makeStyles, Typography } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
+import ToHomeButton from '../../shell/misc/ToHomeButton'
 const useStyles = makeStyles({
   [theme.breakpoints.down('sm')]: {
     textHeader: {
@@ -57,9 +58,7 @@ function NotFreshy() {
     >
       <SadThincIcon />
       <Typography className={classes.textHeader}>{t('title')}</Typography>
-      <Button variant="contained" className={classes.button} color="primary">
-        {t('tohomebutton:title')}
-      </Button>
+      <ToHomeButton />
     </Box>
   )
 }
