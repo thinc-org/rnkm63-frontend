@@ -1,66 +1,55 @@
 import { makeStyles } from '@material-ui/core'
-
-const font = (props: { lang: String }) =>
-  props.lang.startsWith('th') ? 'Kanit' : 'Rubik'
+import { Palette } from '@material-ui/icons'
 
 const indexStyle = makeStyles((theme: any) => ({
   container: {
-    fontFamily: font,
-    padding: theme.spacing(1),
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-
     [theme.breakpoints.up('sm')]: {
       paddingLeft: theme.spacing(4),
       paddingRight: theme.spacing(4),
     },
   },
   title: {
-    fontSize: '60px',
+    fontSize: '3.75rem',
     fontWeight: 500,
-    color: 'white',
-    margin: 0,
     marginBottom: theme.spacing(4),
-    height: '100px',
     display: 'none',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'block',
     },
   },
   content: {
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'flex',
       justifyContent: 'center',
     },
   },
   image: {
     paddingBottom: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       width: '207px',
     },
   },
   formInput: {
-    background: '#5c5c5c',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
       display: 'inline',
       marginLeft: theme.spacing(2.5),
       flexGrow: 1,
     },
   },
   submitButton: {
-    background: '#44AD53',
+    background: theme.palette.success.main,
     borderRadius: '40px',
     width: '100%',
     display: 'block',
     margin: 'auto',
     marginTop: theme.spacing(6),
-    fontFamily: font,
-    color: 'white',
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontWeight: 700,
     textTransform: 'none',
     '&:hover': {
-      backgroundColor: '#44AD53',
+      background: theme.palette.success.main,
     },
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(5),
@@ -68,21 +57,18 @@ const indexStyle = makeStyles((theme: any) => ({
     },
   },
   submitNote: {
-    display: 'block',
     textAlign: 'center',
-    color: '#F2C94C',
+    color: theme.palette.warning.main,
     fontWeight: 400,
-    fontSize: '10px',
-    margin: '0px',
+    fontSize: '	0.75rem',
     marginTop: theme.spacing(1.5),
     [theme.breakpoints.up('sm')]: {
       marginTop: theme.spacing(2),
-      fontSize: '12px',
     },
   },
   dialog: {
     background: 'white',
-    color: 'black',
+    color: theme.palette.text.secondary,
     width: '327px',
     paddingBottom: theme.spacing(2),
     paddingTop: theme.spacing(1),
@@ -95,45 +81,37 @@ const indexStyle = makeStyles((theme: any) => ({
   dialogTitle: {
     textAlign: 'center',
     fontWeight: 700,
-    fontSize: '20px',
+    fontSize: '1.25rem',
     margin: 0,
   },
   dialogContent: {
     textAlign: 'center',
     fontWeight: 300,
-    fontFamily: font,
-    fontSize: '16px',
+    fontSize: '1rem',
     margin: 0,
     marginBottom: theme.spacing(2),
   },
-  cancelButton: {
+  button: {
     width: '129px',
-    heigth: '27px',
     color: 'white',
-    background: '#D34949',
     borderRadius: '20px',
-    fontSize: '14px',
+    fontSize: '0.875rem',
     fontWeight: 700,
-    '&:hover': {
-      backgroundColor: '#D34949',
-    },
+    textTransform: 'none',
     [theme.breakpoints.up('sm')]: {
       width: '207px',
     },
   },
-  confirmButton: {
-    width: '129px',
-    heigth: '27px',
-    color: 'white',
-    background: '#44AD53',
-    borderRadius: '20px',
-    fontSize: '14px',
-    fontWeight: 700,
+  confirm: {
+    background: theme.palette.success.main,
     '&:hover': {
-      backgroundColor: '#44AD53',
+      backgroundColor: theme.palette.success.main,
     },
-    [theme.breakpoints.up('sm')]: {
-      width: '207px',
+  },
+  cancel: {
+    background: theme.palette.error.main,
+    '&:hover': {
+      backgroundColor: theme.palette.error.main,
     },
   },
   dialogAction: {

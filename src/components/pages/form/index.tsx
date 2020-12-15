@@ -2,16 +2,18 @@ import React from 'react'
 import { useState } from 'react'
 import {
   Button,
-  Container,
+  Box,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
+  Typography,
 } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
 function Form() {
   const [imageBlob, setImageBlob] = useState('')
@@ -23,6 +25,10 @@ function Form() {
 
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
+  const history = useHistory()
+  const complete = React.useCallback(() => {
+    history.push('/form/complete')
+  }, [history])
 
   const validate = React.useCallback(() => {
     //validate here
@@ -34,7 +40,8 @@ function Form() {
   }, [setConfirmOpen, validate])
 
   const submit = React.useCallback(() => {
-    alert('Submitted!')
+    //fetch data here
+    complete()
   }, [])
 
   const closeDialog = React.useCallback(() => {
@@ -42,46 +49,57 @@ function Form() {
   }, [setConfirmOpen])
 
   return (
-    <Container maxWidth="lg" classes={{ root: style.container }}>
-      <p className={style.title}>{t('title')}</p>
-      <div className={style.content}>
-        <div className={style.image}>
+    <Box className={style.container}>
+      <Typography className={style.title}>{t('title')}</Typography>
+      <Box className={style.content}>
+        <Box className={style.image}>
           <Image imageBlob={imageBlob} setImageBlob={setImageBlob} />
-        </div>
-        <div className={style.formInput}>
+        </Box>
+        <Box className={style.formInput}>
           <FormInput userData={userData} setUserData={setUserData} />
-        </div>
-      </div>
-      <div>
+        </Box>
+      </Box>
+      <Box>
         <Button classes={{ root: style.submitButton }} onClick={confirm}>
           {t('submit')}
         </Button>
         <p className={style.submitNote}>{t('submitNote')}</p>
-      </div>
+      </Box>
+
       <Dialog
         open={confirmOpen}
-        onClose={setConfirmOpen}
+        onClose={closeDialog}
         PaperProps={{
           classes: { root: style.dialog },
         }}
         style={{ backdropFilter: 'blur(8px)' }}
       >
         <DialogTitle classes={{ root: style.dialogTitle }}>
-          <p className={style.dialogTitle}>{t('confirmDialogTitle')}</p>
+          <Typography className={style.dialogTitle}>
+            {t('confirmDialogTitle')}
+          </Typography>
         </DialogTitle>
         <DialogContent>
-          <p className={style.dialogContent}>{t('confirmDescription')}</p>
+          <Typography className={style.dialogContent}>
+            {t('confirmDescription')}
+          </Typography>
         </DialogContent>
         <DialogActions classes={{ root: style.dialogAction }}>
-          <Button onClick={closeDialog} classes={{ root: style.cancelButton }}>
+          <Button
+            onClick={closeDialog}
+            classes={{ root: `${style.button} ${style.cancel}` }}
+          >
             {t('cancel')}
           </Button>
-          <Button onClick={submit} classes={{ root: style.confirmButton }}>
+          <Button
+            onClick={submit}
+            classes={{ root: `${style.button} ${style.confirm}` }}
+          >
             {t('confirm')}
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </Box>
   )
 }
 export default Form
