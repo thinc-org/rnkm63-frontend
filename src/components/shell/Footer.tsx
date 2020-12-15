@@ -39,13 +39,6 @@ const useStyles = makeStyles({
     marginBottom: '12px',
   },
 })
-function HeaderSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Footer />
-    </React.Suspense>
-  )
-}
 function Footer() {
   const classes = useStyles()
   const { t } = useTranslation('footer')

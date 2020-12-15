@@ -8,6 +8,7 @@ import {
 import React from 'react'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
+import THINCLogo from '../../local/thincLogo.png'
 import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
 const useStyles = makeStyles({
