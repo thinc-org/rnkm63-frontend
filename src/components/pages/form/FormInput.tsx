@@ -47,27 +47,34 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const RegisterSchema = Yup.object().shape({
-  realname: Yup.string().required('This field is required.'),
-  prefix: Yup.string().required('This field is required.'),
-  surname: Yup.string().required('This field is required.'),
-  nickname: Yup.string().required('This field is required.'),
-  religion: Yup.string().required('This field is required.'),
-  tel: Yup.number()
-    .required('This field is required.')
-    .min(9, 'This field is required.'),
-  facebook: Yup.string().required('This field is required.'),
-  lineID: Yup.string().required('This field is required.'),
-  emergencyTel: Yup.number()
-    .required('This field is required.')
-    .min(9, 'This field is required.'),
-  emergencyConnection: Yup.string().required('This field is required.'),
-})
-
 function FormInput(props: any) {
   const classes = useStyles()
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
+
+  const RegisterSchema = Yup.object().shape({
+    realname: Yup.string().required(`${t('required')}`),
+    prefix: Yup.string().required(`${t('required')}`),
+    surname: Yup.string().required(`${t('required')}`),
+    nickname: Yup.string()
+      .required(`${t('required')}`)
+      .matches(/^[ก-๛]+$/, 'Thai Only.'),
+    religion: Yup.string().required(`${t('required')}`),
+    tel: Yup.number()
+      .required(`${t('required')}`)
+      .min(9, `${t('required')}`),
+    facebook: Yup.string().required(`${t('required')}`),
+    lineID: Yup.string().required(`${t('required')}`),
+    emergencyTel: Yup.number()
+      .required(`${t('required')}`)
+      .min(9, `${t('required')}`),
+    emergencyConnection: Yup.string().required(`${t('required')}`),
+    disease: Yup.string().required(`${t('required')}`),
+    allergyMedicine: Yup.string().required(`${t('required')}`),
+    usedMedicine: Yup.string().required(`${t('required')}`),
+    foodRestriction: Yup.string().required(`${t('required')}`),
+    disability: Yup.string().required(`${t('required')}`),
+  })
   const formik = useFormik({
     initialValues: {
       prefix: '',
@@ -80,6 +87,11 @@ function FormInput(props: any) {
       lineID: '',
       emergencyTel: '',
       emergencyConnection: '',
+      disease: '',
+      allergyMedicine: '',
+      usedMedicine: '',
+      foodRestriction: '',
+      disability: '',
     },
     validationSchema: RegisterSchema,
     onSubmit: (values) => {
@@ -263,6 +275,106 @@ function FormInput(props: any) {
               helperText={
                 formik.touched.emergencyConnection &&
                 formik.errors.emergencyConnection
+              }
+              variant="outlined"
+            />
+          </FormControl>
+        </div>
+
+        <div className={classes.inside}>
+          <FormControl className={classes.formControl}>
+            <FormLabel className={classes.label}>{t('disease')}</FormLabel>
+            <TextField
+              name="disease"
+              id="disease"
+              // className={classes.inputbox}
+              size="small"
+              value={formik.values.disease}
+              onChange={formik.handleChange}
+              error={formik.touched.disease && Boolean(formik.errors.disease)}
+              helperText={formik.touched.disease && formik.errors.disease}
+              variant="outlined"
+            />
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+            <FormLabel className={classes.label}>
+              {t('allergyMedicine')}
+            </FormLabel>
+            <TextField
+              name="allergyMedicine"
+              id="allergyMedicine"
+              // className={classes.inputbox}
+              size="small"
+              value={formik.values.allergyMedicine}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.allergyMedicine &&
+                Boolean(formik.errors.allergyMedicine)
+              }
+              helperText={
+                formik.touched.allergyMedicine && formik.errors.allergyMedicine
+              }
+              variant="outlined"
+            />
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+            <FormLabel className={classes.label}>{t('usedMedicine')}</FormLabel>
+            <TextField
+              name="usedMedicine"
+              id="usedMedicine"
+              // className={classes.inputbox}
+              size="small"
+              value={formik.values.usedMedicine}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.usedMedicine &&
+                Boolean(formik.errors.usedMedicine)
+              }
+              helperText={
+                formik.touched.usedMedicine && formik.errors.usedMedicine
+              }
+              variant="outlined"
+            />
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+            <FormLabel className={classes.label}>{t('disability')}</FormLabel>
+            <TextField
+              name="disability"
+              id="disability"
+              // className={classes.inputbox}
+              size="small"
+              value={formik.values.disability}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.disability && Boolean(formik.errors.disability)
+              }
+              helperText={
+                formik.touched.disability && formik.errors.foodRestriction
+              }
+              variant="outlined"
+            />
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+            <FormLabel className={classes.label}>
+              {t('foodRestriction')}
+            </FormLabel>
+            <TextField
+              name="foodRestriction"
+              id="foodRestriction"
+              // className={classes.inputbox}
+              size="small"
+              value={formik.values.foodRestriction}
+              onChange={formik.handleChange}
+              error={
+                formik.touched.foodRestriction &&
+                Boolean(formik.errors.foodRestriction)
+              }
+              helperText={
+                formik.touched.foodRestriction && formik.errors.foodRestriction
               }
               variant="outlined"
             />

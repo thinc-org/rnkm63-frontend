@@ -31,8 +31,15 @@
   "hs": "Hinduism",
   "sk": "Sikhism",
   "ot": "Other",
-  "rns": "Rather not say",
-  "tel": "Phone number",
-  "emertel": "Emergency contact",
-  "emergencyConnection": "Relationship"
+  "rns": "Rather not to say",
+  "tel": "Phone Number",
+  "emergencyTel": "Emergency Contact",
+  "emergencyConnection": "Relationship",
+  "disease": "Personal Illness",
+  "allergyMedicine": "Drug Allergy",
+  "usedMedicine": "Personal Medication",
+  "foodRestriction": "Dietary Restriction",
+  "disability": "Disabilities",
+  "required": "Please complete this field.",
+  "notthai": "Please write your nickname in Thai."
 }
