@@ -7,13 +7,13 @@ import { useTranslation } from 'react-i18next'
 const useStyles = makeStyles({
   profile: {
     textAlign: 'center',
-    marginBottom: '117px',
+    marginBottom: '75px',
     fontFamily: 'Kanit',
   },
   image: {
     display: 'inline-block',
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '8%',
+    marginRight: '8%',
     marginBottom: '32px',
     marginTop: '20px',
     alignItems: 'center',
@@ -52,30 +52,25 @@ const useStyles = makeStyles({
   },
   '@media screen and (max-width: 720px)': {
     profile: {
-      marginBottom: '26px',
+      marginBottom: '40px',
     },
     image: {
-      width: '150px',
-      height: '200px',
       marginTop: '18px',
-    },
-    imageSize: {
-      width: '150px',
-      height: '200px',
+      marginBottom: '-18px',
     },
     title: {
-      fontSize: '18px',
+      fontSize: '22px',
       lineHeight: '17px',
     },
     valueDetails: {
-      fontSize: '16px',
+      fontSize: '25px',
       lineHeight: '17px',
       marginTop: '13px',
-      marginBottom: '19px',
+      marginBottom: '25px',
     },
     baanWarning: {
       marginTop: '-19px',
-      fontSize: '8px',
+      fontSize: '12px',
     },
   },
   '@media screen and (max-width: 320px)': {},
@@ -85,7 +80,7 @@ function Profile(props: any) {
   const classes = useStyles()
   const { t, i18n } = useTranslation('profile')
   return (
-    <div className={classes.profile}>
+    <body className={classes.profile}>
       <div className={classes.image}>
         <img className={classes.imageSize} src={Pics} alt="user profile pic" />
       </div>
@@ -113,10 +108,12 @@ function Profile(props: any) {
         </div>
       </div>
       <Countdown />
-    </div>
+    </body>
   )
 }
 
-function langChange(): any {}
+function getBaan(id: number): string {
+  return 'hello'
+}
 
 export default Profile
