@@ -2,25 +2,33 @@ import { createMuiTheme } from '@material-ui/core'
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ['Kanit', 'Rubik', 'sans-serif'].join(','),
+    fontFamily: ['Rubik', 'Kanit', 'sans-serif'].join(','),
   },
   breakpoints: {
     values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
+      xs: 320,
+      sm: 720,
+      md: 1024,
       lg: 1280,
       xl: 1920,
     },
   },
-  //#44AD53 is green color.
   palette: {
-    type: 'dark',
     primary: {
-      main: '#44AD53',
+      main: '#383838', //grey
+    },
+    error: {
+      main: '#D34949', //red
+    },
+    success: {
+      main: '#44AD53', //green
+    },
+    warning: {
+      main: '#F2C94C', //yellow
     },
     text: {
-      primary: '#eee',
+      primary: '#FFFFFF', //white
+      secondary: '#000000', //black
     },
   },
 })
