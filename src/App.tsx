@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { CookiesProvider } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie'
 
 import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
@@ -9,9 +9,6 @@ import { UserProvider } from './contexts/UserContext'
 import { Container, Box, makeStyles } from '@material-ui/core'
 
 import background from './local/background.png'
-
-import LoginPage from './pages/LoginPage';
-import WaitForVerificationPage from "./pages/WaitForVerificationPage"
 
 const useStyles = makeStyles({
   AppContainer: {
@@ -36,7 +33,7 @@ function App() {
             <Container className={classes.PageContainer}>
               <Switch>
                 <Route path="/login" exact>
-                  <LoginPage />
+                  <Login />
                 </Route>
                 <Route path="/form" exact>
                   <Form />
