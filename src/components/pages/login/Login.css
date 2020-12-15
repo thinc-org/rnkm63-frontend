@@ -1,2 +1,18 @@
 .Login {
 }
+
+.th {
+  font-family: 'kanit';
+}
+
+.en {
+  font-family: 'rubik';
+}
+
+.th .MuiFormControlLabel-label {
+  font-family: 'kanit';
+}
+
+.en .MuiFormControlLabel-label {
+  font-family: 'rubik';
+}

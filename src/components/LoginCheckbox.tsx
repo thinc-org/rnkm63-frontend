@@ -14,7 +14,6 @@ interface Props extends WithStyles<typeof styles> {
 const styles = {
   label: {
     fontSize: 12,
-    fontFamily: 'rubik',
   },
 }
 
