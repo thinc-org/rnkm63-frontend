@@ -1,10 +1,36 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import { Box, makeStyles } from '@material-ui/core'
+import {
+  makeStyles,
+  Button,
+  Container,
+  ButtonGroup,
+  Box,
+} from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
-import classes from '*.module.css'
+
 const useStyles = makeStyles({
+  TH: {
+    backgroundColor: '#44AD53',
+    color: 'white',
+    borderRadius: 3,
+  },
+  THUsed: {
+    backgroundColor: '#fff',
+    color: 'white',
+    borderRadius: 3,
+  },
+  EN: {
+    backgroundColor: '#44AD53',
+    color: 'white',
+    borderRadius: 3,
+  },
+  ENUsed: {
+    backgroundColor: '#fff',
+    color: 'white',
+    borderRadius: 3,
+  },
+
   [theme.breakpoints.down('sm')]: {
     button: {
       border: 0,
@@ -38,19 +64,29 @@ const useStyles = makeStyles({
     },
   },
 })
+
 function LanguageSwitcher() {
   const { t, i18n } = useTranslation('shell')
+  const classes = useStyles()
+  const language = i18n.language
+
+  console.log(classes)
+
   const switchLng = React.useCallback(() => {
-    if (i18n.language === 'en') {
-      i18n.changeLanguage('th')
-    } else {
+    if (language === 'th') {
       i18n.changeLanguage('en')
+    } else {
+      i18n.changeLanguage('th')
     }
-  }, [i18n])
+  }, [i18n, language])
   return (
     <Button onClick={switchLng} variant="contained">
-      <Button>TH</Button>
-      <Button>EN</Button>
+      <Container className={language === 'th' ? classes.TH : classes.THUsed}>
+        TH
+      </Container>
+      <Container className={language === 'th' ? classes.ENUsed : classes.EN}>
+        EN
+      </Container>
     </Button>
   )
 }
