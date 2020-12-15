@@ -33,5 +33,12 @@
   "rns": "ไม่ระบุ",
   "tel": "เบอร์โทรศัพท์",
   "emergencyTel": "เบอร์ติดต่อฉุกเฉิน",
-  "emergencyConnection": "เกี่ยวข้องเป็น"
+  "emergencyConnection": "เกี่ยวข้องเป็น",
+  "disease": "โรคประจำตัว",
+  "allergyMedicine": "ยาที่แพ้",
+  "usedMedicine": "ยาที่ใช้ประจำ",
+  "foodRestriction": "ข้อจำกัดทางอาหาร",
+  "disability": "ความบกพร่องทางร่างกาย",
+  "required": "กรุณากรอกข้อมูลให้ครบ",
+  "notthai": "กรุณาเขียนชื่อเล่นของคุณด้วยภาษาไทยเท่านั้น"
 }
