@@ -6,55 +6,21 @@ import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
 import ToHomeButton from '../../shell/misc/ToHomeButton'
 const useStyles = makeStyles({
-  [theme.breakpoints.down('sm')]: {
-    textHeader: {
-      color: 'white',
-      fontSize: '28px',
+  textHeader: {
+    color: 'white',
+    fontSize: '3.75em',
+    fontWeight: 700,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.75em',
     },
-    text: {
-      color: 'white',
-      fontSize: '16px',
-    },
-    image: {
-      width: '171px',
-      height: '220px',
-    },
-    button: {
-      marginTop: '20px',
-      width: '283px',
-      height: '45px',
-      backgroundColor: '#44AD53',
-      borderRadius: '40px',
-    },
-    buttonText: { color: 'white', fontSize: '18px' },
   },
-  [theme.breakpoints.up('sm')]: {
-    textHeader: {
+  text: {
+    color: 'white',
+    fontSize: '2.125em',
+    fontWeight: 500,
+    [theme.breakpoints.down('sm')]: {
       color: 'white',
-      fontSize: '60px',
-      fontWeight: 700,
-    },
-    text: {
-      color: 'white',
-      fontSize: '34px',
-      fontWeight: 500,
-    },
-    image: {
-      width: '206px',
-      height: '266px',
-    },
-    button: {
-      marginTop: '20px',
-      width: '210px',
-      height: '40px',
-      backgroundColor: '#44AD53',
-      borderRadius: '40px',
-    },
-    buttonText: {
-      color: 'white',
-      fontFamily: 'Rubik',
-      fontSize: '18px',
-      fontWeight: 700,
+      fontSize: '1em',
     },
   },
 })
