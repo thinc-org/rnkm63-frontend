@@ -1,6 +1,7 @@
 import React from 'react'
 import Countdown from './Countdown'
 import Pics from './pics.png'
+import BaanInfo from './baanInfo.json'
 import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
@@ -22,7 +23,7 @@ const useStyles = makeStyles({
   imageSize: {},
   value: {
     display: 'inline-block',
-    width: '417px',
+    width: '471px',
     verticalAlign: 'top',
     marginTop: '20px',
   },
@@ -39,7 +40,7 @@ const useStyles = makeStyles({
   valueDetails: {
     color: 'white',
     textAlign: 'left',
-    lineHeight: '54px',
+    lineHeight: '40px',
     fontSize: '32px',
     marginTop: '0px',
     marginBottom: '28px',
@@ -66,7 +67,7 @@ const useStyles = makeStyles({
     },
     valueDetails: {
       fontSize: '25px',
-      lineHeight: '17px',
+      lineHeight: '27px',
       marginTop: '13px',
       marginBottom: '25px',
     },
@@ -128,10 +129,12 @@ function Profile(props: any) {
         <div>
           <h2 className={classes.title}>{t('Baan')}</h2>
           <h3 className={classes.valueDetails}>
-            {i18n.language.startsWith('en') ? 'Baan arai' : 'บ้านอะไร'}
+            {i18n.language.startsWith('en')
+              ? 'Baan ' + getBaan(20)['name-en']
+              : 'บ้าน' + getBaan(20)['name-th']}
           </h3>
           <h4 className={classes.baanWarning}>
-            {1 + 2 === 2 ? t('baanWarning') : ''}
+            {1 + 1 === 2 ? t('baanWarning') : ''}
           </h4>
         </div>
       </div>
@@ -140,8 +143,24 @@ function Profile(props: any) {
   )
 }
 
-function getBaan(id: number): string {
-  return 'hello'
+interface baanName {
+  ID?: number
+  'name-en': string
+  'name-th': string
+}
+
+function getBaan(id: any): baanName {
+  if (id === null) {
+    return {
+      'name-en': '-',
+      'name-th': '-',
+    }
+  } else {
+    return {
+      'name-en': BaanInfo.find((x: baanName) => x.ID === id)['name-en'],
+      'name-th': BaanInfo.find((x: baanName) => x.ID === id)['name-th'],
+    }
+  }
 }
 
 export default Profile
