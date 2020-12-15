@@ -13,11 +13,11 @@ import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
 const useStyles = makeStyles({
   header: {
-    marginTop: '30px',
+    marginTop: theme.spacing(3.75),
   },
   [theme.breakpoints.down('sm')]: {
     header: {
-      marginTop: '15px',
+      marginTop: theme.spacing(1.875),
     },
     thincLogo: {
       maxWidth: '50%',
