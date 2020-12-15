@@ -14,7 +14,6 @@ const useStyles = makeStyles({
       padding: '0 5px',
       marginLeft: '30px',
       marginRight: '50px',
-      fontFamily: 'Rubik',
       fontSize: '0.85em',
       textAlign: 'center',
       lineHeight: '22px',

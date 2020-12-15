@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import sadthincIcon from '../../../local/sadthinc.png'
 import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
+import ToHomeButton from '../../shell/misc/ToHomeButton'
 const useStyles = makeStyles({
   [theme.breakpoints.down('sm')]: {
     textHeader: {
@@ -71,11 +72,7 @@ function NotFound() {
       <SadThincIcon />
       <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>
-      <Button variant="contained" className={classes.button} color="primary">
-        <Typography className={classes.buttonText}>
-          {t('tohomebutton:title')}
-        </Typography>
-      </Button>
+      <ToHomeButton />
     </Box>
   )
 }
