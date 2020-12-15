@@ -1,4 +1,4 @@
-import { Box, makeStyles, useMediaQuery } from '@material-ui/core'
+import { Box, Hidden, makeStyles, useMediaQuery } from '@material-ui/core'
 import React from 'react'
 import DrawerInside from './misc/DrawerInside'
 import LanguageSwitcher from './misc/LanguageSwitcher'
@@ -28,14 +28,18 @@ const useStyles = makeStyles({
 })
 function Header() {
   const classes = useStyles()
-  const matches = useMediaQuery(theme.breakpoints.up('sm'))
   return (
     <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <img src={THINCLogo} alt="" className={classes.thincLogo} />
         <Box flexDirection="row" justifyContent="flex-start">
           <LanguageSwitcher />
-          {matches && <LogOutButton />}
+          <Hidden smDown>
+            <LogOutButton />
+          </Hidden>
+          <Hidden smUp>
+            <DrawerInside />
+          </Hidden>
         </Box>
       </Box>
     </Box>
