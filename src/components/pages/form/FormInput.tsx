@@ -336,7 +336,10 @@ const FormSelectField = React.memo(function FormSelectField(
       >
         <option aria-label="None" value="" />
         {options.map((option) => (
-          <FormSelectFieldOption {...option} />
+          <FormSelectFieldOption
+            key={`${option.value}-${option.text}`}
+            {...option}
+          />
         ))}
       </Select>
     </FormControl>
