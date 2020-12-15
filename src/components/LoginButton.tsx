@@ -4,7 +4,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles'
 import { Connect } from '../controllers/LoginController'
 
 interface Props extends WithStyles<typeof styles> {
-  className?: string
+  children?: React.ReactNode
   agree?: boolean
   text?: string
 }
@@ -20,7 +20,7 @@ const styles = {
     color: 'white',
     fontSize: 18,
     fontWeight: 700,
-    fontFamily: 'rubik',
+    fontFamily: 'kanit',
   },
   disabled: {
     background: 'grey',
@@ -28,7 +28,7 @@ const styles = {
 }
 
 function LoginButton(props: Props) {
-  const { classes, className, agree } = props
+  const { classes, agree } = props
 
   return (
     <Button
@@ -38,7 +38,7 @@ function LoginButton(props: Props) {
       classes={classes}
       style={{ textTransform: 'none' }}
     >
-      {props.text}
+      {props.children}
     </Button>
   )
 }

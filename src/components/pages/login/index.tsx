@@ -2,26 +2,16 @@ import React from 'react'
 import './Login.css'
 import Box from '@material-ui/core/Box'
 import Card from '@material-ui/core/Card'
-import { withStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import LoginButton from '../../LoginButton'
 import LoginCheckbox from '../../LoginCheckbox'
 import { SendTicketToBack } from '../../../controllers/LoginController'
 import { useTranslation } from 'react-i18next'
 import { Link, useHistory } from 'react-router-dom'
+import { useCookies } from 'react-cookie'
 
 import { Loading, Error } from '../../common'
 
 import { UserContext, UserType } from '../../../contexts/UserContext'
-
-const LoginTitle = withStyles({
-  root: {
-    color: 'white',
-    fontFamily: 'rubik',
-    fontSize: 60,
-    fontWeight: 500,
-  },
-})(Typography)
 
 function LoginSuspenseHOC() {
   return (
@@ -32,10 +22,10 @@ function LoginSuspenseHOC() {
 }
 
 function Login() {
-  const { t } = useTranslation('login')
-
+  const { t, i18n } = useTranslation('login')
   const [user, setUser] = React.useContext(UserContext)
   const [agree, setAgree] = React.useState(false)
+  const [cookies, setCookies] = useCookies()
 
   const history = useHistory()
   /*
@@ -49,6 +39,7 @@ function Login() {
   // Once you got the user object from the server, just pass it to onSigninComplete
   const onSigninComplete = (user: UserType) => {
     setUser(user) //set the user into the context
+    setCookies('rnkm63Session', true) // set seesion cookie
     history.push('/') //redirect to home
   }
 
@@ -61,7 +52,7 @@ function Login() {
     })
   }
 
-  function toggleAgree() {
+  const toggleAgree = () => {
     setAgree(!agree)
   }
 
@@ -69,13 +60,16 @@ function Login() {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     console.log(ticket)
-    if (ticket != null) {
+    if (ticket !== null) {
       /*
       SendTicketToBack(ticket, (session) => {
         console.log(session)
       })
       */
       mockSetUser()
+    }
+    if (cookies['rnkm63Session'] !== undefined) {
+      history.push('/')
     }
   })
 
@@ -93,9 +87,9 @@ function Login() {
           </div>
         )
       }
-      <Box mx="auto" maxWidth="500px" px="10px">
-        <Box mb={3}>
-          <LoginTitle variant="h1">{t('title')}</LoginTitle>
+      <Box mx="auto" maxWidth="500px" px="10px" className={i18n.language}>
+        <Box mb={3} fontSize={38} color="white" fontWeight={700}>
+          {t('title')}
         </Box>
         <Card>
           <Box p={3}>
@@ -104,7 +98,7 @@ function Login() {
             </Box>
             <LoginCheckbox update={toggleAgree} text={t('agreement')} />
             <Box mt={5}>
-              <LoginButton agree={agree} text={t('login')} />
+              <LoginButton agree={agree}>{t('login')}</LoginButton>
             </Box>
           </Box>
         </Card>
