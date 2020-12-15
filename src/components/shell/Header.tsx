@@ -1,5 +1,6 @@
 import { Box, makeStyles, useMediaQuery } from '@material-ui/core'
 import React from 'react'
+import DrawerInside from './misc/DrawerInside'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
 import THINCLogo from '../../local/thincLogo.png'
