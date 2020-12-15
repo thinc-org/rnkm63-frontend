@@ -1,11 +1,10 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { makeStyles, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 const useStyles = makeStyles({
   button: {
-    marginTop: '20px',
     width: '210px',
     height: '40px',
     backgroundColor: '#44AD53',
