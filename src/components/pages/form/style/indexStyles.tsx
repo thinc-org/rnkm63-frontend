@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core'
-import { Palette } from '@material-ui/icons'
 
 const indexStyle = makeStyles((theme: any) => ({
   container: {
@@ -120,4 +119,4 @@ const indexStyle = makeStyles((theme: any) => ({
   },
 }))
 
-export { indexStyle }
+export default indexStyle

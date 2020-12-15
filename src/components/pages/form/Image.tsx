@@ -12,7 +12,11 @@ import {
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
-import { getCroppedImg, getResizedImage } from './utils/imageHelper'
+import {
+  getCroppedImg,
+  getResizedImage,
+  checkImageSize,
+} from './utils/imageHelper'
 import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
@@ -38,7 +42,7 @@ const Transition = React.forwardRef(function Transition(
 })
 
 function Image(props: React.PropsWithRef<any>) {
-  const { t, i18n } = useTranslation('form')
+  const { t } = useTranslation('form')
 
   const [upImg, setUpImg] = useState('')
   const [cropState, setCropState] = useState(false)
@@ -51,31 +55,60 @@ function Image(props: React.PropsWithRef<any>) {
   const [maxZoom, setMaxZoom] = useState(4)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const [finalImg, setFinalImg] = useState('')
+  const [editStatus, setEditStatus] = useState(false)
 
-  const style = imageStyle()
+  const style = imageStyle({ editStatus })
 
-  const onSelectFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader()
-      reader.addEventListener('load', () => setUpImg(reader.result as string))
+  const onSelectFile = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.files && e.target.files.length > 0) {
+        const reader = new FileReader()
+        const file = e.target.files[0]
 
-      const { uri, widthImg, heightImg }: resizeImg = (await getResizedImage(
-        e.target.files[0]
-      )) as resizeImg
+        reader.addEventListener('load', () => setUpImg(reader.result as string))
 
-      reader.readAsDataURL(uri)
+        const { uri, widthImg, heightImg }: resizeImg = (await getResizedImage(
+          file
+        )) as resizeImg
 
-      setCrop({
-        x: 0,
-        y: 0,
-      })
-      setMaxZoom(Math.min(widthImg / 180, heightImg / 240))
-      setZoom(1)
-    }
-  }
+        reader.readAsDataURL(uri)
+
+        setCrop({
+          x: 0,
+          y: 0,
+        })
+        setMaxZoom(Math.min(widthImg / 180, heightImg / 240))
+        setZoom(1)
+      }
+    },
+    []
+  )
 
   const onCropComplete = useCallback((_, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
+
+  const makeCroppedImage = useCallback(async () => {
+    if (!upImg) {
+      return
+    }
+    const img: resultImg = await getCroppedImg(upImg, croppedAreaPixels)
+    setCropState(false)
+    setFinalImg(img.urlFile)
+    props.setImageBlob(img.blob)
+  }, [upImg, croppedAreaPixels])
+
+  const closeDialog = useCallback(() => setCropState(false), [setCropState])
+
+  const zoomOnChange = useCallback((_, newValue) => {
+    setZoom(newValue as number)
+  }, [])
+
+  const selectSameFile = useCallback((e) => (e.currentTarget.value = ''), [])
+
+  const resetCropState = useCallback(() => {
+    setCropState(true)
+    setUpImg('')
   }, [])
 
   return (
@@ -96,14 +129,14 @@ function Image(props: React.PropsWithRef<any>) {
         }}
         TransitionComponent={Transition}
         keepMounted
-        onClose={() => setCropState(false)}
+        onClose={closeDialog}
         style={{ backdropFilter: 'blur(8px)' }}
       >
         <DialogTitle>
           <IconButton
             aria-label="close"
             className={style.closeButton}
-            onClick={() => setCropState(false)}
+            onClick={closeDialog}
           >
             <CloseIcon />
           </IconButton>
@@ -145,9 +178,7 @@ function Image(props: React.PropsWithRef<any>) {
                 min={1}
                 max={maxZoom}
                 step={0.1}
-                onChange={(_, newValue) => {
-                  setZoom(newValue as number)
-                }}
+                onChange={zoomOnChange}
               />
               <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
             </Box>
@@ -159,54 +190,38 @@ function Image(props: React.PropsWithRef<any>) {
                 accept="image/*"
                 className={style.input}
                 id="contained-button-file"
-                onChange={onSelectFile}
-                onClick={(e) => (e.currentTarget.value = '')}
+                onChange={async (e) => await onSelectFile(e)}
+                onClick={selectSameFile}
                 type="file"
               />
               <label htmlFor="contained-button-file">
-                <Button
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    color: 'white',
-                    verticalAlign: 'center',
-                  }}
-                  component="span"
-                >
-                  {'Click to Upload Image'}
+                <Button className={style.imageUploadButton} component="span">
+                  {t('uploadInstruction')}
                 </Button>
               </label>
             </Box>
           </Box>
         )}
         <DialogContentText className={style.dialogText}>
-          <ul>
-            {t('cropDescription', {
-              returnObjects: true,
-              joinArrays: '|',
-            })
-              .split('|')
-              .map((value) => (
-                <li key={value}>{value}</li>
-              ))}
-          </ul>
+          {t('cropDescription', {
+            returnObjects: true,
+            joinArrays: '|',
+          })
+            .split('|')
+            .map((value, index) => (
+              <Typography key={index}>{'- ' + value}</Typography>
+            ))}
         </DialogContentText>
-        <Button
-          variant="contained"
-          color="primary"
-          className={style.submitButton}
-          onClick={async () => {
-            if (!upImg) {
-              return
-            }
-            const img: resultImg = await getCroppedImg(upImg, croppedAreaPixels)
-            setCropState(false)
-            setFinalImg(img.urlFile)
-            props.setImageBlob(img.blob)
-          }}
-        >
-          {t('confirmCrop')}
-        </Button>
+        {!!upImg ? (
+          <Button
+            variant="contained"
+            color="primary"
+            className={style.submitButton}
+            onClick={makeCroppedImage}
+          >
+            {t('confirmCrop')}
+          </Button>
+        ) : null}
       </Dialog>
 
       {!!finalImg ? (
@@ -227,10 +242,7 @@ function Image(props: React.PropsWithRef<any>) {
           variant="contained"
           color="primary"
           className={style.button}
-          onClick={() => {
-            setCropState(true)
-            setUpImg('')
-          }}
+          onClick={resetCropState}
         >
           {t('uploadTextButton')}
         </Button>

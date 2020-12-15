@@ -2,6 +2,10 @@ import { Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core'
 import { createStyles } from '@material-ui/core'
 
+interface propsStyle {
+  editStatus: Boolean
+}
+
 const imageStyle = makeStyles((theme: Theme) =>
   createStyles({
     input: {
@@ -30,17 +34,27 @@ const imageStyle = makeStyles((theme: Theme) =>
     },
     submitButton: {
       margin: theme.spacing(2),
+      borderRadius: '40px',
       alignSelf: 'center',
-      width: '70%',
+      width: '50%',
       backgroundColor: theme.palette.success.main,
       '&:hover': {
         background: theme.palette.success.main,
       },
+      [theme.breakpoints.up('sm')]: {
+        width: '30%',
+      },
     },
     image: {
       borderRadius: '30px',
+      borderStyle: 'solid',
       borderColor: 'red',
-      borderWidth: '5px',
+      borderWidth: (props: propsStyle) => {
+        if (!props.editStatus) {
+          return '0px'
+        }
+        return '2px'
+      },
       background: '#C4C4C4',
       marginBottom: theme.spacing(1),
       width: '150px',
@@ -49,6 +63,17 @@ const imageStyle = makeStyles((theme: Theme) =>
         width: '207px',
         height: '276px',
         marginBottom: theme.spacing(2.5),
+      },
+    },
+    imageUploadButton: {
+      fontSize: '1rem',
+      width: '100%',
+      height: '100%',
+      color: 'white',
+      verticalAlign: 'center',
+      paddingTop: theme.spacing(0),
+      [theme.breakpoints.up('sm')]: {
+        fontSize: '2rem',
       },
     },
     reasonText: {
@@ -75,18 +100,21 @@ const imageStyle = makeStyles((theme: Theme) =>
       alignItems: 'center',
       alignSelf: 'center',
       width: '70%',
-      height: '300px',
+      height: '200px',
       background: '#333',
-      [theme.breakpoints.down('xs')]: {
-        height: '200px',
+      [theme.breakpoints.up('sm')]: {
+        height: '300px',
       },
     },
     dialogText: {
       color: 'black',
-      width: '75%',
+      width: '70%',
       alignSelf: 'center',
       fontWeight: 500,
       fontSize: '1.125rem',
+      paddingTop: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
+      paddingBottom: theme.spacing(1),
       lineHeight: '32px',
       [theme.breakpoints.down('xs')]: {
         fontSize: '0.875rem',
@@ -95,6 +123,7 @@ const imageStyle = makeStyles((theme: Theme) =>
     },
     dialog: {
       background: 'white',
+      borderRadius: '36px',
     },
     dialogTitle: {
       display: 'flex',
@@ -111,4 +140,4 @@ const imageStyle = makeStyles((theme: Theme) =>
   })
 )
 
-export { imageStyle }
+export default imageStyle
