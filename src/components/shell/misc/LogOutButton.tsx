@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { makeStyles, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 const useStyles = makeStyles({
@@ -14,13 +14,11 @@ const useStyles = makeStyles({
       padding: '0 5px',
       marginLeft: '30px',
       marginRight: '50px',
-    },
-    buttonText: {
-      color: 'white',
       fontFamily: 'Rubik',
       fontSize: '14px',
       textAlign: 'center',
       lineHeight: '22px',
+      fontWeight: 500,
     },
   },
   [theme.breakpoints.up('sm')]: {
@@ -33,13 +31,11 @@ const useStyles = makeStyles({
       padding: '0 5px',
       marginLeft: '30px',
       marginRight: '50px',
-    },
-    buttonText: {
-      color: 'white',
       fontFamily: 'Rubik',
       fontSize: '14px',
       textAlign: 'center',
       lineHeight: '22px',
+      fontWeight: 500,
     },
   },
 })
@@ -48,7 +44,7 @@ function LogOutButton() {
   const { t } = useTranslation('logoutbutton')
   return (
     <Button variant="contained" color="secondary" className={classes.button}>
-      <Typography className={classes.buttonText}>{t('title')}</Typography>
+      {t('title')}
     </Button>
   )
 }
