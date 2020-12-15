@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   },
 })
 function NotFound() {
-  const { t } = useTranslation(['notfound', 'tohomebutton'])
+  const { t } = useTranslation(['notfound'])
   const classes = useStyles()
   return (
     <Box
