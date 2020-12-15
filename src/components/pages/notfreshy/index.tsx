@@ -5,48 +5,19 @@ import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
 import ToHomeButton from '../../shell/misc/ToHomeButton'
 const useStyles = makeStyles({
-  [theme.breakpoints.down('sm')]: {
-    textHeader: {
-      color: 'white',
-      fontSize: '22px',
-    },
-    image: {
-      width: '171px',
-      height: '220px',
-    },
-    button: {
-      marginTop: '20px',
-      width: '283px',
-      height: '45px',
-      backgroundColor: '#44AD53',
-      borderRadius: '40px',
-      color: 'white',
-      fontSize: '18px',
-    },
-  },
-  [theme.breakpoints.up('sm')]: {
-    textHeader: {
-      color: 'white',
-      fontSize: '60px',
-      fontWeight: '700',
-    },
-    image: {
-      width: '206px',
-      height: '266px',
-    },
-    button: {
-      marginTop: '20px',
-      width: '210px',
-      height: '40px',
-      backgroundColor: '#44AD53',
-      borderRadius: '40px',
-      color: 'white',
-      fontSize: '18px',
+  textHeader: {
+    color: 'white',
+    fontSize: '3.75em',
+    fontWeight: 700,
+    [theme.breakpoints.down('sm')]: {
+      textHeader: {
+        fontSize: '1.375em',
+      },
     },
   },
 })
 function NotFreshy() {
-  const { t } = useTranslation(['not104', 'tohomebutton'])
+  const { t } = useTranslation(['not104'])
   const classes = useStyles()
   return (
     <Box
