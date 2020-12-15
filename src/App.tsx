@@ -17,9 +17,6 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column',
     backgroundImage: `url(${BackgroundImg})`,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
   },
   PageContainer: {
     flex: 1,
