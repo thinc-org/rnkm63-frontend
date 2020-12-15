@@ -12,9 +12,12 @@ import THINCLogo from '../../local/thincLogo.png'
 import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
 const useStyles = makeStyles({
+  header: {
+    marginTop: '30px',
+  },
   [theme.breakpoints.down('sm')]: {
     header: {
-      marginTop: '20px',
+      marginTop: '15px',
     },
     thincLogo: {
       maxWidth: '50%',
