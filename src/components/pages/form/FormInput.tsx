@@ -11,6 +11,26 @@ import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import FormLabel from '@material-ui/core/FormLabel'
 
+const RegisterSchema = Yup.object().shape({
+  realname: Yup.string().required('required'),
+  prefix: Yup.string().required('required'),
+  surname: Yup.string().required('required'),
+  nickname: Yup.string()
+    .required('required')
+    .matches(/^[ก-๛]+$/, 'notthai'),
+  religion: Yup.string().required('required'),
+  tel: Yup.number().required('required').min(9, 'required'),
+  facebook: Yup.string().required('required'),
+  lineID: Yup.string().required('required'),
+  emergencyTel: Yup.number().required('required').min(9, 'required'),
+  emergencyConnection: Yup.string().required('required'),
+  disease: Yup.string().required('required'),
+  allergyMedicine: Yup.string().required('required'),
+  usedMedicine: Yup.string().required('required'),
+  foodRestriction: Yup.string().required('required'),
+  disability: Yup.string().required('required'),
+})
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(1),
@@ -52,29 +72,6 @@ function FormInput(props: any) {
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
 
-  const RegisterSchema = Yup.object().shape({
-    realname: Yup.string().required(`${t('required')}`),
-    prefix: Yup.string().required(`${t('required')}`),
-    surname: Yup.string().required(`${t('required')}`),
-    nickname: Yup.string()
-      .required(`${t('required')}`)
-      .matches(/^[ก-๛]+$/, 'Thai Only.'),
-    religion: Yup.string().required(`${t('required')}`),
-    tel: Yup.number()
-      .required(`${t('required')}`)
-      .min(9, `${t('required')}`),
-    facebook: Yup.string().required(`${t('required')}`),
-    lineID: Yup.string().required(`${t('required')}`),
-    emergencyTel: Yup.number()
-      .required(`${t('required')}`)
-      .min(9, `${t('required')}`),
-    emergencyConnection: Yup.string().required(`${t('required')}`),
-    disease: Yup.string().required(`${t('required')}`),
-    allergyMedicine: Yup.string().required(`${t('required')}`),
-    usedMedicine: Yup.string().required(`${t('required')}`),
-    foodRestriction: Yup.string().required(`${t('required')}`),
-    disability: Yup.string().required(`${t('required')}`),
-  })
   const formik = useFormik({
     initialValues: {
       prefix: '',
@@ -132,7 +129,11 @@ function FormInput(props: any) {
               value={formik.values.realname}
               onChange={formik.handleChange}
               error={formik.touched.realname && Boolean(formik.errors.realname)}
-              helperText={formik.touched.realname && formik.errors.realname}
+              helperText={
+                formik.touched.realname &&
+                formik.errors.realname &&
+                t(formik.errors.realname)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -147,7 +148,11 @@ function FormInput(props: any) {
               value={formik.values.surname}
               onChange={formik.handleChange}
               error={formik.touched.surname && Boolean(formik.errors.surname)}
-              helperText={formik.touched.realname && formik.errors.realname}
+              helperText={
+                formik.touched.surname &&
+                formik.errors.surname &&
+                t(formik.errors.surname)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -162,7 +167,12 @@ function FormInput(props: any) {
               value={formik.values.nickname}
               onChange={formik.handleChange}
               error={formik.touched.nickname && Boolean(formik.errors.nickname)}
-              helperText={formik.touched.nickname && formik.errors.nickname}
+              //helperText={formik.touched.nickname && formik.errors.nickname}
+              helperText={
+                formik.touched.nickname &&
+                formik.errors.nickname &&
+                t(formik.errors.nickname)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -202,7 +212,9 @@ function FormInput(props: any) {
               value={formik.values.tel}
               onChange={formik.handleChange}
               error={formik.touched.tel && Boolean(formik.errors.tel)}
-              helperText={formik.touched.tel && formik.errors.tel}
+              helperText={
+                formik.touched.tel && formik.errors.tel && t(formik.errors.tel)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -217,7 +229,11 @@ function FormInput(props: any) {
               value={formik.values.facebook}
               onChange={formik.handleChange}
               error={formik.touched.facebook && Boolean(formik.errors.facebook)}
-              helperText={formik.touched.facebook && formik.errors.facebook}
+              helperText={
+                formik.touched.facebook &&
+                formik.errors.facebook &&
+                t(formik.errors.facebook)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -232,7 +248,11 @@ function FormInput(props: any) {
               value={formik.values.lineID}
               onChange={formik.handleChange}
               error={formik.touched.lineID && Boolean(formik.errors.lineID)}
-              helperText={formik.touched.lineID && formik.errors.lineID}
+              helperText={
+                formik.touched.lineID &&
+                formik.errors.lineID &&
+                t(formik.errors.lineID)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -251,7 +271,9 @@ function FormInput(props: any) {
                 Boolean(formik.errors.emergencyTel)
               }
               helperText={
-                formik.touched.emergencyTel && formik.errors.emergencyTel
+                formik.touched.emergencyTel &&
+                formik.errors.emergencyTel &&
+                t(formik.errors.emergencyTel)
               }
               variant="outlined"
             />
@@ -274,7 +296,8 @@ function FormInput(props: any) {
               }
               helperText={
                 formik.touched.emergencyConnection &&
-                formik.errors.emergencyConnection
+                formik.errors.emergencyConnection &&
+                t(formik.errors.emergencyConnection)
               }
               variant="outlined"
             />
@@ -292,7 +315,11 @@ function FormInput(props: any) {
               value={formik.values.disease}
               onChange={formik.handleChange}
               error={formik.touched.disease && Boolean(formik.errors.disease)}
-              helperText={formik.touched.disease && formik.errors.disease}
+              helperText={
+                formik.touched.disease &&
+                formik.errors.disease &&
+                t(formik.errors.disease)
+              }
               variant="outlined"
             />
           </FormControl>
@@ -313,7 +340,9 @@ function FormInput(props: any) {
                 Boolean(formik.errors.allergyMedicine)
               }
               helperText={
-                formik.touched.allergyMedicine && formik.errors.allergyMedicine
+                formik.touched.allergyMedicine &&
+                formik.errors.allergyMedicine &&
+                t(formik.errors.allergyMedicine)
               }
               variant="outlined"
             />
@@ -333,7 +362,9 @@ function FormInput(props: any) {
                 Boolean(formik.errors.usedMedicine)
               }
               helperText={
-                formik.touched.usedMedicine && formik.errors.usedMedicine
+                formik.touched.usedMedicine &&
+                formik.errors.usedMedicine &&
+                t(formik.errors.usedMedicine)
               }
               variant="outlined"
             />
@@ -352,7 +383,9 @@ function FormInput(props: any) {
                 formik.touched.disability && Boolean(formik.errors.disability)
               }
               helperText={
-                formik.touched.disability && formik.errors.foodRestriction
+                formik.touched.disability &&
+                formik.errors.disability &&
+                t(formik.errors.disability)
               }
               variant="outlined"
             />
@@ -374,7 +407,9 @@ function FormInput(props: any) {
                 Boolean(formik.errors.foodRestriction)
               }
               helperText={
-                formik.touched.foodRestriction && formik.errors.foodRestriction
+                formik.touched.foodRestriction &&
+                formik.errors.foodRestriction &&
+                t(formik.errors.foodRestriction)
               }
               variant="outlined"
             />
