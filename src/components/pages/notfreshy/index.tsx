@@ -28,7 +28,6 @@ const useStyles = makeStyles({
       color: 'white',
       fontSize: '60px',
       fontWeight: '700',
-      fontFamily: 'Rubik',
     },
     image: {
       width: '206px',

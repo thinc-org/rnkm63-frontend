@@ -30,13 +30,11 @@ const useStyles = makeStyles({
   [theme.breakpoints.up('sm')]: {
     textHeader: {
       color: 'white',
-      fontFamily: 'Rubik',
       fontSize: '60px',
       fontWeight: 700,
     },
     text: {
       color: 'white',
-      fontFamily: 'Rubik',
       fontSize: '34px',
       fontWeight: 500,
     },
