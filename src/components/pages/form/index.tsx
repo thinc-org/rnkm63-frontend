@@ -23,16 +23,23 @@ function Form() {
 
   const { t, i18n } = useTranslation('form')
   const style = indexStyle({ lang: i18n.language })
-  const validate = () => {
+
+  const validate = React.useCallback(() => {
     //validate here
     return true
-  }
-  const confirm = () => {
+  }, [])
+
+  const confirm = React.useCallback(() => {
     if (validate()) setConfirmOpen(true)
-  }
-  const submit = () => {
+  }, [setConfirmOpen, validate])
+
+  const submit = React.useCallback(() => {
     alert('Submitted!')
-  }
+  }, [])
+
+  const closeDialog = React.useCallback(() => {
+    setConfirmOpen(false)
+  }, [setConfirmOpen])
 
   return (
     <Container maxWidth="lg" classes={{ root: style.container }}>
@@ -46,17 +53,14 @@ function Form() {
         </div>
       </div>
       <div>
-        <Button
-          classes={{ root: style.submitButton }}
-          onClick={() => confirm()}
-        >
+        <Button classes={{ root: style.submitButton }} onClick={confirm}>
           {t('submit')}
         </Button>
         <p className={style.submitNote}>{t('submitNote')}</p>
       </div>
       <Dialog
         open={confirmOpen}
-        onClose={() => setConfirmOpen(false)}
+        onClose={setConfirmOpen}
         PaperProps={{
           classes: { root: style.dialog },
         }}
@@ -69,16 +73,10 @@ function Form() {
           <p className={style.dialogContent}>{t('confirmDescription')}</p>
         </DialogContent>
         <DialogActions classes={{ root: style.dialogAction }}>
-          <Button
-            onClick={() => setConfirmOpen(false)}
-            classes={{ root: style.cancelButton }}
-          >
+          <Button onClick={closeDialog} classes={{ root: style.cancelButton }}>
             {t('cancel')}
           </Button>
-          <Button
-            onClick={() => submit()}
-            classes={{ root: style.confirmButton }}
-          >
+          <Button onClick={submit} classes={{ root: style.confirmButton }}>
             {t('confirm')}
           </Button>
         </DialogActions>

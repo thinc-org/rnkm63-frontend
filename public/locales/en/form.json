@@ -41,5 +41,7 @@
   "foodRestriction": "Dietary Restriction",
   "disability": "Disabilities",
   "required": "Please complete this field.",
-  "notthai": "Please write your nickname in Thai."
+  "notthai": "Please write your nickname in Thai.",
+  "lineID": "LINE ID",
+  "facebook": "Facebook"
 }
