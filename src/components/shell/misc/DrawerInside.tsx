@@ -19,6 +19,11 @@ const useStyles = makeStyles({
     background: 'black',
     color: 'white',
   },
+  hovers: {
+    '&:hover': {
+      backgroundColor: '#333',
+    },
+  },
 })
 
 type Anchor = 'right'
@@ -43,28 +48,28 @@ export default function DrawerInside() {
       className={classes.fullList}
     >
       <List>
-        <ListItem>
+        <ListItem className={classes.hovers}>
           <ListItemIcon>
             <HomeOutlinedIcon style={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText>หน้าหลัก</ListItemText>
         </ListItem>
 
-        <ListItem>
+        <ListItem className={classes.hovers}>
           <ListItemIcon>
             <EventNoteRoundedIcon style={{ color: 'white' }} />
           </ListItemIcon>
           <ListItemText>กำหนดการ</ListItemText>
         </ListItem>
 
-        <ListItem>
+        <ListItem className={classes.hovers}>
           <ListItemIcon>
             <HomeOutlinedIcon style={{ color: green[500] }} />
           </ListItemIcon>
           <ListItemText style={{ color: green[500] }}>เลือกบ้าน</ListItemText>
         </ListItem>
 
-        <ListItem>
+        <ListItem className={classes.hovers}>
           <ListItemIcon>
             <MeetingRoomIcon style={{ color: red[400] }} />
           </ListItemIcon>
