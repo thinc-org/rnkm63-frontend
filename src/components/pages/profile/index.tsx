@@ -1,16 +1,122 @@
 import React from 'react'
-
-import { Box } from '@material-ui/core'
-
+import Countdown from './Countdown'
+import Pics from './pics.png'
+import { makeStyles } from '@material-ui/core/styles'
 import { useTranslation } from 'react-i18next'
 
-function Profile() {
-  const { t } = useTranslation('profile')
+const useStyles = makeStyles({
+  profile: {
+    textAlign: 'center',
+    marginBottom: '117px',
+    fontFamily: 'Kanit',
+  },
+  image: {
+    display: 'inline-block',
+    marginLeft: '10%',
+    marginRight: '10%',
+    marginBottom: '32px',
+    marginTop: '20px',
+    alignItems: 'center',
+    borderRadius: '24px',
+  },
+  imageSize: {},
+  value: {
+    display: 'inline-block',
+    width: '481px',
+    verticalAlign: 'top',
+    marginTop: '20px',
+  },
+  title: {
+    color: '#54D166',
+    textAlign: 'left',
+    marginTop: '0px',
+    marginBottom: '0px',
+    lineHeight: '27px',
+    fontSize: '18px',
+    letterSpacing: '0.007em',
+  },
+  valueDetails: {
+    color: 'white',
+    textAlign: 'left',
+    lineHeight: '54px',
+    fontSize: '32px',
+    marginTop: '0px',
+    marginBottom: '28px',
+    letterSpacing: '0.007em',
+  },
+  baanWarning: {
+    color: '#F2C94C',
+    margin: '-28px 0px',
+    textAlign: 'left',
+    fontSize: '12px',
+  },
+  '@media screen and (max-width: 720px)': {
+    profile: {
+      marginBottom: '26px',
+    },
+    image: {
+      width: '150px',
+      height: '200px',
+      marginTop: '18px',
+    },
+    imageSize: {
+      width: '150px',
+      height: '200px',
+    },
+    title: {
+      fontSize: '18px',
+      lineHeight: '17px',
+    },
+    valueDetails: {
+      fontSize: '16px',
+      lineHeight: '17px',
+      marginTop: '13px',
+      marginBottom: '19px',
+    },
+    baanWarning: {
+      marginTop: '-19px',
+      fontSize: '8px',
+    },
+  },
+  '@media screen and (max-width: 320px)': {},
+})
+
+function Profile(props: any) {
+  const classes = useStyles()
+  const { t, i18n } = useTranslation('profile')
   return (
-    <Box>
-      <h1>{t('someSampleText')}</h1>
-    </Box>
+    <div className={classes.profile}>
+      <div className={classes.image}>
+        <img className={classes.imageSize} src={Pics} alt="user profile pic" />
+      </div>
+      <div className={classes.value}>
+        <div>
+          <h2 className={classes.title}>{t('Name')}</h2>
+          <h3 className={classes.valueDetails}>สมชาย</h3>
+        </div>
+        <div>
+          <h2 className={classes.title}>{t('Faculty')}</h2>
+          <h3 className={classes.valueDetails}>
+            {i18n.language.startsWith('en')
+              ? 'Faculty of engineering'
+              : 'คณะวิศวกรรมศาสตร์'}
+          </h3>
+        </div>
+        <div>
+          <h2 className={classes.title}>{t('Baan')}</h2>
+          <h3 className={classes.valueDetails}>
+            {i18n.language.startsWith('en') ? 'Baan arai' : 'บ้านอะไร'}
+          </h3>
+          <h4 className={classes.baanWarning}>
+            {1 + 1 === 2 ? t('baanWarning') : ''}
+          </h4>
+        </div>
+      </div>
+      <Countdown />
+    </div>
   )
 }
+
+function langChange(): any {}
 
 export default Profile
