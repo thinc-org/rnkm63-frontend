@@ -1,7 +1,6 @@
 import React from 'react'
-import { Box, Button, makeStyles, Typography } from '@material-ui/core'
+import { Box, makeStyles, Typography } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
-import sadthincIcon from '../../../local/sadthinc.png'
 import theme from '../../../config/theme'
 import SadThincIcon from '../../shell/misc/SadThincIcon'
 import ToHomeButton from '../../shell/misc/ToHomeButton'

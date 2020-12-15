@@ -1,10 +1,4 @@
-import {
-  Box,
-  ListItem,
-  ListItemProps,
-  makeStyles,
-  useMediaQuery,
-} from '@material-ui/core'
+import { Box, makeStyles, useMediaQuery } from '@material-ui/core'
 import React from 'react'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
@@ -31,9 +25,6 @@ const useStyles = makeStyles({
     },
   },
 })
-function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
-  return <ListItem button component="a" {...props} />
-}
 function Header() {
   const classes = useStyles()
   const matches = useMediaQuery(theme.breakpoints.up('sm'))
