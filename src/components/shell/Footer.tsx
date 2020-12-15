@@ -30,12 +30,12 @@ const useStyles = makeStyles({
   footerFont: {
     color: '#8D8D8D',
     textAlign: 'center',
-    fontSize: '10px',
+    fontSize: '0.625em',
   },
   footerFont2: {
     color: '#8D8D8D',
     textAlign: 'center',
-    fontSize: '10px',
+    fontSize: '0.625em',
     marginBottom: '12px',
   },
 })

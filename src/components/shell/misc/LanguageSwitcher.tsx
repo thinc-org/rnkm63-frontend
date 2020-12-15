@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     buttonText: {
       color: 'white',
       fontFamily: 'Rubik',
-      fontSize: '14px',
+      fontSize: '0.85em',
       textAlign: 'center',
       lineHeight: '22px',
     },
@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     buttonText: {
       color: 'white',
       fontFamily: 'Rubik',
-      fontSize: '14px',
+      fontSize: '0.85em',
       textAlign: 'center',
       lineHeight: '22px',
     },
