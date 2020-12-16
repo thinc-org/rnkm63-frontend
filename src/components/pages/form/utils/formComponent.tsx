@@ -8,38 +8,49 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { formStyle } from '../style'
+import { useField } from 'formik'
 
-interface IFormField<V, E> {
-  id: string
+interface IFormField {
   name: string
-  value: V
-  handleChange: (event: E) => void
+  value: string
+  onChange: (e: React.ChangeEvent<any>) => void
   error: string | undefined
-  touched: Boolean | undefined
-  className?: string
+  touched: boolean
 }
 
-interface IFormTextField
-  extends IFormField<
-    String,
-    React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  > {}
+interface IFormTextFieldWrapper {
+  name: string
+}
+
+interface IFormTextField extends IFormField {}
 
 interface IFormSelectFieldOption {
   value: string
   text: string
 }
 
-interface IFormSelectField
-  extends IFormField<
-    String,
-    React.ChangeEvent<{ name?: string | undefined; value: any }>
-  > {
+interface IFormSelectFieldWrapper {
+  name: string
   options: IFormSelectFieldOption[]
 }
 
-const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
-  const { id, name, value, handleChange, error, touched } = props
+interface IFormSelectField extends IFormField {
+  options: IFormSelectFieldOption[]
+}
+
+const FormTextField = React.memo(function FormTextField(
+  props: IFormTextFieldWrapper
+) {
+  const { name } = props
+  const [{ value, onChange }, { error, touched }] = useField(name)
+  const pass = { name, value, onChange, error, touched }
+  return <FormTextFieldInner {...pass} />
+})
+
+const FormTextFieldInner = React.memo(function FormTextFieldInner(
+  props: IFormTextField
+) {
+  const { name, value, onChange, error, touched } = props
   const { t } = useTranslation('form')
   const classes = formStyle()
   return (
@@ -47,14 +58,11 @@ const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
       <FormLabel className={classes.label}>{t(name)}</FormLabel>
       <TextField
         name={name}
-        id={id}
         size="small"
         value={value}
-        onChange={handleChange}
+        onChange={onChange}
         error={touched && Boolean(error)}
-        //helperText={touched && error && t(error)}
         className={classes.particular}
-        //label={t(name)}
         variant="outlined"
       />
       <FormHelperText className={classes.error}>
@@ -65,9 +73,18 @@ const FormTextField = React.memo(function FormTextField(props: IFormTextField) {
 })
 
 const FormSelectField = React.memo(function FormSelectField(
+  props: IFormSelectFieldWrapper
+) {
+  const { name, options } = props
+  const [{ value, onChange }, { error, touched }] = useField(name)
+  const pass = { name, value, onChange, error, touched, options }
+  return <FormSelectFieldInner {...pass} />
+})
+
+const FormSelectFieldInner = React.memo(function FormSelectFieldInner(
   props: IFormSelectField
 ) {
-  const { id, name, value, handleChange, error, touched, options } = props
+  const { name, value, onChange, error, touched, options } = props
   const { t } = useTranslation('form')
   const classes = formStyle()
   return (
@@ -76,12 +93,11 @@ const FormSelectField = React.memo(function FormSelectField(
       <Select
         native
         className={classes.particular_select}
-        id={id}
         name={name}
         value={value}
         variant="outlined"
         error={touched && Boolean(error)}
-        onChange={handleChange}
+        onChange={onChange}
       >
         <option aria-label="None" value="" />
         {options.map((option) => (
