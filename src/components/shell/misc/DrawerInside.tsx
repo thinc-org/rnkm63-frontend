@@ -1,37 +1,47 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core'
 import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MenuIcon from '@material-ui/icons/Menu'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import { green, red } from '@material-ui/core/colors'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
-  fullList: {
-    width: 'auto',
-  },
   bgColor: {
     background: 'black',
     color: 'white',
   },
-  hovers: {
+  eachList: {
+    color: 'white',
     '&:hover': {
-      backgroundColor: '#333',
+      opacity: '0.5',
     },
+  },
+  HomeSchIcon: {
+    color: 'white',
+  },
+  selectBann: {
+    color: green[500],
+  },
+  logOut: {
+    color: red[400],
   },
 })
 
-type Anchor = 'right'
+type Anchor = 'control'
 
 export default function DrawerInside() {
   const classes = useStyles()
   const [state, setState] = React.useState({
-    right: false,
+    control: false,
   })
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (
@@ -45,35 +55,34 @@ export default function DrawerInside() {
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
-      className={classes.fullList}
     >
       <List>
-        <ListItem className={classes.hovers}>
-          <ListItemIcon>
-            <HomeOutlinedIcon style={{ color: 'white' }} />
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.HomeSchIcon}>
+            <HomeOutlinedIcon />
           </ListItemIcon>
           <ListItemText>หน้าหลัก</ListItemText>
         </ListItem>
 
-        <ListItem className={classes.hovers}>
-          <ListItemIcon>
-            <EventNoteRoundedIcon style={{ color: 'white' }} />
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.HomeSchIcon}>
+            <EventNoteRoundedIcon />
           </ListItemIcon>
           <ListItemText>กำหนดการ</ListItemText>
         </ListItem>
 
-        <ListItem className={classes.hovers}>
-          <ListItemIcon>
-            <HomeOutlinedIcon style={{ color: green[500] }} />
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.selectBann}>
+            <HomeOutlinedIcon />
           </ListItemIcon>
-          <ListItemText style={{ color: green[500] }}>เลือกบ้าน</ListItemText>
+          <ListItemText className={classes.selectBann}>เลือกบ้าน</ListItemText>
         </ListItem>
 
-        <ListItem className={classes.hovers}>
-          <ListItemIcon>
-            <MeetingRoomIcon style={{ color: red[400] }} />
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.logOut}>
+            <MeetingRoomIcon />
           </ListItemIcon>
-          <ListItemText style={{ color: red[400] }}>Logout</ListItemText>
+          <ListItemText className={classes.logOut}>Logout</ListItemText>
         </ListItem>
       </List>
     </div>
@@ -81,19 +90,15 @@ export default function DrawerInside() {
 
   return (
     <div>
-      {(['right'] as Anchor[]).map((anchor) => (
-        <React.Fragment key={anchor}>
-          <MenuIcon onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon>
-          <Drawer
-            classes={{ paper: classes.bgColor }}
-            anchor={anchor}
-            open={state[anchor]}
-            onClose={toggleDrawer(anchor, false)}
-          >
-            {list(anchor)}
-          </Drawer>
-        </React.Fragment>
-      ))}
+      <MenuIcon onClick={toggleDrawer('control', true)} />
+      <Drawer
+        classes={{ paper: classes.bgColor }}
+        anchor={'right'}
+        open={state['control']}
+        onClose={toggleDrawer('control', false)}
+      >
+        {list('control')}
+      </Drawer>
     </div>
   )
 }
