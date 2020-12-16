@@ -12,7 +12,7 @@ const indexStyle = makeStyles((theme: any) => ({
   },
   title: {
     fontSize: 38,
-    color: 'white',
+    color: theme.palette.text.primary,
     fontWeight: 700,
     marginBottom: 10,
   },
@@ -20,6 +20,7 @@ const indexStyle = makeStyles((theme: any) => ({
     fontSize: 16,
     fontWeight: 400,
     marginBottom: 11,
+    color: theme.palette.text.secondary,
   },
   checkboxForm: {
     marginBottom: 30,
@@ -27,19 +28,23 @@ const indexStyle = makeStyles((theme: any) => ({
   agreement: {
     fontSize: 12,
     fontWeight: 400,
+    color: theme.palette.text.secondary,
   },
   checkbox: {
-    color: '#27AE60',
+    color: theme.palette.success.main,
   },
   button: {
-    background: '#44AD53',
+    background: theme.palette.success.main,
     borderRadius: 20,
     border: 0,
     height: 45,
     textTransform: 'none',
-    color: 'white',
+    color: theme.palette.text.primary,
     fontSize: 20,
     fontWeight: 700,
+    '&:hover': {
+      background: theme.palette.primary.main,
+    },
   },
 }))
 
