@@ -35,7 +35,11 @@ const FORM_RELIGION_FIELD_OPTIONS = [
   { value: 'RNS', text: 'rns' },
 ]
 const formInitialValues = {
+<<<<<<< refs/remotes/origin/dev
   prefixname: '',
+=======
+  prefix: '',
+>>>>>>> Initial work on form page service
   realname: '',
   surname: '',
   nickname: '',
@@ -44,7 +48,11 @@ const formInitialValues = {
   facebook: '',
   lineID: '',
   emergencyTel: '',
+<<<<<<< refs/remotes/origin/dev
   emergencyTelRelationship: '',
+=======
+  emergencyConnection: '',
+>>>>>>> Initial work on form page service
   disease: '',
   allergyMedicine: '',
   usedMedicine: '',
