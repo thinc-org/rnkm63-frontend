@@ -1,50 +1,102 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-
-import ItemDrawer from './ItemDrawer'
-
-import { Drawer } from '@material-ui/core'
-
+import {
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+} from '@material-ui/core'
+import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MenuIcon from '@material-ui/icons/Menu'
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
+import { green, red } from '@material-ui/core/colors'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   bgColor: {
     background: 'black',
     color: 'white',
   },
-  iconPos: {
-    fontSize: '2rem',
-    margin: '0 1rem 1rem 1rem',
-    position: 'relative',
-    top: '1.6rem',
+  eachList: {
+    color: 'white',
+    '&:hover': {
+      opacity: '0.5',
+    },
+  },
+  HomeSchIcon: {
+    color: 'white',
+  },
+  selectBann: {
+    color: green[500],
+  },
+  logOut: {
+    color: red[400],
   },
 })
 
+type Anchor = 'control'
+
 export default function DrawerInside() {
   const classes = useStyles()
-  const [state, setState] = React.useState(false)
+  const [state, setState] = React.useState({
+    control: false,
+  })
 
   const toggleDrawer = React.useCallback(() => {
     setState((state) => !state)
   }, [])
 
-  const list = () => (
-    <div role="presentation" onClick={toggleDrawer}>
-      <ItemDrawer />
+  const list = (anchor: Anchor) => (
+    <div
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.HomeSchIcon}>
+            <HomeOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText>หน้าหลัก</ListItemText>
+        </ListItem>
+
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.HomeSchIcon}>
+            <EventNoteRoundedIcon />
+          </ListItemIcon>
+          <ListItemText>กำหนดการ</ListItemText>
+        </ListItem>
+
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.selectBann}>
+            <HomeOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.selectBann}>เลือกบ้าน</ListItemText>
+        </ListItem>
+
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
+          <ListItemIcon className={classes.logOut}>
+            <MeetingRoomIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.logOut}>Logout</ListItemText>
+        </ListItem>
+      </List>
     </div>
   )
 
   return (
-    <React.Fragment>
-      <MenuIcon className={classes.iconPos} onClick={toggleDrawer} />
+    <div>
+      <MenuIcon onClick={toggleDrawer('control', true)} />
       <Drawer
         classes={{ paper: classes.bgColor }}
         anchor={'right'}
-        open={state}
-        onClose={toggleDrawer}
+        open={state['control']}
+        onClose={toggleDrawer('control', false)}
       >
-        {list()}
+        {list('control')}
       </Drawer>
-    </React.Fragment>
+    </div>
   )
 }
