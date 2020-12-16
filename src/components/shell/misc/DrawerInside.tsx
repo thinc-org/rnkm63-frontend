@@ -1,5 +1,10 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
 import { makeStyles } from '@material-ui/core/styles'
+import { green, red } from '@material-ui/core/colors'
+
 import {
   Drawer,
   List,
@@ -7,12 +12,11 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@material-ui/core'
+
 import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MenuIcon from '@material-ui/icons/Menu'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
-import { green, red } from '@material-ui/core/colors'
-import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   bgColor: {
@@ -40,6 +44,7 @@ type Anchor = 'control'
 
 export default function DrawerInside() {
   const classes = useStyles()
+  const { t } = useTranslation(['drawer'])
   const [state, setState] = React.useState({
     control: false,
   })
@@ -59,28 +64,30 @@ export default function DrawerInside() {
           <ListItemIcon className={classes.HomeSchIcon}>
             <HomeOutlinedIcon />
           </ListItemIcon>
-          <ListItemText>หน้าหลัก</ListItemText>
+          <ListItemText>{t('Home')}</ListItemText>
         </ListItem>
 
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.HomeSchIcon}>
             <EventNoteRoundedIcon />
           </ListItemIcon>
-          <ListItemText>กำหนดการ</ListItemText>
+          <ListItemText>{t('Schedule')}</ListItemText>
         </ListItem>
 
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.selectBann}>
             <HomeOutlinedIcon />
           </ListItemIcon>
-          <ListItemText className={classes.selectBann}>เลือกบ้าน</ListItemText>
+          <ListItemText className={classes.selectBann}>
+            {t('Bann')}
+          </ListItemText>
         </ListItem>
 
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.logOut}>
             <MeetingRoomIcon />
           </ListItemIcon>
-          <ListItemText className={classes.logOut}>Logout</ListItemText>
+          <ListItemText className={classes.logOut}>{t('Logout')}</ListItemText>
         </ListItem>
       </List>
     </div>
