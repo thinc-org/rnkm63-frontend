@@ -1,49 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles({
-  countdownDetail: {
-    fontSize: '34px',
-    marginTop: '77px',
-    marginBottom: '25px',
-    lineHeight: '22px',
-  },
-  countdownTimer: {
-    fontSize: '48px',
-    margin: '0px 0px',
-    lineHeight: '40px',
-    fontWeight: 'bold',
-  },
-  '@media screen and (max-width: 720px)': {
-    countdownDetail: {
-      fontSize: '22px',
-      lineHeight: '28px',
-      marginTop: '53px',
-      marginBottom: '9px',
-    },
-    countdownTimer: {
-      fontSize: '30px',
-      lineHeight: '28px',
-      marginTop: '20px',
-    },
-  },
-  '@media screen and (max-width: 320px)': {
-    countdownDetail: {
-      fontSize: '14px',
-      lineHeight: '28px',
-      marginTop: '35px',
-      marginBottom: '9px',
-    },
-    countdownTimer: {
-      fontSize: '18px',
-      lineHeight: '28px',
-    },
-  },
-})
+import { countdownStyles } from './styles/countdownStyles'
 
 export const Countdown = (props: any) => {
-  const classes = useStyles()
+  const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
   const endTime = new Date('2020-12-20').valueOf()
@@ -102,27 +62,6 @@ export const Countdown = (props: any) => {
       </h1>
     </div>
   )
-  /*function secondsToTime(secs: number)  {
-        let days = Math.floor(secs / (60*60*24));
-
-        let d_of_hours = secs % (60*60*24);
-        let hours = Math.floor(d_of_hours / (60*60));
-
-        let d_of_minutes = secs % (60*60);
-        let minutes= Math.floor(d_of_minutes / 60);
-
-        let d_of_seconds = d_of_minutes % 60;
-        let seconds = Math.ceil(d_of_seconds);
-
-        let obj = {
-            "d": (secs <= 0 ? 0 : days),
-            "h": (secs <= 0 ? 0 : days),
-            "m": (secs <= 0 ? 0 : days),
-            "s": (secs <= 0 ? 0 : days),
-        }
-
-    return obj;
-    }*/
 }
 
 export default Countdown
