@@ -10,6 +10,9 @@ import { Container, Box, makeStyles } from '@material-ui/core'
 
 import background from './local/background.png'
 
+import { ThemeProvider } from '@material-ui/core/styles'
+import theme from './config/theme'
+
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
@@ -27,28 +30,30 @@ function App() {
   return (
     <CookiesProvider>
       <UserProvider>
-        <Router>
-          <Box className={classes.AppContainer}>
-            <Header />
-            <Container className={classes.PageContainer}>
-              <Switch>
-                <Route path="/login" exact>
-                  <Login />
-                </Route>
-                <Route path="/form" exact>
-                  <Form />
-                </Route>
-                <Route path="/" exact>
-                  <Profile />
-                </Route>
-                <Route>
-                  <NotFound />
-                </Route>
-              </Switch>
-            </Container>
-            <Footer />
-          </Box>
-        </Router>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Box className={classes.AppContainer}>
+              <Header />
+              <Container className={classes.PageContainer}>
+                <Switch>
+                  <Route path="/login" exact>
+                    <Login />
+                  </Route>
+                  <Route path="/form" exact>
+                    <Form />
+                  </Route>
+                  <Route path="/" exact>
+                    <Profile />
+                  </Route>
+                  <Route>
+                    <NotFound />
+                  </Route>
+                </Switch>
+              </Container>
+              <Footer />
+            </Box>
+          </Router>
+        </ThemeProvider>
       </UserProvider>
     </CookiesProvider>
   )
