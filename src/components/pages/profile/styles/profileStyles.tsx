@@ -48,11 +48,14 @@ export const profileStyles = makeStyles({
     fontSize: '12px',
     display: 'table',
     wordWrap: 'break-word',
-    textOverflow: 'ellipsis',
+    whiteSpace: 'pre-line',
   },
   '@media screen and (max-width: 720px)': {
     profile: {
       marginBottom: '40px',
+    },
+    value: {
+      width: '90%',
     },
     image: {
       marginTop: '18px',
@@ -74,12 +77,6 @@ export const profileStyles = makeStyles({
     },
   },
   '@media screen and (max-width: 320px)': {
-    profile: {
-      width: '80%',
-    },
-    value: {
-      width: '70%',
-    },
     image: {
       width: '150px',
       height: '200px',
@@ -100,7 +97,8 @@ export const profileStyles = makeStyles({
     baanWarning: {
       marginTop: '-12px',
       fontSize: '8px',
-      width: '60%',
+      wordWrap: 'break-word',
+      whiteSpace: 'pre-line',
     },
   },
 })
