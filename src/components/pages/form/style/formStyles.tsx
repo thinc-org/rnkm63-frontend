@@ -44,6 +44,7 @@ const formStyle = makeStyles(
     label: {
       margin: theme.spacing(0.5),
       color: theme.palette.text.primary,
+      heigth: '100%',
     },
     formControl: {
       marginTop: theme.spacing(0.5),

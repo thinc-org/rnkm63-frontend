@@ -34,9 +34,27 @@ const FORM_RELIGION_FIELD_OPTIONS = [
   { value: 'other', text: 'ot' },
   { value: 'rns', text: 'rns' },
 ]
+const formInitialValues = {
+  prefix: '',
+  realname: '',
+  surname: '',
+  nickname: '',
+  religion: '',
+  tel: '',
+  facebook: '',
+  lineID: '',
+  emergencyTel: '',
+  emergencyConnection: '',
+  disease: '',
+  allergyMedicine: '',
+  usedMedicine: '',
+  foodRestriction: '',
+  disability: '',
+}
 
 export {
   registerSchema,
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
+  formInitialValues,
 }

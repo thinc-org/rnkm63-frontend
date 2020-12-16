@@ -1,5 +1,6 @@
 {
-  "title": "Register",
+  "register": "Register",
+  "editProfile": "Edit profile",
   "submit": "Submit",
   "submitNote": "Note: You cannot edit information after you submit.",
   "uploadTextButton": "Upload",
