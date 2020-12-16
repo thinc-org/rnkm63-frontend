@@ -1,38 +1,44 @@
+import { Box, makeStyles, useMediaQuery } from '@material-ui/core'
 import React from 'react'
-import './Header.css'
-import { Link } from 'react-router-dom'
-import { Loading } from '../common'
 import LanguageSwitcher from './misc/LanguageSwitcher'
-import { UserContext } from '../../contexts/UserContext'
-
-function HeaderSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Header />
-    </React.Suspense>
-  )
-}
-
+import LogOutButton from './misc/LogOutButton'
+import THINCLogo from '../../local/thincLogo.png'
+import { withSuspense } from '../hoc'
+import theme from '../../config/theme'
+const useStyles = makeStyles({
+  header: {
+    marginTop: theme.spacing(3.75),
+  },
+  [theme.breakpoints.down('sm')]: {
+    header: {
+      marginTop: theme.spacing(1.875),
+    },
+    thincLogo: {
+      maxWidth: '50%',
+      maxHeight: '50%',
+    },
+    list: {
+      width: 250,
+    },
+    fullList: {
+      width: 'auto',
+    },
+  },
+})
 function Header() {
-  const user = React.useContext(UserContext)[0]
+  const classes = useStyles()
+  const matches = useMediaQuery(theme.breakpoints.up('sm'))
   return (
-    <div className="Header">
-      <h1>HEADER GOES HERE</h1>
-
-      {
-        /*
-          This is an example of how you might check if the user is logged in
-          The <Link> component should also be very useful. Check out <NavLink> too!
-          */
-        user ? (
-          <h5>{`Logged in as ${user.name}`}</h5>
-        ) : (
-          <Link to="/login">Login</Link>
-        )
-      }
-      <LanguageSwitcher />
-    </div>
+    <Box className={classes.header}>
+      <Box display="flex" flexDirection="row" justifyContent="space-between">
+        <img src={THINCLogo} alt="" className={classes.thincLogo} />
+        <Box flexDirection="row" justifyContent="flex-start">
+          <LanguageSwitcher />
+          {matches && <LogOutButton />}
+        </Box>
+      </Box>
+    </Box>
   )
 }
 
-export default HeaderSuspenseHOC
+export default withSuspense(Header)

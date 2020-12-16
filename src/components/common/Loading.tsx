@@ -1,12 +1,8 @@
-import React from "react";
-import "./Loading.css";
+import React from 'react'
+import { Box } from '@material-ui/core'
 
 function Loading() {
-  return (
-    <div className="LoadingContainer">
-      Probably make some fancy spinny thing here
-    </div>
-  );
+  return <Box>Probably make some fancy spinny thing here</Box>
 }
 
-export default Loading;
+export default Loading

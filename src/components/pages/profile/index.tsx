@@ -1,24 +1,16 @@
-import React from "react";
-import "./Profile.css";
+import React from 'react'
 
-import { useTranslation } from "react-i18next";
-import { Loading } from "../../common";
+import { Box } from '@material-ui/core'
 
-function ProfileSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Profile />
-    </React.Suspense>
-  );
-}
+import { useTranslation } from 'react-i18next'
 
 function Profile() {
-  const { t } = useTranslation("profile");
+  const { t } = useTranslation('profile')
   return (
-    <div className="Profile">
-      <h1>{t("someSampleText")}</h1>
-    </div>
-  );
+    <Box>
+      <h1>{t('someSampleText')}</h1>
+    </Box>
+  )
 }
 
-export default ProfileSuspenseHOC;
+export default Profile

@@ -1,23 +1,29 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { Header, Footer } from './components/shell'
-import { Profile, Form, Login, NotFound } from './components/pages'
-
-import { UserProvider } from './contexts/UserContext'
-import { Container, Box, makeStyles } from '@material-ui/core'
-
-import background from './local/background.png'
-
-import { ThemeProvider } from '@material-ui/core/styles'
+import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
 import theme from './config/theme'
+
+import { Header, Footer } from './components/shell'
+import {
+  Profile,
+  Form,
+  Login,
+  NotFound,
+  NotFreshy,
+  FormComplete,
+} from './components/pages'
+import { Loading } from './components/common'
+import { UserProvider } from './contexts/UserContext'
+import BackgroundImg from './local/background.png'
 
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
+    minWidth: '100vw',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: `url(${background})`,
+    backgroundImage: `url(${BackgroundImg})`,
   },
   PageContainer: {
     flex: 1,
@@ -30,23 +36,19 @@ function App() {
     <UserProvider>
       <ThemeProvider theme={theme}>
         <Router>
-          <Box className={classes.AppContainer}>
+          <Box className={classes.AppContainer} color="text.primary">
             <Header />
             <Container className={classes.PageContainer}>
-              <Switch>
-                <Route path="/login" exact>
-                  <Login />
-                </Route>
-                <Route path="/form" exact>
-                  <Form />
-                </Route>
-                <Route path="/" exact>
-                  <Profile />
-                </Route>
-                <Route>
-                  <NotFound />
-                </Route>
-              </Switch>
+              <React.Suspense fallback={<Loading />}>
+                <Switch>
+                  <Route path="/login" exact component={Login} />
+                  <Route path="/form" exact component={Form} />
+                  <Route path="/form/complete" exact component={FormComplete} />
+                  <Route path="/not104" exact component={NotFreshy} />
+                  <Route path="/" exact component={Profile} />
+                  <Route component={NotFound} />
+                </Switch>
+              </React.Suspense>
             </Container>
             <Footer />
           </Box>

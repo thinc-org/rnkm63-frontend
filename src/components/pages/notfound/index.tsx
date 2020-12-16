@@ -1,24 +1,45 @@
-import React from "react";
-import "./NotFound.css";
-
-import { useTranslation } from "react-i18next";
-import { Loading } from "../../common";
-
-function NotFoundSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <NotFound />
-    </React.Suspense>
-  );
-}
-
+import React from 'react'
+import { Box, makeStyles, Typography } from '@material-ui/core'
+import { useTranslation } from 'react-i18next'
+import theme from '../../../config/theme'
+import SadThincIcon from '../../shell/misc/SadThincIcon'
+import ToHomeButton from '../../shell/misc/ToHomeButton'
+const useStyles = makeStyles({
+  textHeader: {
+    color: 'white',
+    fontSize: '3.75em',
+    fontWeight: 700,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.75em',
+    },
+  },
+  text: {
+    color: 'white',
+    fontSize: '2.125em',
+    fontWeight: 500,
+    [theme.breakpoints.down('sm')]: {
+      color: 'white',
+      fontSize: '1em',
+    },
+  },
+})
 function NotFound() {
-  const { t } = useTranslation("notfound");
+  const { t } = useTranslation(['notfound'])
+  const classes = useStyles()
   return (
-    <div className="NotFound">
-      <h1>{t("title")}</h1>
-    </div>
-  );
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      marginTop="70px"
+      alignItems="center"
+    >
+      <SadThincIcon />
+      <Typography className={classes.textHeader}>Error 404</Typography>
+      <Typography className={classes.text}>{t('title')}</Typography>
+      <ToHomeButton />
+    </Box>
+  )
 }
 
-export default NotFoundSuspenseHOC;
+export default NotFound
