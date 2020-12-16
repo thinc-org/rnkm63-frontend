@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import { withStyles, WithStyles } from '@material-ui/core/styles'
-//import { Connect } from '../../../controllers/LoginController'
+import { Connect } from '../../../controllers/LoginController'
 
 interface Props extends WithStyles<typeof styles> {
   children?: React.ReactNode
@@ -34,6 +34,7 @@ function LoginButton(props: Props) {
       fullWidth={true}
       disabled={!agree}
       classes={classes}
+      onClick={Connect}
       style={{ textTransform: 'none' }}
     >
       {props.children}
