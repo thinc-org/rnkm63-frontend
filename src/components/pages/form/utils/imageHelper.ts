@@ -112,12 +112,18 @@ export async function getCroppedImg(
   return { urlFile: URL.createObjectURL(compressImg), blob: compressImg }
 }
 
-export function checkImageSize(img: string, checkFile: Boolean = false) {
-  const buffer = Buffer.from(img.substring(img.indexOf(',') + 1))
-
-  if (checkFile === true) {
-    return buffer.length <= limitFileKB * 1024
+export function checkImageSize(img: string | File, checkFile: Boolean = false) {
+  if (typeof img === 'string') {
+    const buffer = Buffer.from(img.substring(img.indexOf(',') + 1))
+    if (checkFile === true) {
+      return buffer.length <= limitFileKB * 1024
+    }
+    return buffer.length
+  } else {
+    const buffer = img.size
+    if (checkFile === true) {
+      return buffer <= limitFileKB * 1024
+    }
+    return buffer
   }
-
-  return buffer.length
 }

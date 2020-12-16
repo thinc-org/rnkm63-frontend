@@ -55,9 +55,7 @@ const FormTextFieldInner = React.memo(function FormTextFieldInner(
   const classes = formStyle()
   return (
     <FormControl className={classes.formControl}>
-      <FormLabel className={classes.label} focused={false}>
-        {t(name)}
-      </FormLabel>
+      <FormLabel className={classes.label}>{t(name)}</FormLabel>
       <TextField
         name={name}
         size="small"
@@ -91,7 +89,9 @@ const FormSelectFieldInner = React.memo(function FormSelectFieldInner(
   const classes = formStyle()
   return (
     <FormControl className={classes.formControl}>
-      <FormLabel className={classes.label}>{t(name)}</FormLabel>
+      <FormLabel className={classes.label} focused={false}>
+        {t(name)}
+      </FormLabel>
       <Select
         native
         className={classes.particular_select}

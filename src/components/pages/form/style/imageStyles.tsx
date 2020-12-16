@@ -1,6 +1,5 @@
-import { Theme } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core'
-import { createStyles } from '@material-ui/core'
+import { Theme, makeStyles, createStyles } from '@material-ui/core'
+import red from '@material-ui/core/colors/red'
 
 interface propsStyle {
   editStatus: Boolean
@@ -123,7 +122,7 @@ const imageStyle = makeStyles((theme: Theme) =>
     },
     dialog: {
       background: 'white',
-      borderRadius: '36px',
+      borderRadius: '0px',
     },
     dialogTitle: {
       display: 'flex',
@@ -136,6 +135,11 @@ const imageStyle = makeStyles((theme: Theme) =>
       alignItems: 'center',
       width: '70%',
       paddingTop: theme.spacing(2.5),
+    },
+    errorText: {
+      paddingTop: theme.spacing(2),
+      alignSelf: 'center',
+      color: red[500],
     },
   })
 )

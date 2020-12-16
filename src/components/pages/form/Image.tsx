@@ -12,7 +12,11 @@ import {
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
-import { getCroppedImg, getResizedImage } from './utils/imageHelper'
+import {
+  getCroppedImg,
+  getResizedImage,
+  checkImageSize,
+} from './utils/imageHelper'
 import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
@@ -49,17 +53,23 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
 
   const [zoom, setZoom] = useState(1)
   const [maxZoom, setMaxZoom] = useState(4)
+  const [fileSizeError, setFileSizeError] = useState(false)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const [finalImg, setFinalImg] = useState('')
   const [editStatus, setEditStatus] = useState(false)
 
-  const style = imageStyle({ editStatus })
+  const style = imageStyle({ editStatus: false })
 
   const onSelectFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files.length > 0) {
         const reader = new FileReader()
         const file = e.target.files[0]
+
+        if (!checkImageSize(file, true)) {
+          setFileSizeError(true)
+          return
+        }
 
         reader.addEventListener('load', () => setUpImg(reader.result as string))
 
@@ -75,6 +85,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         })
         setMaxZoom(Math.min(widthImg / 180, heightImg / 240))
         setZoom(1)
+        setFileSizeError(false)
       }
     },
     []
@@ -92,9 +103,13 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCropState(false)
     setFinalImg(img.urlFile)
     props.setImageBlob(img.blob)
+    setEditStatus(true)
   }, [upImg, croppedAreaPixels])
 
-  const closeDialog = useCallback(() => setCropState(false), [setCropState])
+  const closeDialog = useCallback(() => {
+    setCropState(false)
+    setFileSizeError(false)
+  }, [setCropState])
 
   const zoomOnChange = useCallback((_, newValue) => {
     setZoom(newValue as number)
@@ -198,6 +213,9 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
             </Box>
           </Box>
         )}
+        <Typography hidden={!fileSizeError} className={style.errorText}>
+          {t('fileSizeError')}
+        </Typography>
         <DialogContentText className={style.dialogText}>
           {t('cropDescription', {
             returnObjects: true,
@@ -242,7 +260,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         >
           {t('uploadTextButton')}
         </Button>
-        <Typography className={style.reasonText}>
+        <Typography hidden={editStatus} className={style.reasonText}>
           {t('uploadReason')}
         </Typography>
       </Box>
