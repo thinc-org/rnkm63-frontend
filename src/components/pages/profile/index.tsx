@@ -19,7 +19,7 @@ function Profile(props: any) {
       <div className={classes.value}>
         <div>
           <h2 className={classes.title}>{t('Name')}</h2>
-          <h3 className={classes.valueDetails}>สมชาย</h3>
+          <h3 className={classes.valueDetails}>นางสาว ก้อย นุ้ย</h3>
         </div>
         <div>
           <h2 className={classes.title}>{t('Faculty')}</h2>
@@ -32,7 +32,9 @@ function Profile(props: any) {
         <div>
           <h2 className={classes.title}>{t('Baan')}</h2>
           <h3 className={classes.valueDetails}>
-            {i18n.language.startsWith('en') ? 'Baan ' : 'บ้าน'}
+            {i18n.language.startsWith('en')
+              ? getBaan(20)['name-en']
+              : getBaan(20)['name-th']}
           </h3>
           <h4 className={classes.baanWarning}>
             {1 + 1 === 2 ? t('baanWarning') : ''}
