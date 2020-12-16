@@ -1,49 +1,38 @@
 import React from 'react'
-import { FormControlLabel } from '@material-ui/core'
-import { withStyles, WithStyles } from '@material-ui/core/styles'
-import Checkbox, { CheckboxProps } from '@material-ui/core/Checkbox'
+import { FormControlLabel, Typography, Checkbox } from '@material-ui/core'
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import indexStyle from './indexStyle'
 
-interface Props extends WithStyles<typeof styles> {
-  className?: string
+type Props = {
   update?: () => void
   text?: string
 }
 
-const styles = {
-  label: {
-    fontSize: 12,
-  },
-}
-
-const GreenCheckbox = withStyles({
-  root: {
-    color: '#27AE60',
-    '&$checked': {
-      color: '#27AE60',
-    },
-  },
-  checked: {},
-})((props: CheckboxProps) => <Checkbox color="default" {...props} />)
-
-function LoginCheckbox(props: Props) {
-  const { classes, update } = props
+function LoginCheckbox({ update, text }: Props) {
+  const style = indexStyle()
 
   return (
     <FormControlLabel
-      classes={classes}
+      className={style.checkboxForm}
       control={
-        <GreenCheckbox
+        <Checkbox
           onChange={update}
-          icon={<CheckBoxOutlineBlankIcon fontSize="large" />}
-          checkedIcon={<CheckBoxIcon fontSize="large" />}
+          icon={
+            <CheckBoxOutlineBlankIcon
+              className={style.checkbox}
+              fontSize="large"
+            />
+          }
+          checkedIcon={
+            <CheckBoxIcon className={style.checkbox} fontSize="large" />
+          }
           name="checkedI"
         />
       }
-      label={props.text}
+      label={<Typography className={style.agreement}>{text}</Typography>}
     />
   )
 }
 
-export default withStyles(styles)(LoginCheckbox)
+export default LoginCheckbox

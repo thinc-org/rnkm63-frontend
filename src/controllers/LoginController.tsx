@@ -1,28 +1,26 @@
 import axios from 'axios'
 
-/////
-const chulaSSOApi = 'http://localhost:8080'
-const backendEndpoint = 'http://localhost:5000'
-const service = 'http://localhost:3000'
-/////
-
-type Session = {}
 type SimpleCallback = () => void
-type ValidationCallback = (session: Session) => void
 
 function Connect() {
-  window.location.href = chulaSSOApi + '/login?service=' + service + '/login'
+  window.location.href =
+    process.env.REACT_APP_CHULASSOAPI +
+    '/login?service=' +
+    process.env.REACT_APP_SERVICE +
+    '/login'
 }
 
-function SendTicketToBack(ticket: string, callback: ValidationCallback) {
-  let data = {
-    ticket: ticket,
+function SendTicketToBack(ticket: string, callback: SimpleCallback) {
+  let config = {
+    params: {
+      ticket: ticket,
+    },
   }
 
   axios
-    .post(backendEndpoint + '/auth/verify', data)
+    .get(process.env.REACT_APP_API + '/auth/verify', config)
     .then((res) => {
-      callback(res.data)
+      callback()
     })
     .catch((err) => {
       throw new Error(err)
@@ -31,7 +29,7 @@ function SendTicketToBack(ticket: string, callback: ValidationCallback) {
 
 function LogOut(callback: SimpleCallback) {
   axios
-    .get(backendEndpoint + '/auth/logout')
+    .get(process.env.REACT_APP_API + '/auth/logout')
     .then((res) => {
       callback()
     })

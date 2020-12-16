@@ -1,6 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import { CookiesProvider } from 'react-cookie'
 
 import { Header, Footer } from './components/shell'
 import { Profile, Form, Login, NotFound } from './components/pages'
@@ -28,34 +27,32 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   return (
-    <CookiesProvider>
-      <UserProvider>
-        <ThemeProvider theme={theme}>
-          <Router>
-            <Box className={classes.AppContainer}>
-              <Header />
-              <Container className={classes.PageContainer}>
-                <Switch>
-                  <Route path="/login" exact>
-                    <Login />
-                  </Route>
-                  <Route path="/form" exact>
-                    <Form />
-                  </Route>
-                  <Route path="/" exact>
-                    <Profile />
-                  </Route>
-                  <Route>
-                    <NotFound />
-                  </Route>
-                </Switch>
-              </Container>
-              <Footer />
-            </Box>
-          </Router>
-        </ThemeProvider>
-      </UserProvider>
-    </CookiesProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Box className={classes.AppContainer}>
+            <Header />
+            <Container className={classes.PageContainer}>
+              <Switch>
+                <Route path="/login" exact>
+                  <Login />
+                </Route>
+                <Route path="/form" exact>
+                  <Form />
+                </Route>
+                <Route path="/" exact>
+                  <Profile />
+                </Route>
+                <Route>
+                  <NotFound />
+                </Route>
+              </Switch>
+            </Container>
+            <Footer />
+          </Box>
+        </Router>
+      </ThemeProvider>
+    </UserProvider>
   )
 }
 
