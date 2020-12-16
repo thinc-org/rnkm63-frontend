@@ -41,7 +41,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="down" ref={ref} {...props} />
 })
 
-function Image(props: React.PropsWithRef<any>) {
+const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const { t } = useTranslation('form')
 
   const [upImg, setUpImg] = useState('')
@@ -252,6 +252,6 @@ function Image(props: React.PropsWithRef<any>) {
       </Box>
     </Box>
   )
-}
+})
 
 export default Image
