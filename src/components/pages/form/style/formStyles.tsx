@@ -1,11 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core'
 
 const formStyle = makeStyles(
-<<<<<<< refs/remotes/origin/dev
   (theme: Theme) => ({
-=======
-  (theme) => ({
->>>>>>> Fix css ordering issue when build project and remove horizontal scrollbar
     overrides: {
       MuiInput: {
         formControl: {
@@ -48,17 +44,10 @@ const formStyle = makeStyles(
     label: {
       margin: theme.spacing(0.5),
       color: theme.palette.text.primary,
-<<<<<<< refs/remotes/origin/dev
-<<<<<<< refs/remotes/origin/dev
       heigth: '100%',
       [theme.breakpoints.down('xs')]: {
         fontSize: '0.825rem',
       },
-=======
->>>>>>> Fix css ordering issue when build project and remove horizontal scrollbar
-=======
-      heigth: '100%',
->>>>>>> Initial work on form page service
     },
     formControl: {
       marginTop: theme.spacing(0.5),
@@ -72,7 +61,6 @@ const formStyle = makeStyles(
       color: theme.palette.error.main,
       marginLeft: theme.spacing(0.5),
     },
-<<<<<<< refs/remotes/origin/dev
     requireNote: {
       color: theme.palette.warning.main,
       margin: theme.spacing(0.5),
@@ -81,8 +69,6 @@ const formStyle = makeStyles(
         fontSize: '0.825rem',
       },
     },
-=======
->>>>>>> Fix css ordering issue when build project and remove horizontal scrollbar
   }),
   { index: 1 }
 )

@@ -7,7 +7,6 @@ import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
-<<<<<<< refs/remotes/origin/dev
 import {
   registerSchema,
   formInitialValues,
@@ -31,39 +30,12 @@ function Form() {
   const [data, setData] = useState(formInitialValues)
   const [error500, setError500] = useState(false)
   const [errorRequestID, setErrorRequestID] = useState('')
-=======
-import { registerSchema, formInitialValues } from './utils/registerSchema'
-import axios from 'axios'
-const getUserData = function (): any {
-  axios
-    .get('https://dev.rubnongkaomai.com/api/user/mockUser?mode=1')
-    .then((res) => {
-      //ฝากเช็คเรื่องชื่อเล่นผิดด้วย
-      return res.data
-    })
-    .catch((err) => {
-      alert(err)
-      return null
-    })
-}
-const postUserData = function (data: any): boolean {
-  //fetch data here
-  return false
-}
-
-function Form() {
-  const [imageBlob, setImageBlob] = useState({})
-  const [confirmOpen, setConfirmOpen] = useState(false)
-  const userData = getUserData()
-  let data = {}
->>>>>>> Initial work on form page service
   const { t } = useTranslation('form')
   const style = indexStyle()
   const history = useHistory()
 
   const confirm = React.useCallback(
     (value) => {
-<<<<<<< refs/remotes/origin/dev
       if (userData!.isImgWrong && imageBlob === 0) {
         setImageRequired(true)
         return
@@ -91,20 +63,6 @@ function Form() {
       setConfirmOpen(false)
       setError500(true)
       return
-=======
-      if (userData.data.isImgWrong && !imageBlob) {
-        return
-      }
-      data = value
-      setConfirmOpen(true)
-    },
-    [setConfirmOpen]
-  )
-
-  const submit = React.useCallback(() => {
-    if (postUserData(data)) {
-      history.push('/form/complete')
->>>>>>> Initial work on form page service
     }
   }, [data, history])
 
@@ -187,18 +145,11 @@ function Form() {
           <Box className={style.content}>
             <Box className={style.image}>
               <Image
-<<<<<<< refs/remotes/origin/dev
                 setImageBlob={setImageBlob}
                 preImage={preImage}
                 imageRequired={imageRequired}
                 setImageRequired={setImageRequired}
                 isImgWrong={userData.isImgWrong || !userData.data}
-=======
-                imageBlob={imageBlob}
-                setImageBlob={setImageBlob}
-                imageURL={userData.imageURL}
-                isImgWrong={userData.isImgWrong}
->>>>>>> Initial work on form page service
               />
             </Box>
             <Box className={style.formInput}>
