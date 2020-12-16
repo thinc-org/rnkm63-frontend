@@ -112,16 +112,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setFinalImg(img.urlFile)
     setImageBlob(img.blob)
     setEditStatus(true)
-<<<<<<< refs/remotes/origin/dev
   }, [upImg, croppedAreaPixels, setImageBlob])
-=======
-    setImageRequired(false)
-<<<<<<< refs/remotes/origin/dev
-  }, [upImg, croppedAreaPixels])
->>>>>>> Make a GET request to api and modify data form
-=======
-  }, [upImg, croppedAreaPixels, setImageBlob, setImageRequired])
->>>>>>> Update form page style
 
   const closeDialog = useCallback(() => {
     setCropState(false)

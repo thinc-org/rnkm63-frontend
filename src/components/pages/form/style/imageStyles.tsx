@@ -31,6 +31,7 @@ const imageStyle = makeStyles(
         '&:hover': {
           backgroundColor: '#1D324D',
         },
+<<<<<<< refs/remotes/origin/dev
       },
       submitButton: {
         margin: theme.spacing(2),
@@ -117,6 +118,102 @@ const imageStyle = makeStyles(
         background: 'white',
         borderRadius: '0px',
       },
+=======
+      },
+      submitButton: {
+        margin: theme.spacing(2),
+        borderRadius: '40px',
+        alignSelf: 'center',
+        width: '50%',
+        backgroundColor: theme.palette.success.main,
+        '&:hover': {
+          background: theme.palette.success.main,
+        },
+        [theme.breakpoints.up('sm')]: {
+          width: '30%',
+        },
+      },
+      image: {
+        borderRadius: '30px',
+        borderStyle: 'solid',
+        borderColor: 'red',
+        borderWidth: (props: propsStyle) => {
+          if (!props.editStatus) {
+            return '0px'
+          }
+          return '2px'
+        },
+        background: '#C4C4C4',
+        marginBottom: theme.spacing(1),
+        width: '150px',
+        height: '200px',
+        [theme.breakpoints.up('sm')]: {
+          width: '207px',
+          height: '276px',
+          marginBottom: theme.spacing(2.5),
+        },
+      },
+      imageUploadButton: {
+        fontSize: '1rem',
+        width: '100%',
+        height: '100%',
+        color: 'white',
+        verticalAlign: 'center',
+        paddingTop: theme.spacing(0),
+        [theme.breakpoints.up('sm')]: {
+          fontSize: '2rem',
+        },
+      },
+      reasonText: {
+        fontWeight: 400,
+        fontSize: '0.875rem',
+        color: theme.palette.error.main,
+        marginTop: theme.spacing(1),
+        [theme.breakpoints.up('sm')]: {
+          fontSize: '0.75rem',
+          marginTop: theme.spacing(2),
+        },
+      },
+      closeButton: {
+        margin: 0,
+        padding: theme.spacing(2),
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.palette.grey[500],
+      },
+      cropContainer: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        alignSelf: 'center',
+        width: '70%',
+        height: '200px',
+        background: '#333',
+        [theme.breakpoints.up('sm')]: {
+          height: '300px',
+        },
+      },
+      dialogText: {
+        color: 'black',
+        width: '70%',
+        alignSelf: 'center',
+        fontWeight: 500,
+        fontSize: '1.125rem',
+        paddingTop: theme.spacing(2),
+        paddingLeft: theme.spacing(2),
+        paddingBottom: theme.spacing(1),
+        lineHeight: '32px',
+        [theme.breakpoints.down('xs')]: {
+          fontSize: '0.875rem',
+          lineHeight: '24px',
+        },
+      },
+      dialog: {
+        background: 'white',
+        borderRadius: '0px',
+      },
+>>>>>>> Fix css ordering issue when build project and remove horizontal scrollbar
       dialogTitle: {
         display: 'flex',
         alignSelf: 'center',
@@ -133,6 +230,7 @@ const imageStyle = makeStyles(
         paddingTop: theme.spacing(2),
         alignSelf: 'center',
         color: red[500],
+<<<<<<< refs/remotes/origin/dev
       },
       cropDescription: {
         fontSize: '1.125rem',
@@ -142,6 +240,8 @@ const imageStyle = makeStyles(
           fontSize: '0.875rem',
           lineHeight: '24px',
         },
+=======
+>>>>>>> Fix css ordering issue when build project and remove horizontal scrollbar
       },
     }),
   { index: 1 }
