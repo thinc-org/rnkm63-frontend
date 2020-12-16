@@ -24,14 +24,16 @@ function Login() {
   const style = indexStyle()
   const history = useHistory()
 
-  let query = new URLSearchParams(window.location.search)
-  let ticket = query.get('ticket')
-  if (ticket !== null) {
-    SendTicketToBack(ticket, () => {
-      console.log('work')
-      //history.push('/')
-    })
-  }
+  React.useEffect(() => {
+    let query = new URLSearchParams(window.location.search)
+    let ticket = query.get('ticket')
+    if (ticket !== null) {
+      SendTicketToBack(ticket, () => {
+        console.log('work')
+        //history.push('/')
+      })
+    }
+  })
 
   const toggleAgree = () => {
     setAgree(!agree)

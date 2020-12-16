@@ -22,7 +22,7 @@ const indexStyle = makeStyles((theme: any) => ({
     marginBottom: 11,
   },
   checkboxForm: {
-    marginBottom: 36,
+    marginBottom: 30,
   },
   agreement: {
     fontSize: 12,
