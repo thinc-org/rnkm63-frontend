@@ -33,6 +33,7 @@ const completeStyle = makeStyles((theme: any) => ({
   button: {
     margin: 'auto',
     display: 'block',
+    textAlign: 'center',
     width: '206px',
     borderRadius: '40px',
     fontWeight: 700,

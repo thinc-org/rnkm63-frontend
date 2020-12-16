@@ -12,11 +12,7 @@ import {
 } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
-import {
-  getCroppedImg,
-  getResizedImage,
-  checkImageSize,
-} from './utils/imageHelper'
+import { getCroppedImg, getResizedImage } from './utils/imageHelper'
 import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'

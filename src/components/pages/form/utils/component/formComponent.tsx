@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { formStyle } from '../style'
+import { formStyle } from '../../style'
 import { useField } from 'formik'
 
 interface IFormField {
@@ -55,7 +55,9 @@ const FormTextFieldInner = React.memo(function FormTextFieldInner(
   const classes = formStyle()
   return (
     <FormControl className={classes.formControl}>
-      <FormLabel className={classes.label}>{t(name)}</FormLabel>
+      <FormLabel className={classes.label} focused={false}>
+        {t(name)}
+      </FormLabel>
       <TextField
         name={name}
         size="small"

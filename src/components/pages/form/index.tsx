@@ -1,16 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
-import {
-  Button,
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from '@material-ui/core'
+import React, { useState } from 'react'
+import { Button, Box, Typography } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
+import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
@@ -103,52 +95,5 @@ function Form() {
     </Box>
   )
 }
-
-interface IFormDialog {
-  confirmOpen: boolean
-  closeDialog: () => void
-  submit: () => void
-}
-
-const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
-  const style = indexStyle()
-  const { t } = useTranslation('form')
-  const { confirmOpen, closeDialog, submit } = props
-  return (
-    <Dialog
-      open={confirmOpen}
-      onClose={closeDialog}
-      PaperProps={{
-        classes: { root: style.dialog },
-      }}
-      style={{ backdropFilter: 'blur(8px)' }}
-    >
-      <DialogTitle classes={{ root: style.dialogTitle }}>
-        <Typography className={style.dialogTitle}>
-          {t('confirmDialogTitle')}
-        </Typography>
-      </DialogTitle>
-      <DialogContent>
-        <Typography className={style.dialogContent}>
-          {t('confirmDescription')}
-        </Typography>
-      </DialogContent>
-      <DialogActions classes={{ root: style.dialogAction }}>
-        <Button
-          onClick={closeDialog}
-          classes={{ root: `${style.button} ${style.cancel}` }}
-        >
-          {t('cancel')}
-        </Button>
-        <Button
-          onClick={submit}
-          classes={{ root: `${style.button} ${style.confirm}` }}
-        >
-          {t('confirm')}
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-})
 
 export default Form

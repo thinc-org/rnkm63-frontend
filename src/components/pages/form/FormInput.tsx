@@ -4,10 +4,10 @@ import theme from '../../../config/theme'
 import {
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
-} from './utils/optionConstant'
+} from './utils/registerSchema'
 import { formStyle } from './style'
 import { Grid, Typography } from '@material-ui/core'
-import { FormSelectField, FormTextField } from './utils/formComponent'
+import { FormSelectField, FormTextField } from './utils/component/formComponent'
 import { useTranslation } from 'react-i18next'
 
 function FormInput(props: any) {
