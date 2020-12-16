@@ -2,7 +2,7 @@ import * as Yup from 'yup'
 
 const registerSchema = Yup.object().shape({
   realname: Yup.string().required('required'),
-  prefix: Yup.string().required('required'),
+  prefixname: Yup.string().required('required'),
   surname: Yup.string().required('required'),
   nickname: Yup.string()
     .required('required')
@@ -12,7 +12,7 @@ const registerSchema = Yup.object().shape({
   facebook: Yup.string().required('required'),
   lineID: Yup.string().required('required'),
   emergencyTel: Yup.string().required('required'),
-  emergencyConnection: Yup.string().required('required'),
+  emergencyTelRelationship: Yup.string().required('required'),
   disease: Yup.string().required('required'),
   allergyMedicine: Yup.string().required('required'),
   usedMedicine: Yup.string().required('required'),
@@ -21,21 +21,21 @@ const registerSchema = Yup.object().shape({
 })
 
 const FORM_PREFIX_FIELD_OPTIONS = [
-  { value: 'Mr.', text: 'mr' },
-  { value: 'Ms.', text: 'ms' },
+  { value: 'นาย', text: 'mr' },
+  { value: 'นางสาว', text: 'ms' },
 ]
 
 const FORM_RELIGION_FIELD_OPTIONS = [
   { value: 'buddhism', text: 'bd' },
   { value: 'christianity', text: 'cs' },
   { value: 'islam', text: 'il' },
-  { value: 'hiduism', text: 'hs' },
+  { value: 'hinduism', text: 'hs' },
   { value: 'sikhism', text: 'sk' },
   { value: 'other', text: 'ot' },
-  { value: 'rns', text: 'rns' },
+  { value: 'RNS', text: 'rns' },
 ]
 const formInitialValues = {
-  prefix: '',
+  prefixname: '',
   realname: '',
   surname: '',
   nickname: '',
@@ -44,7 +44,7 @@ const formInitialValues = {
   facebook: '',
   lineID: '',
   emergencyTel: '',
-  emergencyConnection: '',
+  emergencyTelRelationship: '',
   disease: '',
   allergyMedicine: '',
   usedMedicine: '',

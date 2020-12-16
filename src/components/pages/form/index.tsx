@@ -7,6 +7,7 @@ import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
+<<<<<<< refs/remotes/origin/dev
 import {
   registerSchema,
   formInitialValues,
@@ -30,20 +31,47 @@ function Form() {
   const [data, setData] = useState(formInitialValues)
   const [error500, setError500] = useState(false)
   const [errorRequestID, setErrorRequestID] = useState('')
+=======
+import { registerSchema, formInitialValues } from './utils/registerSchema'
+import axios from 'axios'
+
+const postUserData = function (data: any): boolean {
+  //fetch data here
+  console.log(data)
+  return false
+}
+
+function Form() {
+  const [imageBlob, setImageBlob] = useState(0)
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [userData, setUserData] = useState(null as any)
+  const [preImage, setPreImage] = useState('')
+  const [imageRequired, setImageRequired] = useState(false)
+  const [data, setData] = useState({})
+
+>>>>>>> Make a GET request to api and modify data form
   const { t } = useTranslation('form')
   const style = indexStyle()
   const history = useHistory()
 
   const confirm = React.useCallback(
     (value) => {
+<<<<<<< refs/remotes/origin/dev
       if (userData!.isImgWrong && imageBlob === 0) {
+=======
+      if (!(userData.isImgWrong && imageBlob !== 0)) {
+>>>>>>> Make a GET request to api and modify data form
         setImageRequired(true)
         return
       }
       setData(value)
       setConfirmOpen(true)
     },
+<<<<<<< refs/remotes/origin/dev
     [setConfirmOpen, imageBlob, userData]
+=======
+    [setConfirmOpen, imageBlob]
+>>>>>>> Make a GET request to api and modify data form
   )
 
   const submit = React.useCallback(async () => {
@@ -102,6 +130,36 @@ function Form() {
 
   if (userData!.isConfirm) {
     history.push('/')
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const url = ''
+      const res = await axios.get(url)
+
+      setUserData(res.data)
+      if (!res.data.data) {
+        return
+      }
+      const imgURL = res.data.data.imgURL
+      const fetchImg = await axios
+        .get(imgURL, {
+          responseType: 'arraybuffer',
+        })
+        .then((response) =>
+          Buffer.from(response.data, 'binary').toString('base64')
+        )
+      setPreImage('data:image/jpeg;base64,' + fetchImg)
+    }
+    fetchData()
+  }, [])
+
+  if (!userData) {
+    return userData
+  }
+
+  if (userData.isConfirm) {
+    history.push('/profile')
   }
 
   return (

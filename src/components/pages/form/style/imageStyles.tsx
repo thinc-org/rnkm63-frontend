@@ -53,7 +53,7 @@ const imageStyle = makeStyles(
           if (!props.editStatus) {
             return '0px'
           }
-          return '2px'
+          return '5px'
         },
         background: '#C4C4C4',
         marginBottom: theme.spacing(1),
@@ -66,7 +66,7 @@ const imageStyle = makeStyles(
         },
       },
       imageUploadButton: {
-        fontSize: '1rem',
+        fontSize: '0.75rem',
         width: '100%',
         height: '100%',
         color: 'white',
@@ -107,19 +107,11 @@ const imageStyle = makeStyles(
         },
       },
       dialogText: {
-        color: 'black',
         width: '70%',
         alignSelf: 'center',
-        fontWeight: 500,
-        fontSize: '1.125rem',
         paddingTop: theme.spacing(2),
         paddingLeft: theme.spacing(2),
         paddingBottom: theme.spacing(1),
-        lineHeight: '32px',
-        [theme.breakpoints.down('xs')]: {
-          fontSize: '0.875rem',
-          lineHeight: '24px',
-        },
       },
       dialog: {
         background: 'white',
@@ -141,6 +133,15 @@ const imageStyle = makeStyles(
         paddingTop: theme.spacing(2),
         alignSelf: 'center',
         color: red[500],
+      },
+      cropDescription: {
+        fontSize: '1.125rem',
+        fontWeight: 500,
+        paddingBottom: theme.spacing(0.5),
+        [theme.breakpoints.down('xs')]: {
+          fontSize: '0.875rem',
+          lineHeight: '24px',
+        },
       },
     }),
   { index: 1 }

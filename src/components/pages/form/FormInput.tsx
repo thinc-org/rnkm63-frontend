@@ -29,7 +29,7 @@ function FormInput(props: any) {
         {theme.breakpoints.up('sm') ? (
           <Grid item sm={2}>
             <FormSelectField
-              name="prefix"
+              name="prefixname"
               options={FORM_PREFIX_FIELD_OPTIONS}
             />
           </Grid>
@@ -62,6 +62,7 @@ function FormInput(props: any) {
           {t('nicknameNote')}
           <Link
             href="https://www.facebook.com/chulafreshmen"
+            target="_blank"
             style={{
               color: '#97c0f3',
             }}
@@ -85,7 +86,7 @@ function FormInput(props: any) {
           <FormTextField name="emergencyTel" />
         </Grid>
         <Grid item xs={6}>
-          <FormTextField name="emergencyConnection" />
+          <FormTextField name="emergencyTelRelationship" />
         </Grid>
       </Grid>
       <Grid container className={classes.inside}>

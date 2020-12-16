@@ -1,7 +1,7 @@
 import { compressAccurately, urltoBlob } from 'image-conversion'
 import Resizer from 'react-image-file-resizer'
 
-const createImage = (url: any) =>
+export const createImage = (url: any) =>
   new Promise((resolve, reject) => {
     const image = new Image()
     image.addEventListener('load', () => resolve(image))
