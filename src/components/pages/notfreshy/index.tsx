@@ -10,21 +10,14 @@ const useStyles = makeStyles({
     fontSize: '3.75em',
     fontWeight: 700,
     [theme.breakpoints.down('sm')]: {
-      fontSize: '1.75em',
-    },
-  },
-  text: {
-    color: 'white',
-    fontSize: '2.125em',
-    fontWeight: 500,
-    [theme.breakpoints.down('sm')]: {
-      color: 'white',
-      fontSize: '1em',
+      textHeader: {
+        fontSize: '1.375em',
+      },
     },
   },
 })
-function NotFound() {
-  const { t } = useTranslation(['notfound'])
+function NotFreshy() {
+  const { t } = useTranslation(['not104'])
   const classes = useStyles()
   return (
     <Box
@@ -35,11 +28,10 @@ function NotFound() {
       alignItems="center"
     >
       <SadThincIcon />
-      <Typography className={classes.textHeader}>Error 404</Typography>
-      <Typography className={classes.text}>{t('title')}</Typography>
+      <Typography className={classes.textHeader}>{t('title')}</Typography>
       <ToHomeButton />
     </Box>
   )
 }
 
-export default NotFound
+export default NotFreshy

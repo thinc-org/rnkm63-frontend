@@ -10,6 +10,7 @@ import {
   Form,
   Login,
   NotFound,
+  NotFreshy,
   FormComplete,
 } from './components/pages'
 import { Loading } from './components/common'
@@ -19,6 +20,7 @@ import BackgroundImg from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
+    minWidth: '100vw',
     display: 'flex',
     flexDirection: 'column',
     backgroundImage: `url(${BackgroundImg})`,
@@ -42,6 +44,7 @@ function App() {
                   <Route path="/login" exact component={Login} />
                   <Route path="/form" exact component={Form} />
                   <Route path="/form/complete" exact component={FormComplete} />
+                  <Route path="/not104" exact component={NotFreshy} />
                   <Route path="/" exact component={Profile} />
                   <Route component={NotFound} />
                 </Switch>

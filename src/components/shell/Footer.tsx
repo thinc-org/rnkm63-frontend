@@ -1,8 +1,9 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import SGCUIcon from '../../local/sgcuIcon.png'
 import THINCIcon from '../../local/thincIcon.png'
-
+import { withSuspense } from '../hoc'
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -28,19 +29,18 @@ const useStyles = makeStyles({
   footerFont: {
     color: '#8D8D8D',
     textAlign: 'center',
-    fontSize: '10px',
-    fontFamily: 'Kanit',
+    fontSize: '0.625em',
   },
-  footerFontLastLine: {
+  footerFont2: {
     color: '#8D8D8D',
     textAlign: 'center',
-    fontSize: '10px',
-    fontFamily: 'Kanit',
-    marginBottom: '9px',
+    fontSize: '0.625em',
+    marginBottom: '12px',
   },
 })
 function Footer() {
   const classes = useStyles()
+  const { t } = useTranslation('footer')
   return (
     <Box className={classes.footer}>
       <Box display="flex" flexDirection="column" marginTop="15px">
@@ -54,15 +54,14 @@ function Footer() {
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
-          งานรับน้องก้าวใหม่ ปีการศึกษา 2563
-          องค์การบริหารสโมสรนิสิตจุฬาลงกรณ์มหาวิทยาลัย
+          {t('firstline')}
         </Typography>
-        <Typography variant="body1" className={classes.footerFontLastLine}>
-          สงวนลิขสิทธิ์ © 2563 Thinc.
+        <Typography variant="body1" className={classes.footerFont2}>
+          {t('secondline')}
         </Typography>
       </Box>
     </Box>
   )
 }
 
-export default Footer
+export default withSuspense(Footer)
