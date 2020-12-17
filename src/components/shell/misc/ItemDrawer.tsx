@@ -8,7 +8,6 @@ import {
   makeStyles,
 } from '@material-ui/core'
 
-// import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 
