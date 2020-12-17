@@ -20,7 +20,8 @@ interface IFormData {
   imgURL?: string
 }
 
-interface IFormDataRequest extends IFormData {
+interface IFormDataRequest {
+  data: IFormData | null
   isNameWrong: boolean
   isImgWrong: boolean
   reason: string | null

@@ -103,31 +103,23 @@ function Form() {
 
   useEffect(() => {
     async function fetchData() {
-      const url = `${API_URL}/user/profile`
-      const res = await axios.get(url, { withCredentials: true })
+      const res = await getProfile()
 
       setUserData(res.data)
       if (!res.data.data) {
         return
       }
-      const imgURL = res.data.data.imgURL
-      const fetchImg = await axios
-        .get(imgURL, {
-          responseType: 'arraybuffer',
-        })
-        .then((response) =>
-          Buffer.from(response.data, 'binary').toString('base64')
-        )
-      setPreImage('data:image/jpeg;base64,' + fetchImg)
+
+      setPreImage(res.data.data.imgURL)
     }
     fetchData()
   }, [])
 
   if (!userData) {
-    return userData
+    return null
   }
 
-  if (userData.isConfirm) {
+  if (userData!.isConfirm) {
     history.push('/')
   }
 
