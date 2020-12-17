@@ -9,11 +9,13 @@ import { useTranslation } from 'react-i18next'
 
 const fetchUserData = async () => {
   return axios
-    .get('')
+    .get('https://dev.rubnongkaomai.com/api/user/mockUser?mode=5')
     .then(({ data }) => {
+      console.log(data)
       return data
     })
     .catch((err) => {
+      console.log(err)
       return err
     })
 }
@@ -21,33 +23,33 @@ const fetchUserData = async () => {
 function Profile(props: any) {
   const defaultUser = {
     data: {
-      nickname: 'ก้อย สุธิดา',
-      picURL: '',
+      nickname: '-',
+      imgURL: '',
     },
     faculty: {
-      name_en: 'Faculty of engineering',
-      name_th: 'คณะวิศวกรรมศาสตร์',
+      name_en: '-',
+      name_th: '-',
     },
-    currentBaanId: 5,
-    isTransfer: false,
+    currentBaan: 0,
+    isTransfer: true,
   }
 
   const [userInfo, setUserInfo] = useState(defaultUser)
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
 
-  /*useEffect(() => {
+  useEffect(() => {
     fetchUserData().then((userData) => {
-      setUserInfo(userData);
-    });
-  })*/
+      setUserInfo(userData)
+    })
+  }, [])
 
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
         <img
           className={classes.imageSize}
-          src={Pics}
+          src={userInfo.data.imgURL}
           alt={userInfo.data.nickname}
         />
       </Box>
@@ -65,9 +67,7 @@ function Profile(props: any) {
             {t('Faculty')}
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
-            {i18n.language.startsWith('en')
-              ? userInfo.faculty.name_en
-              : userInfo.faculty.name_th}
+            {i18n.language.startsWith('en') ? '-' : '-'}
           </Typography>
         </Box>
         <Box>
@@ -76,8 +76,8 @@ function Profile(props: any) {
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
-              ? getBaan(userInfo.currentBaanId)['name-en']
-              : getBaan(userInfo.currentBaanId)['name-th']}
+              ? getBaan(userInfo['currentBaan'])['name-en'] || '-'
+              : getBaan(userInfo['currentBaan'])['name-th'] || '-'}
           </Typography>
           <Typography variant="h4" className={classes.baanWarning}>
             {userInfo.isTransfer ? t('baanWarning') : ''}
