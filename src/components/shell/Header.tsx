@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   [theme.breakpoints.up('md')]: {
     thincLogo: {
       position: 'relative',
-      top: '-1rem',
+      top: '-1.4rem',
     },
   },
 })
