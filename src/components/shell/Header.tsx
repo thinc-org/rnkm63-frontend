@@ -37,7 +37,7 @@ function Header() {
           <Hidden smDown>
             <LogOutButton />
           </Hidden>
-          <Hidden smUp>
+          <Hidden mdUp>
             <DrawerInside />
           </Hidden>
         </Box>
