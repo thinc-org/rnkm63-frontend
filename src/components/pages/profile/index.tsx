@@ -5,7 +5,6 @@ import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
-import { error } from 'console'
 
 const fetchUserData = async () => {
   return axios
