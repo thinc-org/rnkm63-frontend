@@ -38,6 +38,12 @@ const useStyles = makeStyles({
   logOut: {
     color: red[400],
   },
+  iconPos: {
+    fontSize: '2rem',
+    margin: '0 1rem 1rem 1rem',
+    position: 'relative',
+    top: '1.6rem',
+  },
 })
 
 export default function DrawerInside() {
@@ -87,7 +93,7 @@ export default function DrawerInside() {
 
   return (
     <React.Fragment>
-      <MenuIcon onClick={toggleDrawer} />
+      <MenuIcon className={classes.iconPos} onClick={toggleDrawer} />
       <Drawer
         classes={{ paper: classes.bgColor }}
         anchor={'right'}
