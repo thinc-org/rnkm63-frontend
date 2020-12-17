@@ -40,27 +40,17 @@ const useStyles = makeStyles({
   },
 })
 
-type Anchor = 'control'
-
 export default function DrawerInside() {
   const classes = useStyles()
   const { t } = useTranslation(['drawer'])
-  const [state, setState] = React.useState({
-    control: false,
-  })
+  const [state, setState] = React.useState(false)
 
-  const toggleDrawer = (anchor: Anchor, open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    setState({ ...state, [anchor]: open })
-  }
+  const toggleDrawer = React.useCallback(() => {
+    setState((state) => !state)
+  }, [])
 
-  const list = (anchor: Anchor) => (
-    <div
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
+  const list = () => (
+    <div role="presentation" onClick={toggleDrawer}>
       <List>
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.HomeSchIcon}>
@@ -97,14 +87,14 @@ export default function DrawerInside() {
 
   return (
     <div>
-      <MenuIcon onClick={toggleDrawer('control', true)} />
+      <MenuIcon onClick={toggleDrawer} />
       <Drawer
         classes={{ paper: classes.bgColor }}
         anchor={'right'}
-        open={state['control']}
-        onClose={toggleDrawer('control', false)}
+        open={state}
+        onClose={toggleDrawer}
       >
-        {list('control')}
+        {list()}
       </Drawer>
     </div>
   )
