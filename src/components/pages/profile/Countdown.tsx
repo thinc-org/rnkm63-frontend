@@ -7,7 +7,7 @@ export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
-  const endTime = new Date('2020-12-20').valueOf()
+  const endTime = new Date('2020-12-18').valueOf()
   const time = new Date().valueOf() + 7 * 1000 * 60 * 60
   const timeLeft = (endTime - time) / 1000
   const { secs = timeLeft } = props

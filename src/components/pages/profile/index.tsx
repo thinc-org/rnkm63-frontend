@@ -5,12 +5,15 @@ import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
+import { API_URL } from '../../../utils'
 
 const fetchUserData = async () => {
   return axios
-    .get('https://dev.rubnongkaomai.com/api/user/mockUser?mode=5')
+    .get(API_URL + '/user/profile', {
+      headers: { 'No-CSRF': true },
+      withCredentials: true,
+    })
     .then(({ data }) => {
-      console.log(JSON.stringify(data))
       return data
     })
     .catch((err) => {
