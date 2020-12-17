@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
+import { API_URL } from '../utils'
 
 type SimpleCallback = () => void
 
@@ -11,15 +12,17 @@ function Connect() {
 }
 
 function SendTicketToBack(ticket: string, callback: SimpleCallback) {
-  let config = {
+  let config: AxiosRequestConfig = {
     params: {
       ticket: ticket,
     },
+    withCredentials: true,
   }
 
   axios
-    .get(process.env.REACT_APP_API + '/auth/verify', config)
+    .get(API_URL + '/auth/verify', config)
     .then((res) => {
+      console.log(res)
       callback()
     })
     .catch((err) => {
@@ -29,7 +32,7 @@ function SendTicketToBack(ticket: string, callback: SimpleCallback) {
 
 function LogOut(callback: SimpleCallback) {
   axios
-    .get(process.env.REACT_APP_API + '/auth/logout')
+    .get(API_URL + '/auth/logout')
     .then((res) => {
       callback()
     })
