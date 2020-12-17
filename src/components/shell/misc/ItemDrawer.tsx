@@ -8,6 +8,7 @@ import {
   makeStyles,
 } from '@material-ui/core'
 
+import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 
@@ -37,7 +38,7 @@ const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation(['drawer'])
   return (
-    <React.Fragment>
+    <div>
       <List>
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.HomeSchIcon}>
@@ -46,7 +47,7 @@ const ItemDrawer = () => {
           <ListItemText>{t('Home')}</ListItemText>
         </ListItem>
 
-        {/* <ListItem className={classes.eachList} component={Link} to={'/'}>}
+        <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.HomeSchIcon}>
             <EventNoteRoundedIcon />
           </ListItemIcon>
@@ -60,7 +61,7 @@ const ItemDrawer = () => {
           <ListItemText className={classes.selectBann}>
             {t('Bann')}
           </ListItemText>
-        </ListItem>*/}
+        </ListItem>
 
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.logOut}>
@@ -69,7 +70,7 @@ const ItemDrawer = () => {
           <ListItemText className={classes.logOut}>{t('Logout')}</ListItemText>
         </ListItem>
       </List>
-    </React.Fragment>
+    </div>
   )
 }
 
