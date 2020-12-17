@@ -86,7 +86,7 @@ export default function DrawerInside() {
   )
 
   return (
-    <div>
+    <React.Fragment>
       <MenuIcon onClick={toggleDrawer} />
       <Drawer
         classes={{ paper: classes.bgColor }}
@@ -96,6 +96,6 @@ export default function DrawerInside() {
       >
         {list()}
       </Drawer>
-    </div>
+    </React.Fragment>
   )
 }
