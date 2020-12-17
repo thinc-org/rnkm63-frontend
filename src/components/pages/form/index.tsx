@@ -103,7 +103,7 @@ function Form() {
 
   useEffect(() => {
     async function fetchData() {
-      const url = ''
+      const url = 'https://dev.rubnongkaomai.com/api/user/mockUser?mode=1'
       const res = await axios.get(url)
 
       setUserData(res.data)
