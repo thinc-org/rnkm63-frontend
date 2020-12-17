@@ -5,8 +5,8 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn --frozen-lockfile
 COPY . .
-ARG STAGE
-RUN mv .env.$STAGE .env
+ARG stage
+RUN mv .env.$stage .env
 RUN yarn build
 
 FROM nginx:1.19.5-alpine AS nginx

@@ -2,7 +2,7 @@ steps:
   # build the container image
   - name: 'gcr.io/kaniko-project/executor:latest'
     args:
-      - --build-arg=stage=development
+      - --build-arg=stage=production
       - --destination=gcr.io/rnkm63/frontend:$BRANCH_NAME
       - --cache=true
       - --cache-ttl=336h
