@@ -7,6 +7,7 @@ RUN yarn --frozen-lockfile
 COPY . .
 ARG stage
 RUN mv .env.$stage .env
+RUN rm .env.*
 RUN CI=true yarn build
 
 FROM nginx:1.19.5-alpine AS nginx
