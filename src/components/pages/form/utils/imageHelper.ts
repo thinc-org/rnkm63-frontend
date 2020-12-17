@@ -12,7 +12,7 @@ export const createImage = (url: string): Promise<HTMLImageElement> =>
 
 const limitFileKB = 300
 
-function getRadianAngle(degreeValue: any) {
+function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180
 }
 

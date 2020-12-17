@@ -10,7 +10,7 @@ import { Grid, Typography } from '@material-ui/core'
 import { FormSelectField, FormTextField } from './utils/component/formComponent'
 import { useTranslation } from 'react-i18next'
 
-function FormInput(props: any) {
+function FormInput() {
   const classes = formStyle()
   const { t } = useTranslation('form')
 

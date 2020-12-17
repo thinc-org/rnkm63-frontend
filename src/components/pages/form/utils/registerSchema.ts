@@ -1,5 +1,36 @@
 import * as Yup from 'yup'
 
+interface IFormData {
+  prefixname: string
+  realname: string
+  surname: string
+  nickname: string
+  religion: string
+  disease: string
+  allergy?: string
+  allergyMedicine: string
+  usedMedicine: string
+  foodRestriction: string
+  disability: string
+  tel: string
+  emergencyTel: string
+  emergencyTelRelationship: string
+  facebook: string
+  lineID: string
+  imgURL?: string
+}
+
+interface IFormDataRequest extends IFormData {
+  isNameWrong: boolean
+  isImgWrong: boolean
+  reason: string | null
+  isQualified: boolean
+  isConfirm: boolean
+  isTransfer: boolean
+  currentBaan: number
+  preferBaan: number | null
+}
+
 const registerSchema = Yup.object().shape({
   realname: Yup.string().required('required'),
   prefixname: Yup.string().required('required'),
@@ -59,3 +90,5 @@ export {
   FORM_RELIGION_FIELD_OPTIONS,
   formInitialValues,
 }
+
+export type { IFormData, IFormDataRequest }
