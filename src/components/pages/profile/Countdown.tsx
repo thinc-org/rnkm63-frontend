@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { countdownStyles } from './styles/countdownStyles'
+import { Box, Typography } from '@material-ui/core'
 
 export const Countdown = (props: any) => {
   const classes = countdownStyles()
@@ -52,15 +53,17 @@ export const Countdown = (props: any) => {
   })
 
   return (
-    <div>
-      <h3 className={classes.countdownDetail}>{t('countdownDetail')}</h3>
-      <h1 className={classes.countdownTimer}>
+    <Box>
+      <Typography variant="h3" className={classes.countdownDetail}>
+        {t('countdownDetail')}
+      </Typography>
+      <Typography variant="h1" className={classes.countdownTimer}>
         {days} {t('Days')} &nbsp;
         {hours} {t('Hours')} &nbsp;
         {minutes} {t('Minutes')} &nbsp;
         {seconds} {t('Seconds')}
-      </h1>
-    </div>
+      </Typography>
+    </Box>
   )
 }
 

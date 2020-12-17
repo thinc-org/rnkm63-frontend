@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import Countdown from './Countdown'
 import Pics from './pics.png'
+import theme from '../../../config/theme'
+import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
@@ -13,34 +15,42 @@ function Profile(props: any) {
 
   return (
     <body className={classes.profile}>
-      <div className={classes.image}>
+      <Box className={classes.image}>
         <img className={classes.imageSize} src={Pics} alt="user profile pic" />
-      </div>
-      <div className={classes.value}>
-        <div>
-          <h2 className={classes.title}>{t('Name')}</h2>
-          <h3 className={classes.valueDetails}>นางสาว ก้อย นุ้ย</h3>
-        </div>
-        <div>
-          <h2 className={classes.title}>{t('Faculty')}</h2>
-          <h3 className={classes.valueDetails}>
+      </Box>
+      <Box className={classes.value}>
+        <Box>
+          <Typography variant="h2" className={classes.title}>
+            {t('Name')}
+          </Typography>
+          <Typography variant="h3" className={classes.valueDetails}>
+            นางสาว ก้อย นุ้ย
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="h2" className={classes.title}>
+            {t('Faculty')}
+          </Typography>
+          <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
               ? 'Faculty of engineering'
               : 'คณะวิศวกรรมศาสตร์'}
-          </h3>
-        </div>
-        <div>
-          <h2 className={classes.title}>{t('Baan')}</h2>
-          <h3 className={classes.valueDetails}>
+          </Typography>
+        </Box>
+        <Box>
+          <Typography variant="h2" className={classes.title}>
+            {t('Baan')}
+          </Typography>
+          <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
               ? getBaan(20)['name-en']
               : getBaan(20)['name-th']}
-          </h3>
-          <h4 className={classes.baanWarning}>
+          </Typography>
+          <Typography variant="h4" className={classes.baanWarning}>
             {1 + 1 === 2 ? t('baanWarning') : ''}
-          </h4>
-        </div>
-      </div>
+          </Typography>
+        </Box>
+      </Box>
       <Countdown />
     </body>
   )

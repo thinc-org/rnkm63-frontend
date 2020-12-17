@@ -1,17 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const profileStyles = makeStyles({
+export const profileStyles = makeStyles((theme: any) => ({
   profile: {
     textAlign: 'center',
     marginBottom: '75px',
-    fontFamily: 'Kanit',
   },
   image: {
     display: 'inline-block',
     marginLeft: '8%',
     marginRight: '8%',
-    marginBottom: '32px',
-    marginTop: '50px',
+    marginBottom: '20px',
     alignItems: 'center',
     borderRadius: '24px',
   },
@@ -20,7 +18,6 @@ export const profileStyles = makeStyles({
     display: 'inline-block',
     width: '471px',
     verticalAlign: 'top',
-    marginTop: '50px',
   },
   title: {
     color: '#54D166',
@@ -57,10 +54,7 @@ export const profileStyles = makeStyles({
     value: {
       width: '90%',
     },
-    image: {
-      marginTop: '18px',
-      marginBottom: '-14px',
-    },
+    image: {},
     title: {
       fontSize: '22px',
       lineHeight: '17px',
@@ -101,4 +95,4 @@ export const profileStyles = makeStyles({
       whiteSpace: 'pre-line',
     },
   },
-})
+}))

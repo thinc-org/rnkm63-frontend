@@ -1,41 +1,37 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const countdownStyles = makeStyles({
+export const countdownStyles = makeStyles((theme: any) => ({
   countdownDetail: {
-    fontSize: '34px',
-    marginTop: '77px',
+    fontSize: '2rem',
+    fontWeight: 300,
+    marginTop: '6%',
     marginBottom: '25px',
     lineHeight: '22px',
-  },
-  countdownTimer: {
-    fontSize: '48px',
-    margin: '0px 0px',
-    lineHeight: '40px',
-    fontWeight: 'bold',
-  },
-  '@media screen and (max-width: 720px)': {
-    countdownDetail: {
-      fontSize: '22px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.5rem',
       lineHeight: '28px',
       marginTop: '53px',
       marginBottom: '9px',
     },
-    countdownTimer: {
-      fontSize: '30px',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1rem',
       lineHeight: '28px',
-      marginTop: '20px',
+      marginTop: '20%',
     },
   },
-  '@media screen and (max-width: 320px)': {
-    countdownDetail: {
-      fontSize: '14px',
+  countdownTimer: {
+    fontSize: '3rem',
+    fontWeight: 500,
+    margin: '0px 0px',
+    lineHeight: '40px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.75rem',
       lineHeight: '28px',
-      marginTop: '35px',
-      marginBottom: '9px',
+      marginTop: '5%',
     },
-    countdownTimer: {
-      fontSize: '18px',
-      lineHeight: '28px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '22px',
     },
   },
-})
+}))
