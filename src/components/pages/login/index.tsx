@@ -34,7 +34,7 @@ function Login() {
         //history.push('/')
       })
     }
-  })
+  }, [])
 
   const toggleAgree = () => {
     setAgree(!agree)

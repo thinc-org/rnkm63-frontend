@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core'
 
-const indexStyle = makeStyles((theme: any) => ({
+const indexStyle = makeStyles((theme: Theme) => ({
   login: {
     maxWidth: 375,
     marginLeft: 'auto',
