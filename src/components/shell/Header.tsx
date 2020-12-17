@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     marginTop: theme.spacing(3.75),
   },
   thincLogo: {
-    marginBottom: '-3rem',
+    marginBottom: '-4rem',
   },
   [theme.breakpoints.down('sm')]: {
     header: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   [theme.breakpoints.up('md')]: {
     thincLogo: {
       position: 'relative',
-      top: '-1.3',
+      top: '-1rem',
     },
   },
 })
