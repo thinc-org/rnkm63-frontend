@@ -47,7 +47,7 @@ function Form() {
       setUserData(value)
       setConfirmOpen(true)
     },
-    [setConfirmOpen, userData, setUserData]
+    [setConfirmOpen, setUserData]
   )
 
   const submit = React.useCallback(() => {
