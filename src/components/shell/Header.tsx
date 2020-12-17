@@ -25,6 +25,12 @@ const useStyles = makeStyles({
       width: 'auto',
     },
   },
+  [theme.breakpoints.up('md')]: {
+    thincLogo: {
+      position: 'relative',
+      top: '-1.4rem',
+    },
+  },
 })
 function Header() {
   const classes = useStyles()
