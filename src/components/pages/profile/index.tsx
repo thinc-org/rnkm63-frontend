@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Countdown from './Countdown'
 import Pics from './pics.png'
-import theme from '../../../config/theme'
 import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'

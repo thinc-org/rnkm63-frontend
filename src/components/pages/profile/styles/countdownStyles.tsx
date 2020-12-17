@@ -10,13 +10,13 @@ export const countdownStyles = makeStyles((theme: any) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '1.5rem',
       lineHeight: '28px',
-      marginTop: '53px',
+      marginTop: '75px',
       marginBottom: '9px',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '1rem',
       lineHeight: '28px',
-      marginTop: '20%',
+      marginTop: '65px',
     },
   },
   countdownTimer: {
@@ -27,7 +27,7 @@ export const countdownStyles = makeStyles((theme: any) => ({
     [theme.breakpoints.down('sm')]: {
       fontSize: '1.75rem',
       lineHeight: '28px',
-      marginTop: '5%',
+      marginTop: '3%',
     },
     [theme.breakpoints.down('sm')]: {
       fontSize: '1.5rem',

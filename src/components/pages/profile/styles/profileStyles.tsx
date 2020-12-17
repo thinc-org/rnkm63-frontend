@@ -4,20 +4,35 @@ export const profileStyles = makeStyles((theme: any) => ({
   profile: {
     textAlign: 'center',
     marginBottom: '75px',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: '40px',
+    },
   },
   image: {
     display: 'inline-block',
     marginLeft: '8%',
     marginRight: '8%',
-    marginBottom: '20px',
     alignItems: 'center',
     borderRadius: '24px',
+    [theme.breakpoints.down('xs')]: {
+      width: '150px',
+      height: '200px',
+    },
   },
-  imageSize: {},
+  imageSize: {
+    [theme.breakpoints.down('xs')]: {
+      width: '150px',
+      height: '200px',
+    },
+  },
   value: {
     display: 'inline-block',
-    width: '471px',
+    width: '50%',
     verticalAlign: 'top',
+    [theme.breakpoints.down('sm')]: {
+      width: '90%',
+      marginTop: '50px',
+    },
   },
   title: {
     color: '#54D166',
@@ -25,70 +40,50 @@ export const profileStyles = makeStyles((theme: any) => ({
     marginTop: '0px',
     marginBottom: '0px',
     lineHeight: '27px',
-    fontSize: '18px',
+    fontSize: '1.1rem',
     letterSpacing: '0.007em',
-    fontWeight: 'bold',
+    fontWeight: 600,
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '17px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.2rem',
+    },
   },
   valueDetails: {
     color: 'white',
     textAlign: 'left',
     lineHeight: '40px',
-    fontSize: '32px',
+    fontSize: '2rem',
     marginTop: '0px',
     marginBottom: '28px',
     letterSpacing: '0.007em',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '27px',
+      marginTop: '13px',
+      marginBottom: '25px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1.25rem',
+      marginBottom: '18px',
+      lineHeight: '17px',
+    },
   },
   baanWarning: {
     color: '#F2C94C',
     margin: '-28px 0px',
     textAlign: 'left',
-    fontSize: '12px',
+    fontSize: '0.75rem',
     display: 'table',
     wordWrap: 'break-word',
     whiteSpace: 'pre-line',
-  },
-  '@media screen and (max-width: 720px)': {
-    profile: {
-      marginBottom: '40px',
-    },
-    value: {
-      width: '90%',
-    },
-    image: {},
-    title: {
-      fontSize: '22px',
-      lineHeight: '17px',
-    },
-    valueDetails: {
-      fontSize: '25px',
-      lineHeight: '27px',
-      marginTop: '13px',
-      marginBottom: '25px',
-    },
-    baanWarning: {
+    [theme.breakpoints.down('sm')]: {
       marginTop: '-19px',
       fontSize: '12px',
     },
-  },
-  '@media screen and (max-width: 320px)': {
-    image: {
-      width: '150px',
-      height: '200px',
-    },
-    imageSize: {
-      width: '150px',
-      height: '200px',
-    },
-    title: {
-      fontSize: '18px',
-      lineHeight: '17px',
-    },
-    valueDetails: {
-      fontSize: '16px',
-      marginBottom: '18px',
-      lineHeight: '17px',
-    },
-    baanWarning: {
+    [theme.breakpoints.down('xs')]: {
       marginTop: '-12px',
       fontSize: '8px',
       wordWrap: 'break-word',
