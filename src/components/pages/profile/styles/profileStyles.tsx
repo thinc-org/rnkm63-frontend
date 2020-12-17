@@ -30,8 +30,11 @@ export const profileStyles = makeStyles((theme: any) => ({
     width: '50%',
     verticalAlign: 'top',
     [theme.breakpoints.down('sm')]: {
-      width: '90%',
+      width: '65%',
       marginTop: '50px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      width: '90%',
     },
   },
   title: {
