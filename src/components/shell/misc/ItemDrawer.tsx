@@ -32,7 +32,12 @@ const useStyles = makeStyles({
   },
 })
 
-const ItemDrawer = (props: any) => {
+interface changeLang {
+  home: String
+  logOut: String
+}
+
+const ItemDrawer = (props: changeLang) => {
   const classes = useStyles()
   return (
     <React.Fragment>
