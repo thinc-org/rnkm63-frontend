@@ -5,9 +5,10 @@ const indexStyle = makeStyles((theme: Theme) => ({
     maxWidth: 375,
     marginLeft: 'auto',
     marginRight: 'auto',
+    marginBottom: 30,
   },
   container: {
-    padding: '40px 20px',
+    padding: '30px 20px',
     borderRadius: 5,
   },
   title: {
@@ -40,7 +41,7 @@ const indexStyle = makeStyles((theme: Theme) => ({
     height: 45,
     textTransform: 'none',
     color: theme.palette.text.primary,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 700,
     '&:hover': {
       background: theme.palette.primary.main,
