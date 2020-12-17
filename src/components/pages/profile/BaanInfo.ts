@@ -102,7 +102,7 @@ const baanInfo: baan[] = [
   },
   {
     ID: 19,
-    'name-th': 'บ้านปรี้ยว',
+    'name-th': 'บ้านเปรี้ยว',
     'name-en': 'Baan Preaw',
   },
   {
@@ -173,7 +173,15 @@ const baanInfo: baan[] = [
 ]
 
 export function getBaan(baanNumber: number): any {
-  return baanInfo.find((item: baan) => {
+  const sent = baanInfo.find((item: baan) => {
     return item.ID === baanNumber
   })
+  if (sent) {
+    return sent
+  } else {
+    return {
+      'name-th': '-',
+      'name-en': '-',
+    }
+  }
 }

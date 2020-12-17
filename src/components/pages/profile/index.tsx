@@ -5,12 +5,13 @@ import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
+import { error } from 'console'
 
 const fetchUserData = async () => {
   return axios
     .get('https://dev.rubnongkaomai.com/api/user/mockUser?mode=5')
     .then(({ data }) => {
-      console.log(data)
+      console.log(JSON.stringify(data))
       return data
     })
     .catch((err) => {
@@ -34,13 +35,19 @@ function Profile(props: any) {
   }
 
   const [userInfo, setUserInfo] = useState(defaultUser)
+  const baanEng = getBaan(userInfo['currentBaan'])['name-en'] || '-'
+  const baanThai = getBaan(userInfo['currentBaan'])['name-th'] || '-'
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
 
   useEffect(() => {
-    fetchUserData().then((userData) => {
-      setUserInfo(userData)
-    })
+    fetchUserData()
+      .then((userData) => {
+        setUserInfo(userData)
+      })
+      .catch((err) => {
+        setUserInfo(defaultUser)
+      })
   }, [])
 
   return (
@@ -74,9 +81,7 @@ function Profile(props: any) {
             {t('Baan')}
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
-            {i18n.language.startsWith('en')
-              ? getBaan(userInfo['currentBaan'])['name-en'] || '-'
-              : getBaan(userInfo['currentBaan'])['name-th'] || '-'}
+            {i18n.language.startsWith('en') ? baanEng : baanThai}
           </Typography>
           <Typography variant="h4" className={classes.baanWarning}>
             {userInfo.isTransfer ? t('baanWarning') : ''}
