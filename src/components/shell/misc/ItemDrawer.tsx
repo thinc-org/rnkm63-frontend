@@ -1,5 +1,4 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import {
   List,
   ListItem,
@@ -33,9 +32,8 @@ const useStyles = makeStyles({
   },
 })
 
-const ItemDrawer = () => {
+const ItemDrawer = (props: any) => {
   const classes = useStyles()
-  const { t } = useTranslation(['drawer'])
   return (
     <React.Fragment>
       <List>
@@ -43,9 +41,10 @@ const ItemDrawer = () => {
           <ListItemIcon className={classes.HomeSchIcon}>
             <HomeOutlinedIcon />
           </ListItemIcon>
-          <ListItemText>{t('Home')}</ListItemText>
+          <ListItemText>{props.home}</ListItemText>
         </ListItem>
 
+        {/* for phase 2 */}
         {/* <ListItem className={classes.eachList} component={Link} to={'/'}>}
           <ListItemIcon className={classes.HomeSchIcon}>
             <EventNoteRoundedIcon />
@@ -66,7 +65,7 @@ const ItemDrawer = () => {
           <ListItemIcon className={classes.logOut}>
             <MeetingRoomIcon />
           </ListItemIcon>
-          <ListItemText className={classes.logOut}>{t('Logout')}</ListItemText>
+          <ListItemText className={classes.logOut}>{props.logOut}</ListItemText>
         </ListItem>
       </List>
     </React.Fragment>

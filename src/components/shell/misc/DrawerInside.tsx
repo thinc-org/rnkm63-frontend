@@ -1,4 +1,6 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+
 import { makeStyles } from '@material-ui/core/styles'
 
 import ItemDrawer from './ItemDrawer'
@@ -22,6 +24,7 @@ const useStyles = makeStyles({
 
 export default function DrawerInside() {
   const classes = useStyles()
+  const { t } = useTranslation(['drawer'])
   const [state, setState] = React.useState(false)
 
   const toggleDrawer = React.useCallback(() => {
@@ -30,7 +33,7 @@ export default function DrawerInside() {
 
   const list = () => (
     <div role="presentation" onClick={toggleDrawer}>
-      <ItemDrawer />
+      <ItemDrawer home={t('Home')} logOut={t('Logout')} />
     </div>
   )
 
