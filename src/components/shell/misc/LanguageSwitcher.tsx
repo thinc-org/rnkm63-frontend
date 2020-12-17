@@ -51,8 +51,6 @@ function LanguageSwitcher() {
   const classes = useStyles()
   const language = i18n.language
 
-  console.log(classes)
-
   const switchLng = React.useCallback(() => {
     if (language === 'th') {
       i18n.changeLanguage('en')
