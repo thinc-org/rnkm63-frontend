@@ -16,13 +16,7 @@ function FormInput(props: any) {
 
   return (
     <React.Fragment>
-      <Typography
-        style={{
-          color: theme.palette.warning.main,
-          margin: theme.spacing(0.5),
-          fontSize: '1.25rem',
-        }}
-      >
+      <Typography className={classes.requireNote}>
         {t('requireNote')}
       </Typography>
       <Grid container className={classes.inside}>

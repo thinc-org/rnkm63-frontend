@@ -45,6 +45,9 @@ const formStyle = makeStyles(
       margin: theme.spacing(0.5),
       color: theme.palette.text.primary,
       heigth: '100%',
+      [theme.breakpoints.down('xs')]: {
+        fontSize: '0.825rem',
+      },
     },
     formControl: {
       marginTop: theme.spacing(0.5),
@@ -57,6 +60,14 @@ const formStyle = makeStyles(
     error: {
       color: theme.palette.error.main,
       marginLeft: theme.spacing(0.5),
+    },
+    requireNote: {
+      color: theme.palette.warning.main,
+      margin: theme.spacing(0.5),
+      fontSize: '1.25rem',
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '0.825rem',
+      },
     },
   }),
   { index: 1 }
