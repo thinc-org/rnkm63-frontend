@@ -38,7 +38,7 @@ const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation(['drawer'])
   return (
-    <div>
+    <React.Fragment>
       <List>
         <ListItem className={classes.eachList} component={Link} to={'/'}>
           <ListItemIcon className={classes.HomeSchIcon}>
@@ -70,7 +70,7 @@ const ItemDrawer = () => {
           <ListItemText className={classes.logOut}>{t('Logout')}</ListItemText>
         </ListItem>
       </List>
-    </div>
+    </React.Fragment>
   )
 }
 
