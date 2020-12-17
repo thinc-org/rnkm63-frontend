@@ -85,7 +85,7 @@ export const profileStyles = makeStyles((theme: any) => ({
     },
     [theme.breakpoints.down('xs')]: {
       marginTop: '-12px',
-      fontSize: '8px',
+      fontSize: '0.7rem',
       wordWrap: 'break-word',
       whiteSpace: 'pre-line',
     },

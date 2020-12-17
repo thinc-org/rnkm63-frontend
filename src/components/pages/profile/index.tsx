@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import Countdown from './Countdown'
 import Pics from './pics.png'
 import { Box, Typography } from '@material-ui/core'
@@ -6,16 +7,49 @@ import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
 
-function Profile(props: any) {
-  const [userInfo, setUserInfo] = useState<any>([])
+const fetchUserData = async () => {
+  return axios
+    .get('')
+    .then(({ data }) => {
+      return data
+    })
+    .catch((err) => {
+      return err
+    })
+}
 
+function Profile(props: any) {
+  const defaultUser = {
+    data: {
+      nickname: 'ก้อย สุธิดา',
+      picURL: '',
+    },
+    faculty: {
+      name_en: 'Faculty of engineering',
+      name_th: 'คณะวิศวกรรมศาสตร์',
+    },
+    currentBaanId: 5,
+    isTransfer: false,
+  }
+
+  const [userInfo, setUserInfo] = useState<any>(defaultUser)
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
+
+  /*useEffect(() => {
+    fetchUserData().then((userData) => {
+      setUserInfo(userData);
+    });
+  })*/
 
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
-        <img className={classes.imageSize} src={Pics} alt="user profile pic" />
+        <img
+          className={classes.imageSize}
+          src={Pics}
+          alt={userInfo.data.nickname}
+        />
       </Box>
       <Box className={classes.value}>
         <Box>
@@ -23,7 +57,7 @@ function Profile(props: any) {
             {t('Name')}
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
-            นางสาว ก้อย นุ้ย
+            {userInfo.data.nickname}
           </Typography>
         </Box>
         <Box>
@@ -32,8 +66,8 @@ function Profile(props: any) {
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
-              ? 'Faculty of engineering'
-              : 'คณะวิศวกรรมศาสตร์'}
+              ? userInfo.faculty.name_en
+              : userInfo.faculty.name_th}
           </Typography>
         </Box>
         <Box>
@@ -42,11 +76,11 @@ function Profile(props: any) {
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
-              ? getBaan(20)['name-en']
-              : getBaan(20)['name-th']}
+              ? getBaan(userInfo.currentBaanId)['name-en']
+              : getBaan(userInfo.currentBaanId)['name-th']}
           </Typography>
           <Typography variant="h4" className={classes.baanWarning}>
-            {1 + 1 === 2 ? t('baanWarning') : ''}
+            {userInfo.isTransfer ? t('baanWarning') : ''}
           </Typography>
         </Box>
       </Box>
