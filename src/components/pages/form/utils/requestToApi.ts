@@ -5,11 +5,12 @@ import { IFormData } from './registerSchema'
 const config = {
   headers: { 'No-CSRF': true },
   withCredentials: true,
+  baseURL: API_URL,
 }
+const apiClient = axios.create(config)
 
 const getProfile = function (): AxiosPromise<any> {
-  const url = `${API_URL}/user/profile`
-  return axios.get(url, config)
+  return apiClient.get('/user/profile')
 }
 
 const postUserData = function (
@@ -20,7 +21,7 @@ const postUserData = function (
     data,
     edit,
   }
-  return axios.post(`${API_URL}/user/profile`, reqBody, config)
+  return apiClient.post('/user/profile', reqBody)
 }
 
 const getPolicyStorage = function (): AxiosPromise<any> {
