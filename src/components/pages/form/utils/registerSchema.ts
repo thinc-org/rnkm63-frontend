@@ -18,6 +18,7 @@ const registerSchema = Yup.object().shape({
   usedMedicine: Yup.string().required('required'),
   foodRestriction: Yup.string().required('required'),
   disability: Yup.string().required('required'),
+  allergy: Yup.string().required('required'),
 })
 
 const FORM_PREFIX_FIELD_OPTIONS = [
@@ -46,6 +47,7 @@ const formInitialValues = {
   emergencyTel: '',
   emergencyTelRelationship: '',
   disease: '',
+  allergy: '',
   allergyMedicine: '',
   usedMedicine: '',
   foodRestriction: '',

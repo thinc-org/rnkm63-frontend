@@ -48,5 +48,6 @@
   "lineID": "LINE ID",
   "facebook": "Facebook",
   "requireNote": "*Do not leave any fields blank. (“-” if empty)",
-  "nicknameNote": "Note: If you don’t have Thai nickname, please contact "
+  "nicknameNote": "Note: If you don’t have Thai nickname, please contact ",
+  "allergy": "Allergies"
 }

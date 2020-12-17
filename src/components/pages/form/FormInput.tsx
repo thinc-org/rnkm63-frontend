@@ -88,6 +88,9 @@ function FormInput(props: any) {
           <FormTextField name="disease" />
         </Grid>
         <Grid item xs={12} sm={6}>
+          <FormTextField name="allergy" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
           <FormTextField name="allergyMedicine" />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -96,7 +99,7 @@ function FormInput(props: any) {
         <Grid item xs={12} sm={6}>
           <FormTextField name="disability" />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <FormTextField name="foodRestriction" />
         </Grid>
       </Grid>
