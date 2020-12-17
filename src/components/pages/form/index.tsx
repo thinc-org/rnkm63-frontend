@@ -103,12 +103,10 @@ function Form() {
 
   useEffect(() => {
     async function fetchData() {
-      const url = API_URL + '/user/profile'
+      const url = `${API_URL}/user/profile`
       const res = await axios.get(url, { withCredentials: true })
 
-      console.log(res)
       setUserData(res.data)
-
       if (!res.data.data) {
         return
       }
