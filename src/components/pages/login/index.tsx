@@ -7,16 +7,7 @@ import { SendTicketToBack } from '../../../controllers/LoginController'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import indexStyle from './indexStyle'
-
-import { Loading } from '../../common'
-
-function LoginSuspenseHOC() {
-  return (
-    <React.Suspense fallback={Loading}>
-      <Login />
-    </React.Suspense>
-  )
-}
+import { withSuspense } from '../../hoc'
 
 function Login() {
   const { t } = useTranslation('login')
@@ -54,4 +45,4 @@ function Login() {
   )
 }
 
-export default LoginSuspenseHOC
+export default withSuspense(Login)
