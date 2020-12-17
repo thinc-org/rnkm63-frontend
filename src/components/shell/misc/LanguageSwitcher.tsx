@@ -1,61 +1,48 @@
 import React from 'react'
-import { makeStyles, Button, Container } from '@material-ui/core'
+import { makeStyles, Button, Box } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
-import theme from '../../../config/theme'
 
 const useStyles = makeStyles({
-  TH: {
-    backgroundColor: '#44AD53',
-    color: 'white',
-    borderRadius: 3,
+  Button: {
+    backgroundColor: 'rgba(128,128,128,0.2)',
+    width: '6rem',
+    height: '2.5rem',
   },
-  THUsed: {
-    backgroundColor: '#fff',
-    color: 'white',
-    borderRadius: 3,
+  Lang: {
+    zIndex: 10,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
-  EN: {
-    backgroundColor: '#44AD53',
-    color: 'white',
-    borderRadius: 3,
+  Th: {
+    left: 0,
+    right: '50%',
   },
-  ENUsed: {
-    backgroundColor: '#fff',
-    color: 'white',
-    borderRadius: 3,
+  En: {
+    left: '50%',
+    right: 0,
   },
-
-  [theme.breakpoints.down('sm')]: {
-    button: {
-      border: 0,
-      borderRadius: 8.91,
-      width: 89,
-      height: 40,
-      padding: '0 5px',
-    },
-    buttonText: {
-      color: 'white',
-      fontFamily: 'Rubik',
-      fontSize: '0.85em',
-      textAlign: 'center',
-      lineHeight: '22px',
-    },
+  Overlay: {
+    margin: 0,
+    zIndex: 9,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: '25%',
+    right: '25%',
+    backgroundColor: '#44ad53',
+    borderRadius: 4,
+    transitionDuration: '0.15s',
+    transitionProperty: 'transform',
   },
-  [theme.breakpoints.up('sm')]: {
-    button: {
-      border: 0,
-      borderRadius: 8.91,
-      width: 89,
-      height: 40,
-      padding: '0 5px',
-    },
-    buttonText: {
-      color: 'white',
-      fontFamily: 'Rubik',
-      fontSize: '0.85em',
-      textAlign: 'center',
-      lineHeight: '22px',
-    },
+  OverlayLeft: {
+    transform: 'translateX(-50%)',
+  },
+  OverlayRight: {
+    transform: 'translateX(50%)',
   },
 })
 
@@ -63,8 +50,6 @@ function LanguageSwitcher() {
   const { i18n } = useTranslation('shell')
   const classes = useStyles()
   const language = i18n.language
-
-  console.log(classes)
 
   const switchLng = React.useCallback(() => {
     if (language === 'th') {
@@ -74,13 +59,18 @@ function LanguageSwitcher() {
     }
   }, [i18n, language])
   return (
-    <Button onClick={switchLng} variant="contained">
-      <Container className={language === 'th' ? classes.TH : classes.THUsed}>
-        TH
-      </Container>
-      <Container className={language === 'th' ? classes.ENUsed : classes.EN}>
-        EN
-      </Container>
+    <Button onClick={switchLng} className={classes.Button} disableElevation>
+      <Box
+        className={`${classes.Overlay} ${
+          language === 'th' ? classes.OverlayLeft : classes.OverlayRight
+        }`}
+      ></Box>
+      <Box className={`${classes.Lang} ${classes.Th}`}>
+        <span>TH</span>
+      </Box>
+      <Box className={`${classes.Lang} ${classes.En}`}>
+        <span>EN</span>
+      </Box>
     </Button>
   )
 }
