@@ -20,10 +20,11 @@ import BackgroundImg from './local/background.png'
 const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
-    minWidth: '100vw',
     display: 'flex',
     flexDirection: 'column',
     backgroundImage: `url(${BackgroundImg})`,
+    backgroundSize: 'cover',
+    backgroundAttachment: 'fixed',
   },
   PageContainer: {
     flex: 1,
