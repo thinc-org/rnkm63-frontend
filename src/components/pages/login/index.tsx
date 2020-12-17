@@ -1,53 +1,48 @@
 import React from 'react'
-import { Button, Box } from '@material-ui/core'
-import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
 
-import { UserContext, User } from '../../../contexts/UserContext'
+import { Box, Card, Typography } from '@material-ui/core'
+import LoginButton from './LoginButton'
+import LoginCheckbox from './LoginCheckbox'
+import { SendTicketToBack } from '../../../controllers/LoginController'
+import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+import indexStyle from './indexStyle'
+import { withSuspense } from '../../hoc'
 
 function Login() {
   const { t } = useTranslation('login')
+  const [agree, setAgree] = React.useState(false)
 
-  const { user, setUser } = React.useContext(UserContext)
-  /*
-    Here, you have a user object in the user variable.
-    And a setUser function that can set the user object
-    as demonstrated by the mock set user button.
+  const style = indexStyle()
+  const history = useHistory()
 
-    You can edit the types as appropriate in src/contexts/UserContext
-  */
+  React.useEffect(() => {
+    let query = new URLSearchParams(window.location.search)
+    let ticket = query.get('ticket')
+    if (ticket !== null) {
+      SendTicketToBack(ticket, () => {
+        console.log('work')
+        //history.push('/')
+      })
+    }
+  }, [])
 
-  // Once you got the user object from the server, just pass it to onSigninComplete
-  const onSigninComplete = React.useCallback(
-    (u: User) => {
-      setUser(u) //set the user into the context
-    },
-    [setUser]
-  )
-
-  //this is a mock function to 'login'.
-  const mockSetUser = () => {
-    onSigninComplete({
-      name: 'hello',
-      id: '123',
-      age: 10,
-    })
+  const toggleAgree = () => {
+    setAgree(!agree)
   }
 
   return (
-    <>
-      {
-        //a demo of how you might redirect if the user is already logged in
-        !!user && <Redirect to="/" />
-      }
-      <Box>
-        <h1>{t('title')}</h1>
-        <Button onClick={mockSetUser} variant="contained" color="primary">
-          Mock set user
-        </Button>
-      </Box>
-    </>
+    <Box className={style.login}>
+      <Typography className={style.title}>{t('title')}</Typography>
+      <Card className={style.container}>
+        <Typography className={style.description}>
+          {t('description')}
+        </Typography>
+        <LoginCheckbox update={toggleAgree} text={t('agreement')} />
+        <LoginButton agree={agree}>{t('login')}</LoginButton>
+      </Card>
+    </Box>
   )
 }
 
-export default Login
+export default withSuspense(Login)
