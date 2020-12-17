@@ -32,7 +32,7 @@ function Profile(props: any) {
     isTransfer: false,
   }
 
-  const [userInfo, setUserInfo] = useState<any>(defaultUser)
+  const [userInfo, setUserInfo] = useState(defaultUser)
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
 

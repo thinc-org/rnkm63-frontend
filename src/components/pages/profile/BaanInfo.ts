@@ -1,4 +1,10 @@
-const baanInfo = [
+interface baan {
+  ID: number
+  'name-th': string
+  'name-en': string
+}
+
+const baanInfo: baan[] = [
   {
     ID: 0,
     'name-th': '-',
@@ -167,7 +173,7 @@ const baanInfo = [
 ]
 
 export function getBaan(baanNumber: number): any {
-  return baanInfo.find((item: any) => {
+  return baanInfo.find((item: baan) => {
     return item.ID === baanNumber
   })
 }
