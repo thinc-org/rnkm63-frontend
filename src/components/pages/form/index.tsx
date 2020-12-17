@@ -128,7 +128,7 @@ function Form() {
   }
 
   if (userData.isConfirm) {
-    history.push('/profile')
+    history.push('/')
   }
 
   return (
