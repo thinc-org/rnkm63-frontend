@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Countdown from './Countdown'
-import Pics from './pics.png'
 import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'

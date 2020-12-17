@@ -10,8 +10,8 @@ export const profileStyles = makeStyles((theme: any) => ({
   },
   image: {
     display: 'inline-block',
-    marginLeft: '10%',
-    marginRight: '10%',
+    marginLeft: '8%',
+    marginRight: '8%',
     alignItems: 'center',
     borderRadius: '24px',
     [theme.breakpoints.down('xs')]: {
@@ -30,7 +30,7 @@ export const profileStyles = makeStyles((theme: any) => ({
   },
   value: {
     display: 'inline-block',
-    width: '50%',
+    width: '40%',
     verticalAlign: 'top',
     [theme.breakpoints.down('sm')]: {
       width: '65%',
