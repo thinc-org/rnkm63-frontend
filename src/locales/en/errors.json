@@ -1,0 +1,10 @@
+{
+  "returnHome": "Back to home",
+  "notfound": {
+    "title": "Error 404",
+    "detail": "Page not found"
+  },
+  "not104": {
+    "title": "For CU104 only"
+  }
+}
