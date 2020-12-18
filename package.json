@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.57",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -16,12 +17,13 @@
     "@types/react-image-crop": "^8.1.2",
     "@types/react-router-dom": "^5.1.6",
     "axios": "^0.21.0",
+    "formik": "^2.2.6",
+    "http-proxy-middleware": "^1.0.6",
     "i18next": "^19.8.4",
     "i18next-browser-languagedetector": "^6.0.1",
     "i18next-http-backend": "^1.0.21",
-    "query-string": "5",
-    "formik": "^2.2.6",
     "image-conversion": "^2.1.1",
+    "query-string": "5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-easy-crop": "^3.3.1",
@@ -31,7 +33,6 @@
     "react-scripts": "4.0.0",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
-    "yarn": "^1.22.10",
     "yup": "^0.32.8"
   },
   "scripts": {

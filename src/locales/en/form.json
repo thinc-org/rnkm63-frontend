@@ -1,5 +1,6 @@
 {
-  "title": "Register",
+  "register": "Register",
+  "editProfile": "Edit profile",
   "submit": "Submit",
   "submitNote": "Note: You cannot edit information after you submit.",
   "uploadTextButton": "Upload",
@@ -18,9 +19,9 @@
     "The ratio between your face and the whole photo should be about 1 : 3"
   ],
   "uploadInstruction": "Click to upload image",
-  "fileSizeError": "Your picture exceeds 300kb.",
+  "fileSizeError": "Your picture exceeds 300KB.",
   "dialogTitle": "Edit Image",
-  "prefix": "Title",
+  "prefixname": "Title",
   "mr": "Mr.",
   "ms": "Ms.",
   "realname": "First name",
@@ -36,7 +37,7 @@
   "rns": "Rather not to say",
   "tel": "Phone Number",
   "emergencyTel": "Emergency Contact",
-  "emergencyConnection": "Relationship",
+  "emergencyTelRelationship": "Relationship",
   "disease": "Personal Illness",
   "allergyMedicine": "Drug Allergy",
   "usedMedicine": "Personal Medication",
@@ -47,5 +48,6 @@
   "lineID": "LINE ID",
   "facebook": "Facebook",
   "requireNote": "*Do not leave any fields blank. (“-” if empty)",
-  "nicknameNote": "Note: If you don’t have Thai nickname, please contact "
+  "nicknameNote": "Note: If you don’t have Thai nickname, please contact ",
+  "allergy": "Allergies"
 }

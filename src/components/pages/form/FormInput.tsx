@@ -10,26 +10,20 @@ import { Grid, Typography } from '@material-ui/core'
 import { FormSelectField, FormTextField } from './utils/component/formComponent'
 import { useTranslation } from 'react-i18next'
 
-function FormInput(props: any) {
+function FormInput() {
   const classes = formStyle()
   const { t } = useTranslation('form')
 
   return (
     <React.Fragment>
-      <Typography
-        style={{
-          color: theme.palette.warning.main,
-          margin: theme.spacing(0.5),
-          fontSize: '1.25rem',
-        }}
-      >
+      <Typography className={classes.requireNote}>
         {t('requireNote')}
       </Typography>
       <Grid container className={classes.inside}>
         {theme.breakpoints.up('sm') ? (
           <Grid item sm={2}>
             <FormSelectField
-              name="prefix"
+              name="prefixname"
               options={FORM_PREFIX_FIELD_OPTIONS}
             />
           </Grid>
@@ -62,6 +56,7 @@ function FormInput(props: any) {
           {t('nicknameNote')}
           <Link
             href="https://www.facebook.com/chulafreshmen"
+            target="_blank"
             style={{
               color: '#97c0f3',
             }}
@@ -85,12 +80,15 @@ function FormInput(props: any) {
           <FormTextField name="emergencyTel" />
         </Grid>
         <Grid item xs={6}>
-          <FormTextField name="emergencyConnection" />
+          <FormTextField name="emergencyTelRelationship" />
         </Grid>
       </Grid>
       <Grid container className={classes.inside}>
         <Grid item xs={12} sm={6}>
           <FormTextField name="disease" />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <FormTextField name="allergy" />
         </Grid>
         <Grid item xs={12} sm={6}>
           <FormTextField name="allergyMedicine" />
@@ -101,7 +99,7 @@ function FormInput(props: any) {
         <Grid item xs={12} sm={6}>
           <FormTextField name="disability" />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sm={6}>
           <FormTextField name="foodRestriction" />
         </Grid>
       </Grid>
