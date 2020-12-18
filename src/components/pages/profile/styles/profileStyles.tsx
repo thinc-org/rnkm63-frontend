@@ -4,6 +4,7 @@ export const profileStyles = makeStyles((theme: any) => ({
   profile: {
     textAlign: 'center',
     marginBottom: '75px',
+    marginTop: '40px',
     [theme.breakpoints.down('sm')]: {
       marginBottom: '40px',
     },
