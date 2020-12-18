@@ -2,6 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios'
 import { API_URL } from '../utils'
 
 type SimpleCallback = () => void
+type ErrorCallback = (status: number) => void
 
 function Connect() {
   window.location.href =
@@ -11,7 +12,11 @@ function Connect() {
     '/login'
 }
 
-function SendTicketToBack(ticket: string, callback: SimpleCallback) {
+function SendTicketToBack(
+  ticket: string,
+  successCallback: SimpleCallback,
+  errorCallback: ErrorCallback
+) {
   let config: AxiosRequestConfig = {
     params: {
       ticket: ticket,
@@ -22,11 +27,10 @@ function SendTicketToBack(ticket: string, callback: SimpleCallback) {
   axios
     .get(API_URL + '/auth/verify', config)
     .then((res) => {
-      console.log(res)
-      callback()
+      successCallback()
     })
     .catch((err) => {
-      throw new Error(err)
+      errorCallback(err.response.status)
     })
 }
 
