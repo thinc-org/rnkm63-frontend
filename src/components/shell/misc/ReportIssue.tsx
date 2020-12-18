@@ -16,6 +16,7 @@ const ReportIssue = () => {
   return (
     <Button
       href="https://airtable.com/shrdg6IwqtKmNMfkL"
+      target="__blank__"
       className={classes.pos}
     >
       {t('Report')}
