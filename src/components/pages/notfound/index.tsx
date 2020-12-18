@@ -22,18 +22,22 @@ const useStyles = makeStyles({
       fontSize: '1em',
     },
   },
+  Error: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: '70px',
+    alignItems: 'center',
+    [theme.breakpoints.up('md')]: {
+      marginTop: '15px',
+    },
+  },
 })
 function NotFound() {
   const { t } = useTranslation(['notfound'])
   const classes = useStyles()
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      marginTop="70px"
-      alignItems="center"
-    >
+    <Box className={classes.Error}>
       <SadThincIcon />
       <Typography className={classes.textHeader}>Error 404</Typography>
       <Typography className={classes.text}>{t('title')}</Typography>

@@ -1,6 +1,7 @@
 {
   "Home": "Home",
   "Schedule": "Schedule",
-  "Bann": "Bann",
-  "Logout": "LogOut"
+  "Bann": "Choose Bann",
+  "Logout": "LogOut",
+  "Report": "Report"
 }
