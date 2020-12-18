@@ -10,6 +10,7 @@ import {
 import SadThincIcon from '../shell/misc/SadThincIcon'
 import { Theme } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import LinkButton from './LinkButton'
 import theme from '../../config/theme'
 
 const greenButtonTheme = createMuiTheme({
@@ -63,7 +64,16 @@ export function ErrorButton(props: any) {
 }
 
 export function ErrorLink(props: any) {
-  return <Link component={ErrorButton} {...props} />
+  const classes = useStyles()
+  return (
+    <Link
+      component={LinkButton}
+      className={classes.button}
+      color="primary"
+      variant="contained"
+      {...props}
+    />
+  )
 }
 
 interface IError {
