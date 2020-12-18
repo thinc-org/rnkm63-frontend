@@ -58,16 +58,11 @@ function HandleError(props: IError) {
   if (status === 401 || status === 403) history.push('/login')
   const classes = useStyles()
   const reportProblem = React.useCallback(() => {
-    window.location.href =
-      requestID === ''
-        ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
-        : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
-          requestID
+    window.location.href = !requestID
+      ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
+      : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
+        requestID
   }, [requestID])
-
-  const returnHome = React.useCallback(() => {
-    history.push('/')
-  }, [history])
 
   return (
     <Box className={classes.container}>
@@ -80,12 +75,7 @@ function HandleError(props: IError) {
           {t('report')}
         </Button>
       ) : (
-        <Link
-          to="/"
-          component={Button}
-          className={classes.button}
-          onClick={returnHome}
-        >
+        <Link to="/" component={Button} className={classes.button}>
           {t('returnHome')}
         </Link>
       )}
