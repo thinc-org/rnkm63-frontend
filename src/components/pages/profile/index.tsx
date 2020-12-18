@@ -7,6 +7,18 @@ import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
 import { API_URL } from '../../../utils'
 
+interface User {
+  data: {
+    nickname: string
+  }
+  faculty: {
+    name_en: string
+    name_th: string
+  }
+  currentBaan: number
+  isTransfer: boolean
+}
+
 const fetchUserData = async () => {
   return axios
     .get(API_URL + '/user/profile', {
@@ -22,11 +34,25 @@ const fetchUserData = async () => {
     })
 }
 
-function Profile(props: any) {
-  const defaultUser = {
+const fetchUserPic = async () => {
+  return axios
+    .get(API_URL + 'getUploadFileName', {
+      headers: { 'No-CSRF': true },
+      withCredentials: true,
+    })
+    .then((data) => {
+      return data
+    })
+    .catch((err) => {
+      console.log(err)
+      return err
+    })
+}
+
+function Profile() {
+  const defaultUser: User = {
     data: {
       nickname: '-',
-      imgURL: '',
     },
     faculty: {
       name_en: '-',
@@ -36,7 +62,11 @@ function Profile(props: any) {
     isTransfer: true,
   }
 
-  const [userInfo, setUserInfo] = useState(defaultUser)
+  const defaultProfilePicURL =
+    'https://media.discordapp.net/attachments/780977351428931594/784451408275046460/ElL3lTKVkAA2CmN.png'
+
+  const [userInfo, setUserInfo] = useState<User>(defaultUser)
+  const [userPic, setUserPic] = useState(defaultProfilePicURL)
   const baanEng = getBaan(userInfo['currentBaan'])['name-en'] || '-'
   const baanThai = getBaan(userInfo['currentBaan'])['name-th'] || '-'
   const classes = profileStyles()
@@ -50,6 +80,12 @@ function Profile(props: any) {
       .catch((err) => {
         setUserInfo(defaultUser)
       })
+    /*fetchUserPic()
+    .then((picURL) => {
+      setUserPic(picURL)
+    }).catch(err => {
+      setUserPic(defaultProfilePicURL)
+    })*/
   }, [])
 
   return (
@@ -57,7 +93,7 @@ function Profile(props: any) {
       <Box className={classes.image}>
         <img
           className={classes.imageSize}
-          src={userInfo.data.imgURL}
+          src={userPic}
           alt={userInfo.data.nickname}
         />
       </Box>

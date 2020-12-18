@@ -5,7 +5,6 @@ import LoginButton from './LoginButton'
 import LoginCheckbox from './LoginCheckbox'
 import { SendTicketToBack } from '../../../controllers/LoginController'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
 import indexStyle from './indexStyle'
 import { withSuspense } from '../../hoc'
 
@@ -14,7 +13,6 @@ function Login() {
   const [agree, setAgree] = React.useState(false)
 
   const style = indexStyle()
-  const history = useHistory()
 
   React.useEffect(() => {
     let query = new URLSearchParams(window.location.search)

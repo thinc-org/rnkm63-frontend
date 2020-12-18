@@ -1,12 +1,11 @@
 import React from 'react'
-import { Loading } from '../common'
 
 export default function withSuspense<P>(
   Component: React.ComponentType<P>
 ): React.FC<P> {
   return (props: P) => {
     return (
-      <React.Suspense fallback={<Loading />}>
+      <React.Suspense fallback={null}>
         <Component {...props} />
       </React.Suspense>
     )

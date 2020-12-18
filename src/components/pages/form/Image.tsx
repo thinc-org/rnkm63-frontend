@@ -95,6 +95,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
+  const { setImageBlob } = props
   const makeCroppedImage = useCallback(async () => {
     if (!upImg) {
       return
@@ -102,9 +103,9 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     const img: resultImg = await getCroppedImg(upImg, croppedAreaPixels)
     setCropState(false)
     setFinalImg(img.urlFile)
-    props.setImageBlob(img.blob)
+    setImageBlob(img.blob)
     setEditStatus(true)
-  }, [upImg, croppedAreaPixels])
+  }, [upImg, croppedAreaPixels, setImageBlob])
 
   const closeDialog = useCallback(() => {
     setCropState(false)
