@@ -57,6 +57,7 @@ const ItemDrawer = () => {
         <ListItem>
           <Button
             href="https://airtable.com/shrdg6IwqtKmNMfkL"
+            target="__blank__"
             className={classes.eachList}
           >
             <ListItemIcon className={classes.HomeSchIcon}>
