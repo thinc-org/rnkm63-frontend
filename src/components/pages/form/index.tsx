@@ -18,7 +18,6 @@ import {
   getProfile,
   uploadImageToStorage,
   getPolicyStorage,
-  getImageURL,
 } from './utils/requestToApi'
 
 function Form() {
@@ -79,14 +78,11 @@ function Form() {
         setError(res.status)
         setErrorRequestID(res.headers['x-request-id'])
       }
-
       setUserData(res.data)
       if (!res.data.data) {
         return
       }
-
-      const resImgUrl = await getImageURL()
-      setPreImage('https://storage.googleapis.com/' + resImgUrl.data)
+      setPreImage(res.data.data.imgURL)
     }
     fetchData()
   }, [history])

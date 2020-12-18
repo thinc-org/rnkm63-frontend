@@ -28,17 +28,11 @@ const getPolicyStorage = function (): AxiosPromise<any> {
   return apiClient.get('/user/getUploadPolicy').catch((err) => err.response)
 }
 
-const getImageURL = function (): AxiosPromise<any> {
-  return apiClient.get('/user/getUploadFileName').catch((err) => err.response)
-}
-
 const uploadImageToStorage = function (blobImg: Blob, policy: any) {
   let bodyFormData = new FormData()
 
   const policyDocument = policy.fields
   const urlStorage = policy.url
-
-  bodyFormData.append('file', blobImg)
 
   const fieldKeys = Object.keys(policyDocument)
   fieldKeys.forEach((val: string) => {
@@ -46,7 +40,7 @@ const uploadImageToStorage = function (blobImg: Blob, policy: any) {
   })
 
   bodyFormData.append('Content-Type', 'image/jpeg')
-
+  bodyFormData.append('file', blobImg)
   return axios
     .post(urlStorage, bodyFormData, {
       headers: {
@@ -56,10 +50,4 @@ const uploadImageToStorage = function (blobImg: Blob, policy: any) {
     .catch((err) => err.response)
 }
 
-export {
-  getProfile,
-  postUserData,
-  getPolicyStorage,
-  uploadImageToStorage,
-  getImageURL,
-}
+export { getProfile, postUserData, getPolicyStorage, uploadImageToStorage }

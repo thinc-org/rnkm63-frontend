@@ -7,11 +7,12 @@ import { SendTicketToBack } from '../../../controllers/LoginController'
 import { useTranslation } from 'react-i18next'
 import indexStyle from './indexStyle'
 import { withSuspense } from '../../hoc'
+import { useHistory } from 'react-router-dom'
 
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
-
+  const history = useHistory()
   const style = indexStyle()
 
   React.useEffect(() => {
@@ -19,11 +20,10 @@ function Login() {
     let ticket = query.get('ticket')
     if (ticket !== null) {
       SendTicketToBack(ticket, () => {
-        console.log('work')
-        //history.push('/')
+        history.push('/form')
       })
     }
-  }, [])
+  }, [history])
 
   const toggleAgree = () => {
     setAgree(!agree)
