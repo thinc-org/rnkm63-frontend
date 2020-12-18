@@ -15,13 +15,24 @@ function Login() {
   const history = useHistory()
   const style = indexStyle()
 
+  const onLoginComplete = React.useCallback(() => {
+    history.push('/form')
+  }, [history])
+
+  const onLoginError = React.useCallback(
+    (status: number) => {
+      if (status === 403) {
+        history.push('/not104')
+      }
+    },
+    [history]
+  )
+
   React.useEffect(() => {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     if (ticket !== null) {
-      SendTicketToBack(ticket, () => {
-        history.push('/form')
-      })
+      SendTicketToBack(ticket, onLoginComplete, onLoginError)
     }
   }, [history])
 
