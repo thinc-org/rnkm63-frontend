@@ -2,8 +2,8 @@ import React from 'react'
 import { Box, Button, makeStyles, Typography } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import SadThincIcon from '../shell/misc/SadThincIcon'
-import ToHomeButton from '../shell/misc/ToHomeButton'
 import { Theme } from '@material-ui/core'
+import { Link, useHistory } from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -44,31 +44,40 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function Error500(props: { requestID: string }) {
-  const { t } = useTranslation('error500')
+function HandleError(props: { requestID: string; status: number }) {
+  const { t } = useTranslation('error')
+  const history = useHistory()
+  if (props.status === 401 || props.status === 403) history.push('/login')
   const classes = useStyles()
-  const reportProblem = React.useCallback((requestID) => {
-    if (props.requestID != null)
-      window.location.href =
-        'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
-        props.requestID
-    else window.location.href = 'https://airtable.com/shrdg6IwqtKmNMfkL'
+  const reportProblem = React.useCallback(() => {
+    window.location.href =
+      props.requestID === ''
+        ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
+        : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
+          props.requestID
+  }, [])
+
+  const returnHome = React.useCallback(() => {
+    history.push('/')
   }, [])
 
   return (
     <Box className={classes.container}>
       <SadThincIcon />
-      <Typography className={classes.textHeader}>{t('title')}</Typography>
-      <Button
-        variant="contained"
-        className={classes.button}
-        color="primary"
-        onClick={reportProblem}
-      >
-        {t('report')}
-      </Button>
+      <Typography className={classes.textHeader}>
+        {t(String(props.status))}
+      </Typography>
+      {props.status === 500 || props.status === 503 ? (
+        <Button className={classes.button} onClick={reportProblem}>
+          {t('report')}
+        </Button>
+      ) : (
+        <Link to="/" component={Button} className={classes.button}>
+          {t('returnHome')}
+        </Link>
+      )}
     </Box>
   )
 }
 
-export default Error500
+export default HandleError

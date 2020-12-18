@@ -12,7 +12,7 @@ import {
   formInitialValues,
   IFormDataRequest,
 } from './utils/registerSchema'
-import Error500 from '../../common/Error500'
+import HandleError from '../../common/HandleError'
 import {
   postUserData,
   getProfile,
@@ -28,7 +28,7 @@ function Form() {
   const [preImage, setPreImage] = useState('')
   const [imageRequired, setImageRequired] = useState(false)
   const [data, setData] = useState(formInitialValues)
-  const [error500, setError500] = useState(false)
+  const [error, setError] = useState(0)
   const [errorRequestID, setErrorRequestID] = useState('')
   const { t } = useTranslation('form')
   const style = indexStyle()
@@ -58,12 +58,7 @@ function Form() {
     }
     const res = await postUserData(data, edit)
     if (res.status === 200 || res.status === 201) history.push('/form/complete')
-    if (res.status === 401) history.push('/login')
-    if (res.status === 500) {
-      setConfirmOpen(false)
-      setError500(true)
-      return
-    }
+    else setError(res.status)
   }, [data, history])
 
   const closeDialog = React.useCallback(() => {
@@ -73,11 +68,7 @@ function Form() {
   useEffect(() => {
     async function fetchData() {
       const res = await getProfile()
-      if (res.status === 401) history.push('/login')
-      if (res.status === 500) {
-        setError500(true)
-        return
-      }
+      if (res.status !== 200) setError(res.status)
 
       setUserData(res.data)
       if (!res.data.data) {
@@ -90,8 +81,8 @@ function Form() {
     fetchData()
   }, [])
 
-  if (error500) {
-    return <Error500 requestID={errorRequestID} />
+  if (error !== 0) {
+    return <HandleError requestID={errorRequestID} status={error} />
   }
 
   if (!userData) {
