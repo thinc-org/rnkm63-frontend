@@ -1,8 +1,9 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core'
+import { createMuiTheme, makeStyles, MuiThemeProvider } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
+import { green } from '@material-ui/core/colors'
 const useStyles = makeStyles({
   button: {
     width: '210px',
@@ -20,13 +21,17 @@ const useStyles = makeStyles({
     },
   },
 })
+
+const greenTheme = createMuiTheme({ palette: { primary: green } })
 function ToHomeButton() {
   const classes = useStyles()
   const { t } = useTranslation('tohomebutton')
   return (
-    <Button variant="contained" className={classes.button} color="primary">
-      {t('title')}
-    </Button>
+    <MuiThemeProvider theme={greenTheme}>
+      <Button variant="contained" className={classes.button} color="primary">
+        {t('title')}
+      </Button>
+    </MuiThemeProvider>
   )
 }
 export default ToHomeButton
