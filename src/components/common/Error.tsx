@@ -120,16 +120,16 @@ export function HandleRequestError(props: IRequestError) {
   const location = useLocation()
 
   if (status === 401 || status === 403) history.push('/login')
-  const reportProblem = React.useCallback(() => {
-    window.location.href = !requestID
-      ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
-      : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
-        requestID
-  }, [requestID])
+  const reportUrl = !requestID
+    ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
+    : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' + requestID
+
   return (
     <Error title={t(`code.${status}`)}>
       {props.status === 500 || props.status === 503 || props.status === 400 ? (
-        <ErrorButton onClick={reportProblem}>{t('report')}</ErrorButton>
+        <ErrorButton href={reportUrl} target="_blank">
+          {t('report')}
+        </ErrorButton>
       ) : location?.pathname !== '/' ? (
         <ErrorLink to="/">{t('returnHome')}</ErrorLink>
       ) : (
