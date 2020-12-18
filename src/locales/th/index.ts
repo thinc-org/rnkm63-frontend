@@ -9,7 +9,6 @@ import notfound from './notfound.json'
 import profile from './profile.json'
 import shell from './shell.json'
 import tohomebutton from './tohomebutton.json'
-import error from './error.json'
 
 const th = {
   drawer,
@@ -23,7 +22,6 @@ const th = {
   profile,
   shell,
   tohomebutton,
-  error,
 }
 
 export default th

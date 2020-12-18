@@ -5,14 +5,14 @@ import FormInput from './FormInput'
 import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
+import Error, { ErrorButton, ErrorLink } from '../../common/Error'
 import {
   registerSchema,
   formInitialValues,
   IFormDataRequest,
 } from './utils/registerSchema'
-import HandleError from '../../common/HandleError'
 import {
   postUserData,
   getProfile,
@@ -88,7 +88,7 @@ function Form() {
   }, [history])
 
   if (error !== 0) {
-    return <HandleError requestID={errorRequestID} status={error} />
+    return <HandleFormError requestID={errorRequestID} status={error} />
   }
 
   if (!userData) {
@@ -139,6 +139,35 @@ function Form() {
         submit={submit}
       />
     </Box>
+  )
+}
+
+interface IFormError {
+  requestID: string
+  status: number
+}
+
+function HandleFormError(props: IFormError) {
+  const { t } = useTranslation('form')
+  const { requestID, status } = props
+
+  const history = useHistory()
+
+  if (status === 401 || status === 403) history.push('/login')
+  const reportProblem = React.useCallback(() => {
+    window.location.href = !requestID
+      ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
+      : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
+        requestID
+  }, [requestID])
+  return (
+    <Error title={t(`error.${status}`)}>
+      {props.status === 500 || props.status === 503 ? (
+        <ErrorButton onClick={reportProblem}>{t('error.report')}</ErrorButton>
+      ) : (
+        <ErrorLink to="/">{t('error.returnHome')}</ErrorLink>
+      )}
+    </Error>
   )
 }
 
