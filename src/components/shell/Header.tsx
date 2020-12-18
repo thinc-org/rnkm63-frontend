@@ -5,7 +5,7 @@ import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
 import ReportIssue from './misc/ReportIssue'
 
-import THINCLogo from '../../local/thincLogo.png'
+import THINCLogo from '../../local/white_logo.png'
 import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
 const useStyles = makeStyles({
@@ -13,7 +13,9 @@ const useStyles = makeStyles({
     marginTop: theme.spacing(3.75),
   },
   thincLogo: {
-    marginBottom: '-4rem',
+    width: '14rem',
+    height: '10rem',
+    margin: '-2rem 0 -3rem 0',
   },
   [theme.breakpoints.down('sm')]: {
     header: {
