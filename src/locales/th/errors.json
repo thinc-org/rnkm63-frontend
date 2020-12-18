@@ -1,5 +1,6 @@
 {
   "returnHome": "กลับสู่หน้าหลัก",
+  "refreshPage": "รีเฟรช",
   "report": "รายงานปัญหา",
   "notfound": {
     "title": "Error 404",
