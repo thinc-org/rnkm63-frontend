@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import {
   List,
   ListItem,
-  ListItemText,
   ListItemIcon,
   makeStyles,
   Button,
+  Box,
 } from '@material-ui/core'
 
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles({
   eachList: {
     color: 'white',
-    fontWeight: 1000,
+    textTransform: 'none',
     '&:hover': {
       opacity: '0.5',
     },
@@ -42,24 +42,29 @@ const ItemDrawer = () => {
   return (
     <React.Fragment>
       <List>
-        <ListItem className={classes.eachList} component={Link} to={'/'}>
-          <Button>
+        <ListItem>
+          <Button className={classes.eachList} component={Link} to={'/'}>
             <ListItemIcon className={classes.HomeSchIcon}>
               <HomeOutlinedIcon />
             </ListItemIcon>
-            <ListItemText>{t('Home')}</ListItemText>
+            <Box fontSize={16} fontWeight="fontWeightBold">
+              {t('Home')}
+            </Box>
           </Button>
         </ListItem>
 
-        <ListItem
-          component={Button}
-          className={classes.eachList}
-          href="https://airtable.com/shrdg6IwqtKmNMfkL"
-        >
-          <ListItemIcon className={classes.HomeSchIcon}>
-            <BugReportOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Report')}</ListItemText>
+        <ListItem>
+          <Button
+            href="https://airtable.com/shrdg6IwqtKmNMfkL"
+            className={classes.eachList}
+          >
+            <ListItemIcon className={classes.HomeSchIcon}>
+              <BugReportOutlinedIcon />
+            </ListItemIcon>
+            <Box fontSize={16} fontWeight="fontWeightBold">
+              {t('Report')}
+            </Box>
+          </Button>
         </ListItem>
 
         {/* <ListItem className={classes.eachList} component={Link} to={'/'}>}
@@ -83,9 +88,13 @@ const ItemDrawer = () => {
             <ListItemIcon className={classes.logOut}>
               <MeetingRoomIcon />
             </ListItemIcon>
-            <ListItemText className={classes.logOut}>
+            <Box
+              fontSize={16}
+              fontWeight="fontWeightBold"
+              className={classes.logOut}
+            >
               {t('Logout')}
-            </ListItemText>
+            </Box>
           </Button>
         </ListItem>
       </List>
