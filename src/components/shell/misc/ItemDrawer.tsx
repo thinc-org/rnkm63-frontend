@@ -94,12 +94,7 @@ const ItemDrawer = () => {
         </ListItem>*/}
 
         <ListItem>
-          <Button
-            className={classes.eachList}
-            component={Link}
-            to={'/'}
-            onClick={TologOut}
-          >
+          <Button className={classes.eachList} onClick={TologOut}>
             <ListItemIcon className={classes.logOut}>
               <MeetingRoomIcon />
             </ListItemIcon>
