@@ -1,8 +1,11 @@
 import { Box, Hidden, makeStyles } from '@material-ui/core'
 import React from 'react'
+
 import DrawerInside from './misc/DrawerInside'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
+import ReportIssue from './misc/ReportIssue'
+
 import THINCLogo from '../../local/thincLogo.png'
 import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
@@ -42,6 +45,9 @@ function Header() {
       <Box display="flex" flexDirection="row" justifyContent="space-between">
         <img src={THINCLogo} alt="" className={classes.thincLogo} />
         <Box flexDirection="row" justifyContent="flex-start">
+          <Hidden smDown>
+            <ReportIssue />
+          </Hidden>
           <LanguageSwitcher />
           <Hidden smDown>
             <LogOutButton />
