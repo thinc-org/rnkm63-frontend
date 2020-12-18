@@ -12,7 +12,7 @@ import { Theme } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LinkButton from './LinkButton'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 import theme from '../../config/theme'
 
 const greenButtonTheme = createMuiTheme({
@@ -117,6 +117,7 @@ export function HandleRequestError(props: IRequestError) {
   const { requestID, status } = props
 
   const history = useHistory()
+  const location = useLocation()
 
   if (status === 401 || status === 403) history.push('/login')
   const reportProblem = React.useCallback(() => {
@@ -129,8 +130,12 @@ export function HandleRequestError(props: IRequestError) {
     <Error title={t(`code.${status}`)}>
       {props.status === 500 || props.status === 503 || props.status === 400 ? (
         <ErrorButton onClick={reportProblem}>{t('report')}</ErrorButton>
-      ) : (
+      ) : location?.pathname !== '/' ? (
         <ErrorLink to="/">{t('returnHome')}</ErrorLink>
+      ) : (
+        <Link to="/" component={ErrorButton}>
+          {t('refreshPage')}
+        </Link>
       )}
     </Error>
   )
