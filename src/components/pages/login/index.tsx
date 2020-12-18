@@ -34,7 +34,7 @@ function Login() {
     if (ticket !== null) {
       SendTicketToBack(ticket, onLoginComplete, onLoginError)
     }
-  }, [history])
+  }, [history, onLoginComplete, onLoginError])
 
   const toggleAgree = () => {
     setAgree(!agree)
