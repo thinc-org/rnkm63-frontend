@@ -36,7 +36,7 @@ function Form() {
 
   const confirm = React.useCallback(
     (value) => {
-      if (userData!.isImgWrong && imageBlob === 0) {
+      if ((!userData!.data || userData!.isImgWrong) && imageBlob === 0) {
         setImageRequired(true)
         return
       }
@@ -50,18 +50,22 @@ function Form() {
     const edit =
       imageBlob !== 0 ||
       userData!.isNameWrong ||
-      userData!.data === null ||
+      !userData!.data ||
       userData!.data.nickname !== data.nickname
     if (imageBlob !== 0) {
       const resPolicy = await getPolicyStorage()
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
       if (resUpload.status === 400) {
-        setErrorRequestID('')
+        setError(resUpload.status)
+        return
       }
     }
     const res = await postUserData(data, edit)
     if (res.status === 200 || res.status === 201) history.push('/form/complete')
-    else setError(res.status)
+    else {
+      setError(res.status)
+      setErrorRequestID(res.headers['x-request-id'])
+    }
   }, [data, history, imageBlob, userData])
 
   const closeDialog = React.useCallback(() => {
@@ -71,7 +75,10 @@ function Form() {
   useEffect(() => {
     async function fetchData() {
       const res = await getProfile()
-      if (res.status !== 200) setError(res.status)
+      if (res.status !== 200) {
+        setError(res.status)
+        setErrorRequestID(res.headers['x-request-id'])
+      }
 
       setUserData(res.data)
       if (!res.data.data) {

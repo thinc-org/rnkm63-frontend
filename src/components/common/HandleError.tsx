@@ -70,7 +70,7 @@ function HandleError(props: IError) {
       <Typography className={classes.textHeader}>
         {t(String(status))}
       </Typography>
-      {props.status === 500 || props.status === 503 ? (
+      {props.status === 500 || props.status === 503 || props.status === 400 ? (
         <Button className={classes.button} onClick={reportProblem}>
           {t('report')}
         </Button>
