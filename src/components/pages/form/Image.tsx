@@ -43,13 +43,7 @@ const Transition = React.forwardRef(function Transition(
 
 const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const { t } = useTranslation('form')
-  const {
-    setImageBlob,
-    preImage,
-    isImgWrong,
-    imageRequired,
-    setImageRequired,
-  } = props
+  const { setImageBlob, preImage, isImgWrong, imageRequired } = props
 
   const [upImg, setUpImg] = useState('')
   const [cropState, setCropState] = useState(false)

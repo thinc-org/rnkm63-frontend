@@ -44,35 +44,48 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-function HandleError(props: { requestID: string; status: number }) {
+interface IError {
+  requestID: string
+  status: number
+}
+
+function HandleError(props: IError) {
   const { t } = useTranslation('error')
+  const { requestID, status } = props
+
   const history = useHistory()
-  if (props.status === 401 || props.status === 403) history.push('/login')
+
+  if (status === 401 || status === 403) history.push('/login')
   const classes = useStyles()
   const reportProblem = React.useCallback(() => {
     window.location.href =
-      props.requestID === ''
+      requestID === ''
         ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
         : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
-          props.requestID
-  }, [])
+          requestID
+  }, [requestID])
 
   const returnHome = React.useCallback(() => {
     history.push('/')
-  }, [])
+  }, [history])
 
   return (
     <Box className={classes.container}>
       <SadThincIcon />
       <Typography className={classes.textHeader}>
-        {t(String(props.status))}
+        {t(String(status))}
       </Typography>
       {props.status === 500 || props.status === 503 ? (
         <Button className={classes.button} onClick={reportProblem}>
           {t('report')}
         </Button>
       ) : (
-        <Link to="/" component={Button} className={classes.button}>
+        <Link
+          to="/"
+          component={Button}
+          className={classes.button}
+          onClick={returnHome}
+        >
           {t('returnHome')}
         </Link>
       )}

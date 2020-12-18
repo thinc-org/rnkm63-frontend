@@ -55,11 +55,14 @@ function Form() {
     if (imageBlob !== 0) {
       const resPolicy = await getPolicyStorage()
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
+      if (resUpload.status === 400) {
+        setErrorRequestID('')
+      }
     }
     const res = await postUserData(data, edit)
     if (res.status === 200 || res.status === 201) history.push('/form/complete')
     else setError(res.status)
-  }, [data, history])
+  }, [data, history, imageBlob, userData])
 
   const closeDialog = React.useCallback(() => {
     setConfirmOpen(false)
@@ -79,7 +82,7 @@ function Form() {
       setPreImage('https://storage.googleapis.com/' + resImgUrl.data)
     }
     fetchData()
-  }, [])
+  }, [history])
 
   if (error !== 0) {
     return <HandleError requestID={errorRequestID} status={error} />
@@ -110,7 +113,6 @@ function Form() {
                 setImageBlob={setImageBlob}
                 preImage={preImage}
                 imageRequired={imageRequired}
-                setImageRequired={setImageRequired}
                 isImgWrong={userData.isImgWrong || !userData.data}
               />
             </Box>
