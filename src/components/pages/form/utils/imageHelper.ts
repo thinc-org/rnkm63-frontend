@@ -1,7 +1,7 @@
-import { compressAccurately, urltoBlob } from 'image-conversion'
+import { compressAccurately } from 'image-conversion'
 import Resizer from 'react-image-file-resizer'
 
-const createImage = (url: any) =>
+export const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image()
     image.addEventListener('load', () => resolve(image))
@@ -12,7 +12,7 @@ const createImage = (url: any) =>
 
 const limitFileKB = 300
 
-function getRadianAngle(degreeValue: any) {
+function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180
 }
 
@@ -55,6 +55,18 @@ export async function getResizedImage(img: File) {
   })
 }
 
+function canvasToBlob(canvas: HTMLCanvasElement, type: string): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob === null) {
+        reject('failed to convert canvas to blob')
+      } else {
+        resolve(blob)
+      }
+    }, type)
+  })
+}
+
 /**
  * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
  * @param {File} image - Image File url
@@ -66,9 +78,9 @@ export async function getCroppedImg(
   pixelCrop: any,
   rotation = 0
 ) {
-  const image: any = await createImage(imageSrc)
-  const canvas: any = document.createElement('canvas')
-  const ctx: any = canvas.getContext('2d')
+  const image = await createImage(imageSrc)
+  const canvas = document.createElement('canvas')
+  const ctx = canvas.getContext('2d')!!
 
   const maxSize = Math.max(image.width, image.height)
   const safeArea = maxSize
@@ -103,8 +115,7 @@ export async function getCroppedImg(
   )
 
   // As Base64 string
-  const base64 = canvas.toDataURL('image/jpeg')
-  const blob = await urltoBlob(base64)
+  const blob = await canvasToBlob(canvas, 'image/jpeg')
 
   const compressImg = await compressAccurately(blob, limitFileKB)
 

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
 import { API_URL } from '../utils'
 
 type SimpleCallback = () => void
@@ -12,7 +12,7 @@ function Connect() {
 }
 
 function SendTicketToBack(ticket: string, callback: SimpleCallback) {
-  let config = {
+  let config: AxiosRequestConfig = {
     params: {
       ticket: ticket,
     },
@@ -22,6 +22,7 @@ function SendTicketToBack(ticket: string, callback: SimpleCallback) {
   axios
     .get(API_URL + '/auth/verify', config)
     .then((res) => {
+      console.log(res)
       callback()
     })
     .catch((err) => {

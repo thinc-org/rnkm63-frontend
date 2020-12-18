@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   Button,
   Slide,
@@ -43,6 +43,7 @@ const Transition = React.forwardRef(function Transition(
 
 const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const { t } = useTranslation('form')
+  const { setImageBlob, preImage, isImgWrong, imageRequired } = props
 
   const [upImg, setUpImg] = useState('')
   const [cropState, setCropState] = useState(false)
@@ -55,10 +56,10 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const [maxZoom, setMaxZoom] = useState(4)
   const [fileSizeError, setFileSizeError] = useState(false)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-  const [finalImg, setFinalImg] = useState('')
+  const [finalImg, setFinalImg] = useState(preImage)
   const [editStatus, setEditStatus] = useState(false)
 
-  const style = imageStyle({ editStatus: false })
+  const style = imageStyle({ editStatus: imageRequired })
 
   const onSelectFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,7 +96,6 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
-  const { setImageBlob } = props
   const makeCroppedImage = useCallback(async () => {
     if (!upImg) {
       return
@@ -122,6 +122,10 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCropState(true)
     setUpImg('')
   }, [])
+
+  useEffect(() => {
+    setFinalImg(preImage)
+  }, [preImage])
 
   return (
     <Box
@@ -224,7 +228,9 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           })
             .split('|')
             .map((value, index) => (
-              <Typography key={index}>{'- ' + value}</Typography>
+              <Typography className={style.cropDescription} key={index}>
+                {'- ' + value}
+              </Typography>
             ))}
         </DialogContentText>
         {!!upImg ? (
@@ -253,15 +259,20 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           flexDirection: 'column',
         }}
       >
-        <Button
-          variant="contained"
-          color="primary"
-          className={style.button}
-          onClick={resetCropState}
+        {isImgWrong ? (
+          <Button
+            variant="contained"
+            color="primary"
+            className={style.button}
+            onClick={resetCropState}
+          >
+            {t('uploadTextButton')}
+          </Button>
+        ) : null}
+        <Typography
+          hidden={editStatus || !isImgWrong}
+          className={style.reasonText}
         >
-          {t('uploadTextButton')}
-        </Button>
-        <Typography hidden={editStatus} className={style.reasonText}>
           {t('uploadReason')}
         </Typography>
       </Box>
