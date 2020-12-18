@@ -1,10 +1,16 @@
 {
   "returnHome": "Back to home",
+  "report": "Report Problem",
   "notfound": {
     "title": "Error 404",
     "detail": "Page not found"
   },
   "not104": {
     "title": "For CU104 only"
+  },
+  "codes": {
+    "500": "Internal Server Error",
+    "503": "Service Unavaliable",
+    "409": "You have already confirmed"
   }
 }
