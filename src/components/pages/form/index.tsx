@@ -7,7 +7,7 @@ import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
-import Error, { ErrorButton, ErrorLink } from '../../common/Error'
+import { HandleRequestError } from '../../common/Error'
 import {
   registerSchema,
   formInitialValues,
@@ -88,7 +88,7 @@ function Form() {
   }, [history])
 
   if (error !== 0) {
-    return <HandleFormError requestID={errorRequestID} status={error} />
+    return <HandleRequestError requestID={errorRequestID} status={error} />
   }
 
   if (!userData) {
@@ -142,6 +142,7 @@ function Form() {
   )
 }
 
+<<<<<<< HEAD
 interface IFormError {
   requestID: string
   status: number
@@ -171,4 +172,6 @@ function HandleFormError(props: IFormError) {
   )
 }
 
+=======
+>>>>>>> make HandleError shared again
 export default Form

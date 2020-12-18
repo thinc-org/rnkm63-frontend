@@ -49,12 +49,5 @@
   "facebook": "Facebook",
   "requireNote": "*Do not leave any fields blank. (“-” if empty)",
   "nicknameNote": "Note: If you don’t have Thai nickname, please contact ",
-  "allergy": "Allergies",
-  "error": {
-    "500": "Internal Server Error",
-    "503": "Service Unavaliable",
-    "409": "You have already confirmed",
-    "report": "Report Problem",
-    "returnHome": "Back to home"
-  }
+  "allergy": "Allergies"
 }

@@ -6,7 +6,7 @@ import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
 import { API_URL } from '../../../utils'
-import HandleError from '../../common/HandleError'
+import { HandleRequestError } from '../../common/Error'
 import { useHistory } from 'react-router-dom'
 
 interface User {
@@ -69,7 +69,7 @@ function Profile() {
     fetchData()
   }, [history])
   if (error !== 0) {
-    return <HandleError requestID={errorRequestID} status={error} />
+    return <HandleRequestError requestID={errorRequestID} status={error} />
   }
 
   if (!userInfo) {

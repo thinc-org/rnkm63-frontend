@@ -11,6 +11,8 @@ import SadThincIcon from '../shell/misc/SadThincIcon'
 import { Theme } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LinkButton from './LinkButton'
+import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 import theme from '../../config/theme'
 
 const greenButtonTheme = createMuiTheme({
@@ -102,6 +104,35 @@ function Error({ title, detail, children }: IError) {
         <ThemeProvider theme={greenButtonTheme}>{children}</ThemeProvider>
       </Box>
     </Box>
+  )
+}
+
+interface IRequestError {
+  requestID: string
+  status: number
+}
+
+export function HandleRequestError(props: IRequestError) {
+  const { t } = useTranslation('errors')
+  const { requestID, status } = props
+
+  const history = useHistory()
+
+  if (status === 401 || status === 403) history.push('/login')
+  const reportProblem = React.useCallback(() => {
+    window.location.href = !requestID
+      ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
+      : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
+        requestID
+  }, [requestID])
+  return (
+    <Error title={t(`code.${status}`)}>
+      {props.status === 500 || props.status === 503 || props.status === 400 ? (
+        <ErrorButton onClick={reportProblem}>{t('report')}</ErrorButton>
+      ) : (
+        <ErrorLink to="/">{t('returnHome')}</ErrorLink>
+      )}
+    </Error>
   )
 }
 
