@@ -28,11 +28,19 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(4),
     alignItems: 'center',
   },
-  textHeader: {
-    color: 'white',
+  titleText: {
     fontSize: '3rem',
     fontWeight: 700,
     marginTop: theme.spacing(4),
+  },
+  detailText: {
+    fontSize: '1.5rem',
+    fontWeight: 500,
+  },
+  buttonsContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   button: {
     width: '15rem',
@@ -40,7 +48,6 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '1.5rem',
     fontSize: '1.125rem',
     marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
     fontWeight: 700,
     [theme.breakpoints.up('sm')]: {
       button: {
@@ -87,8 +94,11 @@ function Error({ title, detail, children }: IError) {
   return (
     <Box className={classes.container}>
       <SadThincIcon />
-      <Typography className={classes.textHeader}>{title}</Typography>
-      <Box>
+      <Typography className={classes.titleText}>{title}</Typography>
+      {!!detail && (
+        <Typography className={classes.detailText}>{detail}</Typography>
+      )}
+      <Box className={classes.buttonsContainer}>
         <ThemeProvider theme={greenButtonTheme}>{children}</ThemeProvider>
       </Box>
     </Box>
