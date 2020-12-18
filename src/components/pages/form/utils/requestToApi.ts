@@ -10,7 +10,7 @@ const config = {
 const apiClient = axios.create(config)
 
 const getProfile = function (): AxiosPromise<any> {
-  return apiClient.get('/user/profile')
+  return apiClient.get('/user/profile').catch((err) => err.response)
 }
 
 const postUserData = function (
@@ -21,38 +21,45 @@ const postUserData = function (
     data,
     edit,
   }
-  return apiClient.post('/user/profile', reqBody)
+  return apiClient.post('/user/profile', reqBody).catch((err) => err.response)
 }
 
 const getPolicyStorage = function (): AxiosPromise<any> {
-  return axios.get(`${API_URL}/user/uploadFileName`, config)
+  return apiClient.get('/user/getUploadPolicy').catch((err) => err.response)
 }
 
-const uploadImageToStorage = function (
-  blobImg: Blob,
-  policy: any,
-  filename: string
-) {
-  const bodyFormData = new FormData()
-  const fileImg = new File([blobImg], filename, {
-    type: 'image/jpeg',
-  })
+const getImageURL = function (): AxiosPromise<any> {
+  return apiClient.get('/user/getUploadFileName').catch((err) => err.response)
+}
 
-  const policyDocument = policy.policyDocument
-  const urlStorage = `${policyDocument.url}${policyDocument.fields.key}`
+const uploadImageToStorage = function (blobImg: Blob, policy: any) {
+  let bodyFormData = new FormData()
 
-  bodyFormData.append('image', fileImg)
+  const policyDocument = policy.fields
+  const urlStorage = policy.url
 
-  const fieldKeys = Object.keys(policyDocument.fields)
+  bodyFormData.append('file', blobImg)
+
+  const fieldKeys = Object.keys(policyDocument)
   fieldKeys.forEach((val: string) => {
-    bodyFormData.append(val, policyDocument.fields[val])
+    bodyFormData.append(val, policyDocument[val])
   })
 
-  return axios.post(urlStorage, bodyFormData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
-  })
+  bodyFormData.append('Content-Type', 'image/jpeg')
+
+  return axios
+    .post(urlStorage, bodyFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    .catch((err) => err.response)
 }
 
-export { getProfile, postUserData, getPolicyStorage, uploadImageToStorage }
+export {
+  getProfile,
+  postUserData,
+  getPolicyStorage,
+  uploadImageToStorage,
+  getImageURL,
+}

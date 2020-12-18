@@ -69,6 +69,7 @@ function Form() {
   const closeDialog = React.useCallback(() => {
     setConfirmOpen(false)
   }, [setConfirmOpen])
+
   useEffect(() => {
     async function fetchData() {
       const res = await getProfile()
@@ -85,37 +86,6 @@ function Form() {
 
       const resImgUrl = await getImageURL()
       setPreImage('https://storage.googleapis.com/' + resImgUrl.data)
-    }
-    fetchData()
-  }, [])
-
-  if (error500) {
-    return <Error500 requestID={errorRequestID} />
-  }
-
-  if (!userData) {
-    return null
-  }
-
-  if (userData!.isConfirm) {
-    history.push('/')
-  }
-
-  useEffect(() => {
-    async function fetchData() {
-      const res = await getProfile()
-      if (res.status === 401) history.push('/login')
-      if (res.status === 500) {
-        setError500(true)
-        return
-      }
-
-      setUserData(res.data)
-      if (!res.data.data) {
-        return
-      }
-
-      setPreImage(res.data.data.imgURL)
     }
     fetchData()
   }, [])

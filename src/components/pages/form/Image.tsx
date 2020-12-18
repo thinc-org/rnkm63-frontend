@@ -102,7 +102,6 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCroppedAreaPixels(croppedAreaPixels)
   }, [])
 
-  const { setImageBlob } = props
   const makeCroppedImage = useCallback(async () => {
     if (!upImg) {
       return
