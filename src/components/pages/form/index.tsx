@@ -5,7 +5,7 @@ import FormInput from './FormInput'
 import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import Error, { ErrorButton, ErrorLink } from '../../common/Error'
 import {
