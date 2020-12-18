@@ -1,24 +1,86 @@
 import React from 'react'
-import { Box, makeStyles } from '@material-ui/core'
+import {
+  Box,
+  Button,
+  Typography,
+  makeStyles,
+  ThemeProvider,
+  createMuiTheme,
+} from '@material-ui/core'
+import SadThincIcon from '../shell/misc/SadThincIcon'
+import { Theme } from '@material-ui/core'
+import { Link } from 'react-router-dom'
+import theme from '../../config/theme'
 
-const useStyles = makeStyles({
-  ErrorContainer: {
-    backgroundColor: 'red',
+const greenButtonTheme = createMuiTheme({
+  palette: {
+    primary: theme.palette.success,
+    secondary: theme.palette.error,
   },
 })
 
-interface IError {
-  title: string
-  detail: string
-}
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    marginTop: theme.spacing(4),
+    alignItems: 'center',
+  },
+  textHeader: {
+    color: 'white',
+    fontSize: '3rem',
+    fontWeight: 700,
+    marginTop: theme.spacing(4),
+  },
+  button: {
+    width: '15rem',
+    height: '3rem',
+    borderRadius: '1.5rem',
+    fontSize: '1.125rem',
+    marginTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
+    fontWeight: 700,
+    [theme.breakpoints.up('sm')]: {
+      button: {
+        width: '12rem',
+        height: '3rem',
+      },
+    },
+  },
+}))
 
-function Error({ title, detail }: IError) {
+export function ErrorButton(props: any) {
   const classes = useStyles()
   return (
-    <Box className={classes.ErrorContainer}>
-      <h1>Error!!</h1>
-      <h4>{title}</h4>
-      <p>{detail}</p>
+    <Button
+      className={classes.button}
+      color="primary"
+      variant="contained"
+      {...props}
+    />
+  )
+}
+
+export function ErrorLink(props: any) {
+  return <Link component={ErrorButton} {...props} />
+}
+
+interface IError {
+  title: string
+  detail?: string
+  children: JSX.Element | JSX.Element[]
+}
+
+function Error({ title, detail, children }: IError) {
+  const classes = useStyles()
+  return (
+    <Box className={classes.container}>
+      <SadThincIcon />
+      <Typography className={classes.textHeader}>{title}</Typography>
+      <Box>
+        <ThemeProvider theme={greenButtonTheme}>{children}</ThemeProvider>
+      </Box>
     </Box>
   )
 }
