@@ -101,7 +101,7 @@ const FormSelectFieldInner = React.memo(function FormSelectFieldInner(
         error={touched && Boolean(error)}
         onChange={onChange}
       >
-        <option aria-label="None" value="" />
+        <option aria-label="None" value="" style={{ background: 'white' }} />
         {options.map((option) => (
           <FormSelectFieldOption
             key={`${option.value}-${option.text}`}
@@ -118,7 +118,7 @@ const FormSelectFieldOption = React.memo(function FormSelectFieldOption(
 ) {
   const { t } = useTranslation('form')
   return (
-    <option style={{ color: 'black' }} value={props.value}>
+    <option style={{ color: 'black', background: 'white' }} value={props.value}>
       {t(props.text)}
     </option>
   )

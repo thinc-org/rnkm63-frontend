@@ -18,6 +18,9 @@ import { UserContext } from '../../../contexts/UserContext'
 import Loading from '../../common/Loading'
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: ['Rubik', 'Kanit', 'sans-serif'].join(','),
+  },
   palette: {
     type: 'light',
     primary: {
