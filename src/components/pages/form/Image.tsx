@@ -162,7 +162,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         </DialogTitle>
 
         {!!upImg ? (
-          <React.Fragment>
+          <Box>
             <Box
               style={{
                 height: '100%',
@@ -198,7 +198,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               />
               <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
             </Box>
-          </React.Fragment>
+          </Box>
         ) : (
           <Box className={style.cropContainer}>
             <Box style={{ width: '100%', height: '100%' }}>

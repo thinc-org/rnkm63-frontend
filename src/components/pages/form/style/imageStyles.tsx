@@ -37,11 +37,13 @@ const imageStyle = makeStyles(
         borderRadius: '40px',
         alignSelf: 'center',
         width: '50%',
+        minHeight: '30px',
         backgroundColor: theme.palette.success.main,
         '&:hover': {
           background: theme.palette.success.main,
         },
         [theme.breakpoints.up('sm')]: {
+          minHeight: '40px',
           width: '30%',
         },
       },
@@ -101,6 +103,7 @@ const imageStyle = makeStyles(
         alignSelf: 'center',
         width: '70%',
         height: '200px',
+        minHeight: '200px',
         background: '#333',
         [theme.breakpoints.up('sm')]: {
           height: '300px',
@@ -114,6 +117,7 @@ const imageStyle = makeStyles(
         paddingBottom: theme.spacing(1),
       },
       dialog: {
+        overflowY: 'scroll',
         background: 'white',
         borderRadius: '0px',
       },
@@ -126,6 +130,7 @@ const imageStyle = makeStyles(
         display: 'flex',
         alignSelf: 'center',
         alignItems: 'center',
+        margin: 'auto',
         width: '70%',
         paddingTop: theme.spacing(2.5),
       },
