@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Box, Typography } from '@material-ui/core'
+import React, { useEffect, useRef } from 'react'
+import { Button, Box, Typography, RootRef } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
 import FormDialog from './utils/component/formDialogComponent'
@@ -60,6 +60,17 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
     if (imageBlob !== 0) {
       const resPolicy = await getPolicyStorage()
+      if (resPolicy.status === 401) {
+        history.push('/login')
+      } else if (resPolicy.status === 500) {
+        this.setState({
+          submitError: RequestError(
+            resPolicy.status,
+            resPolicy.headers['x-request-id']
+          ),
+          isSubmitLoading: false,
+        })
+      }
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
       if (resUpload.status === 400) {
         this.setState({
@@ -95,9 +106,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
     const { userData } = this.context
 
     if ((!userData?.data || userData?.isImgWrong) && imageBlob === 0) {
-      this.setState({
-        imageRequired: true,
-      })
+      this.setImageRequired(true)
     } else {
       this.setState(
         {
@@ -110,6 +119,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
   setImageBlob: (blob: any) => void = (blob) => {
     this.setState({
       imageBlob: blob,
+    })
+  }
+  setImageRequired: (param: boolean) => void = (param) => {
+    this.setState({
+      imageRequired: param,
     })
   }
   render() {
@@ -131,6 +145,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
           setImageBlob={this.setImageBlob}
           imageRequired={imageRequired}
           isConfirmOpen={this.state.confirmOpen}
+          setImageRequired={this.setImageRequired}
           closeDialog={this.closeDialog}
           submit={this.submit}
         />
@@ -140,10 +155,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
 interface IFormUI {
   userData: IUser
-  confirm: (value: IUserData) => void
-  setImageBlob: (blob: any) => void
   imageRequired: boolean
   isConfirmOpen: boolean
+  setImageBlob: (blob: any) => void
+  setImageRequired: (param: boolean) => void
+  confirm: (value: IUserData) => void
   closeDialog: () => void
   submit: () => void
 }
@@ -154,12 +170,21 @@ function FormUI(props: IFormUI) {
     confirm,
     setImageBlob,
     imageRequired,
+    setImageRequired,
     isConfirmOpen,
     closeDialog,
     submit,
   } = props
   const { t } = useTranslation('form')
   const style = indexStyle()
+  const imageRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (imageRequired) {
+      imageRef.current?.scrollIntoView()
+    }
+  }, [imageRequired])
+
   return (
     <Box className={style.container}>
       <Formik
@@ -172,14 +197,19 @@ function FormUI(props: IFormUI) {
             {!userData.data ? t('register') : t('editProfile')}
           </Typography>
           <Box className={style.content}>
-            <Box className={style.image}>
-              <Image
-                setImageBlob={setImageBlob}
-                preImage={userData?.data?.imgURL ?? ''}
-                imageRequired={imageRequired}
-                isImgWrong={userData.isImgWrong || !userData.data}
-              />
-            </Box>
+            <RootRef rootRef={imageRef}>
+              <Box className={style.image}>
+                <Image
+                  setImageBlob={setImageBlob}
+                  preImage={
+                    userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
+                  }
+                  imageRequired={imageRequired}
+                  setImageRequired={setImageRequired}
+                  isImgWrong={userData.isImgWrong || !userData.data}
+                />
+              </Box>
+            </RootRef>
             <Box className={style.formInput}>
               <FormInput />
             </Box>

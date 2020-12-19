@@ -32,7 +32,7 @@ export async function getResizedImage(
         widthTarget,
         heightTarget,
         'jpeg',
-        80,
+        90,
         0,
         (uri) => {
           resolve(uri)
@@ -66,7 +66,7 @@ export async function getResizedImage(
       widthImg,
       heightImg,
       'jpeg',
-      85,
+      100,
       0,
       (uri) => {
         resolve({ uri, widthImg, heightImg })
@@ -137,6 +137,7 @@ export async function getCroppedImg(
 
   // As Base64 string
   const blob = await canvasToBlob(canvas, 'image/jpeg')
+
   const resizeBlob = await getResizedImage(blob, 300, 400)
   const compressImg = await compressAccurately(resizeBlob, limitFileKB)
 
@@ -144,17 +145,21 @@ export async function getCroppedImg(
   return { urlFile: URL.createObjectURL(compressImg), blob: compressImg }
 }
 
-export function checkImageSize(img: string | File, checkFile: Boolean = false) {
+export function checkImageSize(
+  img: string | File,
+  checkFile: Boolean = false,
+  sizeLimit: number
+) {
   if (typeof img === 'string') {
     const buffer = Buffer.from(img.substring(img.indexOf(',') + 1))
     if (checkFile === true) {
-      return buffer.length <= limitFileKB * 1024
+      return buffer.length <= sizeLimit * 1024
     }
     return buffer.length
   } else {
     const buffer = img.size
     if (checkFile === true) {
-      return buffer <= limitFileKB * 1024
+      return buffer <= sizeLimit * 1024
     }
     return buffer
   }
