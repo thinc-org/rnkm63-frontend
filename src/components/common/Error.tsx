@@ -10,10 +10,11 @@ import {
 import SadThincIcon from '../shell/misc/SadThincIcon'
 import { Theme } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import LinkButton from './LinkButton'
+import LinkButton, { LinkButtonProps } from './LinkButton'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useLocation } from 'react-router-dom'
 import theme from '../../config/theme'
+import { ButtonProps } from '@material-ui/core/Button'
 
 const greenButtonTheme = createMuiTheme({
   palette: {
@@ -60,7 +61,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export function ErrorButton(props: any) {
+interface ErrorButtonProps extends ButtonProps {
+  target: string
+  href: string
+}
+
+export function ErrorButton(props: ErrorButtonProps) {
   const classes = useStyles()
   return (
     <Button
@@ -72,23 +78,30 @@ export function ErrorButton(props: any) {
   )
 }
 
-export function ErrorLink(props: any) {
+interface ErrorLinkProps extends ButtonProps {
+  to: string
+  replace?: boolean
+}
+
+export function ErrorLink(props: ErrorLinkProps) {
   const classes = useStyles()
-  return (
-    <Link
-      component={LinkButton}
+  const { to, replace, ...button } = props
+  const comp = (props: LinkButtonProps) => (
+    <LinkButton
+      {...button}
+      {...props}
       className={classes.button}
       color="primary"
       variant="contained"
-      {...props}
     />
   )
+  return <Link component={comp} to={to} replace={replace} />
 }
 
 interface IError {
   title: string
   detail?: string
-  children: JSX.Element | JSX.Element[]
+  children: React.ReactNode
 }
 
 function Error({ title, detail, children }: IError) {

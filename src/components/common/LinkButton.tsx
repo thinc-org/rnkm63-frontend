@@ -1,10 +1,17 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
+import { ButtonProps } from '@material-ui/core/Button'
 
+export interface LinkButtonProps extends ButtonProps {
+  target: string
+  href: string
+  navigate: Function
+}
 // <Link component={Button} /> causes an undesired page refresh.
 // Use <Link component={LinkButton} /> instead.
-function LinkButton(props: any) {
-  const { onClick, navigate, ...rest } = props
+function LinkButton(props: LinkButtonProps) {
+  console.log(props)
+  const { navigate, ...rest } = props
   const go = React.useCallback(
     (e) => {
       e.preventDefault()
