@@ -5,45 +5,228 @@ import FormInput from './FormInput'
 import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { HandleRequestError } from '../../common/Error'
-import {
-  registerSchema,
-  formInitialValues,
-  IFormDataRequest,
-} from './utils/registerSchema'
+import { registerSchema, formInitialValues } from './utils/registerSchema'
 import {
   postUserData,
-  getProfile,
   uploadImageToStorage,
   getPolicyStorage,
 } from './utils/requestToApi'
 
-function Form() {
+import { UserContext, IUserData, IUser } from '../../../contexts/UserContext'
+import { RequestError, IRequestError } from '../../common/Error'
+import Loading from '../../common/Loading'
+
+interface FormState {
+  imageBlob: any
+  confirmOpen: boolean
+  imageRequired: boolean
+  data: IUserData
+  isSubmitLoading: boolean
+  submitError: IRequestError | null
+}
+
+interface FormProps {
+  history: any
+}
+
+class Form extends React.PureComponent<FormProps, FormState> {
+  static contextType = UserContext
+  constructor(props: FormProps) {
+    super(props)
+    this.state = {
+      imageBlob: 0,
+      confirmOpen: false,
+      imageRequired: false,
+      data: formInitialValues,
+      isSubmitLoading: false,
+      submitError: null,
+    }
+  }
+  submit: () => void = async () => {
+    this.setState({
+      isSubmitLoading: true,
+    })
+    const { imageBlob, data } = this.state
+    const { userData } = this.context
+    const { history } = this.props
+    const edit =
+      imageBlob !== 0 ||
+      userData?.isNameWrong ||
+      !userData?.data ||
+      userData?.data.nickname !== data.nickname
+
+    if (imageBlob !== 0) {
+      const resPolicy = await getPolicyStorage()
+      const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
+      if (resUpload.status === 400) {
+        this.setState({
+          submitError: RequestError(
+            resUpload.status,
+            resUpload.headers['x-request-id']
+          ),
+          isSubmitLoading: false,
+        })
+        return
+      }
+    }
+    const res = await postUserData(data, edit)
+    if (res.status === 200 || res.status === 201) history.push('/form/complete')
+    else {
+      this.setState({
+        submitError: RequestError(res.status, res.headers['x-request-id']),
+        isSubmitLoading: false,
+      })
+    }
+  }
+  openDialog: () => void = () => {
+    this.setState({
+      confirmOpen: true,
+    })
+  }
+  closeDialog: () => void = () => {
+    this.setState({
+      confirmOpen: false,
+    })
+  }
+  confirm: (value: IUserData) => void = (value) => {
+    const { imageBlob } = this.state
+    const { userData } = this.context
+
+    if ((!userData?.data || userData?.isImgWrong) && imageBlob === 0) {
+      this.setState({
+        imageRequired: true,
+      })
+    } else {
+      this.setState(
+        {
+          data: value,
+        },
+        this.openDialog
+      )
+    }
+  }
+  setImageBlob: (blob: any) => void = (blob) => {
+    this.setState({
+      imageBlob: blob,
+    })
+  }
+  render() {
+    const {
+      user: userData,
+      isLoaded: isUserLoaded,
+      isError: isUserLoadError,
+      error: userLoadError,
+    } = this.context
+    const { submitError, imageRequired, isSubmitLoading } = this.state
+    if (userLoadError) return <HandleRequestError {...userLoadError} />
+    else if (userData?.isConfirm) return <Redirect to="/" />
+    else if (submitError) return <HandleRequestError {...submitError} />
+    else if (!isUserLoaded || isSubmitLoading) return <Loading />
+    else
+      return (
+        <FormUI
+          userData={userData}
+          confirm={this.confirm}
+          setImageBlob={this.setImageBlob}
+          imageRequired={imageRequired}
+          isConfirmOpen={this.state.confirmOpen}
+          closeDialog={this.closeDialog}
+          submit={this.submit}
+        />
+      )
+  }
+}
+
+interface IFormUI {
+  userData: IUser
+  confirm: (value: IUserData) => void
+  setImageBlob: (blob: any) => void
+  imageRequired: boolean
+  isConfirmOpen: boolean
+  closeDialog: () => void
+  submit: () => void
+}
+
+function FormUI(props: IFormUI) {
+  const {
+    userData,
+    confirm,
+    setImageBlob,
+    imageRequired,
+    isConfirmOpen,
+    closeDialog,
+    submit,
+  } = props
+  const { t } = useTranslation('form')
+  const style = indexStyle()
+  return (
+    <Box className={style.container}>
+      <Formik
+        initialValues={userData?.data ?? formInitialValues}
+        onSubmit={confirm}
+        validationSchema={registerSchema}
+      >
+        <FormikForm>
+          <Typography className={style.title}>
+            {!userData.data ? t('register') : t('editProfile')}
+          </Typography>
+          <Box className={style.content}>
+            <Box className={style.image}>
+              <Image
+                setImageBlob={setImageBlob}
+                preImage={userData?.data?.imgURL ?? ''}
+                imageRequired={imageRequired}
+                isImgWrong={userData.isImgWrong || !userData.data}
+              />
+            </Box>
+            <Box className={style.formInput}>
+              <FormInput />
+            </Box>
+          </Box>
+          <Box>
+            <Button classes={{ root: style.submitButton }} type="submit">
+              {t('submit')}
+            </Button>
+            <Typography className={style.submitNote}>
+              {t('submitNote')}
+            </Typography>
+          </Box>
+        </FormikForm>
+      </Formik>
+      <FormDialog
+        confirmOpen={isConfirmOpen}
+        closeDialog={closeDialog}
+        submit={submit}
+      />
+    </Box>
+  )
+}
+/*
+function FormFC() {
   const [imageBlob, setImageBlob] = useState(0 as any)
   const [confirmOpen, setConfirmOpen] = useState(false)
-  const [userData, setUserData] = useState(null as IFormDataRequest | null)
+  const {user: userData, isLoaded: isUserLoaded, isError: isUserLoadError, error: userLoadError} = React.useContext(UserContext)
+
   const [preImage, setPreImage] = useState('')
   const [imageRequired, setImageRequired] = useState(false)
+
   const [data, setData] = useState(formInitialValues)
-  const [error, setError] = useState(0)
-  const [errorRequestID, setErrorRequestID] = useState('')
+
   const { t } = useTranslation('form')
   const style = indexStyle()
   const history = useHistory()
 
-  const confirm = React.useCallback(
-    (value) => {
-      if ((!userData!.data || userData!.isImgWrong) && imageBlob === 0) {
-        setImageRequired(true)
-        return
-      }
-      setData(value)
-      setConfirmOpen(true)
-    },
-    [setConfirmOpen, imageBlob, userData]
-  )
+
+  if (userLoadError) {
+    return <HandleRequestError {...userLoadError} />
+  }
+
+  if (userData?.isConfirm) {
+    history.push('/')
+  }
 
   const submit = React.useCallback(async () => {
     const edit =
@@ -71,33 +254,17 @@ function Form() {
     setConfirmOpen(false)
   }, [setConfirmOpen])
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await getProfile()
-      if (res.status !== 200) {
-        setError(res.status)
-        setErrorRequestID(res.headers['x-request-id'])
-      }
-      setUserData(res.data)
-      if (!res.data.data) {
+  const confirm = React.useCallback(
+    (value) => {
+      if ((!userData!.data || userData!.isImgWrong) && imageBlob === 0) {
+        setImageRequired(true)
         return
       }
-      setPreImage(res.data.data.imgURL)
-    }
-    fetchData()
-  }, [history])
-
-  if (error !== 0) {
-    return <HandleRequestError requestID={errorRequestID} status={error} />
-  }
-
-  if (!userData) {
-    return null
-  }
-
-  if (userData!.isConfirm) {
-    history.push('/')
-  }
+      setData(value)
+      setConfirmOpen(true)
+    },
+    [setConfirmOpen, imageBlob, userData]
+  )
 
   return (
     <Box className={style.container}>
@@ -140,6 +307,6 @@ function Form() {
       />
     </Box>
   )
-}
+}*/
 
 export default Form

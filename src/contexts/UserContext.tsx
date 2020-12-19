@@ -2,7 +2,7 @@ import React from 'react'
 import getUser from '../controllers/GetUserController'
 import { RequestError, IRequestError } from '../components/common/Error'
 
-interface IUserData {
+export interface IUserData {
   prefixname: string
   realname: string
   surname: string
