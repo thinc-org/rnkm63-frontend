@@ -107,10 +107,18 @@ function Error({ title, detail, children }: IError) {
   )
 }
 
-interface IRequestError {
-  requestID: string
+export interface IRequestError {
   status: number
+  requestID: string | null
 }
+
+export const RequestError = (
+  status: number,
+  requestID: string | null = null
+) => ({
+  status,
+  requestID,
+})
 
 export function HandleRequestError(props: IRequestError) {
   const { t } = useTranslation('errors')
