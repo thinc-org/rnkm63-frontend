@@ -9,10 +9,10 @@ import {
 } from '@material-ui/core'
 import SadThincIcon from '../shell/misc/SadThincIcon'
 import { Theme } from '@material-ui/core'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import LinkButton, { LinkButtonProps } from './LinkButton'
 import { useTranslation } from 'react-i18next'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import theme from '../../config/theme'
 import { ButtonProps } from '@material-ui/core/Button'
 
@@ -136,11 +136,10 @@ export const RequestError = (
 export function HandleRequestError(props: IRequestError) {
   const { t } = useTranslation('errors')
   const { requestID, status } = props
-
-  const history = useHistory()
   const location = useLocation()
 
-  if (status === 401 || status === 403) history.push('/login')
+  if (status === 401 || status === 403) return <Redirect to="/login" />
+
   const reportUrl = !requestID
     ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
     : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' + requestID
