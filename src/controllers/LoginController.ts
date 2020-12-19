@@ -28,7 +28,7 @@ async function LogOut(): Promise<void> {
   try {
     return await axios.get(API_URL + '/auth/logout')
   } catch (e) {
-    throw e.respones.status
+    throw e.response.status
   }
 }
 
