@@ -53,7 +53,7 @@ const useStyles = makeStyles({
 
 function Header() {
   const classes = useStyles()
-  const { t } = useTranslation('logoutbutton')
+  const { t } = useTranslation('shell')
   return (
     <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -69,7 +69,7 @@ function Header() {
               variant="contained"
               color="secondary"
             >
-              {t('title')}
+              {t('logout')}
             </LogOutButton>
           </Hidden>
           <Hidden mdUp>

@@ -1,3 +1,8 @@
 {
-  "switchLanguage": "ภาษาไทย"
+  "switchLanguage": "ภาษาไทย",
+  "logout": "Log Out",
+  "report": "Report",
+  "home": "Home",
+  "schedule": "Schedule",
+  "bann": "Choose Bann"
 }

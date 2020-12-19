@@ -12,14 +12,14 @@ const useStyles = makeStyles({
 
 const ReportIssue = () => {
   const classes = useStyles()
-  const { t } = useTranslation('drawer')
+  const { t } = useTranslation('shell')
   return (
     <Button
       href="https://airtable.com/shrdg6IwqtKmNMfkL"
       target="__blank__"
       className={classes.pos}
     >
-      {t('Report')}
+      {t('report')}
     </Button>
   )
 }

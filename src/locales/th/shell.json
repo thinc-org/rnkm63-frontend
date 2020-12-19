@@ -1,3 +1,8 @@
 {
-  "switchLanguage": "English Version"
+  "switchLanguage": "English Version",
+  "logout": "ออกจากระบบ",
+  "report": "รายงานปัญหา",
+  "home": "หน้าหลัก",
+  "schedule": "กำหนดการ",
+  "bann": "เลือกบ้าน"
 }

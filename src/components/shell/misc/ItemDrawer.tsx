@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 const ItemDrawer = () => {
   const classes = useStyles()
-  const { t } = useTranslation('drawer')
+  const { t } = useTranslation('shell')
 
   return (
     <React.Fragment>
@@ -51,7 +51,7 @@ const ItemDrawer = () => {
               <HomeOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('Home')}
+              {t('home')}
             </Box>
           </Button>
         </ListItem>
@@ -66,7 +66,7 @@ const ItemDrawer = () => {
               <BugReportOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('Report')}
+              {t('report')}
             </Box>
           </Button>
         </ListItem>
@@ -99,7 +99,7 @@ const ItemDrawer = () => {
               className={classes.logOut}
               color="secondary"
             >
-              {t('Logout')}
+              {t('logout')}
             </Box>
           </LogOutButton>
         </ListItem>
