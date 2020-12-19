@@ -52,7 +52,7 @@ function LanguageSwitcher() {
   const language = i18n.language
 
   const switchLng = React.useCallback(() => {
-    if (language === 'th') {
+    if (language.startsWith('th')) {
       i18n.changeLanguage('en')
     } else {
       i18n.changeLanguage('th')
@@ -62,7 +62,7 @@ function LanguageSwitcher() {
     <Button onClick={switchLng} className={classes.Button} disableElevation>
       <Box
         className={`${classes.Overlay} ${
-          language === 'th' ? classes.OverlayLeft : classes.OverlayRight
+          language.startsWith('th') ? classes.OverlayLeft : classes.OverlayRight
         }`}
       ></Box>
       <Box className={`${classes.Lang} ${classes.Th}`}>
