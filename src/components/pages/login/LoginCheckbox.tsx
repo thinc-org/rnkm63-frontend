@@ -18,6 +18,7 @@ function LoginCheckbox({ update, text }: Props) {
       control={
         <Checkbox
           onChange={update}
+          color="primary"
           icon={
             <CheckBoxOutlineBlankIcon
               className={style.checkbox}

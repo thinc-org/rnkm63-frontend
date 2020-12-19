@@ -21,14 +21,14 @@ import LogOutButton from './LogOutButton'
 
 const useStyles = makeStyles({
   eachList: {
-    color: 'white',
+    flex: 1,
+    justifyContent: 'flex-start',
     textTransform: 'none',
+    transitionDuration: '0.15s',
+    transitionProperty: 'opacity',
     '&:hover': {
       opacity: '0.5',
     },
-  },
-  HomeSchIcon: {
-    color: 'white',
   },
   selectBann: {
     color: green[500],
@@ -47,7 +47,7 @@ const ItemDrawer = () => {
       <List>
         <ListItem>
           <Button className={classes.eachList} component={Link} to={'/'}>
-            <ListItemIcon className={classes.HomeSchIcon}>
+            <ListItemIcon>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
@@ -62,7 +62,7 @@ const ItemDrawer = () => {
             target="__blank__"
             className={classes.eachList}
           >
-            <ListItemIcon className={classes.HomeSchIcon}>
+            <ListItemIcon>
               <BugReportOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
@@ -97,7 +97,6 @@ const ItemDrawer = () => {
               fontSize={16}
               fontWeight="fontWeightBold"
               className={classes.logOut}
-              color="secondary"
             >
               {t('logout')}
             </Box>

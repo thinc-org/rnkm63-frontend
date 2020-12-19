@@ -1,12 +1,13 @@
 import React from 'react'
-import { makeStyles, Button, Box } from '@material-ui/core'
+import { makeStyles, Button, Box, Theme } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   Button: {
     backgroundColor: 'rgba(128,128,128,0.2)',
     width: '6rem',
     height: '2.5rem',
+    margin: '0.25rem',
   },
   Lang: {
     zIndex: 10,
@@ -44,7 +45,7 @@ const useStyles = makeStyles({
   OverlayRight: {
     transform: 'translateX(50%)',
   },
-})
+}))
 
 function LanguageSwitcher() {
   const { i18n } = useTranslation('shell')
