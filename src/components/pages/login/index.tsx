@@ -8,14 +8,17 @@ import { useTranslation } from 'react-i18next'
 import indexStyle from './indexStyle'
 import { withSuspense } from '../../hoc'
 import { useHistory } from 'react-router-dom'
+import { UserContext } from '../../../contexts/UserContext'
 
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
   const history = useHistory()
   const style = indexStyle()
+  const { load: loadUser } = React.useContext(UserContext)
 
-  const onLoginComplete = React.useCallback(() => {
+  const onLoginComplete = React.useCallback(async () => {
+    await loadUser()
     history.push('/form')
   }, [history])
 

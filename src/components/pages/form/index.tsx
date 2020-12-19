@@ -121,10 +121,10 @@ class Form extends React.PureComponent<FormProps, FormState> {
       error: userLoadError,
     } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
-    if (userLoadError) return <HandleRequestError {...userLoadError} />
+    if (!isUserLoaded || isSubmitLoading) return <Loading />
+    else if (userLoadError) return <HandleRequestError {...userLoadError} />
     else if (userData?.isConfirm) return <Redirect to="/" />
     else if (submitError) return <HandleRequestError {...submitError} />
-    else if (!isUserLoaded || isSubmitLoading) return <Loading />
     else
       return (
         <FormUI
