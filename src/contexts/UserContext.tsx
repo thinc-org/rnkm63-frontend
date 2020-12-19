@@ -98,20 +98,24 @@ export class UserProvider extends React.Component<any, IUserState> {
       getUser()
         .then((u) => {
           if (!(u && isIUser(u))) throw RequestError(500, null)
-          if (this.loadCompleted + 1 <= loadNumber) this.loadCompleted++
-          this.setState({
-            user: u,
-            isLoaded: true,
-            error: null,
-          })
+          if (this.loadCompleted + 1 <= loadNumber) {
+            this.loadCompleted++
+            this.setState({
+              user: u,
+              isLoaded: true,
+              error: null,
+            })
+          }
         })
         .catch((e) => {
-          if (this.loadCompleted + 1 <= loadNumber) this.loadCompleted++
-          this.setState({
-            user: null,
-            isLoaded: true,
-            error: e,
-          })
+          if (this.loadCompleted + 1 <= loadNumber) {
+            this.loadCompleted++
+            this.setState({
+              user: null,
+              isLoaded: true,
+              error: e,
+            })
+          }
         })
     })
   }
