@@ -13,9 +13,8 @@ const useStyles = makeStyles({
     marginTop: theme.spacing(3.75),
   },
   thincLogo: {
-    width: '14rem',
-    height: '10rem',
-    margin: '-2rem 0 -3rem 0',
+    height: '7.2rem',
+    margin: '-0.9rem 0 -3rem -1rem',
   },
   [theme.breakpoints.down('sm')]: {
     header: {

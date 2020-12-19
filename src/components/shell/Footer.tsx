@@ -30,13 +30,11 @@ const useStyles = makeStyles({
   },
   sgcuIcon: {
     height: '30px',
-    marginLeft: '12px',
-    marginRight: '5px',
+    marginRight: '15px',
   },
   thincIcon: {
-    marginLeft: '6px',
     height: '30px',
-    marginRight: '20px',
+    marginRight: '15px',
   },
   footerFont: {
     color: '#8D8D8D',
@@ -63,12 +61,11 @@ function Footer() {
           marginBottom="6px"
           paddingLeft="25px"
         >
-          <img src={EISA} alt="" className={classes.sponsorIcon} />
-          <img src={kohkae} alt="" className={classes.sponsorIcon} />
-
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
 
+          <img src={EISA} alt="" className={classes.sponsorIcon} />
+          <img src={kohkae} alt="" className={classes.sponsorIcon} />
           <img src={Major} alt="" className={classes.sponsorIcon} />
           <img src={SPT} alt="" className={classes.sponsorIcon} />
         </Box>
