@@ -43,7 +43,13 @@ const Transition = React.forwardRef(function Transition(
 
 const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const { t } = useTranslation('form')
-  const { setImageBlob, preImage, isImgWrong, imageRequired } = props
+  const {
+    setImageBlob,
+    preImage,
+    isImgWrong,
+    imageRequired,
+    setImageRequired,
+  } = props
 
   const [upImg, setUpImg] = useState('')
   const [cropState, setCropState] = useState(false)
@@ -67,7 +73,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         const reader = new FileReader()
         const file = e.target.files[0]
 
-        if (!checkImageSize(file, true)) {
+        if (!checkImageSize(file, true, 10240)) {
           setFileSizeError(true)
           return
         }
@@ -105,7 +111,8 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setFinalImg(img.urlFile)
     setImageBlob(img.blob)
     setEditStatus(true)
-  }, [upImg, croppedAreaPixels, setImageBlob])
+    setImageRequired(false)
+  }, [upImg, croppedAreaPixels, setImageBlob, setImageRequired])
 
   const closeDialog = useCallback(() => {
     setCropState(false)
@@ -143,6 +150,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         PaperProps={{
           classes: { root: style.dialog },
         }}
+        disableBackdropClick={true}
         TransitionComponent={Transition}
         keepMounted
         onClose={closeDialog}
