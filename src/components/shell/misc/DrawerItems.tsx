@@ -18,17 +18,18 @@ import { green, red } from '@material-ui/core/colors'
 
 import { Link } from 'react-router-dom'
 import LogOutButton from './LogOutButton'
+import { UserContext } from '../../../contexts/UserContext'
 
 const useStyles = makeStyles({
   eachList: {
-    color: 'white',
+    flex: 1,
+    justifyContent: 'flex-start',
     textTransform: 'none',
+    transitionDuration: '0.15s',
+    transitionProperty: 'opacity',
     '&:hover': {
       opacity: '0.5',
     },
-  },
-  HomeSchIcon: {
-    color: 'white',
   },
   selectBann: {
     color: green[500],
@@ -41,13 +42,14 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
+  const { user, error: userError } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
       <List>
         <ListItem>
           <Button className={classes.eachList} component={Link} to={'/'}>
-            <ListItemIcon className={classes.HomeSchIcon}>
+            <ListItemIcon>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
@@ -62,7 +64,7 @@ const ItemDrawer = () => {
             target="__blank__"
             className={classes.eachList}
           >
-            <ListItemIcon className={classes.HomeSchIcon}>
+            <ListItemIcon>
               <BugReportOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
@@ -87,22 +89,22 @@ const ItemDrawer = () => {
             {t('Bann')}
           </ListItemText>
         </ListItem>*/}
-
-        <ListItem>
-          <LogOutButton className={classes.eachList}>
-            <ListItemIcon className={classes.logOut}>
-              <MeetingRoomIcon />
-            </ListItemIcon>
-            <Box
-              fontSize={16}
-              fontWeight="fontWeightBold"
-              className={classes.logOut}
-              color="secondary"
-            >
-              {t('logout')}
-            </Box>
-          </LogOutButton>
-        </ListItem>
+        {!!user && !userError && (
+          <ListItem>
+            <LogOutButton className={classes.eachList}>
+              <ListItemIcon className={classes.logOut}>
+                <MeetingRoomIcon />
+              </ListItemIcon>
+              <Box
+                fontSize={16}
+                fontWeight="fontWeightBold"
+                className={classes.logOut}
+              >
+                {t('logout')}
+              </Box>
+            </LogOutButton>
+          </ListItem>
+        )}
       </List>
     </React.Fragment>
   )

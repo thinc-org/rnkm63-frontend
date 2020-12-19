@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { Box, Card, Typography } from '@material-ui/core'
+import {
+  Box,
+  Card,
+  Typography,
+  ThemeProvider,
+  createMuiTheme,
+} from '@material-ui/core'
 import LoginButton from './LoginButton'
 import LoginCheckbox from './LoginCheckbox'
 import { SendTicketToBack } from '../../../controllers/LoginController'
@@ -10,6 +16,23 @@ import { withSuspense } from '../../hoc'
 import { useHistory, Redirect } from 'react-router-dom'
 import { UserContext } from '../../../contexts/UserContext'
 import Loading from '../../common/Loading'
+
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: '#44AD53', //green
+      contrastText: '#FFFFFF',
+    },
+    text: {
+      primary: '#000000', //black
+    },
+    background: {
+      default: '#f1f1f1',
+      paper: '#fff',
+    },
+  },
+})
 
 function Login() {
   const { t } = useTranslation('login')
@@ -52,13 +75,15 @@ function Login() {
     return (
       <Box className={style.login}>
         <Typography className={style.title}>{t('title')}</Typography>
-        <Card className={style.container}>
-          <Typography className={style.description}>
-            {t('description')}
-          </Typography>
-          <LoginCheckbox update={toggleAgree} text={t('agreement')} />
-          <LoginButton agree={agree}>{t('login')}</LoginButton>
-        </Card>
+        <ThemeProvider theme={theme}>
+          <Card className={style.container} color="white">
+            <Typography className={style.description}>
+              {t('description')}
+            </Typography>
+            <LoginCheckbox update={toggleAgree} text={t('agreement')} />
+            <LoginButton agree={agree}>{t('login')}</LoginButton>
+          </Card>
+        </ThemeProvider>
       </Box>
     )
 }

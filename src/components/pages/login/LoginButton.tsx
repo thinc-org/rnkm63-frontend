@@ -16,6 +16,8 @@ function LoginButton({ agree, children }: Props) {
       fullWidth={true}
       disabled={!agree}
       className={style.button}
+      color="primary"
+      variant="contained"
       onClick={Connect}
     >
       {children}

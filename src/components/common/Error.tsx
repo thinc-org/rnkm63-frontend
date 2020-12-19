@@ -35,10 +35,12 @@ const useStyles = makeStyles((theme: Theme) => ({
     fontSize: '3rem',
     fontWeight: 700,
     marginTop: theme.spacing(4),
+    textAlign: 'center',
   },
   detailText: {
     fontSize: '1.5rem',
     fontWeight: 500,
+    textAlign: 'center',
   },
   buttonsContainer: {
     display: 'flex',

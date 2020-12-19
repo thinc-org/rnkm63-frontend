@@ -1,25 +1,32 @@
 import { Box, Hidden, makeStyles } from '@material-ui/core'
 import React from 'react'
-import DrawerInside from './misc/DrawerInside'
+import Drawer from './misc/Drawer'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
 import ReportIssue from './misc/ReportIssue'
 import { useTranslation } from 'react-i18next'
-import THINCLogo from '../../local/white_logo.png'
+import RnkmLogo from '../../local/rnkm_logo.png'
 import { withSuspense } from '../hoc'
+import { Link } from 'react-router-dom'
 import theme from '../../config/theme'
+import { UserContext } from '../../contexts/UserContext'
 const useStyles = makeStyles({
   header: {
-    marginTop: theme.spacing(3.75),
+    height: '6rem',
   },
-  thincLogo: {
-    height: '7.2rem',
-    margin: '-0.9rem 0 -3rem -1rem',
+  headerPart: {
+    padding: '0 1rem',
+  },
+  rnkmLogo: {
+    width: '10rem',
+    height: '5rem',
+  },
+  rnkmLogoLink: {
+    margin: '0.25rem',
   },
   logOutButton: {
     border: 0,
     borderRadius: '1.25rem',
-    color: 'white',
     width: '8rem',
     height: '2.5rem',
     margin: '0 1rem',
@@ -27,25 +34,17 @@ const useStyles = makeStyles({
     textAlign: 'center',
     fontWeight: 500,
   },
-  [theme.breakpoints.down('sm')]: {
+  [theme.breakpoints.down('xs')]: {
     header: {
-      marginTop: theme.spacing(1.875),
+      height: '5rem',
     },
-    thincLogo: {
-      maxWidth: '50%',
-      maxHeight: '50%',
+    headerPart: {
+      padding: '0 0.25rem',
     },
-    list: {
-      width: 250,
-    },
-    fullList: {
-      width: 'auto',
-    },
-  },
-  [theme.breakpoints.up('md')]: {
-    thincLogo: {
-      position: 'relative',
-      top: '-1.4rem',
+    rnkmLogo: {
+      width: '10rem',
+      maxWidth: '100%',
+      objectFit: 'contain',
     },
   },
 })
@@ -53,16 +52,33 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
+  const { user, error: userError } = React.useContext(UserContext)
   return (
-    <Box className={classes.header}>
-      <Box display="flex" flexDirection="row" justifyContent="space-between">
-        <img src={THINCLogo} alt="" className={classes.thincLogo} />
-        <Box flexDirection="row" justifyContent="flex-start">
-          <Hidden smDown>
-            <ReportIssue />
-          </Hidden>
-          <LanguageSwitcher />
-          <Hidden smDown>
+    <Box
+      className={classes.header}
+      display="flex"
+      flexDirection="row"
+      justifyContent="space-between"
+      alignItems="center"
+    >
+      <Box flex="1" className={classes.headerPart}>
+        <Link to="/" className={classes.rnkmLogoLink}>
+          <img src={RnkmLogo} alt="" className={classes.rnkmLogo} />
+        </Link>
+      </Box>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="flex-start"
+        alignItems="center"
+        className={classes.headerPart}
+      >
+        <Hidden xsDown>
+          <ReportIssue />
+        </Hidden>
+        <LanguageSwitcher />
+        {!!user && !userError && (
+          <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}
               variant="contained"
@@ -71,10 +87,10 @@ function Header() {
               {t('logout')}
             </LogOutButton>
           </Hidden>
-          <Hidden mdUp>
-            <DrawerInside />
-          </Hidden>
-        </Box>
+        )}
+        <Hidden smUp>
+          <Drawer />
+        </Hidden>
       </Box>
     </Box>
   )

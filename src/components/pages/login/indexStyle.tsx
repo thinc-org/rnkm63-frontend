@@ -2,50 +2,40 @@ import { makeStyles, Theme } from '@material-ui/core'
 
 const indexStyle = makeStyles((theme: Theme) => ({
   login: {
-    maxWidth: 375,
+    maxWidth: '25rem',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginBottom: 30,
+    marginBottom: '2rem',
   },
   container: {
-    padding: '30px 20px',
+    padding: '2rem 1rem',
     borderRadius: 5,
   },
   title: {
-    fontSize: 38,
-    color: theme.palette.text.primary,
+    fontSize: '2.5rem',
     fontWeight: 700,
-    marginBottom: 10,
+    marginBottom: '0.5rem',
   },
   description: {
-    fontSize: 16,
+    fontSize: '1rem',
     fontWeight: 400,
-    marginBottom: 11,
-    color: theme.palette.text.secondary,
+    marginBottom: '1rem',
   },
   checkboxForm: {
-    marginBottom: 30,
+    marginBottom: '2rem',
   },
   agreement: {
-    fontSize: 12,
+    fontSize: '0.8rem',
     fontWeight: 400,
-    color: theme.palette.text.secondary,
   },
-  checkbox: {
-    color: theme.palette.success.main,
-  },
+  checkbox: {},
   button: {
-    background: theme.palette.success.main,
-    borderRadius: 20,
+    borderRadius: '1.75rem',
     border: 0,
-    height: 45,
+    height: '2.5rem',
     textTransform: 'none',
-    color: theme.palette.text.primary,
-    fontSize: 16,
+    fontSize: '1rem',
     fontWeight: 700,
-    '&:hover': {
-      background: theme.palette.primary.main,
-    },
   },
 }))
 
