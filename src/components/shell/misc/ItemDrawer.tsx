@@ -17,6 +17,7 @@ import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
 import { green, red } from '@material-ui/core/colors'
 
 import { Link } from 'react-router-dom'
+import { LogOut } from '../../../controllers/LoginController'
 
 const useStyles = makeStyles({
   eachList: {
@@ -40,6 +41,11 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation(['drawer'])
+
+  const ToLogOut = React.useCallback(() => {
+    LogOut(() => console.log('LogOut Successful'))
+  }, [])
+
   return (
     <React.Fragment>
       <List>
@@ -87,7 +93,7 @@ const ItemDrawer = () => {
         </ListItem>*/}
 
         <ListItem>
-          <Button className={classes.eachList} component={Link} to={'/'}>
+          <Button className={classes.eachList} onClick={ToLogOut}>
             <ListItemIcon className={classes.logOut}>
               <MeetingRoomIcon />
             </ListItemIcon>
