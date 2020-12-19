@@ -85,6 +85,7 @@ export class UserProvider extends React.Component<any, IUserState> {
   }
   load: () => Promise<void> = () => {
     this.loadRequested++
+    const loadNumber = this.loadRequested
     return new Promise((resolve) => {
       this.setState(
         {
@@ -98,7 +99,7 @@ export class UserProvider extends React.Component<any, IUserState> {
         .then((u) => {
           this.loadCompleted++
           if (!(u && isIUser(u))) throw RequestError(500, null)
-          if (this.loadCompleted === this.loadRequested)
+          if (this.loadCompleted <= loadNumber)
             this.setState({
               user: u,
               isLoaded: true,
@@ -107,7 +108,7 @@ export class UserProvider extends React.Component<any, IUserState> {
         })
         .catch((e) => {
           this.loadCompleted++
-          if (this.loadCompleted === this.loadRequested)
+          if (this.loadCompleted <= loadNumber)
             this.setState({
               user: null,
               isLoaded: true,

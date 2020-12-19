@@ -14,6 +14,7 @@ import Loading from '../../common/Loading'
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
   const history = useHistory()
   const style = indexStyle()
   const {
@@ -36,6 +37,7 @@ function Login() {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     if (ticket !== null) {
+      setLoading(true)
       SendTicketToBack(ticket).then(loadUser).catch(onLoginError)
     }
   }, [loadUser, onLoginError])
@@ -44,8 +46,8 @@ function Login() {
     setAgree(!agree)
   }
 
-  if (!isUserLoaded) return <Loading />
   if (isUserLoaded && user && !userLoadError) return <Redirect to="/form" />
+  if (!isUserLoaded || loading) return <Loading />
   else
     return (
       <Box className={style.login}>
