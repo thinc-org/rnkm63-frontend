@@ -1,9 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { API_URL } from '../utils'
 
-type SimpleCallback = () => void
-type ErrorCallback = (status: number) => void
-
 function Connect() {
   window.location.href =
     process.env.REACT_APP_CHULASSOAPI +
@@ -12,11 +9,7 @@ function Connect() {
     '/login'
 }
 
-function SendTicketToBack(
-  ticket: string,
-  successCallback: SimpleCallback,
-  errorCallback: ErrorCallback
-) {
+async function SendTicketToBack(ticket: string): Promise<void> {
   let config: AxiosRequestConfig = {
     params: {
       ticket: ticket,
@@ -24,25 +17,19 @@ function SendTicketToBack(
     withCredentials: true,
   }
 
-  axios
-    .get(API_URL + '/auth/verify', config)
-    .then((res) => {
-      successCallback()
-    })
-    .catch((err) => {
-      errorCallback(err.response.status)
-    })
+  try {
+    return await axios.get(API_URL + '/auth/verify', config)
+  } catch (e) {
+    throw e.response.status
+  }
 }
 
-function LogOut(callback: SimpleCallback) {
-  axios
-    .get(API_URL + '/auth/logout')
-    .then((res) => {
-      callback()
-    })
-    .catch((err) => {
-      throw new Error(err)
-    })
+async function LogOut(): Promise<void> {
+  try {
+    return await axios.get(API_URL + '/auth/logout')
+  } catch (e) {
+    throw e.respones.status
+  }
 }
 
 export { Connect, SendTicketToBack, LogOut }

@@ -36,7 +36,7 @@ function Login() {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     if (ticket !== null) {
-      SendTicketToBack(ticket, loadUser, onLoginError)
+      SendTicketToBack(ticket).then(loadUser).catch(onLoginError)
     }
   }, [loadUser, onLoginError])
 

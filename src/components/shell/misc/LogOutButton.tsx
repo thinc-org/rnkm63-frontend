@@ -24,7 +24,13 @@ function LogOutButton() {
   const { t } = useTranslation('logoutbutton')
 
   const ToLogOut = React.useCallback(() => {
-    LogOut(() => console.log('LogOut Successful'))
+    LogOut()
+      .then(() => {
+        console.log('Logged out')
+      })
+      .catch((e: number) => {
+        console.warn(`Log out failed: ${e}`)
+      })
   }, [])
 
   return (

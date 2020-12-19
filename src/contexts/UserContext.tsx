@@ -65,7 +65,7 @@ interface IUserState {
 }
 
 interface IUserContext extends IUserState {
-  load: () => Promise<null>
+  load: () => Promise<void>
 }
 
 export const UserContext = React.createContext({} as IUserContext)
@@ -83,7 +83,7 @@ export class UserProvider extends React.Component<any, IUserState> {
     this.loadRequested = 0
     this.loadCompleted = 0
   }
-  load: () => Promise<null> = () => {
+  load: () => Promise<void> = () => {
     this.loadRequested++
     return new Promise((resolve) => {
       this.setState(
