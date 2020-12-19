@@ -142,36 +142,4 @@ function Form() {
   )
 }
 
-<<<<<<< HEAD
-interface IFormError {
-  requestID: string
-  status: number
-}
-
-function HandleFormError(props: IFormError) {
-  const { t } = useTranslation('form')
-  const { requestID, status } = props
-
-  const history = useHistory()
-
-  if (status === 401 || status === 403) history.push('/login')
-  const reportProblem = React.useCallback(() => {
-    window.location.href = !requestID
-      ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
-      : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' +
-        requestID
-  }, [requestID])
-  return (
-    <Error title={t(`error.${status}`)}>
-      {props.status === 500 || props.status === 503 ? (
-        <ErrorButton onClick={reportProblem}>{t('error.report')}</ErrorButton>
-      ) : (
-        <ErrorLink to="/">{t('error.returnHome')}</ErrorLink>
-      )}
-    </Error>
-  )
-}
-
-=======
->>>>>>> make HandleError shared again
 export default Form
