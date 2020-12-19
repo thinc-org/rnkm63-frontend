@@ -42,11 +42,9 @@ const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation(['drawer'])
 
-  const TologOut = () => {
-    LogOut(() => {
-      console.log('LogOut Successful')
-    })
-  }
+  const ToLogOut = React.useCallback(() => {
+    LogOut(() => console.log('LogOut Successful'))
+  }, [])
 
   return (
     <React.Fragment>
@@ -94,7 +92,7 @@ const ItemDrawer = () => {
         </ListItem>*/}
 
         <ListItem>
-          <Button className={classes.eachList} onClick={TologOut}>
+          <Button className={classes.eachList} onClick={ToLogOut}>
             <ListItemIcon className={classes.logOut}>
               <MeetingRoomIcon />
             </ListItemIcon>

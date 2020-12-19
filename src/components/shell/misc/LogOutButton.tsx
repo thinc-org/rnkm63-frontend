@@ -22,9 +22,9 @@ function LogOutButton() {
   const classes = useStyles()
   const { t } = useTranslation('logoutbutton')
 
-  const ToLogOut = () => {
+  const ToLogOut = React.useCallback(() => {
     LogOut(() => console.log('LogOut Successful'))
-  }
+  }, [])
 
   return (
     <Button
