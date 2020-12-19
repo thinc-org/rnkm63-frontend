@@ -20,6 +20,8 @@ export interface IUserData {
   facebook: string
   lineID: string
   imgURL: string
+  facultyEn?: string
+  facultyTh?: string
 }
 
 export interface IUser {
