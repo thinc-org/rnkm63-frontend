@@ -1,9 +1,16 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import SGCUIcon from '../../local/sgcuIcon.png'
-import THINCIcon from '../../local/thincIcon.png'
+
+import SGCUIcon from '../../local/WhiteOBJ.svg'
+import THINCIcon from '../../local/thinc_logo.svg'
+import kohkae from '../../local/kohkae.svg' //Left
+import EISA from '../../local/EISA.svg'
+import Major from '../../local/Major.svg' //Right
+import SPT from '../../local/SPT.svg'
+
 import { withSuspense } from '../hoc'
+
 const useStyles = makeStyles({
   root: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
@@ -17,14 +24,19 @@ const useStyles = makeStyles({
   footer: {
     backgroundColor: 'black',
   },
+  sponsorIcon: {
+    marginRight: '15px',
+    height: '30px',
+  },
   sgcuIcon: {
-    width: '25.63px',
-    height: '45px',
+    height: '30px',
+    marginLeft: '12px',
+    marginRight: '5px',
   },
   thincIcon: {
-    marginLeft: '12.37px',
-    width: '99.09px',
-    height: '40px',
+    marginLeft: '6px',
+    height: '30px',
+    marginRight: '20px',
   },
   footerFont: {
     color: '#8D8D8D',
@@ -49,9 +61,16 @@ function Footer() {
           flexDirection="row"
           justifyContent="center"
           marginBottom="6px"
+          paddingLeft="25px"
         >
+          <img src={EISA} alt="" className={classes.sponsorIcon} />
+          <img src={kohkae} alt="" className={classes.sponsorIcon} />
+
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
+
+          <img src={Major} alt="" className={classes.sponsorIcon} />
+          <img src={SPT} alt="" className={classes.sponsorIcon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
           {t('firstline')}
