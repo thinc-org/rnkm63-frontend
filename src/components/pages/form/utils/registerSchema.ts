@@ -79,6 +79,7 @@ const formInitialValues = {
   emergencyTel: '',
   emergencyTelRelationship: '',
   disease: '',
+  allergy: '',
   allergyMedicine: '',
   usedMedicine: '',
   foodRestriction: '',
