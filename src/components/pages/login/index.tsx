@@ -7,20 +7,21 @@ import { SendTicketToBack } from '../../../controllers/LoginController'
 import { useTranslation } from 'react-i18next'
 import indexStyle from './indexStyle'
 import { withSuspense } from '../../hoc'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Redirect } from 'react-router-dom'
 import { UserContext } from '../../../contexts/UserContext'
+import Loading from '../../common/Loading'
 
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
   const history = useHistory()
   const style = indexStyle()
-  const { load: loadUser } = React.useContext(UserContext)
-
-  const onLoginComplete = React.useCallback(async () => {
-    await loadUser()
-    history.push('/form')
-  }, [history, loadUser])
+  const {
+    load: loadUser,
+    user,
+    isLoaded: isUserLoaded,
+    isError: isUserLoadError,
+  } = React.useContext(UserContext)
 
   const onLoginError = React.useCallback(
     (status: number) => {
@@ -35,26 +36,29 @@ function Login() {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     if (ticket !== null) {
-      SendTicketToBack(ticket, onLoginComplete, onLoginError)
+      SendTicketToBack(ticket, loadUser, onLoginError)
     }
-  }, [history, onLoginComplete, onLoginError])
+  }, [loadUser, onLoginError])
 
   const toggleAgree = () => {
     setAgree(!agree)
   }
 
-  return (
-    <Box className={style.login}>
-      <Typography className={style.title}>{t('title')}</Typography>
-      <Card className={style.container}>
-        <Typography className={style.description}>
-          {t('description')}
-        </Typography>
-        <LoginCheckbox update={toggleAgree} text={t('agreement')} />
-        <LoginButton agree={agree}>{t('login')}</LoginButton>
-      </Card>
-    </Box>
-  )
+  if (!isUserLoaded) return <Loading />
+  if (isUserLoaded && user && !isUserLoadError) return <Redirect to="/form" />
+  else
+    return (
+      <Box className={style.login}>
+        <Typography className={style.title}>{t('title')}</Typography>
+        <Card className={style.container}>
+          <Typography className={style.description}>
+            {t('description')}
+          </Typography>
+          <LoginCheckbox update={toggleAgree} text={t('agreement')} />
+          <LoginButton agree={agree}>{t('login')}</LoginButton>
+        </Card>
+      </Box>
+    )
 }
 
 export default withSuspense(Login)
