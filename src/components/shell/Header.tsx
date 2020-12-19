@@ -4,7 +4,7 @@ import DrawerInside from './misc/DrawerInside'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
 import ReportIssue from './misc/ReportIssue'
-
+import { useTranslation } from 'react-i18next'
 import THINCLogo from '../../local/white_logo.png'
 import { withSuspense } from '../hoc'
 import theme from '../../config/theme'
@@ -16,6 +16,17 @@ const useStyles = makeStyles({
     width: '14rem',
     height: '10rem',
     margin: '-2rem 0 -3rem 0',
+  },
+  logOutButton: {
+    border: 0,
+    borderRadius: '1.25rem',
+    color: 'white',
+    width: '8rem',
+    height: '2.5rem',
+    margin: '0 1rem',
+    fontSize: '0.85rem',
+    textAlign: 'center',
+    fontWeight: 500,
   },
   [theme.breakpoints.down('sm')]: {
     header: {
@@ -39,8 +50,10 @@ const useStyles = makeStyles({
     },
   },
 })
+
 function Header() {
   const classes = useStyles()
+  const { t } = useTranslation('logoutbutton')
   return (
     <Box className={classes.header}>
       <Box display="flex" flexDirection="row" justifyContent="space-between">
@@ -51,7 +64,13 @@ function Header() {
           </Hidden>
           <LanguageSwitcher />
           <Hidden smDown>
-            <LogOutButton />
+            <LogOutButton
+              className={classes.logOutButton}
+              variant="contained"
+              color="secondary"
+            >
+              {t('title')}
+            </LogOutButton>
           </Hidden>
           <Hidden mdUp>
             <DrawerInside />
