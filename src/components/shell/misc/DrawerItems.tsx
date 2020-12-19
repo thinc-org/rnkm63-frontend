@@ -18,6 +18,7 @@ import { green, red } from '@material-ui/core/colors'
 
 import { Link } from 'react-router-dom'
 import LogOutButton from './LogOutButton'
+import { UserContext } from '../../../contexts/UserContext'
 
 const useStyles = makeStyles({
   eachList: {
@@ -41,6 +42,7 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
+  const { user, error: userError } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -87,21 +89,22 @@ const ItemDrawer = () => {
             {t('Bann')}
           </ListItemText>
         </ListItem>*/}
-
-        <ListItem>
-          <LogOutButton className={classes.eachList}>
-            <ListItemIcon className={classes.logOut}>
-              <MeetingRoomIcon />
-            </ListItemIcon>
-            <Box
-              fontSize={16}
-              fontWeight="fontWeightBold"
-              className={classes.logOut}
-            >
-              {t('logout')}
-            </Box>
-          </LogOutButton>
-        </ListItem>
+        {!!user && !userError && (
+          <ListItem>
+            <LogOutButton className={classes.eachList}>
+              <ListItemIcon className={classes.logOut}>
+                <MeetingRoomIcon />
+              </ListItemIcon>
+              <Box
+                fontSize={16}
+                fontWeight="fontWeightBold"
+                className={classes.logOut}
+              >
+                {t('logout')}
+              </Box>
+            </LogOutButton>
+          </ListItem>
+        )}
       </List>
     </React.Fragment>
   )

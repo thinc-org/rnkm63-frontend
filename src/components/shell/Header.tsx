@@ -9,6 +9,7 @@ import RnkmLogo from '../../local/rnkm_logo.png'
 import { withSuspense } from '../hoc'
 import { Link } from 'react-router-dom'
 import theme from '../../config/theme'
+import { UserContext } from '../../contexts/UserContext'
 const useStyles = makeStyles({
   header: {
     height: '6rem',
@@ -51,6 +52,7 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
+  const { user, error: userError } = React.useContext(UserContext)
   return (
     <Box
       className={classes.header}
@@ -75,15 +77,17 @@ function Header() {
           <ReportIssue />
         </Hidden>
         <LanguageSwitcher />
-        <Hidden xsDown>
-          <LogOutButton
-            className={classes.logOutButton}
-            variant="contained"
-            color="secondary"
-          >
-            {t('logout')}
-          </LogOutButton>
-        </Hidden>
+        {!!user && !userError && (
+          <Hidden xsDown>
+            <LogOutButton
+              className={classes.logOutButton}
+              variant="contained"
+              color="secondary"
+            >
+              {t('logout')}
+            </LogOutButton>
+          </Hidden>
+        )}
         <Hidden smUp>
           <Drawer />
         </Hidden>
