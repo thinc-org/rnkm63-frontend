@@ -9,10 +9,6 @@ const config = {
 }
 const apiClient = axios.create(config)
 
-const getProfile = function (): AxiosPromise<any> {
-  return apiClient.get('/user/profile').catch((err) => err.response)
-}
-
 const postUserData = function (
   data: IFormData,
   edit: boolean
@@ -50,4 +46,4 @@ const uploadImageToStorage = function (blobImg: Blob, policy: any) {
     .catch((err) => err.response)
 }
 
-export { getProfile, postUserData, getPolicyStorage, uploadImageToStorage }
+export { postUserData, getPolicyStorage, uploadImageToStorage }

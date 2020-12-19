@@ -84,6 +84,7 @@ const formInitialValues = {
   usedMedicine: '',
   foodRestriction: '',
   disability: '',
+  imgURL: '',
 }
 
 export {

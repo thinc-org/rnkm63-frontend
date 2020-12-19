@@ -1,8 +1,0 @@
-{
-  "500": "Internal Server Error",
-  "503": "Service Unavaliable",
-  "409": "You have already confirmed",
-  "400": "Bad Request",
-  "report": "Report Problem",
-  "returnHome": "Back to home"
-}

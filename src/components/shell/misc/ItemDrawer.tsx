@@ -17,7 +17,7 @@ import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
 import { green, red } from '@material-ui/core/colors'
 
 import { Link } from 'react-router-dom'
-import { LogOut } from '../../../controllers/LoginController'
+import LogOutButton from './LogOutButton'
 
 const useStyles = makeStyles({
   eachList: {
@@ -40,11 +40,7 @@ const useStyles = makeStyles({
 
 const ItemDrawer = () => {
   const classes = useStyles()
-  const { t } = useTranslation(['drawer'])
-
-  const ToLogOut = React.useCallback(() => {
-    LogOut(() => console.log('LogOut Successful'))
-  }, [])
+  const { t } = useTranslation('shell')
 
   return (
     <React.Fragment>
@@ -55,7 +51,7 @@ const ItemDrawer = () => {
               <HomeOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('Home')}
+              {t('home')}
             </Box>
           </Button>
         </ListItem>
@@ -70,7 +66,7 @@ const ItemDrawer = () => {
               <BugReportOutlinedIcon />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('Report')}
+              {t('report')}
             </Box>
           </Button>
         </ListItem>
@@ -93,12 +89,7 @@ const ItemDrawer = () => {
         </ListItem>*/}
 
         <ListItem>
-          <Button
-            className={classes.eachList}
-            onClick={ToLogOut}
-            component={Link}
-            to={'/login'}
-          >
+          <LogOutButton className={classes.eachList}>
             <ListItemIcon className={classes.logOut}>
               <MeetingRoomIcon />
             </ListItemIcon>
@@ -106,10 +97,11 @@ const ItemDrawer = () => {
               fontSize={16}
               fontWeight="fontWeightBold"
               className={classes.logOut}
+              color="secondary"
             >
-              {t('Logout')}
+              {t('logout')}
             </Box>
-          </Button>
+          </LogOutButton>
         </ListItem>
       </List>
     </React.Fragment>

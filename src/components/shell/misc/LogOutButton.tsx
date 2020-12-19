@@ -1,43 +1,22 @@
 import React from 'react'
 import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core'
-import { useTranslation } from 'react-i18next'
-import theme from '../../../config/theme'
 import { LogOut } from '../../../controllers/LoginController'
-import { Link } from 'react-router-dom'
-const useStyles = makeStyles({
-  button: {
-    border: 0,
-    borderRadius: '1.25rem',
-    color: 'white',
-    width: '8rem',
-    height: '2.5rem',
-    margin: '0 1rem',
-    fontSize: '0.85rem',
-    textAlign: 'center',
-    fontWeight: 500,
-    [theme.breakpoints.down('sm')]: {},
-  },
-})
-function LogOutButton() {
-  const classes = useStyles()
-  const { t } = useTranslation('logoutbutton')
+import { ButtonProps } from '@material-ui/core/Button'
+import { UserContext } from '../../../contexts/UserContext'
+
+function LogOutButton(props: ButtonProps) {
+  const { load } = React.useContext(UserContext)
 
   const ToLogOut = React.useCallback(() => {
-    LogOut(() => console.log('LogOut Successful'))
-  }, [])
+    LogOut()
+      .then(() => {
+        load()
+      })
+      .catch((e: number) => {
+        console.warn(`Log out failed: ${e}`)
+      })
+  }, [load])
 
-  return (
-    <Button
-      variant="contained"
-      color="secondary"
-      className={classes.button}
-      onClick={ToLogOut}
-      component={Link}
-      to={'/login'}
-    >
-      {t('title')}
-    </Button>
-  )
+  return <Button onClick={ToLogOut} {...props} />
 }
 export default LogOutButton
