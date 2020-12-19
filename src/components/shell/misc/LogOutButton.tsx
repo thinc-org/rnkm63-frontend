@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
 import theme from '../../../config/theme'
 import { LogOut } from '../../../controllers/LoginController'
+import { Link } from 'react-router-dom'
 const useStyles = makeStyles({
   button: {
     border: 0,
@@ -32,6 +33,8 @@ function LogOutButton() {
       color="secondary"
       className={classes.button}
       onClick={ToLogOut}
+      component={Link}
+      to={'/login'}
     >
       {t('title')}
     </Button>
