@@ -20,7 +20,7 @@ function Login() {
     load: loadUser,
     user,
     isLoaded: isUserLoaded,
-    isError: isUserLoadError,
+    error: userLoadError,
   } = React.useContext(UserContext)
 
   const onLoginError = React.useCallback(
@@ -45,7 +45,7 @@ function Login() {
   }
 
   if (!isUserLoaded) return <Loading />
-  if (isUserLoaded && user && !isUserLoadError) return <Redirect to="/form" />
+  if (isUserLoaded && user && !userLoadError) return <Redirect to="/form" />
   else
     return (
       <Box className={style.login}>

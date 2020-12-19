@@ -50,7 +50,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       isSubmitLoading: true,
     })
     const { imageBlob, data } = this.state
-    const { userData } = this.context
+    const { userData, load: loadUser } = this.context
     const { history } = this.props
     const edit =
       imageBlob !== 0 ||
@@ -63,18 +63,17 @@ class Form extends React.PureComponent<FormProps, FormState> {
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
       if (resUpload.status === 400) {
         this.setState({
-          submitError: RequestError(
-            resUpload.status,
-            resUpload.headers['x-request-id']
-          ),
+          submitError: RequestError(resUpload.status, null),
           isSubmitLoading: false,
         })
         return
       }
     }
     const res = await postUserData(data, edit)
-    if (res.status === 200 || res.status === 201) history.push('/form/complete')
-    else {
+    if (res.status === 200 || res.status === 201) {
+      loadUser()
+      history.push('/form/complete')
+    } else {
       this.setState({
         submitError: RequestError(res.status, res.headers['x-request-id']),
         isSubmitLoading: false,
@@ -203,109 +202,5 @@ function FormUI(props: IFormUI) {
     </Box>
   )
 }
-/*
-function FormFC() {
-  const [imageBlob, setImageBlob] = useState(0 as any)
-  const [confirmOpen, setConfirmOpen] = useState(false)
-  const {user: userData, isLoaded: isUserLoaded, isError: isUserLoadError, error: userLoadError} = React.useContext(UserContext)
-
-  const [preImage, setPreImage] = useState('')
-  const [imageRequired, setImageRequired] = useState(false)
-
-  const [data, setData] = useState(formInitialValues)
-
-  const { t } = useTranslation('form')
-  const style = indexStyle()
-  const history = useHistory()
-
-
-  if (userLoadError) {
-    return <HandleRequestError {...userLoadError} />
-  }
-
-  if (userData?.isConfirm) {
-    history.push('/')
-  }
-
-  const submit = React.useCallback(async () => {
-    const edit =
-      imageBlob !== 0 ||
-      userData!.isNameWrong ||
-      !userData!.data ||
-      userData!.data.nickname !== data.nickname
-    if (imageBlob !== 0) {
-      const resPolicy = await getPolicyStorage()
-      const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
-      if (resUpload.status === 400) {
-        setError(resUpload.status)
-        return
-      }
-    }
-    const res = await postUserData(data, edit)
-    if (res.status === 200 || res.status === 201) history.push('/form/complete')
-    else {
-      setError(res.status)
-      setErrorRequestID(res.headers['x-request-id'])
-    }
-  }, [data, history, imageBlob, userData])
-
-  const closeDialog = React.useCallback(() => {
-    setConfirmOpen(false)
-  }, [setConfirmOpen])
-
-  const confirm = React.useCallback(
-    (value) => {
-      if ((!userData!.data || userData!.isImgWrong) && imageBlob === 0) {
-        setImageRequired(true)
-        return
-      }
-      setData(value)
-      setConfirmOpen(true)
-    },
-    [setConfirmOpen, imageBlob, userData]
-  )
-
-  return (
-    <Box className={style.container}>
-      <Formik
-        initialValues={!userData.data ? formInitialValues : userData.data}
-        onSubmit={confirm}
-        validationSchema={registerSchema}
-      >
-        <FormikForm>
-          <Typography className={style.title}>
-            {!userData.data ? t('register') : t('editProfile')}
-          </Typography>
-          <Box className={style.content}>
-            <Box className={style.image}>
-              <Image
-                setImageBlob={setImageBlob}
-                preImage={preImage}
-                imageRequired={imageRequired}
-                isImgWrong={userData.isImgWrong || !userData.data}
-              />
-            </Box>
-            <Box className={style.formInput}>
-              <FormInput />
-            </Box>
-          </Box>
-          <Box>
-            <Button classes={{ root: style.submitButton }} type="submit">
-              {t('submit')}
-            </Button>
-            <Typography className={style.submitNote}>
-              {t('submitNote')}
-            </Typography>
-          </Box>
-        </FormikForm>
-      </Formik>
-      <FormDialog
-        confirmOpen={confirmOpen}
-        closeDialog={closeDialog}
-        submit={submit}
-      />
-    </Box>
-  )
-}*/
 
 export default Form

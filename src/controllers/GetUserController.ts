@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { API_URL } from '../utils'
 import { IUser } from '../contexts/UserContext'
 import { RequestError } from '../components/common/Error'
@@ -11,21 +11,14 @@ const config = {
 
 const apiClient = axios.create(config)
 
-const get = async function (): Promise<AxiosResponse<IUser | null>> {
+async function getUser(): Promise<IUser | null> {
   try {
     const res = await apiClient.get<IUser | null>('/user/profile')
-    return res
+    if (res.status !== 200)
+      throw RequestError(res.status, res.headers['x-request-id'])
+    return res.data
   } catch (e) {
     throw RequestError(e.response.status, e.response.headers['x-request-id'])
-  }
-}
-
-const getUser = async function (): Promise<IUser | null> {
-  const res = await get()
-  if (res.status !== 200) {
-    throw RequestError(res.status, res.headers['x-request-id'])
-  } else {
-    return res.data
   }
 }
 

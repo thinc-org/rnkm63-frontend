@@ -38,19 +38,29 @@ export interface IUser {
 
 /*TYPE GUARDS*/
 // We trust the backend to return the correct data
-/*function isIUserData(d: any): d is IUserData {
 
-  return d != null
-}*/
-// In backend we trust
+const IUSER_FIELDS = [
+  'data',
+  'isNameWrong',
+  'isImgWrong',
+  'reason',
+  'isQualified',
+  'isConfirm',
+  'isTransfer',
+  'currentBaan',
+  'preferBaan',
+]
+
 function isIUser(u: any): u is IUser {
+  for (const field of IUSER_FIELDS) {
+    if (!(field in u)) return false
+  }
   return true
 }
 
 interface IUserState {
   user: IUser | null
   isLoaded: boolean
-  isError: boolean
   error: IRequestError | null
 }
 
@@ -60,71 +70,6 @@ interface IUserContext extends IUserState {
 
 export const UserContext = React.createContext({} as IUserContext)
 
-/*export function UserProvider(props: any) {
-  const [user, setUser] = React.useState<IUserState>({
-    user: null,
-    isLoaded: false,
-    isError: false,
-    error: null,
-  })
-  const load = React.useCallback(async () => {
-      console.log("getting user");
-    try {
-      const u = await getUser()
-      if (!(u && isIUser(u))) throw RequestError(500, null)
-      console.log("got user")
-      console.log(u);
-      setUser({
-        user: u,
-        isLoaded: true,
-        isError: false,
-        error: null,
-      })
-    } catch (e) {
-        console.warn("failed to get user")
-        console.log(e)
-      setUser({
-        user: null,
-        isLoaded: true,
-        isError: true,
-        error: e,
-      })
-    }
-}, [setUser])
-
-const load = React.useCallback(() => {
-    return new Promise(async (resolve, reject) => {
-        try {
-          const u = await getUser()
-          if (!(u && isIUser(u))) throw RequestError(500, null)
-          console.log("got user")
-          console.log(u);
-          setUser({
-            user: u,
-            isLoaded: true,
-            isError: false,
-            error: null,
-        }, resolve)
-        } catch (e) {
-            console.warn("failed to get user")
-            console.log(e)
-          setUser({
-            user: null,
-            isLoaded: true,
-            isError: true,
-            error: e,
-        }, reject)
-        }
-    })
-}, [setUser])
-
-  React.useEffect(() => {
-    load()
-  }, [load])
-  const value = { ...user, load }
-  return <UserContext.Provider value={value} {...props} />
-}
-*/
 export class UserProvider extends React.Component<any, IUserState> {
   loadRequested: number
   loadCompleted: number
@@ -133,7 +78,6 @@ export class UserProvider extends React.Component<any, IUserState> {
     this.state = {
       user: null,
       isLoaded: false,
-      isError: false,
       error: null,
     }
     this.loadRequested = 0
@@ -146,7 +90,6 @@ export class UserProvider extends React.Component<any, IUserState> {
         {
           user: null,
           isLoaded: false,
-          isError: false,
           error: null,
         },
         resolve
@@ -159,7 +102,6 @@ export class UserProvider extends React.Component<any, IUserState> {
             this.setState({
               user: u,
               isLoaded: true,
-              isError: false,
               error: null,
             })
         })
@@ -169,7 +111,6 @@ export class UserProvider extends React.Component<any, IUserState> {
             this.setState({
               user: null,
               isLoaded: true,
-              isError: true,
               error: e,
             })
         })

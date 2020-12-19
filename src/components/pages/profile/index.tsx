@@ -4,7 +4,7 @@ import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
-import { HandleRequestError } from '../../common/Error'
+import { HandleRequestError, RequestError } from '../../common/Error'
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../../../contexts/UserContext'
 import Loading from '../../common/Loading'
@@ -23,8 +23,8 @@ function Profile() {
 
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
-  else if (!userInfo?.data || !userInfo.isConfirm)
-    return <Redirect to="/form" />
+  else if (!userInfo) return <HandleRequestError {...RequestError(500, null)} />
+  else if (!userInfo.data || !userInfo.isConfirm) return <Redirect to="/form" />
   else
     return (
       <body className={classes.profile}>
