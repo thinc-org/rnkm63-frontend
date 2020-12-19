@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import axios, { AxiosPromise } from 'axios'
+import React from 'react'
 import Countdown from './Countdown'
 import { Box, Typography } from '@material-ui/core'
 import { getBaan } from './BaanInfo'
 import { profileStyles } from './styles/profileStyles'
 import { useTranslation } from 'react-i18next'
-import { API_URL } from '../../../utils'
 import { HandleRequestError } from '../../common/Error'
-import { useHistory } from 'react-router-dom'
-import { UserContext, IUserData, IUser } from '../../../contexts/UserContext'
+import { Redirect } from 'react-router-dom'
+import { UserContext } from '../../../contexts/UserContext'
 import Loading from '../../common/Loading'
-
-const config = {
-  headers: { 'No-CSRF': true },
-  withCredentials: true,
-  baseURL: API_URL,
-}
-const apiClient = axios.create(config)
-
-const getProfile = function (): AxiosPromise<any> {
-  return apiClient.get('/user/profile').catch((err) => err.response)
-}
 
 function Profile() {
   const {
     user: userInfo,
     isLoaded: isUserLoaded,
-    isError: isUserLoadError,
     error: userLoadError,
   } = React.useContext(UserContext)
   const userPic = userInfo?.data?.imgURL ?? ''
@@ -34,9 +20,11 @@ function Profile() {
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
-  const history = useHistory()
 
-  if (userLoadError) return <HandleRequestError {...userLoadError} />
+  if (!isUserLoaded) return <Loading />
+  else if (userLoadError) return <HandleRequestError {...userLoadError} />
+  else if (!userInfo?.data || !userInfo.isConfirm)
+    return <Redirect to="/form" />
   else
     return (
       <body className={classes.profile}>

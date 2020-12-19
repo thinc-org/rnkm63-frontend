@@ -37,13 +37,13 @@ export interface IUser {
 }
 
 /*TYPE GUARDS*/
-function isIUserData(d: any): d is IUserData {
-  // We trust the backend to return the correct data
-  return d != null
-}
+// We trust the backend to return the correct data
+/*function isIUserData(d: any): d is IUserData {
 
+  return d != null
+}*/
+// In backend we trust
 function isIUser(u: any): u is IUser {
-  // In backend we trust
   return true
 }
 

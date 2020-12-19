@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Button, Box, Typography } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
 import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
-import { withRouter, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { HandleRequestError } from '../../common/Error'
 import { registerSchema, formInitialValues } from './utils/registerSchema'
@@ -117,7 +117,6 @@ class Form extends React.PureComponent<FormProps, FormState> {
     const {
       user: userData,
       isLoaded: isUserLoaded,
-      isError: isUserLoadError,
       error: userLoadError,
     } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state

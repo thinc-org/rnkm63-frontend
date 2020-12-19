@@ -20,7 +20,7 @@ function Login() {
   const onLoginComplete = React.useCallback(async () => {
     await loadUser()
     history.push('/form')
-  }, [history])
+  }, [history, loadUser])
 
   const onLoginError = React.useCallback(
     (status: number) => {

@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { API_URL } from '../utils'
 import { IUser } from '../contexts/UserContext'
 import { RequestError } from '../components/common/Error'
