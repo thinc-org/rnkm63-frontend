@@ -10,7 +10,6 @@ export interface LinkButtonProps extends ButtonProps {
 // <Link component={Button} /> causes an undesired page refresh.
 // Use <Link component={LinkButton} /> instead.
 function LinkButton(props: LinkButtonProps) {
-  console.log(props)
   const { navigate, ...rest } = props
   const go = React.useCallback(
     (e) => {
