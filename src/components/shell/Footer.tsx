@@ -57,17 +57,29 @@ function Footer() {
   const { t } = useTranslation('footer')
   return (
     <Box className={classes.footer}>
-      <Box display="flex" flexDirection="column" marginTop="15px">
+      <Box
+        display="flex"
+        flexDirection="column"
+        marginTop="15px"
+        paddingX="20px"
+      >
         <Box
           display="flex"
           flexWrap="wrap"
           flexDirection="row"
           justifyContent="center"
           marginBottom="3px"
-          paddingLeft="25px"
         >
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
+        </Box>
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          flexDirection="row"
+          justifyContent="center"
+          marginBottom="3px"
+        >
           <img src={ThaiBev} alt="" className={classes.sponsorIcon} />
           <img src={EISA} alt="" className={classes.sponsorIcon} />
           <img src={kohkae} alt="" className={classes.sponsorIcon} />
