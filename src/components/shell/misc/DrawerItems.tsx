@@ -89,7 +89,7 @@ const ItemDrawer = () => {
             {t('Bann')}
           </ListItemText>
         </ListItem>*/}
-        {!!user && !userError && (
+        {(!userError || userError.status >= 500) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>

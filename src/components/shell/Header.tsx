@@ -77,7 +77,7 @@ function Header() {
           <ReportIssue />
         </Hidden>
         <LanguageSwitcher />
-        {!!user && !userError && (
+        {(!userError || userError.status >= 500) && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}
