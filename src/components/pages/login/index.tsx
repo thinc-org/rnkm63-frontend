@@ -16,7 +16,6 @@ import { withSuspense } from '../../hoc'
 import { useHistory, Redirect } from 'react-router-dom'
 import { UserContext } from '../../../contexts/UserContext'
 import Loading from '../../common/Loading'
-import { HandleRequestError } from '../../common/Error'
 
 const theme = createMuiTheme({
   typography: {
@@ -70,7 +69,7 @@ function Login() {
       setStep(1) // We have the ticket. Now we are verifying it
       SendTicketToBack(ticket).then(onLoginComplete).catch(onLoginError)
     }
-  }, [loadUser, onLoginComplete, onLoginError])
+  }, [onLoginComplete, onLoginError])
 
   React.useEffect(() => {
     if (isUserLoaded && step === 2) {
@@ -78,7 +77,7 @@ function Login() {
         setStep(3) // We are done
       })
     }
-  }, [isUserLoaded, step])
+  }, [isUserLoaded, loadUser, step])
 
   const toggleAgree = () => {
     setAgree(!agree)

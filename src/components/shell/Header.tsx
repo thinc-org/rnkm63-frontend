@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { user, error: userError } = React.useContext(UserContext)
+  const { error: userError } = React.useContext(UserContext)
   return (
     <Box
       className={classes.header}
