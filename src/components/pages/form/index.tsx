@@ -188,6 +188,10 @@ function FormUI(props: IFormUI) {
     }
   }, [imageRequired])
 
+  if (userData.isNameWrong && !!userData.data) {
+    userData.data.nickname = ''
+  }
+
   return (
     <Box className={style.container}>
       <Formik
