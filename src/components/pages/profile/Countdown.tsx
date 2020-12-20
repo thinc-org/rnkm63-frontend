@@ -6,7 +6,7 @@ import { Box, Typography } from '@material-ui/core'
 export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
-  const { t, i18n } = useTranslation('profile')
+  const { t } = useTranslation('profile')
   const endTime = new Date('2020-12-27').valueOf()
   const time = new Date().valueOf() - 5 * 1000 * 60 * 60
   const timeLeft = (endTime - time) / 1000
@@ -51,8 +51,6 @@ export const Countdown = (props: any) => {
       clearInterval(myInterval)
     }
   })
-
-  const isEng = i18n.language.startsWith('en')
 
   return (
     <Box>
