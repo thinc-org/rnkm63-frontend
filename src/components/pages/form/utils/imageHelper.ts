@@ -32,7 +32,7 @@ export async function getResizedImage(
         widthTarget,
         heightTarget,
         'jpeg',
-        90,
+        85,
         0,
         (uri) => {
           resolve(uri)

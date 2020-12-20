@@ -72,9 +72,12 @@ class Form extends React.PureComponent<FormProps, FormState> {
         })
       }
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
-      if (resUpload.status === 400) {
+      if (resUpload.status !== 204) {
         this.setState({
-          submitError: RequestError(resUpload.status, null),
+          submitError: RequestError(
+            resUpload.status,
+            `image-${resUpload.status}`
+          ),
           isSubmitLoading: false,
         })
         return
