@@ -57,11 +57,8 @@ function Login() {
 
   const onLoginError = React.useCallback(
     (status: number) => {
-      if (status === 403) {
-        history.push('/not104')
-      } else {
-        history.push('/')
-      }
+      if (status === 403) history.push('/not104')
+      else history.push('/')
     },
     [history]
   )
@@ -96,7 +93,7 @@ function Login() {
     return <Loading />
   } else if (step === 3 && isUserLoaded && userLoadError) {
     // If we finished everything, but the user loaded with error.
-    return <HandleRequestError {...userLoadError} />
+    return <Redirect to="/" />
   } else {
     // If we are neither waiting for anything nor showing any error, show to login UI.
     return (
