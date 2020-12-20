@@ -72,7 +72,6 @@ export const UserContext = React.createContext({} as IUserContext)
 
 export class UserProvider extends React.Component<any, IUserState> {
   loadRequested: number
-  loadCompleted: number
   constructor(props: any) {
     super(props)
     this.state = {
@@ -81,41 +80,47 @@ export class UserProvider extends React.Component<any, IUserState> {
       error: null,
     }
     this.loadRequested = 0
-    this.loadCompleted = 0
   }
   load: () => Promise<void> = () => {
     this.loadRequested++
     const loadNumber = this.loadRequested
+    // copy the number of the current load into loadNumber
     return new Promise((resolve) => {
-      this.setState(
-        {
-          user: null,
-          isLoaded: false,
-          error: null,
-        },
-        resolve
-      )
+      this.setState({
+        user: null,
+        isLoaded: false,
+        error: null,
+      })
       getUser()
         .then((u) => {
           if (!(u && isIUser(u))) throw RequestError(500, null)
-          if (this.loadCompleted + 1 <= loadNumber) {
-            this.loadCompleted++
-            this.setState({
-              user: u,
-              isLoaded: true,
-              error: null,
-            })
-          }
+
+          // Only use the load result if it is the last load called.
+          // i.e. no load was requested after this one.
+          if (this.loadRequested === loadNumber) {
+            this.setState(
+              {
+                user: u,
+                isLoaded: true,
+                error: null,
+              },
+              resolve
+            )
+          } else resolve()
         })
         .catch((e) => {
-          if (this.loadCompleted + 1 <= loadNumber) {
-            this.loadCompleted++
-            this.setState({
-              user: null,
-              isLoaded: true,
-              error: e,
-            })
-          }
+          // Only use the load result if it is the last load called.
+          // i.e. no load was requested after this one.
+          if (this.loadRequested === loadNumber) {
+            this.setState(
+              {
+                user: null,
+                isLoaded: true,
+                error: e,
+              },
+              resolve
+            )
+          } else resolve()
         })
     })
   }
