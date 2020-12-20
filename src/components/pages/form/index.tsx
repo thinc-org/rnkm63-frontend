@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Button, Box, Typography, RootRef } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
@@ -6,10 +6,19 @@ import FormDialog from './utils/component/formDialogComponent'
 import { indexStyle } from './style'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
-import { Formik, Form as FormikForm } from 'formik'
+import {
+  Formik,
+  Form as FormikForm,
+  validateYupSchema,
+  yupToFormErrors,
+} from 'formik'
 import { HandleRequestError } from '../../common/Error'
-import { registerSchema, formInitialValues } from './utils/registerSchema'
 import { History, LocationState } from 'history'
+import {
+  registerSchema,
+  formInitialValues,
+  IFormData,
+} from './utils/registerSchema'
 import {
   postUserData,
   uploadImageToStorage,
@@ -146,6 +155,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         <FormUI
           userData={userData}
           confirm={this.confirm}
+          imageBlob={this.state.imageBlob}
           setImageBlob={this.setImageBlob}
           imageRequired={imageRequired}
           isConfirmOpen={this.state.confirmOpen}
@@ -161,6 +171,7 @@ interface IFormUI {
   userData: IUser
   imageRequired: boolean
   isConfirmOpen: boolean
+  imageBlob: Blob | number
   setImageBlob: (blob: any) => void
   setImageRequired: (param: boolean) => void
   confirm: (value: IUserData) => void
@@ -173,6 +184,7 @@ function FormUI(props: IFormUI) {
     userData,
     confirm,
     setImageBlob,
+    imageBlob,
     imageRequired,
     setImageRequired,
     isConfirmOpen,
@@ -182,6 +194,7 @@ function FormUI(props: IFormUI) {
   const { t } = useTranslation('form')
   const style = indexStyle()
   const imageRef = useRef<HTMLInputElement>(null)
+  const [submitOnclick, setOnclick] = useState(false)
 
   useEffect(() => {
     if (imageRequired) {
@@ -198,39 +211,79 @@ function FormUI(props: IFormUI) {
       <Formik
         initialValues={userData?.data ?? formInitialValues}
         onSubmit={confirm}
-        validationSchema={registerSchema}
+        validate={(values) => {
+          let imgFail = false
+          if (
+            (!userData?.data || userData?.isImgWrong) &&
+            imageBlob === 0 &&
+            submitOnclick
+          ) {
+            setImageRequired(true)
+            imgFail = true
+          }
+          try {
+            validateYupSchema<IFormData>(values, registerSchema, true)
+          } catch (err) {
+            const objErr = yupToFormErrors(err)
+            if (imgFail && submitOnclick) {
+              imageRef.current?.scrollIntoView()
+            } else if (submitOnclick) {
+              const firstErrorKey = Object.keys(objErr)[0]
+              global.window.document.getElementsByName(firstErrorKey)[0].focus()
+            }
+            setOnclick(false)
+            return yupToFormErrors(err)
+          }
+          if (imgFail) {
+            imageRef.current?.scrollIntoView()
+            setOnclick(false)
+            return
+          }
+          return {}
+        }}
       >
-        <FormikForm>
-          <Typography className={style.title}>
-            {!userData.data ? t('register') : t('editProfile')}
-          </Typography>
-          <Box className={style.content}>
-            <RootRef rootRef={imageRef}>
-              <Box className={style.image}>
-                <Image
-                  setImageBlob={setImageBlob}
-                  preImage={
-                    userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
-                  }
-                  imageRequired={imageRequired}
-                  setImageRequired={setImageRequired}
-                  isImgWrong={userData.isImgWrong || !userData.data}
-                />
+        {(props) => {
+          return (
+            <FormikForm>
+              <Typography className={style.title}>
+                {!userData.data ? t('register') : t('editProfile')}
+              </Typography>
+              <Box className={style.content}>
+                <RootRef rootRef={imageRef}>
+                  <Box className={style.image}>
+                    <Image
+                      setImageBlob={setImageBlob}
+                      preImage={
+                        userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
+                      }
+                      imageRequired={imageRequired}
+                      setImageRequired={setImageRequired}
+                      isImgWrong={userData.isImgWrong || !userData.data}
+                    />
+                  </Box>
+                </RootRef>
+                <Box className={style.formInput}>
+                  <FormInput />
+                </Box>
               </Box>
-            </RootRef>
-            <Box className={style.formInput}>
-              <FormInput />
-            </Box>
-          </Box>
-          <div>
-            <Button classes={{ root: style.submitButton }} type="submit">
-              {t('submit')}
-            </Button>
-            <Typography className={style.submitNote}>
-              {t('submitNote')}
-            </Typography>
-          </div>
-        </FormikForm>
+              <Box>
+                <Button
+                  classes={{ root: style.submitButton }}
+                  type="submit"
+                  onClick={() => {
+                    setOnclick(true)
+                    props.isSubmitting = true
+                  }}
+                >
+                  {t('submit')}
+                </Button>
+                <Typography className={style.submitNote}>
+                  {t('submitNote')}
+                </Typography>
+              </Box>
+            </FormikForm>
+          )
+        }}
       </Formik>
       <FormDialog
         confirmOpen={isConfirmOpen}
