@@ -17,6 +17,9 @@ import theme from '../../config/theme'
 import { ButtonProps } from '@material-ui/core/Button'
 
 const greenButtonTheme = createMuiTheme({
+  typography: {
+    fontFamily: ['Rubik', 'Kanit', 'sans-serif'].join(','),
+  },
   palette: {
     primary: theme.palette.success,
     secondary: theme.palette.error,
@@ -147,15 +150,25 @@ export function HandleRequestError(props: IRequestError) {
     : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' + requestID
 
   return (
-    <Error title={t(`code.${status}`)}>
+    <Error title={t(`codes.${status}`)}>
       {props.status === 500 || props.status === 503 || props.status === 400 ? (
-        <ErrorButton href={reportUrl} target="_blank">
+        <ErrorButton
+          href={reportUrl}
+          target="_blank"
+          style={{ marginBottom: theme.spacing(3) }}
+        >
           {t('report')}
         </ErrorButton>
       ) : location?.pathname !== '/' ? (
-        <ErrorLink to="/">{t('returnHome')}</ErrorLink>
+        <ErrorLink to="/" style={{ marginBottom: theme.spacing(3) }}>
+          {t('returnHome')}
+        </ErrorLink>
       ) : (
-        <Link to="/" component={ErrorButton}>
+        <Link
+          to="/"
+          component={ErrorButton}
+          style={{ marginBottom: theme.spacing(3) }}
+        >
           {t('refreshPage')}
         </Link>
       )}
