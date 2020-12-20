@@ -12,6 +12,7 @@
   "codes": {
     "500": "Internal Server Error",
     "503": "Service Unavaliable",
-    "409": "You have already confirmed"
+    "409": "You have already confirmed",
+    "400": "Bad request"
   }
 }
