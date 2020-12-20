@@ -50,7 +50,7 @@ const ItemDrawer = () => {
         <ListItem>
           <Button className={classes.eachList} component={Link} to={'/'}>
             <ListItemIcon>
-              <HomeOutlinedIcon />
+              <HomeOutlinedIcon style={{ color: 'white' }} />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
               {t('home')}
@@ -65,7 +65,7 @@ const ItemDrawer = () => {
             className={classes.eachList}
           >
             <ListItemIcon>
-              <BugReportOutlinedIcon />
+              <BugReportOutlinedIcon style={{ color: 'white' }} />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
               {t('report')}
