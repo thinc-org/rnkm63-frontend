@@ -30,7 +30,7 @@ export default function DrawerButton() {
   return (
     <React.Fragment>
       <IconButton onClick={toggleDrawer} className={classes.button}>
-        <MenuIcon className={classes.icon} />
+        <MenuIcon className={classes.icon} style={{ color: 'white' }} />
       </IconButton>
       <Drawer anchor={'right'} open={state} onClose={toggleDrawer}>
         <Box role="presentation" onClick={toggleDrawer}>
