@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { countdownStyles } from './styles/countdownStyles'
 import { Box, Typography } from '@material-ui/core'
 
-export const Countdown = (props: any) => {
+export const Countdown = () => {
   const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
   const endTime = new Date('2020-12-27').valueOf()
   const time = new Date().valueOf() - 5 * 1000 * 60 * 60
   const timeLeft = (endTime - time) / 1000
-  const { secs = timeLeft } = props
+  const secs = timeLeft
 
   const [days, setDays] = useState(Math.floor(secs / (60 * 60 * 24)))
   const [hours, setHours] = useState(
