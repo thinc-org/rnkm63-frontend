@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from '@material-ui/core/Link'
-import theme from '../../../config/theme'
 import {
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
@@ -44,20 +43,12 @@ function FormInput() {
             options={FORM_RELIGION_FIELD_OPTIONS}
           />
         </Grid>
-        <Typography
-          style={{
-            color: theme.palette.warning.main,
-            margin: theme.spacing(0.5),
-            fontSize: '0.75rem',
-          }}
-        >
+        <Typography className={classes.nicknameNote}>
           {t('nicknameNote')}
           <Link
             href="https://www.facebook.com/chulafreshmen"
             target="_blank"
-            style={{
-              color: '#97c0f3',
-            }}
+            className={classes.link}
           >
             CU for Freshman
           </Link>

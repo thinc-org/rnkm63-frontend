@@ -11,6 +11,14 @@ const formStyle = makeStyles(
         },
       },
     },
+    link: {
+      color: '#97c0f3',
+    },
+    nicknameNote: {
+      color: theme.palette.warning.main,
+      margin: theme.spacing(0.5),
+      fontSize: '0.75rem',
+    },
     root: {
       padding: theme.spacing(1),
       [theme.breakpoints.down('md')]: {

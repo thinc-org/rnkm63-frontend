@@ -135,14 +135,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   }, [preImage])
 
   return (
-    <Box
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        margin: 0,
-      }}
-    >
+    <Box display="flex" alignItems="center" flexDirection="column" m={0}>
       <Dialog
         open={cropState}
         maxWidth="sm"
@@ -170,15 +163,13 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         </DialogTitle>
 
         {!!upImg ? (
-          <Box>
+          <div>
             <Box
-              style={{
-                height: '100%',
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignContent: 'center',
-              }}
+              height="100%"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignContent="center"
             >
               <Box className={style.cropContainer}>
                 <Cropper
@@ -206,10 +197,10 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               />
               <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
             </Box>
-          </Box>
+          </div>
         ) : (
           <Box className={style.cropContainer}>
-            <Box style={{ width: '100%', height: '100%' }}>
+            <Box width="100%" height="100%">
               <input
                 accept="image/*"
                 className={style.input}
@@ -258,7 +249,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           <img src={finalImg} className={style.image} alt=""></img>
         </Box>
       ) : (
-        <Box className={style.image}></Box>
+        <Box className={style.image} />
       )}
       <Box
         style={{
