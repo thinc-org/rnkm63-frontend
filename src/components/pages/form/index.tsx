@@ -9,6 +9,7 @@ import { Redirect } from 'react-router-dom'
 import { Formik, Form as FormikForm } from 'formik'
 import { HandleRequestError } from '../../common/Error'
 import { registerSchema, formInitialValues } from './utils/registerSchema'
+import { History, LocationState } from 'history'
 import {
   postUserData,
   uploadImageToStorage,
@@ -29,7 +30,7 @@ interface FormState {
 }
 
 interface FormProps {
-  history: any
+  history: History<LocationState>
 }
 
 class Form extends React.PureComponent<FormProps, FormState> {

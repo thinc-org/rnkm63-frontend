@@ -2,6 +2,17 @@ import axios, { AxiosPromise } from 'axios'
 import { API_URL } from '../../../../utils'
 import { IFormData } from './registerSchema'
 
+interface Policy {
+  url: string
+  fields: {
+    key: string
+    'x-goog-date': string
+    'x-goog-credential': string
+    'x-goog-algorithm': string
+    policy: string
+    'x-goog-signature': string
+  }
+}
 const config = {
   headers: { 'No-CSRF': true },
   withCredentials: true,
@@ -9,10 +20,7 @@ const config = {
 }
 const apiClient = axios.create(config)
 
-const postUserData = function (
-  data: IFormData,
-  edit: boolean
-): AxiosPromise<any> {
+const postUserData = function (data: IFormData, edit: boolean): AxiosPromise {
   const reqBody = {
     data,
     edit,
@@ -20,20 +28,19 @@ const postUserData = function (
   return apiClient.post('/user/profile', reqBody).catch((err) => err.response)
 }
 
-const getPolicyStorage = function (): AxiosPromise<any> {
+const getPolicyStorage = function (): AxiosPromise {
   return apiClient.get('/user/getUploadPolicy').catch((err) => err.response)
 }
 
-const uploadImageToStorage = function (blobImg: Blob, policy: any) {
+const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
   let bodyFormData = new FormData()
 
   const policyDocument = policy.fields
   const urlStorage = policy.url
 
-  const fieldKeys = Object.keys(policyDocument)
-  fieldKeys.forEach((val: string) => {
-    bodyFormData.append(val, policyDocument[val])
-  })
+  for (const [key, val] of Object.entries(policyDocument)) {
+    bodyFormData.append(key, val)
+  }
 
   bodyFormData.append('Content-Type', 'image/jpeg')
   bodyFormData.append('file', blobImg)
