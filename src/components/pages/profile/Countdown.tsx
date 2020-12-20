@@ -60,11 +60,10 @@ export const Countdown = (props: any) => {
         {t('countdownDetail')}
       </Typography>
       <Typography variant="h1" className={classes.countdownTimer}>
-        {days} {days > 1 && isEng ? `${t('Days')}s` : t('Days')} &nbsp;
-        {hours} {hours > 1 && isEng ? `${t('Hours')}s` : t('Hours')} &nbsp;
-        {minutes} {minutes > 1 && isEng ? `${t('Minutes')}s` : t('Minutes')}
-        &nbsp;
-        {seconds} {seconds > 1 && isEng ? `${t('Seconds')}s` : t('Seconds')}
+        {days} {t('Days', { count: days })} &nbsp;
+        {hours} {t('Hours', { count: hours })} &nbsp;
+        {minutes} {t('Minutes', { count: minutes })} &nbsp;
+        {seconds} {t('Seconds', { count: seconds })}
       </Typography>
     </Box>
   )
