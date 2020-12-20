@@ -80,7 +80,6 @@ function Footer() {
           justifyContent="center"
           marginBottom="3px"
         >
-          <img src={ThaiBev} alt="" className={classes.sponsorIcon} />
           <img src={EISA} alt="" className={classes.sponsorIcon} />
           <img src={kohkae} alt="" className={classes.sponsorIcon} />
           <img src={Major} alt="" className={classes.sponsorIcon} />
