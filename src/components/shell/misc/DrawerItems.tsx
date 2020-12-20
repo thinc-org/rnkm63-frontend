@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { user, error: userError } = React.useContext(UserContext)
+  const { error: userError } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
