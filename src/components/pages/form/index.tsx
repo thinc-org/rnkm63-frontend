@@ -237,7 +237,6 @@ function FormUI(props: IFormUI) {
               const firstErrorKey = Object.keys(objErr)[0]
               global.window.document.getElementsByName(firstErrorKey)[0].focus()
             }
-            console.log(objErr)
             setSubmitClick(false)
             return yupToFormErrors(err)
           }
