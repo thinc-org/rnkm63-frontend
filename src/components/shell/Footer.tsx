@@ -8,7 +8,6 @@ import kohkae from '../../local/kohkae.svg' //Left
 import EISA from '../../local/EISA.svg'
 import Major from '../../local/Major.svg' //Right
 import SPT from '../../local/SPT.svg'
-import ThaiBev from '../../local/ThaiBev.svg'
 
 import { withSuspense } from '../hoc'
 

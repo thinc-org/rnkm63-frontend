@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 
-export const profileStyles = makeStyles((theme: any) => ({
+export const profileStyles = makeStyles((theme: Theme) => ({
   profile: {
     textAlign: 'center',
     marginBottom: '75px',

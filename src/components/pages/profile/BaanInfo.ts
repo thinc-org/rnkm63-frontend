@@ -172,7 +172,7 @@ const baanInfo: Baan[] = [
   },
 ]
 
-export function getBaan(baanNumber: number): any {
+export function getBaan(baanNumber: number): Baan {
   const sent = baanInfo.find((item: Baan) => {
     return item.ID === baanNumber
   })
@@ -180,6 +180,7 @@ export function getBaan(baanNumber: number): any {
     return sent
   } else {
     return {
+      ID: 0,
       'name-th': '-',
       'name-en': '-',
     }
