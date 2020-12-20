@@ -27,14 +27,17 @@ const useStyles = makeStyles({
   },
   sponsorIcon: {
     marginRight: '15px',
+    marginBottom: '7px',
     height: '30px',
   },
   sgcuIcon: {
     height: '30px',
+    marginBottom: '7px',
     marginRight: '15px',
   },
   thincIcon: {
     height: '30px',
+    marginBottom: '7px',
     marginRight: '15px',
   },
   footerFont: {
@@ -57,9 +60,10 @@ function Footer() {
       <Box display="flex" flexDirection="column" marginTop="15px">
         <Box
           display="flex"
+          flexWrap="wrap"
           flexDirection="row"
           justifyContent="center"
-          marginBottom="6px"
+          marginBottom="3px"
           paddingLeft="25px"
         >
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
