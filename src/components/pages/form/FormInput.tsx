@@ -20,14 +20,12 @@ function FormInput() {
         {t('requireNote')}
       </Typography>
       <Grid container className={classes.inside}>
-        {theme.breakpoints.up('sm') ? (
-          <Grid item sm={2}>
-            <FormSelectField
-              name="prefixname"
-              options={FORM_PREFIX_FIELD_OPTIONS}
-            />
-          </Grid>
-        ) : null}
+        <Grid item xs={12} sm={2}>
+          <FormSelectField
+            name="prefixname"
+            options={FORM_PREFIX_FIELD_OPTIONS}
+          />
+        </Grid>
 
         <Grid item xs={12} sm={4}>
           <FormTextField name="realname" />
