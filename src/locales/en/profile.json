@@ -1,8 +1,8 @@
 {
-  "Days": "Days",
-  "Hours": "Hours",
-  "Minutes": "Minutes",
-  "Seconds": "Seconds",
+  "Days": "Day",
+  "Hours": "Hour",
+  "Minutes": "Minute",
+  "Seconds": "Second",
   "Name": "Nickname",
   "Faculty": "Faculty",
   "Baan": "Baan",

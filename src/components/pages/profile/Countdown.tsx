@@ -6,7 +6,7 @@ import { Box, Typography } from '@material-ui/core'
 export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
-  const { t } = useTranslation('profile')
+  const { t, i18n } = useTranslation('profile')
   const endTime = new Date('2020-12-27').valueOf()
   const time = new Date().valueOf() - 5 * 1000 * 60 * 60
   const timeLeft = (endTime - time) / 1000
@@ -52,16 +52,19 @@ export const Countdown = (props: any) => {
     }
   })
 
+  const isEng = i18n.language.startsWith('en')
+
   return (
     <Box>
       <Typography variant="h3" className={classes.countdownDetail}>
         {t('countdownDetail')}
       </Typography>
       <Typography variant="h1" className={classes.countdownTimer}>
-        {days} {t('Days')} &nbsp;
-        {hours} {t('Hours')} &nbsp;
-        {minutes} {t('Minutes')} &nbsp;
-        {seconds} {t('Seconds')}
+        {days} {days > 1 && isEng ? `${t('Days')}s` : t('Days')} &nbsp;
+        {hours} {hours > 1 && isEng ? `${t('Hours')}s` : t('Hours')} &nbsp;
+        {minutes} {minutes > 1 && isEng ? `${t('Minutes')}s` : t('Minutes')}
+        &nbsp;
+        {seconds} {seconds > 1 && isEng ? `${t('Seconds')}s` : t('Seconds')}
       </Typography>
     </Box>
   )
