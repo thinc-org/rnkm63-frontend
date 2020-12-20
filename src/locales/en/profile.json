@@ -1,8 +1,12 @@
 {
   "Days": "Day",
+  "Days_plural": "Days",
   "Hours": "Hour",
+  "Hours_plural": "Hours",
   "Minutes": "Minute",
+  "Minutes_plural": "Minutes",
   "Seconds": "Second",
+  "Seconds_plural": "Seconds",
   "Name": "Nickname",
   "Faculty": "Faculty",
   "Baan": "Baan",
