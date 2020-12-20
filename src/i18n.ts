@@ -13,7 +13,7 @@ i18n
   // init i18next
   .init({
     fallbackLng: 'en',
-    debug: false,
+    debug: process.env.NODE_ENV === 'development',
     resources: { en, th },
 
     interpolation: {

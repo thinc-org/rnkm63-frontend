@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import {
   Box,
@@ -79,9 +79,9 @@ function Login() {
     }
   }, [isUserLoaded, loadUser, step])
 
-  const toggleAgree = () => {
+  const toggleAgree = useCallback(() => {
     setAgree(!agree)
-  }
+  }, [agree])
 
   if (isUserLoaded && !userLoadError) {
     // If we already have the user with no error whatsoever, then there is no reason to log in.

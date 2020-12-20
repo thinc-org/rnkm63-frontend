@@ -251,14 +251,8 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
       ) : (
         <Box className={style.image} />
       )}
-      <Box
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        {isImgWrong ? (
+      <Box display="flex" alignItems="center" flexDirection="column">
+        {isImgWrong && (
           <Button
             variant="contained"
             color="primary"
@@ -267,7 +261,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           >
             {t('uploadTextButton')}
           </Button>
-        ) : null}
+        )}
         <Typography
           hidden={editStatus || !isImgWrong}
           className={style.reasonText}

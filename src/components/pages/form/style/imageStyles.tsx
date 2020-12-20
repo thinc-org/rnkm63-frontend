@@ -52,10 +52,7 @@ const imageStyle = makeStyles(
         borderStyle: 'solid',
         borderColor: 'red',
         borderWidth: (props: propsStyle) => {
-          if (!props.editStatus) {
-            return '0px'
-          }
-          return '5px'
+          return !props.editStatus ? 0 : 5
         },
         background: '#C4C4C4',
         marginBottom: theme.spacing(1),

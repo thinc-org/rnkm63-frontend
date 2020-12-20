@@ -221,14 +221,14 @@ function FormUI(props: IFormUI) {
               <FormInput />
             </Box>
           </Box>
-          <Box>
+          <div>
             <Button classes={{ root: style.submitButton }} type="submit">
               {t('submit')}
             </Button>
             <Typography className={style.submitNote}>
               {t('submitNote')}
             </Typography>
-          </Box>
+          </div>
         </FormikForm>
       </Formik>
       <FormDialog
