@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import { Button, Box, Typography, RootRef } from '@material-ui/core'
 import Image from './Image'
 import FormInput from './FormInput'
@@ -33,6 +33,7 @@ interface FormState {
   imageBlob: any
   confirmOpen: boolean
   imageRequired: boolean
+  submitClick: boolean
   data: IUserData
   isSubmitLoading: boolean
   submitError: IRequestError | null
@@ -50,6 +51,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       imageBlob: 0,
       confirmOpen: false,
       imageRequired: false,
+      submitClick: false,
       data: formInitialValues,
       isSubmitLoading: false,
       submitError: null,
@@ -119,7 +121,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
     const { userData } = this.context
 
     if ((!userData?.data || userData?.isImgWrong) && imageBlob === 0) {
-      this.setImageRequired(true)
+      return
     } else {
       this.setState(
         {
@@ -139,6 +141,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
       imageRequired: param,
     })
   }
+  setSubmitClick: (param: boolean) => void = (param) => {
+    this.setState({
+      submitClick: param,
+    })
+  }
   render() {
     const {
       user: userData,
@@ -154,11 +161,13 @@ class Form extends React.PureComponent<FormProps, FormState> {
       return (
         <FormUI
           userData={userData}
-          confirm={this.confirm}
-          imageBlob={this.state.imageBlob}
-          setImageBlob={this.setImageBlob}
           imageRequired={imageRequired}
+          imageBlob={this.state.imageBlob}
           isConfirmOpen={this.state.confirmOpen}
+          submitClick={this.state.submitClick}
+          setSubmitClick={this.setSubmitClick}
+          confirm={this.confirm}
+          setImageBlob={this.setImageBlob}
           setImageRequired={this.setImageRequired}
           closeDialog={this.closeDialog}
           submit={this.submit}
@@ -172,6 +181,8 @@ interface IFormUI {
   imageRequired: boolean
   isConfirmOpen: boolean
   imageBlob: Blob | number
+  submitClick: boolean
+  setSubmitClick: (param: boolean) => void
   setImageBlob: (blob: any) => void
   setImageRequired: (param: boolean) => void
   confirm: (value: IUserData) => void
@@ -182,25 +193,20 @@ interface IFormUI {
 function FormUI(props: IFormUI) {
   const {
     userData,
-    confirm,
-    setImageBlob,
     imageBlob,
     imageRequired,
-    setImageRequired,
     isConfirmOpen,
+    submitClick,
+    setSubmitClick,
+    confirm,
+    setImageBlob,
+    setImageRequired,
     closeDialog,
     submit,
   } = props
   const { t } = useTranslation('form')
   const style = indexStyle()
   const imageRef = useRef<HTMLInputElement>(null)
-  const [submitOnclick, setOnclick] = useState(false)
-
-  useEffect(() => {
-    if (imageRequired) {
-      imageRef.current?.scrollIntoView()
-    }
-  }, [imageRequired])
 
   if (userData.isNameWrong && !!userData.data) {
     userData.data.nickname = ''
@@ -216,7 +222,7 @@ function FormUI(props: IFormUI) {
           if (
             (!userData?.data || userData?.isImgWrong) &&
             imageBlob === 0 &&
-            submitOnclick
+            submitClick
           ) {
             setImageRequired(true)
             imgFail = true
@@ -225,21 +231,22 @@ function FormUI(props: IFormUI) {
             validateYupSchema<IFormData>(values, registerSchema, true)
           } catch (err) {
             const objErr = yupToFormErrors(err)
-            if (imgFail && submitOnclick) {
+            if (imgFail && submitClick) {
               imageRef.current?.scrollIntoView()
-            } else if (submitOnclick) {
+            } else if (submitClick) {
               const firstErrorKey = Object.keys(objErr)[0]
               global.window.document.getElementsByName(firstErrorKey)[0].focus()
             }
-            setOnclick(false)
+            console.log(objErr)
+            setSubmitClick(false)
             return yupToFormErrors(err)
           }
           if (imgFail) {
             imageRef.current?.scrollIntoView()
-            setOnclick(false)
+            setSubmitClick(false)
             return
           }
-          return {}
+          return
         }}
       >
         {(props) => {
@@ -271,7 +278,7 @@ function FormUI(props: IFormUI) {
                   classes={{ root: style.submitButton }}
                   type="submit"
                   onClick={() => {
-                    setOnclick(true)
+                    setSubmitClick(true)
                     props.isSubmitting = true
                   }}
                 >
