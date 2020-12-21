@@ -23,7 +23,7 @@ export const profileStyles = makeStyles((theme: Theme) => ({
   imageSize: {
     borderRadius: '25px',
     width: '200px',
-    height: '250px',
+    height: '267px',
     [theme.breakpoints.down('xs')]: {
       width: '150px',
       height: '200px',
