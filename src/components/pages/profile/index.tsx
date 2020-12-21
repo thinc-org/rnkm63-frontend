@@ -6,7 +6,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
-import { getBaan } from './BaanInfo'
+import { getBaan } from 'local/BaanInfo'
 import Countdown from './Countdown'
 import { profileStyles } from './styles/profileStyles'
 
