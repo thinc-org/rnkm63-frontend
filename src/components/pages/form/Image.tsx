@@ -186,16 +186,17 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               </Box>
             </Box>
             <Box className={style.zoomSlider}>
-              <ZoomOutIcon style={{ paddingRight: '10px', color: 'black' }} />
+              <ZoomOutIcon style={{ paddingRight: '10px' }} />
               <Slider
                 defaultValue={1}
                 value={zoom}
+                color="secondary"
                 min={1}
                 max={maxZoom}
                 step={0.1}
                 onChange={zoomOnChange}
               />
-              <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
+              <ZoomInIcon style={{ paddingLeft: '10px' }} />
             </Box>
           </div>
         ) : (

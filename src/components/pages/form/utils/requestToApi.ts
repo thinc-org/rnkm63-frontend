@@ -4,14 +4,7 @@ import { IFormData } from './registerSchema'
 
 interface Policy {
   url: string
-  fields: {
-    key: string
-    'x-goog-date': string
-    'x-goog-credential': string
-    'x-goog-algorithm': string
-    policy: string
-    'x-goog-signature': string
-  }
+  fields: Record<string, string>
 }
 const config = {
   headers: { 'No-CSRF': true },
@@ -28,7 +21,7 @@ const postUserData = function (data: IFormData, edit: boolean): AxiosPromise {
   return apiClient.post('/user/profile', reqBody).catch((err) => err.response)
 }
 
-const getPolicyStorage = function (): AxiosPromise {
+const getPolicyStorage = function (): AxiosPromise<Policy> {
   return apiClient.get('/user/getUploadPolicy').catch((err) => err.response)
 }
 

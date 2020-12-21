@@ -115,13 +115,12 @@ const imageStyle = makeStyles(
       },
       dialog: {
         overflowY: 'scroll',
-        background: 'white',
+        background: '#383838',
         borderRadius: '0px',
       },
       dialogTitle: {
         display: 'flex',
         alignSelf: 'center',
-        color: 'black',
       },
       zoomSlider: {
         display: 'flex',
@@ -138,7 +137,7 @@ const imageStyle = makeStyles(
       },
       cropDescription: {
         fontSize: '1.125rem',
-        fontWeight: 500,
+        color: theme.palette.text.primary,
         paddingBottom: theme.spacing(0.5),
         [theme.breakpoints.down('xs')]: {
           fontSize: '0.875rem',
