@@ -238,13 +238,12 @@ function FormUI(props: IFormUI) {
               global.window.document.getElementsByName(firstErrorKey)[0].focus()
             }
             setSubmitClick(false)
-            return yupToFormErrors(err)
+            return objErr
           }
           if (imgFail) {
             imageRef.current?.scrollIntoView()
-            setSubmitClick(false)
-            return
           }
+          setSubmitClick(false)
           return
         }}
       >
