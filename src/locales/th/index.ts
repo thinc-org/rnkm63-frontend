@@ -5,6 +5,7 @@ import formComplete from './formComplete.json'
 import login from './login.json'
 import profile from './profile.json'
 import shell from './shell.json'
+import selectbaan from './selectbaan.json'
 
 const th = {
   errors,
@@ -14,6 +15,7 @@ const th = {
   login,
   profile,
   shell,
+  selectbaan,
 }
 
 export default th
