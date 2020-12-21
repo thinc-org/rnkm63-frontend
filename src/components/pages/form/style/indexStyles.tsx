@@ -65,7 +65,7 @@ const indexStyle = makeStyles(
       },
     },
     dialog: {
-      background: 'white',
+      background: '#383838',
       color: theme.palette.text.secondary,
       width: '327px',
       paddingBottom: theme.spacing(2),
@@ -79,12 +79,14 @@ const indexStyle = makeStyles(
     dialogTitle: {
       textAlign: 'center',
       fontWeight: 700,
+      color: theme.palette.text.primary,
       fontSize: '1.25rem',
       margin: 0,
     },
     dialogContent: {
       textAlign: 'center',
       fontWeight: 300,
+      color: theme.palette.text.primary,
       fontSize: '1rem',
       margin: 0,
       marginBottom: theme.spacing(2),
