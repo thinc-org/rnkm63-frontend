@@ -1,5 +1,28 @@
 {
   "title": "Select Baan",
   "searchPlaceholder": "Search...",
-  "searchButton": "Search"
+  "searchButton": "Search",
+  "statusGreen": "Available",
+  "statusYellow": "Almost full",
+  "statusRed": "Exceeded capacity",
+  "sizeS": {
+    "text": "Size S",
+    "size": "( 100-150 members )",
+    "mobile": "S"
+  },
+  "sizeM": {
+    "text": "Size M",
+    "size": "( 130-180 members )",
+    "mobile": "M"
+  },
+  "sizeL": {
+    "text": "Size L",
+    "size": "( 200-215 members )",
+    "mobile": "L"
+  },
+  "sizeXL": {
+    "text": "Size XL",
+    "size": "( 300-480 members )",
+    "mobile": "XL"
+  }
 }

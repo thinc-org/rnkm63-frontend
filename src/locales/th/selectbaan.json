@@ -1,5 +1,28 @@
 {
   "title": "เลือกบ้าน",
   "searchPlaceholder": "ค้นหา...",
-  "searchButton": "ค้นหา"
+  "searchButton": "ค้นหา",
+  "statusGreen": "ยังไม่เกินจำนวนรับ",
+  "statusYellow": "กำลังเกินจำนวนรับ",
+  "statusRed": "เกินจำนวนรับแล้ว",
+  "sizeS": {
+    "text": "ไซส์ S",
+    "size": "( 100-150 คน )",
+    "mobile": "S"
+  },
+  "sizeM": {
+    "text": "ไซส์ M",
+    "size": "( 130-180 คน )",
+    "mobile": "M"
+  },
+  "sizeL": {
+    "text": "ไซส์ L",
+    "size": "( 200-215 คน )",
+    "mobile": "L"
+  },
+  "sizeXL": {
+    "text": "ไซส์ XL",
+    "size": "( 300-480 คน )",
+    "mobile": "XL"
+  }
 }
