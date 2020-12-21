@@ -44,6 +44,7 @@ function App() {
             <Container className={classes.PageContainer}>
               <React.Suspense fallback={<Loading />}>
                 <Switch>
+                  <Route path="/select" exact component={SelectBaan} />
                   <Route path="/login" exact component={Login} />
                   <Route path="/form" exact component={Form} />
                   <Route path="/form/complete" exact component={FormComplete} />
