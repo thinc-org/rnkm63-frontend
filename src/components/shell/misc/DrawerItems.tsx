@@ -9,7 +9,7 @@ import {
   Box,
 } from '@material-ui/core'
 
-// import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
+import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
@@ -58,6 +58,32 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
+        <ListItem component={Link} to={'/'}>
+          <Button className={classes.eachList}>
+            <ListItemIcon className={classes.selectBann}>
+              <HomeOutlinedIcon />
+            </ListItemIcon>
+            <Box
+              fontSize={16}
+              fontWeight="fontWeightBold"
+              className={classes.selectBann}
+            >
+              {t('bann')}
+            </Box>
+          </Button>
+        </ListItem>
+
+        <ListItem component={Link} to={'/'}>
+          <Button className={classes.eachList}>
+            <ListItemIcon>
+              <EventNoteRoundedIcon style={{ color: 'white' }} />
+            </ListItemIcon>
+            <Box fontSize={16} fontWeight="fontWeightBold">
+              {t('schedule')}
+            </Box>
+          </Button>
+        </ListItem>
+
         <ListItem>
           <Button
             href="https://airtable.com/shrdg6IwqtKmNMfkL"
@@ -74,21 +100,7 @@ const ItemDrawer = () => {
         </ListItem>
 
         {/* For Phase 2 */}
-        {/* <ListItem className={classes.eachList} component={Link} to={'/'}> }
-          <ListItemIcon className={classes.HomeSchIcon}>
-            <EventNoteRoundedIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Schedule')}</ListItemText>
-        </ListItem>
 
-        <ListItem className={classes.eachList} component={Link} to={'/'}>
-          <ListItemIcon className={classes.selectBann}>
-            <HomeOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.selectBann}>
-            {t('Bann')}
-          </ListItemText>
-        </ListItem>*/}
         {(!userError || userError.status >= 500) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
