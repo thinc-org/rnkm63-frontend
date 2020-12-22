@@ -9,7 +9,7 @@ import {
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { indexStyle } from '../../style'
+import { indexStyle } from '../style'
 
 interface IFormDialog {
   confirmOpen: boolean

@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-
-import { API_URL } from '../utils'
+import { API_URL } from 'utils'
 
 function Connect() {
   window.location.href =

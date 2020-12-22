@@ -1,4 +1,8 @@
 import { Box, Button, RootRef, Typography } from '@material-ui/core'
+import { HandleRequestError } from 'components/common/Error'
+import { IRequestError, RequestError } from 'components/common/Error'
+import Loading from 'components/common/Loading'
+import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
   Form as FormikForm,
   Formik,
@@ -10,14 +14,10 @@ import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
-import { IUser, IUserData, UserContext } from '../../../contexts/UserContext'
-import { HandleRequestError } from '../../common/Error'
-import { IRequestError, RequestError } from '../../common/Error'
-import Loading from '../../common/Loading'
+import FormDialog from './component/formDialogComponent'
 import FormInput from './FormInput'
 import Image from './Image'
 import { indexStyle } from './style'
-import FormDialog from './utils/component/formDialogComponent'
 import {
   formInitialValues,
   IFormData,

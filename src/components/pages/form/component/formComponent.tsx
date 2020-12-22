@@ -9,7 +9,7 @@ import { useField } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { formStyle } from '../../style'
+import { formStyle } from '../style'
 
 interface IFormField {
   name: string

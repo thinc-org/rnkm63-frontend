@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from 'axios'
+import { API_URL } from 'utils'
 
-import { API_URL } from '../../../../utils'
 import { IFormData } from './registerSchema'
 
 interface Policy {
