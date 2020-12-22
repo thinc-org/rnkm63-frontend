@@ -4,12 +4,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Loading } from './components/common'
 import {
+  Baan,
   Form,
   FormComplete,
   Login,
   NotFound,
   NotFreshy,
   Profile,
+  Schedule,
 } from './components/pages'
 import { Footer, Header } from './components/shell'
 import theme from './config/theme'
@@ -46,6 +48,8 @@ function App() {
                   <Route path="/form" exact component={Form} />
                   <Route path="/form/complete" exact component={FormComplete} />
                   <Route path="/not104" exact component={NotFreshy} />
+                  <Route path="/baan" exact component={Baan} />
+                  <Route path="/schedule" exact component={Schedule} />
                   <Route path="/" exact component={Profile} />
                   <Route component={NotFound} />
                 </Switch>
