@@ -3,46 +3,44 @@ import { green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/styles'
 
 export const indexStyle = makeStyles((theme: Theme) => ({
+  container: {
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
   title: {
     paddingBottom: theme.spacing(3),
     [theme.breakpoints.down('xs')]: {
       display: 'none',
     },
   },
+  titleDescription: {
+    color: '#F2C94C',
+    paddingTop: theme.spacing(1),
+  },
   paperSearch: {
     display: 'flex',
     alignItems: 'center',
-    width: '80%',
+    width: '100%',
+    minWidth: '230px',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: '4px',
     padding: theme.spacing(0.75),
     [theme.breakpoints.down('xs')]: {
       width: '100%',
+      height: '30px',
     },
   },
   searchContainer: {
     paddingBottom: theme.spacing(3.5),
     [theme.breakpoints.down('xs')]: {
       paddingTop: theme.spacing(5),
+      paddingBottom: theme.spacing(1),
     },
   },
   searchIcon: {
-    paddingLeft: theme.spacing(1.5),
+    paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     color: 'white',
-  },
-  searchButton: {
-    padding: theme.spacing(1),
-    backgroundColor: '#999999',
-    marginLeft: theme.spacing(2),
-    width: '20%',
-    borderRadius: '50px',
-    '&:hover': {
-      backgroundColor: '#999999',
-    },
-    [theme.breakpoints.down('xs')]: {
-      display: 'none',
-    },
   },
   inputBase: {
     paddingRight: theme.spacing(1),
@@ -58,12 +56,19 @@ export const indexStyle = makeStyles((theme: Theme) => ({
   },
   filterContainer: {
     paddingBottom: theme.spacing(3),
+    paddingLeft: theme.spacing(1.5),
+    paddingRight: theme.spacing(1.5),
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(1),
+    },
   },
   formHelperText: {
     color: '#F2C94C',
-    fontSize: '0.9rem',
+    fontSize: '0.85rem',
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.6rem',
+      paddingRight: theme.spacing(1),
+      display: 'none',
     },
   },
   formControl: {
@@ -80,11 +85,11 @@ export const indexStyle = makeStyles((theme: Theme) => ({
     },
   },
   filterValue: {
-    fontSize: '1.125rem',
+    fontSize: '1.25rem',
     color: '#44AD53',
   },
   maxValue: {
-    fontSize: '1.125rem',
+    fontSize: '1.25rem',
   },
   valueContainer: {
     paddingTop: theme.spacing(0.75),

@@ -1,5 +1,7 @@
 {
-  "title": "เลือกบ้าน",
+  "titleMoveBaan": "ย้ายบ้าน",
+  "titleJoinBaan": "เข้าร่วมบ้าน",
+  "titleDescription": "คลิกที่ชื่อบ้านเพื่อดูข้อมูลเพิ่มเติม",
   "searchPlaceholder": "ค้นหา...",
   "searchButton": "ค้นหา",
   "statusGreen": "ยังไม่เกินจำนวนรับ",
