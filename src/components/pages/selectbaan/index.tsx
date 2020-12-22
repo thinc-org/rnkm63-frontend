@@ -18,6 +18,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import { HandleRequestError, RequestError } from '../../common/Error'
 import StatusColor from './StatusColor'
 import { indexStyle } from './style/indexStyle'
+import MediaCard from './component/cardDialog'
 
 type IFilterSize = {
   [key: string]: boolean
@@ -116,6 +117,7 @@ function SelectBaan() {
         </FormGroup>
         <StatusColor />
         {/* Card */}
+        <MediaCard />
         <Box></Box>
       </Box>
     )
