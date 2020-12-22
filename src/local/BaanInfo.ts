@@ -1,5 +1,6 @@
 interface Baan {
   ID: number
+  size: string
   'name-th': string
   'name-en': string
   'caption-th': string[]
@@ -8,9 +9,10 @@ interface Baan {
   instagram: string
 }
 
-const baanInfo: Baan[] = [
+export const baanInfo: Baan[] = [
   {
     ID: 0,
+    size: '-',
     'name-th': '-',
     'name-en': '-',
     'caption-th': [],
@@ -20,6 +22,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 1,
+    size: 'XL',
     'name-th': 'อินดี้',
     'name-en': 'Indy',
     'caption-th': [
@@ -33,6 +36,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 2,
+    size: 'XL',
     'name-th': 'โจ๋',
     'name-en': 'Jo+',
     'caption-th': [
@@ -71,6 +75,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 3,
+    size: 'XL',
     'name-th': 'แรง',
     'name-en': 'Rang',
     'caption-th': [
@@ -95,6 +100,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 4,
+    size: 'XL',
     'name-th': 'ยิ้ม',
     'name-en': 'Yim',
     'caption-th': [
@@ -125,6 +131,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 5,
+    size: 'L',
     'name-th': 'อะอิ๋ม',
     'name-en': 'AAim',
     'caption-th': [
@@ -144,6 +151,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 6,
+    size: 'L',
     'name-th': 'เฟี้ยว',
     'name-en': 'Fyo',
     'caption-th': [
@@ -169,6 +177,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 7,
+    size: 'L',
     'name-th': 'โจ๊ะเด๊ะ ฮือซา',
     'name-en': 'Jodeh Huesa',
     'caption-th': [
@@ -205,6 +214,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 8,
+    size: 'L',
     'name-th': 'คุ้ม',
     'name-en': 'Koom',
     'caption-th': [
@@ -225,6 +235,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 9,
+    size: 'L',
     'name-th': 'พ่อ',
     'name-en': 'Por',
     'caption-th': [
@@ -260,6 +271,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 10,
+    size: 'L',
     'name-th': 'สด',
     'name-en': 'Sod',
     'caption-th': [
@@ -282,6 +294,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 11,
+    size: 'L',
     'name-th': 'โซ้ยตี๋หลีหมวย',
     'name-en': 'Soeiteelheemouy',
     'caption-th': [
@@ -301,6 +314,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 12,
+    size: 'M',
     'name-th': 'บูชายัญ',
     'name-en': 'Buchayun',
     'caption-th': [
@@ -328,6 +342,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 13,
+    size: 'M',
     'name-th': 'บึ้ม',
     'name-en': 'Buem',
     'caption-th': [
@@ -348,6 +363,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 14,
+    size: 'M',
     'name-th': 'ดัง',
     'name-en': 'Dung',
     'caption-th': [
@@ -381,6 +397,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 15,
+    size: 'M',
     'name-th': 'คิดส์',
     'name-en': 'Kids',
     'caption-th': [
@@ -407,6 +424,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 16,
+    size: 'M',
     'name-th': 'โคะ',
     'name-en': 'Koh',
     'caption-th': [
@@ -420,6 +438,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 17,
+    size: 'M',
     'name-th': 'หลายใจ',
     'name-en': 'Laijai',
     'caption-th': [
@@ -435,6 +454,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 18,
+    size: 'M',
     'name-th': 'ไหน',
     'name-en': 'Nhai',
     'caption-th': [
@@ -466,6 +486,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 19,
+    size: 'M',
     'name-th': 'เปรี้ยว',
     'name-en': 'Preaw',
     'caption-th': [
@@ -501,6 +522,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 20,
+    size: 'M',
     'name-th': 'หวัง',
     'name-en': 'Wang',
     'caption-th': [
@@ -528,6 +550,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 21,
+    size: 'M',
     'name-th': 'ว้อนท์',
     'name-en': 'Wanted',
     'caption-th': [
@@ -547,6 +570,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 22,
+    size: 'S',
     'name-th': 'แอ๊บ',
     'name-en': 'ABNormal',
     'caption-th': [
@@ -588,6 +612,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 24,
+    size: 'S',
     'name-th': 'อากาเป้',
     'name-en': 'Agape',
     'caption-th': [
@@ -612,6 +637,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 27,
+    size: 'S',
     'name-th': 'อินเดียน่า',
     'name-en': 'Indiana',
     'caption-th': [
@@ -633,6 +659,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 29,
+    size: 'S',
     'name-th': 'คุณหนู',
     'name-en': 'Khunnoo',
     'caption-th': [
@@ -653,6 +680,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 30,
+    size: 'S',
     'name-th': 'หมีน้อย',
     'name-en': 'Mheenoi',
     'caption-th': [
@@ -682,6 +710,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 31,
+    size: 'S',
     'name-th': 'พักตากอากาศ',
     'name-en': 'Pak Tak Agard',
     'caption-th': [
@@ -705,6 +734,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 32,
+    size: 'S',
     'name-th': 'ผี',
     'name-en': 'Phee',
     'caption-th': [
@@ -736,6 +766,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 33,
+    size: 'S',
     'name-th': 'หรอย',
     'name-en': 'Rhoy',
     'caption-th': [
@@ -760,6 +791,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 34,
+    size: 'S',
     'name-th': 'เสี่ยว',
     'name-en': 'Seiyw',
     'caption-th': ['บ้านเสี่ยว', '', 'Seiywnarok พวกเราจะเป็นตำนาน'],
@@ -769,6 +801,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 35,
+    size: 'S',
     'name-th': 'เต็ม',
     'name-en': 'Tem',
     'caption-th': [
@@ -800,6 +833,7 @@ const baanInfo: Baan[] = [
   },
   {
     ID: 36,
+    size: 'S',
     'name-th': 'เวิร์ค',
     'name-en': 'Work',
     'caption-th': [
@@ -826,6 +860,7 @@ export function getBaan(baanNumber: number): Baan {
   } else {
     return {
       ID: 0,
+      size: '-',
       'name-th': '-',
       'name-en': '-',
       'caption-th': [],
