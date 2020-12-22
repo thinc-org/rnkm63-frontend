@@ -8,12 +8,12 @@ import {
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core'
 import { ButtonProps } from '@material-ui/core/Button'
+import theme from 'config/theme'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, Redirect } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
-import theme from '../../config/theme'
 import SadThincIcon from '../shell/misc/SadThincIcon'
 import LinkButton, { LinkButtonProps } from './LinkButton'
 

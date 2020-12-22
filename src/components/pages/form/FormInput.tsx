@@ -3,8 +3,8 @@ import Link from '@material-ui/core/Link'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { FormSelectField, FormTextField } from './component/formComponent'
 import { formStyle } from './style'
-import { FormSelectField, FormTextField } from './utils/component/formComponent'
 import {
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
