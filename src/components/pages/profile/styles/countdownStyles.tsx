@@ -28,6 +28,7 @@ export const countdownStyles = makeStyles((theme: Theme) => ({
       fontSize: '1.75rem',
       lineHeight: '28px',
       marginTop: '3%',
+      marginBottom: '5%',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '1.5rem',
