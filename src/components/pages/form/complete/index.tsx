@@ -1,10 +1,9 @@
-import React from 'react'
-
 import { Box, Typography } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import LinkButton from '../../../common/LinkButton'
-
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
+import LinkButton from '../../../common/LinkButton'
 import { completeStyle } from '../style'
 
 function FormComplete() {

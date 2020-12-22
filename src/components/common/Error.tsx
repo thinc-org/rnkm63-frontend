@@ -1,20 +1,21 @@
-import React from 'react'
 import {
   Box,
   Button,
-  Typography,
+  createMuiTheme,
   makeStyles,
   ThemeProvider,
-  createMuiTheme,
+  Typography,
 } from '@material-ui/core'
-import SadThincIcon from '../shell/misc/SadThincIcon'
 import { Theme } from '@material-ui/core'
-import { Link, Redirect } from 'react-router-dom'
-import LinkButton, { LinkButtonProps } from './LinkButton'
-import { useTranslation } from 'react-i18next'
-import { useLocation } from 'react-router-dom'
-import theme from '../../config/theme'
 import { ButtonProps } from '@material-ui/core/Button'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link, Redirect } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
+
+import theme from '../../config/theme'
+import SadThincIcon from '../shell/misc/SadThincIcon'
+import LinkButton, { LinkButtonProps } from './LinkButton'
 
 const greenButtonTheme = createMuiTheme({
   typography: {

@@ -1,6 +1,7 @@
 import React from 'react'
+
+import { IRequestError, RequestError } from '../components/common/Error'
 import getUser from '../controllers/GetUserController'
-import { RequestError, IRequestError } from '../components/common/Error'
 
 export interface IUserData {
   prefixname: string

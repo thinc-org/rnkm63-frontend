@@ -1,24 +1,22 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
 import {
+  Box,
+  Button,
   List,
   ListItem,
   ListItemIcon,
   makeStyles,
-  Button,
-  Box,
 } from '@material-ui/core'
-
+import { green, red } from '@material-ui/core/colors'
+import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
 // import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
-import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
-
-import { green, red } from '@material-ui/core/colors'
-
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import LogOutButton from './LogOutButton'
+
 import { UserContext } from '../../../contexts/UserContext'
+import LogOutButton from './LogOutButton'
 
 const useStyles = makeStyles({
   eachList: {

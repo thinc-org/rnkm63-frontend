@@ -1,27 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react'
 import {
+  Box,
   Button,
-  Slide,
   Dialog,
+  DialogContentText,
   DialogTitle,
   IconButton,
-  DialogContentText,
+  Slide,
   Slider,
-  Box,
   Typography,
 } from '@material-ui/core'
-import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
-import {
-  getCroppedImg,
-  getResizedImage,
-  checkImageSize,
-} from './utils/imageHelper'
-import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
+import React, { useCallback, useEffect, useState } from 'react'
+import Cropper from 'react-easy-crop'
+import { useTranslation } from 'react-i18next'
+
 import { imageStyle } from './style'
+import {
+  checkImageSize,
+  getCroppedImg,
+  getResizedImage,
+} from './utils/imageHelper'
 
 interface resultImg {
   blob: Blob
@@ -162,7 +163,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           {t('dialogTitle')}
         </DialogTitle>
 
-        {!!upImg ? (
+        {upImg ? (
           <div>
             <Box
               height="100%"
@@ -233,7 +234,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               </Typography>
             ))}
         </DialogContentText>
-        {!!upImg ? (
+        {upImg ? (
           <Button
             variant="contained"
             color="primary"
@@ -245,7 +246,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         ) : null}
       </Dialog>
 
-      {!!finalImg ? (
+      {finalImg ? (
         <Box>
           <img src={finalImg} className={style.image} alt=""></img>
         </Box>

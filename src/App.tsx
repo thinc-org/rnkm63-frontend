@@ -1,19 +1,18 @@
+import { Box, Container, makeStyles, ThemeProvider } from '@material-ui/core'
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
-import theme from './config/theme'
-
-import { Header, Footer } from './components/shell'
+import { Loading } from './components/common'
 import {
-  Profile,
   Form,
+  FormComplete,
   Login,
   NotFound,
   NotFreshy,
-  FormComplete,
+  Profile,
 } from './components/pages'
-import { Loading } from './components/common'
+import { Footer, Header } from './components/shell'
+import theme from './config/theme'
 import { UserProvider } from './contexts/UserContext'
 import BackgroundImg from './local/background.png'
 

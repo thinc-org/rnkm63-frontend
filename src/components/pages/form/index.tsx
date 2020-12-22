@@ -1,33 +1,33 @@
-import React, { useRef } from 'react'
-import { Button, Box, Typography, RootRef } from '@material-ui/core'
-import Image from './Image'
-import FormInput from './FormInput'
-import FormDialog from './utils/component/formDialogComponent'
-import { indexStyle } from './style'
-import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
+import { Box, Button, RootRef, Typography } from '@material-ui/core'
 import {
-  Formik,
   Form as FormikForm,
+  Formik,
   validateYupSchema,
   yupToFormErrors,
 } from 'formik'
-import { HandleRequestError } from '../../common/Error'
 import { History, LocationState } from 'history'
+import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Redirect } from 'react-router-dom'
+
+import { IUser, IUserData, UserContext } from '../../../contexts/UserContext'
+import { HandleRequestError } from '../../common/Error'
+import { IRequestError, RequestError } from '../../common/Error'
+import Loading from '../../common/Loading'
+import FormInput from './FormInput'
+import Image from './Image'
+import { indexStyle } from './style'
+import FormDialog from './utils/component/formDialogComponent'
 import {
-  registerSchema,
   formInitialValues,
   IFormData,
+  registerSchema,
 } from './utils/registerSchema'
 import {
+  getPolicyStorage,
   postUserData,
   uploadImageToStorage,
-  getPolicyStorage,
 } from './utils/requestToApi'
-
-import { UserContext, IUserData, IUser } from '../../../contexts/UserContext'
-import { RequestError, IRequestError } from '../../common/Error'
-import Loading from '../../common/Loading'
 
 interface FormState {
   imageBlob: any

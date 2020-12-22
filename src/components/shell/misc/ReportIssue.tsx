@@ -1,7 +1,6 @@
+import { Button, makeStyles } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-import { Button, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles({
   pos: {

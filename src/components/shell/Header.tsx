@@ -1,15 +1,16 @@
 import { Box, Hidden, makeStyles } from '@material-ui/core'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom'
+
+import theme from '../../config/theme'
+import { UserContext } from '../../contexts/UserContext'
+import RnkmLogo from '../../local/rnkm_logo.png'
+import { withSuspense } from '../hoc'
 import Drawer from './misc/Drawer'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
 import ReportIssue from './misc/ReportIssue'
-import { useTranslation } from 'react-i18next'
-import RnkmLogo from '../../local/rnkm_logo.png'
-import { withSuspense } from '../hoc'
-import { Link } from 'react-router-dom'
-import theme from '../../config/theme'
-import { UserContext } from '../../contexts/UserContext'
 const useStyles = makeStyles({
   header: {
     height: '6rem',
