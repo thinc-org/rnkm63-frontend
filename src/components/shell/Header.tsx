@@ -1,4 +1,5 @@
 import { Box, Hidden, makeStyles } from '@material-ui/core'
+import { withSuspense } from 'components/hoc'
 import theme from 'config/theme'
 import { UserContext } from 'contexts/UserContext'
 import RnkmLogo from 'local/rnkm_logo.png'
@@ -6,7 +7,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-import { withSuspense } from '../hoc'
 import Drawer from './misc/Drawer'
 import LanguageSwitcher from './misc/LanguageSwitcher'
 import LogOutButton from './misc/LogOutButton'
