@@ -4,14 +4,11 @@ import { useTranslation } from 'react-i18next'
 
 import { countdownStyles } from './styles/countdownStyles'
 
-export const Countdown = () => {
+export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
-  const endTime = new Date('2020-12-27').valueOf()
-  const time = new Date().valueOf() - 5 * 1000 * 60 * 60
-  const timeLeft = (endTime - time) / 1000
-  const secs = timeLeft
+  const secs = parseInt(props.timeLeft) ?? 100
 
   const [days, setDays] = useState(Math.floor(secs / (60 * 60 * 24)))
   const [hours, setHours] = useState(
@@ -54,7 +51,7 @@ export const Countdown = () => {
   })
 
   return (
-    <Box>
+    <Box style={{ textAlign: 'center' }}>
       <Typography variant="h3" className={classes.countdownDetail}>
         {t('countdownDetail')}
       </Typography>
