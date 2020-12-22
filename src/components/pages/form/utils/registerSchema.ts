@@ -88,10 +88,10 @@ const formInitialValues = {
 }
 
 export {
-  registerSchema,
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
   formInitialValues,
+  registerSchema,
 }
 
 export type { IFormData, IFormDataRequest }

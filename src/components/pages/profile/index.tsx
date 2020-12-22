@@ -1,13 +1,14 @@
-import React from 'react'
-import Countdown from './Countdown'
 import { Box, Typography } from '@material-ui/core'
-import { getBaan } from './BaanInfo'
-import { profileStyles } from './styles/profileStyles'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { HandleRequestError, RequestError } from '../../common/Error'
 import { Redirect } from 'react-router-dom'
+
 import { UserContext } from '../../../contexts/UserContext'
+import { HandleRequestError, RequestError } from '../../common/Error'
 import Loading from '../../common/Loading'
+import { getBaan } from './BaanInfo'
+import Countdown from './Countdown'
+import { profileStyles } from './styles/profileStyles'
 
 function Profile() {
   const {

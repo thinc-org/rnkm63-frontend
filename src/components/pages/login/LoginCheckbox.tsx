@@ -1,7 +1,8 @@
-import React from 'react'
-import { FormControlLabel, Typography, Checkbox } from '@material-ui/core'
-import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
+import { Checkbox, FormControlLabel, Typography } from '@material-ui/core'
 import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank'
+import React from 'react'
+
 import indexStyle from './indexStyle'
 
 type Props = {

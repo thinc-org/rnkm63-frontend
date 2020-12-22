@@ -1,5 +1,5 @@
-import footer from './footer.json'
 import errors from './errors.json'
+import footer from './footer.json'
 import form from './form.json'
 import formComplete from './formComplete.json'
 import login from './login.json'

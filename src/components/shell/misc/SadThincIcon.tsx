@@ -1,7 +1,8 @@
-import React from 'react'
 import { makeStyles } from '@material-ui/core'
-import sadThinc from '../../../local/sadthinc.png'
+import React from 'react'
+
 import theme from '../../../config/theme'
+import sadThinc from '../../../local/sadthinc.png'
 const useStyles = makeStyles({
   image: {
     width: '206px',

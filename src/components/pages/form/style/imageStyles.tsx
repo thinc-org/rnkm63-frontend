@@ -1,4 +1,4 @@
-import { Theme, makeStyles, createStyles } from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import red from '@material-ui/core/colors/red'
 
 interface propsStyle {

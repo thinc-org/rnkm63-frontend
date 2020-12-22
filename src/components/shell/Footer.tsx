@@ -2,13 +2,12 @@ import { Box, makeStyles, Typography } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import SGCUIcon from '../../local/SGCU.svg'
-import THINCIcon from '../../local/thinc_logo.svg'
-import kohkae from '../../local/kohkae.svg' //Left
 import EISA from '../../local/EISA.svg'
+import kohkae from '../../local/kohkae.svg' //Left
 import Major from '../../local/Major.svg' //Right
+import SGCUIcon from '../../local/SGCU.svg'
 import SPT from '../../local/SPT.svg'
-
+import THINCIcon from '../../local/thinc_logo.svg'
 import { withSuspense } from '../hoc'
 
 const useStyles = makeStyles({

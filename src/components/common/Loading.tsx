@@ -1,6 +1,5 @@
-import React from 'react'
-
 import { Box, makeStyles, Theme } from '@material-ui/core'
+import React from 'react'
 
 const STROKE_DASH_END = 800
 

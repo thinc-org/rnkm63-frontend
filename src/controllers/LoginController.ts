@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
+
 import { API_URL } from '../utils'
 
 function Connect() {
@@ -32,4 +33,4 @@ async function LogOut(): Promise<void> {
   }
 }
 
-export { Connect, SendTicketToBack, LogOut }
+export { Connect, LogOut, SendTicketToBack }

@@ -1,13 +1,14 @@
 import {
+  Button,
   Dialog,
+  DialogActions,
+  DialogContent,
   DialogTitle,
   Typography,
-  DialogContent,
-  DialogActions,
-  Button,
 } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
 import { indexStyle } from '../../style'
 
 interface IFormDialog {

@@ -1,5 +1,5 @@
-import Loading from './Loading'
 import Error from './Error'
 import LinkButton from './LinkButton'
+import Loading from './Loading'
 
-export { Loading, Error, LinkButton }
+export { Error, LinkButton, Loading }
