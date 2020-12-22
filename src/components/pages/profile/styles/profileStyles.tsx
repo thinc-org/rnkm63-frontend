@@ -36,6 +36,7 @@ export const profileStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       width: '65%',
       marginTop: '50px',
+      marginBottom: '50px',
     },
     [theme.breakpoints.down('xs')]: {
       width: '90%',

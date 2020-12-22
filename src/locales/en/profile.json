@@ -11,5 +11,10 @@
   "Faculty": "Faculty",
   "Baan": "Baan",
   "countdownDetail": "Time until Round 1",
-  "baanWarning": "Note : You have been assigned to a different baan as your baan is unable to participate in the Rubnongkaomai 2020 event"
+  "baanWarning": "Note : You have been assigned to a different baan as your baan is unable to participate in the Rubnongkaomai 2020 event",
+  "timeLeft": "Result in : ",
+  "round": "Round ",
+  "exitHouse": "Leave Baan",
+  "changeHouse": "Change Baan",
+  "selectHouse": "Select Baan"
 }

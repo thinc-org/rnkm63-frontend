@@ -8,7 +8,7 @@ export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
-  const secs = parseInt(props.timeLeft) ?? 100
+  const secs = props.timeLeft ?? 100
 
   const [days, setDays] = useState(Math.floor(secs / (60 * 60 * 24)))
   const [hours, setHours] = useState(
@@ -51,11 +51,9 @@ export const Countdown = (props: any) => {
   })
 
   return (
-    <Box style={{ textAlign: 'center' }}>
+    <Box>
       <Typography variant="h3" className={classes.countdownDetail}>
-        {t('countdownDetail')}
-      </Typography>
-      <Typography variant="h1" className={classes.countdownTimer}>
+        {t('timeLeft')}
         {days} {t('Days', { count: days })} &nbsp;
         {hours} {t('Hours', { count: hours })} &nbsp;
         {minutes} {t('Minutes', { count: minutes })} &nbsp;
