@@ -1,5 +1,7 @@
 {
-  "title": "Select Baan",
+  "titleMoveBaan": "Change Baan",
+  "titleJoinBaan": "Join Baan",
+  "titleDescription": "Click on the Baan name to see more details",
   "searchPlaceholder": "Search...",
   "searchButton": "Search",
   "statusGreen": "Available",

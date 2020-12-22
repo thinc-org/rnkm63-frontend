@@ -29,8 +29,8 @@ function StatusColor() {
       justifyContent="space-evenly"
       className={style.container}
     >
-      {listStatus.map((val) => (
-        <Box display="flex" alignItems="center">
+      {listStatus.map((val, idx) => (
+        <Box display="flex" alignItems="center" key={idx}>
           <Paper
             className={style.paperStatus}
             style={{ backgroundColor: val.backgroundColor }}
