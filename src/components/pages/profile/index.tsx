@@ -10,6 +10,7 @@ import { Redirect } from 'react-router-dom'
 import Countdown from './Countdown'
 import ProfileInfo from './ProfileInfo'
 import { profileStyles } from './styles/profileStyles'
+import BaanPending from './baanPending'
 
 function Profile() {
   const {
@@ -52,8 +53,8 @@ function Profile() {
             </Typography>
             <Typography variant="h3" className={classes.valueDetails}>
               {i18n.language.startsWith('en')
-                ? userInfo?.data?.facultyEn ?? '-'
-                : userInfo?.data?.facultyTh ?? '-'}
+                ? (userInfo?.data?.facultyEn ?? '-').replace('Faculty of', '')
+                : (userInfo?.data?.facultyTh ?? '-').replace('คณะ', '')}
             </Typography>
           </Box>
           <Box>
@@ -68,7 +69,8 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        <RoundSelector isBaanExist={userInfo?.currentBaan} />
+        <RoundSelector isBaanExist={userInfo?.currentBaan} />{' '}
+        {/*change for RoundSelector or BaanPending */}
         <Countdown />
       </body>
     )
