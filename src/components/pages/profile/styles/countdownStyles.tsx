@@ -2,21 +2,19 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 
 export const countdownStyles = makeStyles((theme: Theme) => ({
   countdownDetail: {
-    fontSize: '2rem',
-    fontWeight: 300,
-    marginTop: '6%',
-    marginBottom: '25px',
+    fontSize: '1.1rem',
+    fontWeight: 500,
+    marginBottom: '15px',
     lineHeight: '22px',
     [theme.breakpoints.down('sm')]: {
       fontSize: '1.5rem',
       lineHeight: '28px',
-      marginTop: '75px',
       marginBottom: '9px',
     },
     [theme.breakpoints.down('xs')]: {
+      marginTop: '8px',
       fontSize: '1rem',
       lineHeight: '28px',
-      marginTop: '65px',
     },
   },
   countdownTimer: {
@@ -28,7 +26,6 @@ export const countdownStyles = makeStyles((theme: Theme) => ({
       fontSize: '1.75rem',
       lineHeight: '28px',
       marginTop: '3%',
-      marginBottom: '5%',
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: '1.5rem',
