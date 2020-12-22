@@ -1,0 +1,91 @@
+import { makeStyles } from '@material-ui/core/styles'
+
+export const useStyles = makeStyles((theme) => ({
+  root: {
+    backgroundColor: '#383838',
+    height: '341px',
+    width: '207px',
+  },
+  centerit: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  button_select: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    color: 'white',
+    fontFamily: 'rubik',
+    fontSize: '18px',
+    marginBottom: '3px',
+    width: '207px',
+    borderRadius: '40px',
+    backgroundColor: '#44AD53',
+  },
+  button_select_card: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    color: 'white',
+    fontFamily: 'rubik',
+    fontSize: '18px',
+    marginBottom: '20px',
+    width: '171px',
+    borderRadius: '40px',
+    height: '40px',
+    backgroundColor: '#44AD53',
+  },
+  dialog_title: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: '28px',
+    padding: '10px 5px 5px',
+  },
+  card_title: {
+    textAlign: 'center',
+    color: 'white',
+    fontSize: '28px',
+    padding: '5px',
+  },
+  card_text: {
+    color: 'white',
+    margin: '25px',
+    fontFamily: 'rubik',
+  },
+  fbandigicon_item: {
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    display: 'flex',
+  },
+  fbandigicon_text: {
+    padding: '7px',
+    color: 'white',
+    fontFamily: 'kanit',
+    fontSize: '20px',
+  },
+  avatar_picture: {
+    height: '100px',
+    width: '100px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '20px',
+  },
+  avatar_picture_card: {
+    height: '100px',
+    width: '100px',
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  dialog_popup: {
+    position: 'absolute',
+    right: '50px',
+    top: '105px',
+    [theme.breakpoints.down('xs')]: {
+      height: '534px',
+    },
+  },
+}))
