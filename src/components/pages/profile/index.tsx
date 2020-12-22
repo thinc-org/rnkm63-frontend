@@ -50,8 +50,8 @@ function Profile() {
             </Typography>
             <Typography variant="h3" className={classes.valueDetails}>
               {i18n.language.startsWith('en')
-                ? userInfo?.data?.facultyEn ?? '-'
-                : userInfo?.data?.facultyTh ?? '-'}
+                ? (userInfo?.data?.facultyEn ?? '-').replace('Faculty of', '')
+                : (userInfo?.data?.facultyTh ?? '-').replace('คณะ', '')}
             </Typography>
           </Box>
           <Box>
