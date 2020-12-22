@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '6rem',
     height: '2.5rem',
     margin: '0.25rem',
+    marginRight: '1.2rem',
   },
   Lang: {
     zIndex: 10,

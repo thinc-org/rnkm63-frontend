@@ -10,6 +10,7 @@ import { withSuspense } from '../hoc'
 import { Link } from 'react-router-dom'
 import theme from '../../config/theme'
 import { UserContext } from '../../contexts/UserContext'
+import LinkPage from './misc/LinkPage'
 const useStyles = makeStyles({
   header: {
     height: '6rem',
@@ -18,8 +19,8 @@ const useStyles = makeStyles({
     padding: '0 1rem',
   },
   rnkmLogo: {
-    width: '10rem',
-    height: '5rem',
+    width: '7.4rem',
+    height: '3.7rem',
   },
   rnkmLogoLink: {
     margin: '0.25rem',
@@ -27,14 +28,13 @@ const useStyles = makeStyles({
   logOutButton: {
     border: 0,
     borderRadius: '1.25rem',
-    width: '8rem',
+    width: '7rem',
     height: '2.5rem',
-    margin: '0 1rem',
-    fontSize: '0.85rem',
+    marginRight: '0.8rem',
     textAlign: 'center',
     fontWeight: 500,
   },
-  [theme.breakpoints.down('xs')]: {
+  [theme.breakpoints.down('sm')]: {
     header: {
       height: '5rem',
     },
@@ -42,8 +42,7 @@ const useStyles = makeStyles({
       padding: '0 0.25rem',
     },
     rnkmLogo: {
-      width: '10rem',
-      maxWidth: '100%',
+      width: '80px',
       objectFit: 'contain',
     },
   },
@@ -66,16 +65,22 @@ function Header() {
           <img src={RnkmLogo} alt="" className={classes.rnkmLogo} />
         </Link>
       </Box>
+
       <Box
         display="flex"
-        flexDirection="row"
-        justifyContent="flex-start"
-        alignItems="center"
+        flex="6"
+        justifyContent="center"
         className={classes.headerPart}
       >
         <Hidden xsDown>
+          <LinkPage name={t('home')} link={'/'} />
+          <LinkPage name={t('bann')} link={'/baan'} />
+          <LinkPage name={t('schedule')} link={'/schedule'} />
           <ReportIssue />
         </Hidden>
+      </Box>
+
+      <Box>
         <LanguageSwitcher />
         {(!userError || userError.status >= 500) && (
           <Hidden xsDown>
