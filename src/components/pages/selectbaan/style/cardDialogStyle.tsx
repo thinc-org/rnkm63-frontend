@@ -50,8 +50,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   card_text: {
     color: 'white',
-    margin: '25px',
+    margin: '10px',
+    marginBottom: '0px',
     fontFamily: 'rubik',
+    fontSize: '20px',
   },
   fbandigicon_item: {
     alignItems: 'center',
@@ -81,11 +83,12 @@ export const useStyles = makeStyles((theme) => ({
     marginRight: 'auto',
   },
   dialog_popup: {
+    backdropFilter: 'blur(8px)',
     position: 'absolute',
     right: '50px',
     top: '105px',
-    [theme.breakpoints.down('xs')]: {
-      height: '534px',
-    },
+    // [theme.breakpoints.down('xs')]: {
+    //   height: '534px',
+    // },
   },
 }))
