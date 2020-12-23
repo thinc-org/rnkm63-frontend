@@ -8,9 +8,9 @@ import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
 import Countdown from './Countdown'
-import ProfileInfo from './ProfileInfo'
+import Pending from './Pending'
+import RoundSelector from './roundSelector'
 import { profileStyles } from './styles/profileStyles'
-import BaanPending from './baanPending'
 
 function Profile() {
   const {
@@ -69,8 +69,15 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        <RoundSelector isBaanExist={userInfo?.currentBaan} />{' '}
-        {/*change for RoundSelector or BaanPending */}
+        {userInfo?.preferBaan === null ? (
+          <RoundSelector isBaanExist={userInfo?.currentBaan} />
+        ) : (
+          <Pending
+            round={1}
+            currentBaan={userInfo?.currentBaan}
+            preferBaan={userInfo?.preferBaan!}
+          />
+        )}
         <Countdown />
       </body>
     )
