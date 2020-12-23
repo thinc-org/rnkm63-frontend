@@ -19,8 +19,8 @@ const useStyles = makeStyles({
     padding: '0 1rem',
   },
   rnkmLogo: {
-    width: '7.4rem',
-    height: '3.7rem',
+    width: '6rem',
+    height: '3rem',
   },
   rnkmLogoLink: {
     margin: '0.25rem',
@@ -41,10 +41,6 @@ const useStyles = makeStyles({
     headerPart: {
       padding: '0 0.25rem',
     },
-    rnkmLogo: {
-      width: '80px',
-      objectFit: 'contain',
-    },
   },
 })
 
@@ -52,6 +48,8 @@ function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const loginReady: boolean = !userError || userError.status >= 500
+
   return (
     <Box
       className={classes.header}
@@ -69,24 +67,29 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent="center"
+        justifyContent={loginReady ? 'center' : 'flex-end'}
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          <LinkPage name={t('home')} link={'/'} />
-          {userInfo?.currentBaan !== 0 ? (
-            <LinkPage name={t('changeBaan')} link={'/baan'} /> //I don't know this path.
-          ) : (
-            <LinkPage name={t('joinBaan')} link={'/select'} />
+          {loginReady && (
+            <>
+              <LinkPage name={t('home')} link={'/'} />
+              <LinkPage
+                name={
+                  userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')
+                }
+                link={'/baan'}
+              />
+              <LinkPage name={t('schedule')} link={'/schedule'} />
+            </>
           )}
-          <LinkPage name={t('schedule')} link={'/schedule'} />
           <ReportIssue />
         </Hidden>
       </Box>
 
       <Box>
         <LanguageSwitcher />
-        {(!userError || userError.status >= 500) && (
+        {loginReady && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}

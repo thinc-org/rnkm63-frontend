@@ -43,6 +43,7 @@ const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const loginReady: boolean = !userError || userError.status >= 500
 
   return (
     <React.Fragment>
@@ -58,34 +59,35 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        <ListItem
-          component={Link}
-          to={userInfo?.currentBaan !== 0 ? '/baan' : '/select'}
-        >
-          <Button className={classes.eachList}>
-            <ListItemIcon className={classes.selectBaan}>
-              <HomeOutlinedIcon />
-            </ListItemIcon>
-            <Box
-              fontSize={16}
-              fontWeight="fontWeightBold"
-              className={classes.selectBaan}
-            >
-              {userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')}
-            </Box>
-          </Button>
-        </ListItem>
+        {loginReady && (
+          <ListItem component={Link} to={'/baan'}>
+            <Button className={classes.eachList}>
+              <ListItemIcon className={classes.selectBaan}>
+                <HomeOutlinedIcon />
+              </ListItemIcon>
+              <Box
+                fontSize={16}
+                fontWeight="fontWeightBold"
+                className={classes.selectBaan}
+              >
+                {userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
 
-        <ListItem component={Link} to={'/'}>
-          <Button className={classes.eachList}>
-            <ListItemIcon>
-              <EventNoteRoundedIcon style={{ color: 'white' }} />
-            </ListItemIcon>
-            <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('schedule')}
-            </Box>
-          </Button>
-        </ListItem>
+        {loginReady && (
+          <ListItem component={Link} to={'/schedule'}>
+            <Button className={classes.eachList}>
+              <ListItemIcon>
+                <EventNoteRoundedIcon style={{ color: 'white' }} />
+              </ListItemIcon>
+              <Box fontSize={16} fontWeight="fontWeightBold">
+                {t('schedule')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
 
         <ListItem>
           <Button
@@ -102,7 +104,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userError || userError.status >= 500) && (
+        {loginReady && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>
