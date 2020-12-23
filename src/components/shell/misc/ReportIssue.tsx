@@ -6,6 +6,7 @@ import { Button, makeStyles } from '@material-ui/core'
 const useStyles = makeStyles({
   root: {
     textAlign: 'center',
+    textTransform: 'none',
   },
 })
 

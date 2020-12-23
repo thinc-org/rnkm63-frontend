@@ -12,6 +12,7 @@ const useStyle = makeStyles({
   root: {
     marginRight: '1rem',
     textAlign: 'center',
+    textTransform: 'none',
   },
   [theme.breakpoints.up('md')]: {
     root: {
