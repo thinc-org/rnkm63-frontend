@@ -7,14 +7,15 @@ import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import MuiDialogActions from '@material-ui/core/DialogActions'
-import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import FacebookIcon from '@material-ui/icons/Facebook'
-import { Typography } from '@material-ui/core'
-import { Box } from '@material-ui/core'
+import { Typography, Box, withStyles } from '@material-ui/core'
 import { DialogTitle } from './dialogComponent'
 import { useStyles } from '../style/cardDialogStyle'
+import ConfirmSelect from './popupConfirm'
+import CardActions from '@material-ui/core/CardActions'
+import { useTranslation } from 'react-i18next'
 
 const DialogContent = withStyles((theme) => ({
   root: {
@@ -38,14 +39,22 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 export default function MediaCard() {
   const classes = useStyles()
+  const { t } = useTranslation('selectbaan')
 
   const [open, setOpen] = React.useState(false)
+  const [openConfirm, setOpenConfirm] = React.useState(false)
 
   const handleClickOpen = () => {
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
+  }
+  const handleOpenConfirmDialog = () => {
+    setOpenConfirm(true)
+  }
+  const handleCloseConfirmDialog = () => {
+    setOpenConfirm(false)
   }
 
   return (
@@ -59,24 +68,34 @@ export default function MediaCard() {
             src="https://cf.bstatic.com/images/hotel/max1024x768/244/244666333.jpg"
           />
           <Typography className={classes.card_text}>
-            ขนาด:<br></br>
-            ที่ว่าง:<br></br>
-            คำขอ:<br></br>
+            {t('size')}:<br></br>
+            {t('space')}:<br></br>
+            {t('request')}:<br></br>
           </Typography>
-          <Button
-            className={classes.button_select_card}
-            variant="contained"
-            onClick={handleClose}
-            color="primary"
-          >
-            เลือก
-          </Button>
         </CardContent>
       </CardActionArea>
+      <CardActions>
+        <Button
+          className={classes.button_select_card}
+          variant="contained"
+          // onClick={handleClose}
+          onClick={handleOpenConfirmDialog}
+          color="primary"
+        >
+          {t('select')}
+        </Button>
+      </CardActions>
+
+      <ConfirmSelect
+        confirmOpen={openConfirm}
+        closeDialog={handleCloseConfirmDialog}
+        submit={handleCloseConfirmDialog}
+      />
 
       <Dialog
         onClose={handleClose}
         open={open}
+        // open={false}
         className={classes.dialog_popup}
         PaperProps={{
           style: {
@@ -130,17 +149,15 @@ export default function MediaCard() {
             <Typography gutterBottom>📻Some door can’t be close</Typography>
           </Typography>
         </DialogContent>
-        {/* <ThemeProvider theme={theme}> */}
         <DialogActions>
           <Button
             className={classes.button_select}
             variant="contained"
-            onClick={handleClose}
+            onClick={handleOpenConfirmDialog}
           >
-            เลือก
+            {t('select')}
           </Button>
         </DialogActions>
-        {/* </ThemeProvider> */}
       </Dialog>
     </Card>
   )

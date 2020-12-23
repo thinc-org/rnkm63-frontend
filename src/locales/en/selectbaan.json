@@ -26,5 +26,9 @@
     "text": "Size XL",
     "size": "( 300-480 members )",
     "mobile": "XL"
-  }
+  },
+  "size": "Size",
+  "space": "Space",
+  "request": "Request",
+  "select": "Select"
 }
