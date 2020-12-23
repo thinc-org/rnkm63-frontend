@@ -2,8 +2,11 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    margin: '10px',
     backgroundColor: '#383838',
-    height: '341px',
+    // height: '381px',
+    // width: '207px',
+    height: 'auto',
     width: '207px',
   },
   centerit: {
@@ -45,8 +48,9 @@ export const useStyles = makeStyles((theme) => ({
   card_title: {
     textAlign: 'center',
     color: 'white',
-    fontSize: '28px',
+    fontSize: '20px',
     padding: '5px',
+    wordBreak: 'break-word',
   },
   card_text: {
     color: 'white',
