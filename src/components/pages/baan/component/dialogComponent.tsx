@@ -1,10 +1,10 @@
-import React from 'react'
-import { createStyles, WithStyles, Theme } from '@material-ui/core/styles'
+import { Typography } from '@material-ui/core'
 import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
-import CloseIcon from '@material-ui/icons/Close'
+import { createStyles, Theme, WithStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
+import React from 'react'
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -33,7 +33,7 @@ interface DialogTitleProps extends WithStyles<typeof styles> {
 }
 
 export const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose, ...other } = props
+  const { children, classes, onClose } = props
   return (
     <MuiDialogTitle disableTypography className={classes.title}>
       <Typography className={classes.title}>{children}</Typography>
