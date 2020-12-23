@@ -51,7 +51,7 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userError } = React.useContext(UserContext)
+  const { error: userError, user: userInfo } = React.useContext(UserContext)
   return (
     <Box
       className={classes.header}
@@ -74,7 +74,11 @@ function Header() {
       >
         <Hidden xsDown>
           <LinkPage name={t('home')} link={'/'} />
-          <LinkPage name={t('bann')} link={'/baan'} />
+          {userInfo?.currentBaan !== 0 ? (
+            <LinkPage name={t('changeBaan')} link={'/baan'} /> //I don't know this path.
+          ) : (
+            <LinkPage name={t('่joinBaan')} link={'/select'} />
+          )}
           <LinkPage name={t('schedule')} link={'/schedule'} />
           <ReportIssue />
         </Hidden>

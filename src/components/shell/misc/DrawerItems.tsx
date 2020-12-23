@@ -31,7 +31,7 @@ const useStyles = makeStyles({
       opacity: '0.5',
     },
   },
-  selectBann: {
+  selectBaan: {
     color: green[500],
   },
   logOut: {
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userError } = React.useContext(UserContext)
+  const { error: userError, user: userInfo } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -58,17 +58,20 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        <ListItem component={Link} to={'/'}>
+        <ListItem
+          component={Link}
+          to={userInfo?.currentBaan !== 0 ? '/baan' : '/select'}
+        >
           <Button className={classes.eachList}>
-            <ListItemIcon className={classes.selectBann}>
+            <ListItemIcon className={classes.selectBaan}>
               <HomeOutlinedIcon />
             </ListItemIcon>
             <Box
               fontSize={16}
               fontWeight="fontWeightBold"
-              className={classes.selectBann}
+              className={classes.selectBaan}
             >
-              {t('bann')}
+              {userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')}
             </Box>
           </Button>
         </ListItem>
@@ -98,8 +101,6 @@ const ItemDrawer = () => {
             </Box>
           </Button>
         </ListItem>
-
-        {/* For Phase 2 */}
 
         {(!userError || userError.status >= 500) && (
           <ListItem>
