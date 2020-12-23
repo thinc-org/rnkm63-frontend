@@ -16,5 +16,12 @@
   "round": "Round ",
   "exitHouse": "Leave Baan",
   "changeHouse": "Change Baan",
-  "selectHouse": "Select Baan"
+  "selectHouse": "Select Baan",
+  "roundcnt": "Round {{count}} : ",
+  "leaveBaan":"Leaving from",
+  "changeBaan":"Changing to",
+  "joinBaan":"Joining",
+  "request":"Total join requests : ",
+  "cancel":"Cancel",
+  "change":"Change"
 }

@@ -12,5 +12,12 @@
   "round": "รอบที่ ",
   "exitHouse": "ออกจากบ้าน",
   "changeHouse": "เปลี่ยนบ้าน",
-  "selectHouse": "เลือกบ้าน"
+  "selectHouse": "เลือกบ้าน",
+  "roundcnt": "รอบที่ {{count}} : ",
+  "leaveBaan":"ยื่นออกจาก",
+  "changeBaan":"ยื่นย้ายไป",
+  "joinBaan":"ยื่นเข้าร่วม",
+  "request":"จำนวนคนที่เลือกบ้านนี้ : ",
+  "cancel":"ยกเลิก",
+  "change":"เปลี่ยน"
 }
