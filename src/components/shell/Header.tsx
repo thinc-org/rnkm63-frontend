@@ -77,7 +77,7 @@ function Header() {
           {userInfo?.currentBaan !== 0 ? (
             <LinkPage name={t('changeBaan')} link={'/baan'} /> //I don't know this path.
           ) : (
-            <LinkPage name={t('่joinBaan')} link={'/select'} />
+            <LinkPage name={t('joinBaan')} link={'/select'} />
           )}
           <LinkPage name={t('schedule')} link={'/schedule'} />
           <ReportIssue />
