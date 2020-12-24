@@ -74,7 +74,6 @@ const MediaCard = ({ value }: any) => {
   const handleCloseConfirmDialog = () => {
     setOpenConfirm(false)
   }
-  console.log(value.color)
   return (
     <Card className={classes.root}>
       <CardActionArea onClick={handleClickOpen}>
