@@ -21,6 +21,9 @@ export const roundStyles = makeStyles((theme: Theme) => ({
       margin: '10px 10px',
       width: '220px',
     },
+    '&:hover': {
+      backgroundColor: theme.palette.error.main,
+    },
   },
   change: {
     color: 'white',
@@ -31,6 +34,9 @@ export const roundStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('sm')]: {
       margin: '10px 10px',
       width: '220px',
+    },
+    '&:hover': {
+      backgroundColor: theme.palette.success.main,
     },
   },
   select: {
