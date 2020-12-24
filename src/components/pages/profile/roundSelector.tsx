@@ -13,10 +13,10 @@ function RoundSelector(props: any) {
         <Typography variant="h2" className={classes.round}>
           {t('round')} 1
         </Typography>
-        <Button variant="contained" className={classes.exit}>
+        <Button href="/" variant="contained" className={classes.exit}>
           {t('exitHouse')}
         </Button>
-        <Button variant="contained" className={classes.change}>
+        <Button href="/select" variant="contained" className={classes.change}>
           {t('changeHouse')}
         </Button>
       </Box>
@@ -28,6 +28,7 @@ function RoundSelector(props: any) {
           {t('round')} 1
         </Typography>
         <Button
+          href="/select"
           variant="contained"
           className={`${classes.change} ${classes.select}`}
         >
