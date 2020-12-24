@@ -36,6 +36,7 @@ interface IFilterData {
   instagram: string
   capacity: number
   request: number
+  color: string
 }
 
 interface ICapacityData {
@@ -92,10 +93,25 @@ function Baan() {
         if (val.instagram === '') {
           val.instagram = '-'
         }
+        // const bpOne = 0.8*findCapacity.capacity
+        let color = ''
+        let cap =
+          findCapacity?.capacity !== undefined ? findCapacity?.capacity : 0
+        let mem =
+          findCapacity?.memberCount !== undefined
+            ? findCapacity?.memberCount
+            : 0
+        console.log(cap, mem)
+        const bpOne = 0.8 * cap
+        if (mem <= bpOne) color = 'red'
+        else if (bpOne < mem && mem < cap) color = 'yellow'
+        else color = 'red'
+
         filterData.push({
           ...val,
           capacity: findCapacity?.capacity as number,
           request: findCapacity?.memberCount as number,
+          color: color,
         })
       }
     }
