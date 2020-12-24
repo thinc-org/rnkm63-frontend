@@ -21,7 +21,7 @@ export const indexStyle = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    minWidth: '230px',
+    minWidth: '238px',
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: '4px',
     padding: theme.spacing(0.75),
