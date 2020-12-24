@@ -67,7 +67,11 @@ export const Countdown = (props: any) => {
   } else {
     return (
       <Box>
-        <Typography variant="h3" className={classes.countdownDetail}>
+        <Typography
+          variant="h3"
+          className={classes.countdownDetail}
+          style={{ marginTop: '5%' }}
+        >
           {t('countdownDetail')}
         </Typography>
         <Typography variant="h1" className={classes.countdownTimer}>
