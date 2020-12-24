@@ -1,6 +1,11 @@
 import axios, { AxiosPromise } from 'axios'
 import { API_URL } from 'utils'
-
+interface ReqInfo {
+  baanID: number
+  requestCount: number
+  capacity: number
+  memberCount: number
+}
 const config = {
   headers: { 'No-CSRF': true },
   withCredentials: true,
@@ -12,9 +17,7 @@ const getRound = function (): AxiosPromise<number> {
   return apiClient.get('/global/round').catch((err) => err.response)
 }
 
-const getAllRequestCount = function (): AxiosPromise<
-  { baanID: number; requestCount: number }[]
-> {
+const getAllRequestCount = function (): AxiosPromise<ReqInfo[]> {
   return apiClient
     .get('/user/getAllUserPreferBaan')
     .catch((err) => err.response)
@@ -31,3 +34,4 @@ const postBaanChange = function (
     .catch((err) => err.response)
 }
 export { getAllRequestCount, getRound, postBaanChange }
+export type { ReqInfo }

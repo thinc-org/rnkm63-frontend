@@ -6,7 +6,11 @@ import { Link } from 'react-router-dom'
 
 import { getBaan, getLogo } from '../../../local/BaanInfo'
 import { pendingStyles } from './styles/pendingStyles'
-import { getAllRequestCount, postBaanChange } from './utils/requestToApi'
+import {
+  getAllRequestCount,
+  postBaanChange,
+  ReqInfo,
+} from './utils/requestToApi'
 interface Props {
   currentBaan: number
   preferBaan: number
@@ -16,12 +20,14 @@ interface Props {
 function Pending(props: Props) {
   const { currentBaan, preferBaan, round } = props
   const { t, i18n } = useTranslation('profile')
-  const BaanInfo = getBaan(preferBaan === 0 ? currentBaan : preferBaan)
-  const BaanLogo = getLogo(preferBaan === 0 ? currentBaan : preferBaan)
+  const baanInfo = getBaan(preferBaan === 0 ? currentBaan : preferBaan)
+  const baanLogo = getLogo(preferBaan === 0 ? currentBaan : preferBaan)
   const [reqCount, setReqCount] = useState(0)
+  const [reqPercent, setReqPercent] = useState(0)
   const styleProps = {
     baanNameColor: preferBaan === 0 ? 'Red' : 'Yellow',
-    requestColor: 'Green', //change later
+    requestColor:
+      reqPercent < 80 ? 'Green' : reqPercent < 100 ? 'Yellow' : 'Red',
   }
   const classes = pendingStyles(styleProps)
 
@@ -40,13 +46,15 @@ function Pending(props: Props) {
       if (res.status < 200 || res.status >= 300) {
         props.setError(RequestError(res.status, res.headers['x-request-id']))
       } else {
-        const reqInfo = res.data.find(
-          (item: { baanID: number; requestCount: number }) => {
-            return item.baanID === (preferBaan === 0 ? currentBaan : preferBaan)
-          }
-        )
+        const reqInfo = res.data.find((item: ReqInfo) => {
+          return item.baanID === (preferBaan === 0 ? currentBaan : preferBaan)
+        })
         if (reqInfo) {
           setReqCount(reqInfo.requestCount)
+          setReqPercent(
+            (reqInfo.requestCount * 100) /
+              (reqInfo.capacity - reqInfo.memberCount)
+          )
         }
       }
     }
@@ -66,12 +74,12 @@ function Pending(props: Props) {
       <Box className={classes.container}>
         <Box className={classes.content}>
           <Box display="flex" alignItems="center" flexGrow="2">
-            <img src={BaanLogo} className={classes.logo} alt="logo"></img>
+            <img src={baanLogo} className={classes.logo} alt="logo"></img>
             <Box textAlign="left">
               <Typography className={classes.baanName}>
                 {i18n.language.startsWith('en')
-                  ? BaanInfo['name-en']
-                  : BaanInfo['name-th']}
+                  ? baanInfo['name-en']
+                  : baanInfo['name-th']}
               </Typography>
               <Typography className={classes.request}>
                 {t('request')}
