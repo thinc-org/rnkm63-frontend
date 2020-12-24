@@ -5,7 +5,7 @@ export const roundStyles = makeStyles((theme: Theme) => ({
     fontWeight: 500,
     fontSize: '60px',
     lineHeight: '22px',
-    marginTop: '48px',
+    marginTop: '60px',
     marginBottom: '1%',
     [theme.breakpoints.down('sm')]: {
       display: 'none',
