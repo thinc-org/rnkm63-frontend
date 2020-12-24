@@ -19,7 +19,7 @@ const listStatus = [
   },
 ]
 
-function StatusColor() {
+const StatusColor = React.memo(function StatusColor() {
   const style = statusColorStyle()
   const { t } = useTranslation('selectbaan')
 
@@ -41,6 +41,6 @@ function StatusColor() {
       ))}
     </Box>
   )
-}
+})
 
 export default StatusColor

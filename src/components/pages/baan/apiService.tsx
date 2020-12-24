@@ -19,3 +19,12 @@ export function getCapacityData(): AxiosPromise<ICapacityData[]> {
     .get('/baan/generateBaanDatabase')
     .catch((err) => err.response)
 }
+
+export function postRequestBaan(id: number): AxiosPromise<string> {
+  const body = {
+    preferBaan: id,
+  }
+  return apiClient
+    .post('/user/requestBaanChange', body)
+    .catch((err) => err.response)
+}

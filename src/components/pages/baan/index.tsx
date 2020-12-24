@@ -86,6 +86,12 @@ function Baan() {
         const findCapacity = capacityData.find((p) => {
           return val.ID === p.id
         })
+        if (val.facebook === '') {
+          val.facebook = '-'
+        }
+        if (val.instagram === '') {
+          val.instagram = '-'
+        }
         filterData.push({
           ...val,
           capacity: findCapacity?.capacity as number,
@@ -121,9 +127,7 @@ function Baan() {
               placeholder={t('searchPlaceholder')}
               fullWidth
               className={style.inputBase}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearchValue(e.target.value)
-              }
+              onChange={(e) => setSearchValue(e.target.value)}
             />
           </Paper>
         </Box>
