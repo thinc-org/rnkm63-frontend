@@ -182,11 +182,9 @@ function Baan() {
           </Box>
         </FormGroup>
         <StatusColor />
-        {console.log(currentFilterData.length)}
         <Box display="flex" flexWrap="wrap" justifyContent="center">
-          {currentFilterData.map((val, idx) => {
-            // {console.log(typeof val)}
-            return <MediaCard key={idx} value={val} />
+          {currentFilterData.map((val) => {
+            return <MediaCard key={val.ID} value={val} />
           })}
         </Box>
       </Box>
