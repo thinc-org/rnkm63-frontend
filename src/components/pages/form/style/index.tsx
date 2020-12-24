@@ -1,6 +1,6 @@
+import completeStyle from './completeStyles'
+import formStyle from './formStyles'
 import imageStyle from './imageStyles'
 import indexStyle from './indexStyles'
-import formStyle from './formStyles'
-import completeStyle from './completeStyles'
 
-export { imageStyle, indexStyle, formStyle, completeStyle }
+export { completeStyle, formStyle, imageStyle, indexStyle }

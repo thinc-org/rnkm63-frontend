@@ -1,21 +1,21 @@
-import React, { useCallback } from 'react'
-
 import {
   Box,
   Card,
-  Typography,
-  ThemeProvider,
   createMuiTheme,
+  ThemeProvider,
+  Typography,
 } from '@material-ui/core'
+import Loading from 'components/common/Loading'
+import { withSuspense } from 'components/hoc'
+import { UserContext } from 'contexts/UserContext'
+import { SendTicketToBack } from 'controllers/LoginController'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { Redirect, useHistory } from 'react-router-dom'
+
+import indexStyle from './indexStyle'
 import LoginButton from './LoginButton'
 import LoginCheckbox from './LoginCheckbox'
-import { SendTicketToBack } from '../../../controllers/LoginController'
-import { useTranslation } from 'react-i18next'
-import indexStyle from './indexStyle'
-import { withSuspense } from '../../hoc'
-import { useHistory, Redirect } from 'react-router-dom'
-import { UserContext } from '../../../contexts/UserContext'
-import Loading from '../../common/Loading'
 
 const theme = createMuiTheme({
   typography: {

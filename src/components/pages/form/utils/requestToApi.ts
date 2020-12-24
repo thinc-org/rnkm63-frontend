@@ -1,5 +1,6 @@
 import axios, { AxiosPromise } from 'axios'
-import { API_URL } from '../../../../utils'
+import { API_URL } from 'utils'
+
 import { IFormData } from './registerSchema'
 
 interface Policy {
@@ -46,4 +47,4 @@ const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
     .catch((err) => err.response)
 }
 
-export { postUserData, getPolicyStorage, uploadImageToStorage }
+export { getPolicyStorage, postUserData, uploadImageToStorage }

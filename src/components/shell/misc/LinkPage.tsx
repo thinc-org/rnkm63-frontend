@@ -1,7 +1,7 @@
 import { Button, makeStyles } from '@material-ui/core'
+import theme from 'config/theme'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import theme from '../../../config/theme'
 
 interface Buttonprops {
   name: string

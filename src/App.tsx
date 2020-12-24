@@ -1,19 +1,20 @@
+import { Box, Container, makeStyles, ThemeProvider } from '@material-ui/core'
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-import { Container, Box, ThemeProvider, makeStyles } from '@material-ui/core'
-import theme from './config/theme'
-
-import { Header, Footer } from './components/shell'
+import { Loading } from './components/common'
 import {
-  Profile,
+  Baan,
   Form,
+  FormComplete,
   Login,
   NotFound,
   NotFreshy,
-  FormComplete,
+  Profile,
+  Schedule,
 } from './components/pages'
-import { Loading } from './components/common'
+import { Footer, Header } from './components/shell'
+import theme from './config/theme'
 import { UserProvider } from './contexts/UserContext'
 import BackgroundImg from './local/background.png'
 
@@ -47,6 +48,8 @@ function App() {
                   <Route path="/form" exact component={Form} />
                   <Route path="/form/complete" exact component={FormComplete} />
                   <Route path="/not104" exact component={NotFreshy} />
+                  <Route path="/baan" exact component={Baan} />
+                  <Route path="/schedule" exact component={Schedule} />
                   <Route path="/" exact component={Profile} />
                   <Route component={NotFound} />
                 </Switch>

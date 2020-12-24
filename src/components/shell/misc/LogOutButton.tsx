@@ -1,8 +1,8 @@
-import React from 'react'
 import Button from '@material-ui/core/Button'
-import { LogOut } from '../../../controllers/LoginController'
 import { ButtonProps } from '@material-ui/core/Button'
-import { UserContext } from '../../../contexts/UserContext'
+import { UserContext } from 'contexts/UserContext'
+import { LogOut } from 'controllers/LoginController'
+import React from 'react'
 
 function LogOutButton(props: ButtonProps) {
   const { load } = React.useContext(UserContext)

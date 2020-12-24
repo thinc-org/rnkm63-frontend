@@ -5,8 +5,8 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/styles": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.57",
+    "@material-ui/styles": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -31,7 +31,7 @@
     "react-i18next": "^11.8.3",
     "react-image-file-resizer": "^0.3.8",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.0",
+    "react-scripts": "^4.0.1",
     "typescript": "^4.0.3",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.8"
@@ -45,8 +45,19 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:react/recommended",
+      "eslint:recommended"
+    ],
+    "plugins": [
+      "react",
+      "simple-import-sort"
+    ],
+    "rules": {
+      "simple-import-sort/imports": "warn",
+      "simple-import-sort/exports": "warn",
+      "react/display-name": "off"
+    }
   },
   "browserslist": {
     "production": [
@@ -62,13 +73,23 @@
   },
   "devDependencies": {
     "@types/sharp": "^0.26.1",
+    "eslint": "^7.16.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.5",
+    "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn pretty-quick --staged"
+      "pre-commit": "yarn lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "yarn eslint --fix",
+      "yarn prettier --write"
+    ]
   }
 }

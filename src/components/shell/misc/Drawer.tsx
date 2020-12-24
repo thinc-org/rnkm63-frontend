@@ -1,12 +1,9 @@
+import { Box, Drawer, IconButton, Theme } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+import MenuIcon from '@material-ui/icons/Menu'
 import React from 'react'
 
-import { makeStyles } from '@material-ui/core/styles'
-
 import ItemDrawer from './DrawerItems'
-
-import { Box, Drawer, IconButton, Theme } from '@material-ui/core'
-
-import MenuIcon from '@material-ui/icons/Menu'
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {

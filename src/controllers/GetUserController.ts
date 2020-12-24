@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { API_URL } from '../utils'
-import { IUser } from '../contexts/UserContext'
-import { RequestError } from '../components/common/Error'
+import { RequestError } from 'components/common/Error'
+import { IUser } from 'contexts/UserContext'
+import { API_URL } from 'utils'
 
 const config = {
   headers: { 'No-CSRF': true },

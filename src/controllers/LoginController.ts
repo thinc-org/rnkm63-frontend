@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { API_URL } from '../utils'
+import { API_URL } from 'utils'
 
 function Connect() {
   window.location.href =
@@ -32,4 +32,4 @@ async function LogOut(): Promise<void> {
   }
 }
 
-export { Connect, SendTicketToBack, LogOut }
+export { Connect, LogOut, SendTicketToBack }
