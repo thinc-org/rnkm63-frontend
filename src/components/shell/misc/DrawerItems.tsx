@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userLoadError, user: userInfo } = React.useContext(UserContext)
+  const { error: userError, user: userInfo } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -56,7 +56,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userLoadError || userLoadError.status >= 500) && (
+        {!userError && (
           <ListItem component={Link} to={'/baan'}>
             <Button className={classes.eachList}>
               <ListItemIcon className={classes.selectBaan}>
@@ -73,7 +73,7 @@ const ItemDrawer = () => {
           </ListItem>
         )}
 
-        {(!userLoadError || userLoadError.status >= 500) && (
+        {!userError && (
           <ListItem component={Link} to={'/schedule'}>
             <Button className={classes.eachList}>
               <ListItemIcon>
@@ -101,7 +101,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userLoadError || userLoadError.status >= 500) && (
+        {(!userError || userError.status >= 500) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>

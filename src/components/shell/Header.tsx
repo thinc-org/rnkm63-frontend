@@ -48,7 +48,7 @@ const useStyles = makeStyles({
 function Header() {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userLoadError, user: userInfo } = React.useContext(UserContext)
+  const { error: userError, user: userInfo } = React.useContext(UserContext)
 
   return (
     <Box
@@ -67,13 +67,11 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={
-          !userLoadError || userLoadError.status >= 500 ? 'center' : 'flex-end'
-        }
+        justifyContent={!userError ? 'center' : 'flex-end'}
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {(!userLoadError || userLoadError.status >= 500) && (
+          {!userError && (
             <>
               <LinkPage name={t('home')} link={'/'} />
               <LinkPage
@@ -91,7 +89,7 @@ function Header() {
 
       <Box>
         <LanguageSwitcher />
-        {(!userLoadError || userLoadError.status >= 500) && (
+        {(!userError || userError.status >= 500) && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}
