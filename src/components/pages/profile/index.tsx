@@ -1,9 +1,13 @@
 import { Box, Typography } from '@material-ui/core'
-import { HandleRequestError, RequestError } from 'components/common/Error'
+import {
+  HandleRequestError,
+  IRequestError,
+  RequestError,
+} from 'components/common/Error'
 import Loading from 'components/common/Loading'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
@@ -11,7 +15,7 @@ import Countdown from './Countdown'
 import Pending from './Pending'
 import RoundSelector from './roundSelector'
 import { profileStyles } from './styles/profileStyles'
-
+import { getRound } from './utils/requestToApi'
 function Profile() {
   const {
     user: userInfo,
@@ -23,11 +27,25 @@ function Profile() {
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
+  const [error, setError] = useState<IRequestError | null>(null)
+  const [round, setRound] = useState(0)
+  useEffect(() => {
+    async function fetchData() {
+      const res = await getRound()
+      if (res.status < 200 || res.status >= 300) {
+        setError(RequestError(res.status, res.headers['x-request-id']))
+      } else {
+        setRound(res.data)
+      }
+    }
+    fetchData()
+  }, [])
 
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
   else if (!userInfo) return <HandleRequestError {...RequestError(500, null)} />
   else if (!userInfo.data || !userInfo.isConfirm) return <Redirect to="/form" />
+  else if (error !== null) return <HandleRequestError {...error} />
   else
     return (
       <body className={classes.profile}>
@@ -70,12 +88,17 @@ function Profile() {
           </Box>
         </Box>
         {userInfo?.preferBaan === null ? (
-          <RoundSelector isBaanExist={userInfo?.currentBaan} />
+          <RoundSelector
+            isBaanExist={userInfo?.currentBaan}
+            round={round}
+            setError={setError}
+          />
         ) : (
           <Pending
-            round={1}
+            round={round}
             currentBaan={userInfo?.currentBaan}
             preferBaan={userInfo?.preferBaan!}
+            setError={setError}
           />
         )}
         <Countdown roundCount={true} />
