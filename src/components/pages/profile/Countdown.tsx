@@ -8,7 +8,7 @@ export const Countdown = (props: any) => {
   const classes = countdownStyles()
 
   const { t } = useTranslation('profile')
-  const secs = props.timeLeft ?? 100
+  const secs = props.timeLeft ?? 10
 
   const [days, setDays] = useState(Math.floor(secs / (60 * 60 * 24)))
   const [hours, setHours] = useState(
