@@ -67,11 +67,13 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={!userLoadError ? 'center' : 'flex-end'}
+        justifyContent={
+          !userLoadError || userLoadError.status >= 500 ? 'center' : 'flex-end'
+        }
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {!userLoadError && (
+          {(!userLoadError || userLoadError.status >= 500) && (
             <>
               <LinkPage name={t('home')} link={'/'} />
               <LinkPage
@@ -89,7 +91,7 @@ function Header() {
 
       <Box>
         <LanguageSwitcher />
-        {!userLoadError && (
+        {(!userLoadError || userLoadError.status >= 500) && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}

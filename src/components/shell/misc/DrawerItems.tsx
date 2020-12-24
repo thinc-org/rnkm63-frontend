@@ -56,7 +56,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {!userLoadError && (
+        {(!userLoadError || userLoadError.status >= 500) && (
           <ListItem component={Link} to={'/baan'}>
             <Button className={classes.eachList}>
               <ListItemIcon className={classes.selectBaan}>
@@ -73,7 +73,7 @@ const ItemDrawer = () => {
           </ListItem>
         )}
 
-        {!userLoadError && (
+        {(!userLoadError || userLoadError.status >= 500) && (
           <ListItem component={Link} to={'/schedule'}>
             <Button className={classes.eachList}>
               <ListItemIcon>
@@ -101,7 +101,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {!userLoadError && (
+        {(!userLoadError || userLoadError.status >= 500) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>
