@@ -14,6 +14,11 @@ const useStyle = makeStyles({
     textAlign: 'center',
     textTransform: 'none',
   },
+  [theme.breakpoints.between(880, 'md')]: {
+    root: {
+      marginRight: '3rem',
+    },
+  },
   [theme.breakpoints.up('md')]: {
     root: {
       marginRight: '5.4rem',
