@@ -78,7 +78,7 @@ function Profile() {
             preferBaan={userInfo?.preferBaan!}
           />
         )}
-        <Countdown />
+        <Countdown roundCount={true} />
       </body>
     )
 }
