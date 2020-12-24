@@ -17,10 +17,10 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
+import { getCapacityData } from './apiService'
 import MediaCard from './component/cardDialog'
 import StatusColor from './StatusColor'
 import { indexStyle } from './style/indexStyle'
-
 type IFilterSize = {
   [key: string]: boolean
 }
@@ -38,6 +38,12 @@ interface IFilterData {
   request: number
 }
 
+interface ICapacityData {
+  id: number
+  capacity: number
+  memberCount: number
+}
+
 function Baan() {
   const {
     user: userInfo,
@@ -53,15 +59,23 @@ function Baan() {
     XL: true,
   })
 
+  const [capacityData, setCapacityData] = useState<ICapacityData[]>([])
   const [currentFilterData, setCurrentFilterData] = useState<IFilterData[]>([])
   const { t } = useTranslation('selectbaan')
   const style = indexStyle()
 
   // Fetch Current Baan Information
-  // useEffect(() => {}, [])
+  useEffect(() => {
+    async function getData() {
+      const res = await getCapacityData()
+      setCapacityData(res.data)
+    }
+    getData()
+  }, [])
 
   // Filter Data
   useEffect(() => {
+    if (capacityData.length === 0) return
     const filterData: IFilterData[] = []
     for (const val of baanInfo) {
       const cmpTextEn = val['name-en']
@@ -69,16 +83,19 @@ function Baan() {
         .indexOf(searchValue.toUpperCase())
       const cmpTextTh = val['name-th'].indexOf(searchValue)
       if (filterSize[val.size] && (cmpTextEn > -1 || cmpTextTh > -1)) {
+        const findCapacity = capacityData.find((p) => {
+          return val.ID === p.id
+        })
         filterData.push({
           ...val,
-          capacity: 0,
-          request: 0,
+          capacity: findCapacity?.capacity as number,
+          request: findCapacity?.memberCount as number,
         })
       }
     }
 
     setCurrentFilterData(filterData)
-  }, [searchValue, filterSize])
+  }, [searchValue, filterSize, capacityData])
 
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
