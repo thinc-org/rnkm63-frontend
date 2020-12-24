@@ -13,10 +13,10 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
   title: {
     textAlign: 'left',
     fontWeight: 700,
-    fontSize: '34px',
+    fontSize: '2.125rem',
     marginBottom: theme.spacing(1),
     [theme.breakpoints.down('xs')]: {
-      fontSize: '18px',
+      fontSize: '1.125rem',
     },
   },
   container: {
@@ -34,7 +34,7 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(4),
     alignItems: 'center',
     display: 'flex',
-    [theme.breakpoints.down('xs')]: {
+    [theme.breakpoints.down(600)]: {
       flexDirection: 'column',
       marginLeft: theme.spacing(2),
       marginRight: theme.spacing(2),
@@ -56,17 +56,17 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
       props.baanNameColor === 'Red'
         ? theme.palette.error.main
         : theme.palette.warning.main,
-    fontSize: '34px',
+    fontSize: '2.125rem',
     fontWeight: 500,
     [theme.breakpoints.down('xs')]: {
-      fontSize: '18px',
+      fontSize: '1.125rem',
     },
   },
   request: {
-    fontSize: '20px',
+    fontSize: '1.25rem',
     fontWeight: 500,
     [theme.breakpoints.down('xs')]: {
-      fontSize: '12px',
+      fontSize: '0.75rem',
     },
     '& span': {
       color: (props: Props) =>
@@ -82,11 +82,17 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
       display: 'flex',
       justifyContent: 'space-around',
       width: '100%',
+      maxWidth: '200px',
+    },
+    [theme.breakpoints.down(600)]: {
+      display: 'flex',
+      justifyContent: 'space-around',
+      width: '100%',
       maxWidth: '300px',
     },
   },
   button: {
-    fontSize: '18px',
+    fontSize: '1.125rem',
     fontWeight: 700,
     borderRadius: '20px',
     height: '40px',
@@ -96,9 +102,11 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
       height: '26px',
       maxWidth: '115px',
       width: '47%',
-      fontSize: '14px',
-      marginTop: theme.spacing(2),
+      fontSize: '0.875rem',
       marginLeft: theme.spacing(0),
+    },
+    [theme.breakpoints.down(600)]: {
+      marginTop: theme.spacing(2),
     },
   },
   change: {

@@ -13,7 +13,7 @@ export const roundStyles = makeStyles((theme: Theme) => ({
   },
   exit: {
     color: 'white',
-    backgroundColor: '#D34949',
+    backgroundColor: theme.palette.error.main,
     width: '320px',
     borderRadius: '20px',
     margin: '20px 10px',
@@ -24,7 +24,7 @@ export const roundStyles = makeStyles((theme: Theme) => ({
   },
   change: {
     color: 'white',
-    backgroundColor: '#54D166',
+    backgroundColor: theme.palette.success.main,
     width: '320px',
     borderRadius: '20px',
     margin: '20px 10px',

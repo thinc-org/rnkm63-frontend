@@ -43,7 +43,7 @@ export const profileStyles = makeStyles((theme: Theme) => ({
     },
   },
   title: {
-    color: '#54D166',
+    color: theme.palette.success.main,
     textAlign: 'left',
     marginTop: '0px',
     marginBottom: '0px',
@@ -80,7 +80,7 @@ export const profileStyles = makeStyles((theme: Theme) => ({
     },
   },
   baanWarning: {
-    color: '#F2C94C',
+    color: theme.palette.warning.main,
     margin: '-28px 0px',
     textAlign: 'left',
     fontSize: '0.75rem',
