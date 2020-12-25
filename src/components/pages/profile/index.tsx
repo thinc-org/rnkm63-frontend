@@ -16,6 +16,7 @@ import Pending from './Pending'
 import RoundSelector from './roundSelector'
 import { profileStyles } from './styles/profileStyles'
 import { getRound } from './utils/requestToApi'
+
 function Profile() {
   const {
     user: userInfo,
@@ -94,7 +95,7 @@ function Profile() {
               round={round}
               setError={setError}
             />
-            <Countdown timeLeft={100} roundCount={true} />
+            <Countdown roundCount={true} />
           </div>
         ) : (
           <div>
