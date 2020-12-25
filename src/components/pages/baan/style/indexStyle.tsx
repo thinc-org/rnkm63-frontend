@@ -65,6 +65,7 @@ export const indexStyle = makeStyles((theme: Theme) => ({
   formHelperText: {
     color: '#F2C94C',
     fontSize: '1rem',
+    paddingLeft: theme.spacing(3.5),
     [theme.breakpoints.down('xs')]: {
       fontSize: '0.6rem',
       paddingRight: theme.spacing(1),

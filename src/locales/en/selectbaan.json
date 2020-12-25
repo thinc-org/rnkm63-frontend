@@ -9,22 +9,22 @@
   "statusRed": "Exceeded capacity",
   "sizeS": {
     "text": "Size S",
-    "size": "( 100-150 members )",
+    "size": "( 100-120 members )",
     "mobile": "S"
   },
   "sizeM": {
     "text": "Size M",
-    "size": "( 130-180 members )",
+    "size": "( 120-180 members )",
     "mobile": "M"
   },
   "sizeL": {
     "text": "Size L",
-    "size": "( 200-215 members )",
+    "size": "( 180-250 members )",
     "mobile": "L"
   },
   "sizeXL": {
     "text": "Size XL",
-    "size": "( 300-480 members )",
+    "size": "( 250+ members )",
     "mobile": "XL"
   },
   "size": "Size",
