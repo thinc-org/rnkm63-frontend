@@ -1,7 +1,7 @@
 import { Box, Button, RootRef, Typography } from '@material-ui/core'
 import { FailureDisplay } from 'components/common/Error'
 import Loading from 'components/common/Loading'
-import { fail, IFailure } from 'components/ErrorProvider'
+import { IFailure } from 'components/ErrorProvider'
 import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
   Form as FormikForm,
@@ -132,14 +132,9 @@ class Form extends React.PureComponent<FormProps, FormState> {
     })
   }
   render() {
-    const {
-      user: userData,
-      isLoaded: isUserLoaded,
-      error: userLoadError,
-    } = this.context
+    const { user: userData } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
-    if (!isUserLoaded || isSubmitLoading) return <Loading />
-    else if (userLoadError) return fail(userLoadError)
+    if (isSubmitLoading) return <Loading />
     else if (submitError) return <FailureDisplay failure={submitError} />
     else
       return (
