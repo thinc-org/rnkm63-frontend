@@ -28,6 +28,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-easy-crop": "^3.3.1",
+    "react-helmet": "^6.1.0",
     "react-i18next": "^11.8.3",
     "react-image-file-resizer": "^0.3.8",
     "react-router-dom": "^5.2.0",
@@ -72,6 +73,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.0",
     "@types/sharp": "^0.26.1",
     "eslint": "^7.16.0",
     "eslint-plugin-react": "^7.21.5",
