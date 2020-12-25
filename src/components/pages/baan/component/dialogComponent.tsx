@@ -47,15 +47,13 @@ const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
   return (
     <div className={classes.title} {...other}>
       <Typography className={classes.title}>{children}</Typography>
-      {onClose ? (
-        <IconButton
-          aria-label="close"
-          className={classes.closeButton}
-          onClick={onClose}
-        >
-          <CloseIcon />
-        </IconButton>
-      ) : null}
+      <IconButton
+        aria-label="close"
+        className={classes.closeButton}
+        onClick={onClose}
+      >
+        <CloseIcon />
+      </IconButton>
     </div>
   )
 })

@@ -21,7 +21,6 @@ import { IFilterData } from '../@types/data'
 import { postRequestBaan } from '../apiService'
 import { useStyles } from '../style/cardDialogStyle'
 import DialogTitle from './dialogComponent'
-// import ConfirmSelect from './popupConfirm'
 
 const DialogContent = withStyles((theme) => ({
   root: {
@@ -104,7 +103,6 @@ const MediaCard = ({ value, disabled, setError }: IComponentData) => {
       <Button
         className={classes.button_select_card}
         variant="contained"
-        // onClick={handleClose}
         disabled={disabled}
         onClick={() => sendToProfile(value.ID)}
         color="primary"
@@ -115,7 +113,6 @@ const MediaCard = ({ value, disabled, setError }: IComponentData) => {
       <Dialog
         onClose={handleClose}
         open={open}
-        // open={false}
         className={classes.dialog_popup}
         PaperProps={{
           style: {
