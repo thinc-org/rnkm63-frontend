@@ -17,32 +17,14 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
+import { ICapacityData, IFilterData } from './@types/data'
 import { getCapacityData } from './apiService'
 import MediaCard from './component/cardDialog'
 import StatusColor from './StatusColor'
 import { indexStyle } from './style/indexStyle'
+
 type IFilterSize = {
   [key: string]: boolean
-}
-
-interface IFilterData {
-  ID: number
-  size: string
-  'name-en': string
-  'name-th': string
-  'caption-th': string[]
-  'caption-en': string[]
-  facebook: string
-  instagram: string
-  capacity: number
-  request: number
-  color: string
-}
-
-interface ICapacityData {
-  id: number
-  capacity: number
-  memberCount: number
 }
 
 function Baan() {
@@ -85,32 +67,28 @@ function Baan() {
       const cmpTextTh = val['name-th'].indexOf(searchValue)
       if (filterSize[val.size] && (cmpTextEn > -1 || cmpTextTh > -1)) {
         const findCapacity = capacityData.find((p) => {
-          return val.ID === p.id
+          return val.ID === p.baanID
         })
+        if (typeof findCapacity === 'undefined') return
+        const capacity = findCapacity.capacity - findCapacity.memberCount
+        const request = findCapacity.requestCount
         if (val.facebook === '') {
           val.facebook = '-'
         }
         if (val.instagram === '') {
           val.instagram = '-'
         }
-        // const bpOne = 0.8*findCapacity.capacity
         let color = ''
-        let cap =
-          findCapacity?.capacity !== undefined ? findCapacity?.capacity : 0
-        let mem =
-          findCapacity?.memberCount !== undefined
-            ? findCapacity?.memberCount
-            : 0
-        console.log(cap, mem)
-        const bpOne = 0.8 * cap
-        if (mem <= bpOne) color = 'red'
-        else if (bpOne < mem && mem < cap) color = 'yellow'
-        else color = 'red'
+        const mem = request
+        const bpOne = 0.8 * capacity
+        if (mem >= capacity) color = 'red'
+        else if (mem < capacity && bpOne <= mem) color = 'yellow'
+        else color = '#44AD53'
 
         filterData.push({
           ...val,
-          capacity: findCapacity?.capacity as number,
-          request: findCapacity?.memberCount as number,
+          capacity,
+          request,
           color: color,
         })
       }
@@ -200,7 +178,16 @@ function Baan() {
         <StatusColor />
         <Box display="flex" flexWrap="wrap" justifyContent="center">
           {currentFilterData.map((val) => {
-            return <MediaCard key={val.ID} value={val} />
+            return (
+              <MediaCard
+                key={val.ID}
+                value={val}
+                disabled={
+                  val.ID === userInfo.currentBaan ||
+                  val.ID === userInfo.preferBaan
+                }
+              />
+            )
           })}
         </Box>
       </Box>

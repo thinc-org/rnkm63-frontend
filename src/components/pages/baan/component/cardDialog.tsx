@@ -16,6 +16,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { IFilterData } from '../@types/data'
 import { useStyles } from '../style/cardDialogStyle'
 import { DialogTitle } from './dialogComponent'
 import ConfirmSelect from './popupConfirm'
@@ -40,20 +41,13 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions)
 
-// interface IFilterData {
-//   ID: number
-//   size: string
-//   'name-en': string
-//   'name-th': string
-//   'caption-th': string[]
-//   'caption-en': string[]
-//   facebook: string
-//   instagram: string
-//   capacity: number
-//   request: number
-// }
+interface IComponentData {
+  value: IFilterData
+  key: number
+  disabled: boolean
+}
 
-const MediaCard = ({ value }: any) => {
+const MediaCard = ({ value, disabled }: IComponentData) => {
   const classes = useStyles()
   const { t } = useTranslation('selectbaan')
   const { i18n } = useTranslation()
@@ -80,7 +74,7 @@ const MediaCard = ({ value }: any) => {
         <CardContent>
           {/* {console.log(value[`name-${lang}`])} */}
           <Typography className={classes.card_title}>
-            {value[`name-${lang}`]}
+            {value[`name-${lang}` as 'name-en' | 'name-th']}
           </Typography>
           <Avatar
             alt="Remy Sharp"
@@ -104,6 +98,7 @@ const MediaCard = ({ value }: any) => {
         className={classes.button_select_card}
         variant="contained"
         // onClick={handleClose}
+        disabled={disabled}
         onClick={handleOpenConfirmDialog}
         color="primary"
       >
@@ -134,7 +129,7 @@ const MediaCard = ({ value }: any) => {
           src={getLogo(value.ID)}
         />
         <DialogTitle onClose={handleClose} classes={classes}>
-          {value[`name-${lang}`]}
+          {value[`name-${lang}` as 'name-th' | 'name-en']}
         </DialogTitle>
 
         <DialogContent>
@@ -151,13 +146,15 @@ const MediaCard = ({ value }: any) => {
             </Typography>
           </Box>
           <Typography style={{ marginTop: '10px' }}>
-            {value[`caption-${lang}`].map((val: string, idx: number) => {
-              return (
-                <Typography key={idx} gutterBottom>
-                  {val}
-                </Typography>
-              )
-            })}
+            {value[`caption-${lang}` as 'caption-en' | 'caption-th'].map(
+              (val: string, idx: number) => {
+                return (
+                  <Typography key={idx} gutterBottom>
+                    {val}
+                  </Typography>
+                )
+              }
+            )}
           </Typography>
         </DialogContent>
         <DialogActions>
@@ -165,6 +162,7 @@ const MediaCard = ({ value }: any) => {
             className={classes.button_select}
             variant="contained"
             onClick={handleOpenConfirmDialog}
+            disabled={disabled}
           >
             {t('select')}
           </Button>
