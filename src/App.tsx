@@ -31,17 +31,17 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Box className={classes.AppContainer} color="text.primary">
-          <ErrorProvider>
-            <UserProvider>
-              <Header />
-              <Container className={classes.PageContainer}>
+          <UserProvider>
+            <Header />
+            <Container className={classes.PageContainer}>
+              <ErrorProvider>
                 <React.Suspense fallback={<Loading />}>
                   <Routes />
                 </React.Suspense>
-              </Container>
-              <Footer />
-            </UserProvider>
-          </ErrorProvider>
+              </ErrorProvider>
+            </Container>
+            <Footer />
+          </UserProvider>
         </Box>
       </Router>
     </ThemeProvider>
