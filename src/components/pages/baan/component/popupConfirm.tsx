@@ -17,7 +17,6 @@ interface IFormDialog {
   submit: () => void
 }
 
-//   const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
 const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
   const style = indexStyle()
   const { t } = useTranslation('form')

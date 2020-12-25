@@ -2,10 +2,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    margin: '10px',
+    margin: theme.spacing(1.5),
     backgroundColor: '#383838',
-    // height: '381px',
-    // width: '207px',
     height: 'auto',
     width: '207px',
   },
@@ -19,9 +17,8 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     color: 'white',
-    fontFamily: 'rubik',
-    fontSize: '18px',
-    marginBottom: '3px',
+    fontSize: '1.125rem',
+    marginBottom: theme.spacing(0.5),
     width: '207px',
     borderRadius: '40px',
     backgroundColor: '#44AD53',
@@ -31,8 +28,7 @@ export const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
     color: 'white',
-    fontFamily: 'rubik',
-    fontSize: '18px',
+    fontSize: '1.125rem',
     marginBottom: '20px',
     width: '171px',
     borderRadius: '40px',
@@ -42,22 +38,22 @@ export const useStyles = makeStyles((theme) => ({
   dialog_title: {
     textAlign: 'center',
     color: 'white',
-    fontSize: '28px',
+    fontSize: '1.75rem',
     padding: '10px 5px 5px',
   },
   card_title: {
     textAlign: 'center',
     color: 'white',
-    fontSize: '20px',
-    padding: '5px',
+    fontSize: '1.25rem',
+    padding: theme.spacing(0.6),
     wordBreak: 'break-word',
   },
   card_text: {
     color: 'white',
-    margin: '10px',
-    marginBottom: '0px',
-    fontFamily: 'rubik',
-    fontSize: '20px',
+    margin: theme.spacing(1.25),
+    marginBottom: theme.spacing(0),
+    fontSize: '1.25rem',
+    textAlign: 'center',
   },
   fbandigicon_item: {
     alignItems: 'center',
@@ -66,10 +62,9 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   fbandigicon_text: {
-    padding: '7px',
+    padding: theme.spacing(0.75),
     color: 'white',
-    fontFamily: 'kanit',
-    fontSize: '20px',
+    fontSize: '1.25rem',
   },
   avatar_picture: {
     height: '100px',
@@ -77,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: '20px',
+    marginTop: theme.spacing(3),
   },
   avatar_picture_card: {
     height: '100px',
@@ -91,8 +86,5 @@ export const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     right: '50px',
     top: '105px',
-    // [theme.breakpoints.down('xs')]: {
-    //   height: '534px',
-    // },
   },
 }))
