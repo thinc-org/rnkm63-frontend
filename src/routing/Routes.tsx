@@ -19,14 +19,15 @@ export default function Routes() {
   if (!isLoaded) return <Loading />
   // If not loaded, wait
   else if (error || !user) {
-    if (error?.status === 401 || error?.status === 403) {
+    const status = error?.status ?? 0
+    if (status >= 401 && status <= 404) {
       // still don't have a better way to determine if a user is logged in
 
       // User is not logged in. Only page allowed is Login
       return (
         <Switch>
           <Route path="/login" exact component={Login} />
-          <Route component={Junction} />
+          <Route component={RedirectTo('/login')} />
         </Switch>
       )
     } else {
@@ -38,7 +39,7 @@ export default function Routes() {
       <Switch>
         <Route path="/form" exact component={Form} />
         <Route path="/form/complete" exact component={FormComplete} />
-        <Route component={Junction} />
+        <Route component={RedirectTo('/form')} />
       </Switch>
     )
   } else {
@@ -48,28 +49,12 @@ export default function Routes() {
         <Route path="/baan" exact component={Baan} />
         <Route path="/schedule" exact component={Schedule} />
         <Route path="/" exact component={Profile} />
-        <Route component={Junction} />
+        <Route component={RedirectTo('/')} />
       </Switch>
     )
   }
 }
 
-// Junction should redir
-function Junction() {
-  const { user, error } = React.useContext(UserContext)
-  if (error || !user) {
-    if (error?.status === 401 || error?.status === 403) {
-      // still don't have a better way to determine if a user is logged in
-      return <Redirect to="/login" />
-    } else {
-      // If not 401 or 403 then we have no idea what happened
-      return fail(error)
-    }
-  } else if (!user.isConfirm) {
-    // Default place to go for unconfirmed user
-    return <Redirect to="/form" />
-  } else {
-    // Default place to go for confirmed user
-    return <Redirect to="/" />
-  }
+function RedirectTo(to: string): React.FC {
+  return () => <Redirect to={to} />
 }
