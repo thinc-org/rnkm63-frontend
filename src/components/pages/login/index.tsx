@@ -40,7 +40,7 @@ const theme = createMuiTheme({
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
-  const [isLoggingIn, setIsLoggingIn] = React.useState(false)
+  const [isLoggingIn, setIsLoggingIn] = React.useState(true)
   //STEP: 0 = start (not logged in). 1 = verifying ticket. 2 = ticket verified and cookie set. 3 = user loaded and everything done
   const style = indexStyle()
   const { load: loadUser } = React.useContext(UserContext)
@@ -68,6 +68,8 @@ function Login() {
     if (ticket !== null) {
       setIsLoggingIn(true)
       SendTicketToBack(ticket).then(onVerifyComplete).catch(onVerifyError)
+    } else {
+      setIsLoggingIn(false)
     }
   }, [onVerifyComplete, onVerifyError])
 
