@@ -1,4 +1,4 @@
-import { IRequestError, RequestError } from 'components/common/Error'
+import { fail, IFailure } from 'components/ErrorProvider'
 import getUser from 'controllers/GetUserController'
 import React from 'react'
 
@@ -61,7 +61,7 @@ function isIUser(u: any): u is IUser {
 interface IUserState {
   user: IUser | null
   isLoaded: boolean
-  error: IRequestError | null
+  error: IFailure | null
 }
 
 interface IUserContext extends IUserState {
@@ -146,8 +146,10 @@ export class UserProvider extends React.Component<any, IUserState> {
       getUser()
         .then((u) => {
           // If the result doesn't pass the type check above,
-          //    throw a 500. It will be caught below.
-          if (!(u && isIUser(u))) throw RequestError(500, null)
+          //   than backend is wrong.
+          if (!(u && isIUser(u))) {
+            fail({})
+          }
 
           // Only use the load result if it is the last load called.
           // i.e. no load was requested after this one.

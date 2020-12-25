@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
+import { intoFailure } from 'components/ErrorProvider'
 import { API_URL } from 'utils'
 
 function Connect() {
@@ -20,7 +21,7 @@ async function SendTicketToBack(ticket: string): Promise<void> {
   try {
     return await axios.get(API_URL + '/auth/verify', config)
   } catch (e) {
-    throw e.response.status
+    throw intoFailure(e)
   }
 }
 
@@ -28,7 +29,7 @@ async function LogOut(): Promise<void> {
   try {
     return await axios.get(API_URL + '/auth/logout')
   } catch (e) {
-    throw e.response.status
+    throw intoFailure(e)
   }
 }
 

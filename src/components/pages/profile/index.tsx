@@ -1,6 +1,6 @@
 import { Box, Typography } from '@material-ui/core'
-import { HandleRequestError, RequestError } from 'components/common/Error'
 import Loading from 'components/common/Loading'
+import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
 import React from 'react'
@@ -23,8 +23,8 @@ function Profile() {
   const { t, i18n } = useTranslation('profile')
 
   if (!isUserLoaded) return <Loading />
-  else if (userLoadError) return <HandleRequestError {...userLoadError} />
-  else if (!userInfo) return <HandleRequestError {...RequestError(500, null)} />
+  else if (userLoadError) return fail(userLoadError)
+  else if (!userInfo) return fail({})
   else if (!userInfo.data || !userInfo.isConfirm) return <Redirect to="/form" />
   else
     return (

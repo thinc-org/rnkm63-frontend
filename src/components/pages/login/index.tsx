@@ -6,6 +6,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import Loading from 'components/common/Loading'
+import { fail, IFailure } from 'components/ErrorProvider'
 import { withSuspense } from 'components/hoc'
 import { UserContext } from 'contexts/UserContext'
 import { SendTicketToBack } from 'controllers/LoginController'
@@ -55,11 +56,15 @@ function Login() {
   }, [])
 
   const onLoginError = React.useCallback(
-    (status: number) => {
-      if (status === 403) history.push('/not104')
-      else history.push('/')
+    (e: IFailure) => {
+      if (e.status === 403)
+        fail({
+          ...e,
+          title: t('not104'),
+        })
+      else fail(e)
     },
-    [history]
+    [history, t]
   )
 
   React.useEffect(() => {

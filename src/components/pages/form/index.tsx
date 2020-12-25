@@ -1,7 +1,7 @@
 import { Box, Button, RootRef, Typography } from '@material-ui/core'
-import { HandleRequestError } from 'components/common/Error'
-import { IRequestError, RequestError } from 'components/common/Error'
+import { FailureDisplay } from 'components/common/Error'
 import Loading from 'components/common/Loading'
+import { fail, Failure, IFailure } from 'components/ErrorProvider'
 import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
   Form as FormikForm,
@@ -36,7 +36,7 @@ interface FormState {
   submitClick: boolean
   data: IUserData
   isSubmitLoading: boolean
-  submitError: IRequestError | null
+  submitError: IFailure | null
 }
 
 interface FormProps {
@@ -76,7 +76,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
         history.push('/login')
       } else if (resPolicy.status === 500) {
         this.setState({
-          submitError: RequestError(
+          submitError: Failure(
             resPolicy.status,
             resPolicy.headers['x-request-id']
           ),
@@ -86,10 +86,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
       if (resUpload.status !== 204) {
         this.setState({
-          submitError: RequestError(
-            resUpload.status,
-            `image-${resUpload.status}`
-          ),
+          submitError: Failure(resUpload.status, `image-${resUpload.status}`),
           isSubmitLoading: false,
         })
         return
@@ -101,7 +98,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       history.push('/form/complete')
     } else {
       this.setState({
-        submitError: RequestError(res.status, res.headers['x-request-id']),
+        submitError: Failure(res.status, res.headers['x-request-id']),
         isSubmitLoading: false,
       })
     }
@@ -154,9 +151,9 @@ class Form extends React.PureComponent<FormProps, FormState> {
     } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
     if (!isUserLoaded || isSubmitLoading) return <Loading />
-    else if (userLoadError) return <HandleRequestError {...userLoadError} />
+    else if (userLoadError) return fail(userLoadError)
     else if (userData?.isConfirm) return <Redirect to="/" />
-    else if (submitError) return <HandleRequestError {...submitError} />
+    else if (submitError) return <FailureDisplay failure={submitError} />
     else
       return (
         <FormUI
