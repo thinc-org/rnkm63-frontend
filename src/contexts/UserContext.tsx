@@ -148,7 +148,7 @@ export class UserProvider extends React.Component<any, IUserState> {
           // If the result doesn't pass the type check above,
           //   than backend is wrong.
           if (!(u && isIUser(u))) {
-            fail({})
+            fail(null)
           }
 
           // Only use the load result if it is the last load called.

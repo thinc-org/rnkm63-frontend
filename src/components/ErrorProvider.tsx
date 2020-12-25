@@ -1,6 +1,6 @@
+import { AxiosError } from 'axios'
 import { FailureDisplay } from 'components/common/Error'
 import React from 'react'
-
 const errorProviderRef: React.RefObject<ErrorProvider> = React.createRef()
 
 /*
@@ -9,14 +9,14 @@ A function to call if you have an error you can't to recover from.
 The preferred interface is IFailure (declared below),
 but it can also work with
 * an AxiosError
-* {} if you don't know anything about your error
+* null if you don't know anything about your error
 
 This is implemented using ref because after some experimentation,
 I find them to be the most robust.
 
 Hook/context solutions sometimes have weird issue when throwing while rendering.
 */
-export function fail(failure: any) {
+export function fail(failure: TIntoFailure) {
   if (errorProviderRef?.current?.setError)
     errorProviderRef.current.setError(intoFailure(failure))
   else {
@@ -31,17 +31,29 @@ export function fail(failure: any) {
 export interface IFailure {
   status: number | null
   requestID: string | null
-  title?: string | null
-  detail?: string | null
+  title: string | null
+  detail: string | null
 }
 
-// Try to convert *any*thing into an IFailure
-export const intoFailure = (error: any) => ({
-  status: error?.status ?? error?.response?.status,
-  requestID: error?.requestID ?? error?.response?.headers['x-request-id'],
-  title: error?.title,
-  detail: error?.detail,
-})
+interface IIntoFailure extends IFailure, AxiosError {}
+
+type TIntoFailure = Partial<IIntoFailure> | null
+
+// Try to convert most things into an IFailure
+export function intoFailure(error: TIntoFailure): IFailure {
+  // ?? null because typescript complains about undefined
+  const status = error?.status ?? error?.response?.status ?? null
+  const requestID =
+    error?.requestID ?? error?.response?.headers['x-request-id'] ?? null
+  const title = error?.title ?? null
+  const detail = error?.title ?? null
+  return {
+    status,
+    requestID,
+    title,
+    detail,
+  }
+}
 
 interface IErrorProviderProps {
   children: React.ReactNode
@@ -68,7 +80,7 @@ class ErrorProvider extends React.Component<
   }
   // We also try to catch errors thrown during rendering.
   // BUT you should `return fail()` instead of throw.
-  componentDidCatch(error: any) {
+  componentDidCatch(error: TIntoFailure) {
     console.warn(error)
     this.setError(intoFailure(error))
   }
