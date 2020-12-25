@@ -5,7 +5,6 @@ import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
 
 import Countdown from './Countdown'
 import { profileStyles } from './styles/profileStyles'
@@ -25,7 +24,6 @@ function Profile() {
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return fail(userLoadError)
   else if (!userInfo) return fail({})
-  else if (!userInfo.data || !userInfo.isConfirm) return <Redirect to="/form" />
   else
     return (
       <body className={classes.profile}>

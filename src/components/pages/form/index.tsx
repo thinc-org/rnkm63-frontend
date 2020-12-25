@@ -12,7 +12,6 @@ import {
 import { History, LocationState } from 'history'
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
 
 import FormDialog from './component/formDialogComponent'
 import FormInput from './FormInput'
@@ -152,7 +151,6 @@ class Form extends React.PureComponent<FormProps, FormState> {
     const { submitError, imageRequired, isSubmitLoading } = this.state
     if (!isUserLoaded || isSubmitLoading) return <Loading />
     else if (userLoadError) return fail(userLoadError)
-    else if (userData?.isConfirm) return <Redirect to="/" />
     else if (submitError) return <FailureDisplay failure={submitError} />
     else
       return (
