@@ -1,11 +1,7 @@
 import axios, { AxiosPromise } from 'axios'
 import { API_URL } from 'utils'
 
-interface ICapacityData {
-  id: number
-  capacity: number
-  memberCount: number
-}
+import { ICapacityData } from './@types/data'
 
 const config = {
   headers: { 'No-CSRF': true },
@@ -16,7 +12,7 @@ const apiClient = axios.create(config)
 
 export function getCapacityData(): AxiosPromise<ICapacityData[]> {
   return apiClient
-    .get('/baan/generateBaanDatabase')
+    .get('/user/getAllUserPreferBaan')
     .catch((err) => err.response)
 }
 
