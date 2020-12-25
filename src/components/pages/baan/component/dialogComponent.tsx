@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core'
-import MuiDialogTitle from '@material-ui/core/DialogTitle'
+// import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import { createStyles, Theme, WithStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
@@ -24,6 +24,17 @@ const styles = (theme: Theme) =>
       marginRight: 'auto',
       fontSize: '28px',
     },
+    centerit: {},
+    button_select: {},
+    button_select_card: {},
+    dialog_title: {},
+    card_title: {},
+    card_text: {},
+    fbandigicon_item: {},
+    fbandigicon_text: {},
+    avatar_picture: {},
+    avatar_picture_card: {},
+    dialog_popup: {},
   })
 
 interface DialogTitleProps extends WithStyles<typeof styles> {
@@ -32,10 +43,10 @@ interface DialogTitleProps extends WithStyles<typeof styles> {
   onClose: () => void
 }
 
-export const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-  const { children, classes, onClose } = props
+const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
+  const { children, classes, onClose, ...other } = props
   return (
-    <MuiDialogTitle disableTypography className={classes.title}>
+    <div className={classes.title} {...other}>
       <Typography className={classes.title}>{children}</Typography>
       {onClose ? (
         <IconButton
@@ -46,6 +57,8 @@ export const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
           <CloseIcon />
         </IconButton>
       ) : null}
-    </MuiDialogTitle>
+    </div>
   )
 })
+
+export default React.memo(DialogTitle)
