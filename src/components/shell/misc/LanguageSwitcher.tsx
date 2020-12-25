@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'rgba(128,128,128,0.2)',
     width: '6rem',
     height: '2.5rem',
-    margin: '0.25rem',
+    margin: '0.25rem 1.2rem 0 0',
   },
   Lang: {
     zIndex: 10,
