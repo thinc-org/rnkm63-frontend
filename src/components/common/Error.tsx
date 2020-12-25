@@ -143,9 +143,7 @@ export function FailureDisplay({
   const { t } = useTranslation('errors')
 
   const title =
-    failure?.title ??
-    t(failure?.status ? `codes.${failure.status}` : 'codes.unknown') ??
-    ''
+    failure?.title ?? t([`codes.${failure.status}`, 'codes.unknown']) ?? ''
   const detail = failure?.detail ?? ''
 
   const reportUrl = !failure.requestID
