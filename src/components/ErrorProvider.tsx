@@ -35,27 +35,13 @@ export interface IFailure {
   detail?: string | null
 }
 
-// a shortcut for creating IFailure object
-export const Failure = (
-  status: number | null = null,
-  requestID: string | null = null,
-  title: string | null = null,
-  detail: string | null = null
-) => ({
-  status,
-  requestID,
-  title,
-  detail,
-})
-
 // Try to convert *any*thing into an IFailure
-export const intoFailure = (error: any) =>
-  Failure(
-    error?.status ?? error?.response?.status,
-    error?.requestID ?? error?.response?.headers['x-request-id'],
-    error?.title,
-    error?.detail
-  )
+export const intoFailure = (error: any) => ({
+  status: error?.status ?? error?.response?.status,
+  requestID: error?.requestID ?? error?.response?.headers['x-request-id'],
+  title: error?.title,
+  detail: error?.detail,
+})
 
 interface IErrorProviderProps {
   children: React.ReactNode

@@ -1,7 +1,7 @@
 import { Box, Button, RootRef, Typography } from '@material-ui/core'
 import { FailureDisplay } from 'components/common/Error'
 import Loading from 'components/common/Loading'
-import { fail, Failure, IFailure } from 'components/ErrorProvider'
+import { fail, IFailure } from 'components/ErrorProvider'
 import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
   Form as FormikForm,
@@ -70,34 +70,23 @@ class Form extends React.PureComponent<FormProps, FormState> {
       userData?.data.nickname !== data.nickname
 
     if (imageBlob !== 0) {
-      const resPolicy = await getPolicyStorage()
-      if (resPolicy.status === 401) {
-        history.push('/login')
-      } else if (resPolicy.status === 500) {
+      try {
+        const resPolicy = await getPolicyStorage()
+        await uploadImageToStorage(imageBlob, resPolicy.data)
+      } catch (e) {
         this.setState({
-          submitError: Failure(
-            resPolicy.status,
-            resPolicy.headers['x-request-id']
-          ),
+          submitError: e,
           isSubmitLoading: false,
         })
-      }
-      const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
-      if (resUpload.status !== 204) {
-        this.setState({
-          submitError: Failure(resUpload.status, `image-${resUpload.status}`),
-          isSubmitLoading: false,
-        })
-        return
       }
     }
-    const res = await postUserData(data, edit)
-    if (res.status === 200 || res.status === 201) {
+    try {
+      await postUserData(data, edit)
       loadUser()
       history.push('/form/complete')
-    } else {
+    } catch (e) {
       this.setState({
-        submitError: Failure(res.status, res.headers['x-request-id']),
+        submitError: e,
         isSubmitLoading: false,
       })
     }
