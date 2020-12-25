@@ -17,20 +17,6 @@ import RoundSelector from './roundSelector'
 import { profileStyles } from './styles/profileStyles'
 import { getRound } from './utils/requestToApi'
 function Profile() {
-  //const endTime = new Date('2020-12-24').valueOf()
-  //const time = new Date().valueOf() - 5 * 1000 * 60 * 60
-  const openTime = 5
-  const [secs, setSecs] = useState(openTime)
-
-  useEffect(() => {
-    let myInterval = setInterval(() => {
-      setSecs(secs - 1)
-    }, 1000)
-    return () => {
-      clearInterval(myInterval)
-    }
-  })
-
   const {
     user: userInfo,
     isLoaded: isUserLoaded,
@@ -101,9 +87,7 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        {secs >= 0 ? (
-          <Countdown roundCount={false} />
-        ) : userInfo?.preferBaan === null ? (
+        {userInfo?.preferBaan === null ? (
           <div>
             <RoundSelector
               isBaanExist={userInfo?.currentBaan}
