@@ -3,7 +3,6 @@ import Avatar from '@material-ui/core/Avatar'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
-// import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Dialog from '@material-ui/core/Dialog'
 import MuiDialogActions from '@material-ui/core/DialogActions'
@@ -15,11 +14,13 @@ import { getLogo } from 'local/BaanInfo'
 import PropTypes from 'prop-types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
 import { IFilterData } from '../@types/data'
+import { postRequestBaan } from '../apiService'
 import { useStyles } from '../style/cardDialogStyle'
-import { DialogTitle } from './dialogComponent'
-import ConfirmSelect from './popupConfirm'
+import DialogTitle from './dialogComponent'
+// import ConfirmSelect from './popupConfirm'
 
 const DialogContent = withStyles((theme) => ({
   root: {
@@ -51,10 +52,11 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
   const classes = useStyles()
   const { t } = useTranslation('selectbaan')
   const { i18n } = useTranslation()
+  const history = useHistory()
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
 
   const [open, setOpen] = React.useState(false)
-  const [openConfirm, setOpenConfirm] = React.useState(false)
+  // const [openConfirm, setOpenConfirm] = React.useState(false)
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -62,17 +64,20 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
   const handleClose = () => {
     setOpen(false)
   }
-  const handleOpenConfirmDialog = () => {
-    setOpenConfirm(true)
+  const sendToProfile = (id: number) => {
+    postRequestBaan(id)
+    history.push('/')
   }
-  const handleCloseConfirmDialog = () => {
-    setOpenConfirm(false)
-  }
+  // const handleOpenConfirmDialog = () => {
+  //   setOpenConfirm(true)
+  // }
+  // const handleCloseConfirmDialog = () => {
+  //   setOpenConfirm(false)
+  // }
   return (
     <Card className={classes.root}>
       <CardActionArea onClick={handleClickOpen}>
         <CardContent>
-          {/* {console.log(value[`name-${lang}`])} */}
           <Typography className={classes.card_title}>
             {value[`name-${lang}` as 'name-en' | 'name-th']}
           </Typography>
@@ -93,24 +98,22 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {/* <CardActions> */}
       <Button
         className={classes.button_select_card}
         variant="contained"
         // onClick={handleClose}
         disabled={disabled}
-        onClick={handleOpenConfirmDialog}
+        onClick={() => sendToProfile(value.ID)}
         color="primary"
       >
         {t('select')}
       </Button>
-      {/* </CardActions> */}
 
-      <ConfirmSelect
+      {/* <ConfirmSelect
         confirmOpen={openConfirm}
         closeDialog={handleCloseConfirmDialog}
         submit={handleCloseConfirmDialog}
-      />
+      /> */}
 
       <Dialog
         onClose={handleClose}
@@ -123,11 +126,7 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
           },
         }}
       >
-        <Avatar
-          alt="Remy Sharp"
-          className={classes.avatar_picture}
-          src={getLogo(value.ID)}
-        />
+        <Avatar className={classes.avatar_picture} src={getLogo(value.ID)} />
         <DialogTitle onClose={handleClose} classes={classes}>
           {value[`name-${lang}` as 'name-th' | 'name-en']}
         </DialogTitle>
@@ -161,7 +160,7 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
           <Button
             className={classes.button_select}
             variant="contained"
-            onClick={handleOpenConfirmDialog}
+            onClick={() => sendToProfile(value.ID)}
             disabled={disabled}
           >
             {t('select')}
@@ -177,43 +176,3 @@ MediaCard.propTypes = {
 }
 
 export default MediaCard
-
-// const styles = (theme:Theme) =>
-//     createStyles({
-//         root: {
-//             margin: "0",
-//             padding: "0"
-//         },
-//         closeButton: {
-//             position: 'absolute',
-//             right: theme.spacing(1),
-//             top: theme.spacing(1),
-//             color: theme.palette.grey[500],
-//         },
-//         title: {
-//             display: "block",
-//             marginLeft: "auto",
-//             marginRight: "auto",
-//             fontSize:"28px"
-//         },
-//     });
-
-// interface DialogTitleProps extends WithStyles<typeof styles> {
-//     id?: string;
-//     children: React.ReactNode;
-//     onClose: () => void;
-// }
-
-// const DialogTitle = withStyles(styles)((props: DialogTitleProps) => {
-//   const { children, classes, onClose, ...other } = props;
-//   return (
-//     <MuiDialogTitle disableTypography className={classes.title}>
-//       <Typography className={classes.title}>{children}</Typography>
-//       {onClose ? (
-//         <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
-//           <CloseIcon />
-//         </IconButton>
-//       ) : null}
-//     </MuiDialogTitle>
-//   );
-// });
