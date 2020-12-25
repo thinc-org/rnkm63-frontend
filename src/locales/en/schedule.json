@@ -1,0 +1,15 @@
+{
+  "schedule_title": "Schedule",
+  "history_title": "History",
+  "table_round_title": "Round",
+  "table_date_title": "Date",
+  "table_start_title": "Start",
+  "table_end_title": "End",
+  "could_not_join": "Couldn't join",
+  "joined": "Joined",
+  "moved_to": "Left",
+  "could_not_moved_to": "Couldn't move to",
+  "instead_join": "Instead joined",
+  "no_request": "No request",
+  "jan": "Jan"
+}
