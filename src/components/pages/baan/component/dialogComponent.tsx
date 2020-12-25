@@ -1,5 +1,4 @@
 import { Typography } from '@material-ui/core'
-// import MuiDialogTitle from '@material-ui/core/DialogTitle'
 import IconButton from '@material-ui/core/IconButton'
 import { createStyles, Theme, WithStyles } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
@@ -9,8 +8,8 @@ import React from 'react'
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      margin: '0',
-      padding: '0',
+      margin: theme.spacing(0),
+      padding: theme.spacing(0),
     },
     closeButton: {
       position: 'absolute',
@@ -22,7 +21,7 @@ const styles = (theme: Theme) =>
       display: 'block',
       marginLeft: 'auto',
       marginRight: 'auto',
-      fontSize: '28px',
+      fontSize: '1.75rem',
     },
     centerit: {},
     button_select: {},

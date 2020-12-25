@@ -10,7 +10,11 @@ import {
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import { Loading } from 'components/common'
-import { HandleRequestError, RequestError } from 'components/common/Error'
+import {
+  HandleRequestError,
+  IRequestError,
+  RequestError,
+} from 'components/common/Error'
 import { UserContext } from 'contexts/UserContext'
 import { baanInfo } from 'local/BaanInfo'
 import React, { useEffect, useState } from 'react'
@@ -44,6 +48,7 @@ function Baan() {
 
   const [capacityData, setCapacityData] = useState<ICapacityData[]>([])
   const [currentFilterData, setCurrentFilterData] = useState<IFilterData[]>([])
+  const [error, setError] = useState<IRequestError | null>(null)
   const { t } = useTranslation('selectbaan')
   const style = indexStyle()
 
@@ -51,7 +56,11 @@ function Baan() {
   useEffect(() => {
     async function getData() {
       const res = await getCapacityData()
-      setCapacityData(res.data)
+      if (res.status < 200 || res.status >= 300) {
+        setError(RequestError(res.status, res.headers['x-request-id']))
+      } else {
+        setCapacityData(res.data)
+      }
     }
     getData()
   }, [])
@@ -89,7 +98,7 @@ function Baan() {
           ...val,
           capacity,
           request,
-          color: color,
+          color,
         })
       }
     }
@@ -101,6 +110,7 @@ function Baan() {
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
   else if (!userInfo) return <HandleRequestError {...RequestError(500, null)} />
   else if (!userInfo.data || !userInfo.isConfirm) return <Redirect to="/form" />
+  else if (error !== null) return <HandleRequestError {...error} />
   else {
     return (
       <Box className={style.container}>
@@ -180,6 +190,7 @@ function Baan() {
           {currentFilterData.map((val) => {
             return (
               <MediaCard
+                setError={setError}
                 key={val.ID}
                 value={val}
                 disabled={

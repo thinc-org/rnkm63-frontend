@@ -10,11 +10,12 @@ import MuiDialogContent from '@material-ui/core/DialogContent'
 import { Theme } from '@material-ui/core/styles'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
+import { IRequestError, RequestError } from 'components/common/Error'
+import { createBrowserHistory } from 'history'
 import { getLogo } from 'local/BaanInfo'
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useHistory } from 'react-router-dom'
 
 import { IFilterData } from '../@types/data'
 import { postRequestBaan } from '../apiService'
@@ -27,10 +28,10 @@ const DialogContent = withStyles((theme) => ({
     padding: '0',
     margin: '0 89px',
     color: 'white',
-    fontSize: '24px',
+    fontSize: '1.5rem',
     [theme.breakpoints.down('xs')]: {
       margin: '0px 45px',
-      fontSize: '18px',
+      fontSize: '1.125rem',
     },
   },
 }))(MuiDialogContent)
@@ -44,36 +45,38 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 interface IComponentData {
   value: IFilterData
+  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
   key: number
   disabled: boolean
 }
 
-const MediaCard = ({ value, disabled }: IComponentData) => {
+const MediaCard = ({ value, disabled, setError }: IComponentData) => {
   const classes = useStyles()
   const { t } = useTranslation('selectbaan')
   const { i18n } = useTranslation()
-  const history = useHistory()
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
-
+  const history = createBrowserHistory({
+    forceRefresh: true,
+  })
   const [open, setOpen] = React.useState(false)
-  // const [openConfirm, setOpenConfirm] = React.useState(false)
 
-  const handleClickOpen = () => {
+  const handleClickOpen = useCallback(() => {
     setOpen(true)
-  }
-  const handleClose = () => {
+  }, [])
+
+  const handleClose = useCallback(() => {
     setOpen(false)
+  }, [])
+
+  const sendToProfile = async (id: number) => {
+    const res = await postRequestBaan(id)
+    if (res.status < 200 || res.status >= 300) {
+      setError(RequestError(res.status, res.headers['x-request-id']))
+    } else {
+      history.push('/')
+    }
   }
-  const sendToProfile = (id: number) => {
-    postRequestBaan(id)
-    history.push('/')
-  }
-  // const handleOpenConfirmDialog = () => {
-  //   setOpenConfirm(true)
-  // }
-  // const handleCloseConfirmDialog = () => {
-  //   setOpenConfirm(false)
-  // }
+
   return (
     <Card className={classes.root}>
       <CardActionArea onClick={handleClickOpen}>
@@ -108,12 +111,6 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
       >
         {t('select')}
       </Button>
-
-      {/* <ConfirmSelect
-        confirmOpen={openConfirm}
-        closeDialog={handleCloseConfirmDialog}
-        submit={handleCloseConfirmDialog}
-      /> */}
 
       <Dialog
         onClose={handleClose}
