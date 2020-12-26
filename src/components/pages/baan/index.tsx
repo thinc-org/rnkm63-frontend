@@ -37,19 +37,7 @@ function Baan() {
   })
 
   const [open, setOpen] = React.useState(false)
-  const [dialogData, setDialogData] = useState<IFilterData>({
-    ID: 0,
-    size: '-',
-    'name-th': '-',
-    'name-en': '-',
-    'caption-th': [],
-    'caption-en': [],
-    facebook: '-',
-    instagram: '-',
-    color: '',
-    capacity: 0,
-    request: 0,
-  })
+  const [dialogDataID, setDialogData] = useState<number>(0)
   const [capacityData, setCapacityData] = useState<ICapacityData[]>([])
   const [currentFilterData, setCurrentFilterData] = useState<IFilterData[]>([])
   const { t } = useTranslation('selectbaan')
@@ -170,7 +158,7 @@ function Baan() {
             <React.Fragment key={val.ID}>
               <CardBaan
                 setError={setError}
-                value={val}
+                data={val}
                 handleClickOpen={handleClickOpen}
                 setDialogData={setDialogData}
                 disabled={
@@ -196,7 +184,7 @@ function Baan() {
             <React.Fragment key={val.ID}>
               <GridCard
                 setError={setError}
-                value={val}
+                data={val}
                 handleClickOpen={handleClickOpen}
                 setDialogData={setDialogData}
                 disabled={
@@ -208,12 +196,12 @@ function Baan() {
           ))}
         </Grid>
         <CardDialog
-          value={dialogData}
+          ID={dialogDataID}
           open={open}
           handleClose={handleClose}
           disabled={
-            dialogData.ID === userInfo.currentBaan ||
-            dialogData.ID === userInfo.preferBaan
+            dialogDataID === userInfo.currentBaan ||
+            dialogDataID === userInfo.preferBaan
           }
           setError={setError}
         />

@@ -12,10 +12,10 @@ import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { fail } from 'components/ErrorProvider'
 import i18n from 'i18next'
-import { getLogo } from 'local/BaanInfo'
+import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 
-import { IFilterData } from '../@types/data'
+// import { IFilterData } from '../@types/data'
 import { useStyles } from '../style/cardDialogStyle'
 import DialogTitle from './dialogComponent'
 import SubmitButton from './SubmitButton'
@@ -41,19 +41,27 @@ const DialogActions = withStyles((theme: Theme) => ({
 }))(MuiDialogActions)
 
 interface ICardDialog {
-  value: IFilterData
+  ID: number
   open: boolean
   handleClose: () => void
   disabled: boolean
   setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 
-const CardDialog = React.memo(function CardDialog(props: ICardDialog) {
-  const { value, open, handleClose, disabled, setError } = props
+const CardDialog = function CardDialog(props: ICardDialog) {
+  const { ID, open, handleClose, disabled, setError } = props
   const classes = useStyles()
   const lang = i18n.language.startsWith('th') ? 'th' : 'en'
   const color = disabled ? '#A9A9A9' : 'white'
-  const urlLogo = getLogo(value.ID)
+  const urlLogo = getLogo(ID)
+  const value = getBaan(ID)
+
+  if (value.facebook === '') {
+    value.facebook = '-'
+  }
+  if (value.instagram === '') {
+    value.instagram = '-'
+  }
 
   return (
     <Dialog
@@ -106,6 +114,6 @@ const CardDialog = React.memo(function CardDialog(props: ICardDialog) {
       </DialogActions>
     </Dialog>
   )
-})
+}
 
 export default CardDialog

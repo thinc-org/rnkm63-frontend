@@ -64,12 +64,6 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.25rem',
     textAlign: 'center',
   },
-  actionArea: {
-    '&:hover $focusHighlight': {
-      opacity: 0,
-    },
-  },
-  focusHighlight: {},
   fbandigicon_item: {
     alignItems: 'center',
     flexWrap: 'wrap',
