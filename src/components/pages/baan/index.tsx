@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next'
 
 import { ICapacityData, IFilterData, IFilterSize } from './@types/data'
 import CardBaan from './component/CardBaan'
-import CardDialog from './component/CardDialog'
+import CardDialog from './component/cardDialog'
 import GridCard from './component/GridCard'
 import StatusColor from './StatusColor'
 import { indexStyle } from './style/indexStyle'

@@ -17,7 +17,7 @@ import React from 'react'
 
 import { IFilterData } from '../@types/data'
 import { useStyles } from '../style/cardDialogStyle'
-import DialogTitle from './DialogComponent'
+import DialogTitle from './dialogComponent'
 import SubmitButton from './SubmitButton'
 
 const DialogContent = withStyles((theme: Theme) => ({
