@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: '#383838',
     height: 'auto',
     width: '207px',
+    [theme.breakpoints.down('xs')]: {
+      display: 'none',
+    },
   },
   centerit: {
     display: 'block',
@@ -22,6 +25,9 @@ export const useStyles = makeStyles((theme) => ({
     width: '207px',
     borderRadius: '40px',
     backgroundColor: '#44AD53',
+    '&:hover': {
+      backgroundColor: theme.palette.success.main,
+    },
   },
   button_select_card: {
     display: 'block',
@@ -34,6 +40,9 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '40px',
     height: '40px',
     backgroundColor: '#44AD53',
+    '&:hover': {
+      backgroundColor: theme.palette.success.main,
+    },
   },
   dialog_title: {
     textAlign: 'center',
@@ -55,6 +64,12 @@ export const useStyles = makeStyles((theme) => ({
     fontSize: '1.25rem',
     textAlign: 'center',
   },
+  actionArea: {
+    '&:hover $focusHighlight': {
+      opacity: 0,
+    },
+  },
+  focusHighlight: {},
   fbandigicon_item: {
     alignItems: 'center',
     flexWrap: 'wrap',

@@ -1,4 +1,4 @@
-interface Baan {
+export interface Baan {
   ID: number
   size: string
   'name-th': string
