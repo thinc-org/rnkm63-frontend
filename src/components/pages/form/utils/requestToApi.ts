@@ -1,6 +1,6 @@
 import axios, { AxiosPromise } from 'axios'
 import { intoFailure } from 'components/ErrorProvider'
-import { API_URL } from 'utils'
+import { apiClient } from 'config/axiosInstance'
 
 import { IFormData } from './registerSchema'
 
@@ -8,12 +8,6 @@ interface Policy {
   url: string
   fields: Record<string, string>
 }
-const config = {
-  headers: { 'No-CSRF': true },
-  withCredentials: true,
-  baseURL: API_URL,
-}
-const apiClient = axios.create(config)
 
 const postUserData = function (data: IFormData, edit: boolean): AxiosPromise {
   const reqBody = {

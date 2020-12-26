@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: '2.5rem',
     height: '2.5rem',
     margin: '0.25rem',
+    marginLeft: '-0.8rem',
   },
   icon: {
     fontSize: '2rem',

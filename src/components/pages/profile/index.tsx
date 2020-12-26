@@ -1,11 +1,15 @@
 import { Box, Typography } from '@material-ui/core'
+import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
-import React from 'react'
+import { getEndTime, getStartTime } from 'local/RoundInfo'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import BaanRender from './BaanRender'
 import Countdown from './Countdown'
 import { profileStyles } from './styles/profileStyles'
+import { getRound } from './utils/requestToApi'
 
 function Profile() {
   const { user: userInfo } = React.useContext(UserContext)
@@ -14,14 +18,36 @@ function Profile() {
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
   const classes = profileStyles()
   const { t, i18n } = useTranslation('profile')
+  const [round, setRound] = useState(0)
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const res = await getRound()
+        setRound(res.data)
+      } catch (e) {
+        fail(e)
+      }
+    }
+    fetchData()
+  }, [])
 
+  const endOfSelect = new Date('2021-01-13 12:00:00').valueOf()
+  const currentTime = new Date().valueOf()
+  const endTime = new Date(getEndTime(round)).valueOf()
+  let secs = (endTime - currentTime) / 1000
+  if (secs < 0) {
+    const nextStartTime = new Date(getStartTime(round + 1)).valueOf()
+    secs = (currentTime - nextStartTime) / 1000
+  }
+
+  if (!userInfo) return fail({})
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
         <img
           className={classes.imageSize}
           src={userPic}
-          alt={userInfo?.data?.nickname ?? '-'}
+          alt={userInfo.data?.nickname ?? '-'}
         />
       </Box>
       <Box className={classes.value}>
@@ -30,7 +56,7 @@ function Profile() {
             {t('Name')}
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
-            {userInfo?.data?.nickname ?? '-'}
+            {userInfo.data?.nickname ?? '-'}
           </Typography>
         </Box>
         <Box>
@@ -39,8 +65,8 @@ function Profile() {
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
-              ? userInfo?.data?.facultyEn ?? '-'
-              : userInfo?.data?.facultyTh ?? '-'}
+              ? (userInfo.data?.facultyEn ?? '-').replace('Faculty of', '')
+              : (userInfo.data?.facultyTh ?? '-').replace('คณะ', '')}
           </Typography>
         </Box>
         <Box>
@@ -51,11 +77,21 @@ function Profile() {
             {i18n.language.startsWith('en') ? baanEng : baanThai}
           </Typography>
           <Typography variant="h4" className={classes.baanWarning}>
-            {userInfo?.isTransfer ? t('baanWarning') : ''}
+            {userInfo.isTransfer ? t('baanWarning') : ''}
           </Typography>
         </Box>
       </Box>
-      <Countdown />
+      {currentTime !== endOfSelect && (
+        <>
+          <BaanRender
+            round={round}
+            secs={secs}
+            preferBaan={userInfo.preferBaan}
+            currentBaan={userInfo.currentBaan}
+          />
+          <Countdown timeLeft={secs} roundCount={true} />
+        </>
+      )}
     </body>
   )
 }

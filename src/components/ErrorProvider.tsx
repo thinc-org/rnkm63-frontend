@@ -35,7 +35,9 @@ export interface IFailure {
   detail?: string | null
 }
 
-type IIntoFailure = Partial<IFailure | AxiosError> | null
+interface AxiosErrorOrIFailure extends AxiosError, IFailure {}
+
+type IIntoFailure = Partial<AxiosErrorOrIFailure> | null
 
 // Try to convert most things into an IFailure
 export function intoFailure(error: IIntoFailure): IFailure {
