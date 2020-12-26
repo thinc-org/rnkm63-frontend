@@ -57,6 +57,8 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
     forceRefresh: true,
   })
   const [open, setOpen] = React.useState(false)
+  let color = 'white'
+  if (disabled) color = '#A9A9A9'
 
   const handleClickOpen = useCallback(() => {
     setOpen(true)
@@ -105,6 +107,7 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
         disabled={disabled}
         onClick={() => sendToProfile(value.ID)}
         color="primary"
+        style={{ color: color }}
       >
         {t('select')}
       </Button>
@@ -155,6 +158,7 @@ const MediaCard = ({ value, disabled }: IComponentData) => {
             variant="contained"
             onClick={() => sendToProfile(value.ID)}
             disabled={disabled}
+            style={{ color: color }}
           >
             {t('select')}
           </Button>
