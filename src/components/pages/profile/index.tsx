@@ -12,9 +12,8 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
 
+import BaanRender from './BaanRender'
 import Countdown from './Countdown'
-import Pending from './Pending'
-import RoundSelector from './roundSelector'
 import { profileStyles } from './styles/profileStyles'
 import { getRound } from './utils/requestToApi'
 
@@ -50,47 +49,6 @@ function Profile() {
   if (secs < 0) {
     const nextStartTime = new Date(getStartTime(round + 1)).valueOf()
     secs = (currentTime - nextStartTime) / 1000
-  }
-
-  let baanRender
-  if (currentTime !== endOfSelect) {
-    if (secs < 0) {
-      // 15 minutes interval between round (secs is negative)
-      baanRender = (
-        <div>
-          <Typography
-            variant="h2"
-            style={{ fontSize: '3rem', fontWeight: 500, marginTop: '5%' }}
-          >
-            {t('process')} {round}...
-          </Typography>
-        </div>
-      )
-    } else if (!userInfo?.preferBaan) {
-      // no prefer baan, A round selector is displayed
-      baanRender = (
-        <div>
-          <Typography variant="h2" className={classes.round}>
-            {t('round') + ' ' + round}
-          </Typography>
-          <RoundSelector
-            isBaanExist={userInfo?.currentBaan ?? 0}
-            setError={setError}
-          />
-        </div>
-      )
-    } else {
-      baanRender = ( // if the user have a prefer baan, a pending status is displayed
-        <div>
-          <Pending
-            round={round}
-            currentBaan={userInfo?.currentBaan ?? 0}
-            preferBaan={userInfo?.preferBaan!}
-            setError={setError}
-          />
-        </div>
-      )
-    }
   }
 
   if (!isUserLoaded) return <Loading />
@@ -139,11 +97,17 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        {baanRender}
-        {currentTime !== endOfSelect ? (
-          <Countdown timeLeft={secs} roundCount={true} />
-        ) : (
-          ''
+        {currentTime !== endOfSelect && (
+          <>
+            <BaanRender
+              round={round}
+              secs={secs}
+              preferBaan={userInfo?.preferBaan}
+              currentBaan={userInfo?.currentBaan}
+              setError={setError}
+            />
+            <Countdown timeLeft={secs} roundCount={true} />
+          </>
         )}
       </body>
     )
