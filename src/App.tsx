@@ -8,7 +8,7 @@ import { Loading } from './components/common'
 import { Footer, Header } from './components/shell'
 import theme from './config/theme'
 import { UserProvider } from './contexts/UserContext'
-import BackgroundImg from './local/background.png'
+import { BgBottom, BgLeft, BgTop } from './local/backgrounds'
 
 const useStyles = makeStyles({
   AppContainer: {
@@ -16,9 +16,11 @@ const useStyles = makeStyles({
     minWidth: '280px',
     display: 'flex',
     flexDirection: 'column',
-    backgroundImage: `url(${BackgroundImg})`,
-    backgroundSize: 'cover',
-    backgroundAttachment: 'fixed',
+    backgroundColor: '#212121',
+    backgroundImage: `url(${BgTop}), url(${BgBottom}), url(${BgLeft})`,
+    backgroundPosition: 'right top, right bottom, left top',
+    backgroundSize: '62.5vw 7.3vw, 37.5vw 14.6vw, 14.6vw 37.5vw',
+    backgroundRepeat: 'no-repeat',
   },
   PageContainer: {
     flex: 1,
