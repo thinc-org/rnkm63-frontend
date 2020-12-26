@@ -61,7 +61,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       isSubmitLoading: true,
     })
     const { imageBlob, data } = this.state
-    const { userData, load: loadUser } = this.context
+    const { user: userData, load: loadUser } = this.context
     const { history } = this.props
     const edit =
       imageBlob !== 0 ||
@@ -103,7 +103,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
   }
   confirm: (value: IUserData) => void = (value) => {
     const { imageBlob } = this.state
-    const { userData } = this.context
+    const { user: userData } = this.context
 
     if ((!userData?.data || userData?.isImgWrong) && imageBlob === 0) {
       return
