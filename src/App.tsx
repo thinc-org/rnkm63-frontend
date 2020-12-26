@@ -1,18 +1,10 @@
 import { Box, Container, makeStyles, ThemeProvider } from '@material-ui/core'
+import ErrorProvider from 'components/ErrorProvider'
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import Routes from 'routing/Routes'
 
 import { Loading } from './components/common'
-import {
-  Baan,
-  Form,
-  FormComplete,
-  Login,
-  NotFound,
-  NotFreshy,
-  Profile,
-  Schedule,
-} from './components/pages'
 import { Footer, Header } from './components/shell'
 import theme from './config/theme'
 import { UserProvider } from './contexts/UserContext'
@@ -36,30 +28,23 @@ const useStyles = makeStyles({
 function App() {
   const classes = useStyles()
   return (
-    <UserProvider>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <Box className={classes.AppContainer} color="text.primary">
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Box className={classes.AppContainer} color="text.primary">
+          <UserProvider>
             <Header />
             <Container className={classes.PageContainer}>
-              <React.Suspense fallback={<Loading />}>
-                <Switch>
-                  <Route path="/login" exact component={Login} />
-                  <Route path="/form" exact component={Form} />
-                  <Route path="/form/complete" exact component={FormComplete} />
-                  <Route path="/not104" exact component={NotFreshy} />
-                  <Route path="/baan" exact component={Baan} />
-                  <Route path="/schedule" exact component={Schedule} />
-                  <Route path="/" exact component={Profile} />
-                  <Route component={NotFound} />
-                </Switch>
-              </React.Suspense>
+              <ErrorProvider>
+                <React.Suspense fallback={<Loading />}>
+                  <Routes />
+                </React.Suspense>
+              </ErrorProvider>
             </Container>
             <Footer />
-          </Box>
-        </Router>
-      </ThemeProvider>
-    </UserProvider>
+          </UserProvider>
+        </Box>
+      </Router>
+    </ThemeProvider>
   )
 }
 

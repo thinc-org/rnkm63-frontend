@@ -1,5 +1,4 @@
 import { Typography } from '@material-ui/core'
-import { IRequestError } from 'components/common/Error'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -11,11 +10,10 @@ interface Props {
   round: number
   preferBaan: number | null
   currentBaan: number
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 function BaanRender(props: Props) {
   const { t } = useTranslation('profile')
-  const { secs, round, preferBaan, currentBaan, setError } = props
+  const { secs, round, preferBaan, currentBaan } = props
   const classes = profileStyles()
   if (secs < 0) {
     // 15 minutes interval between round (secs is negative)
@@ -36,7 +34,7 @@ function BaanRender(props: Props) {
         <Typography variant="h2" className={classes.round}>
           {t('round') + ' ' + round}
         </Typography>
-        <RoundSelector isBaanExist={currentBaan ?? 0} setError={setError} />
+        <RoundSelector isBaanExist={currentBaan ?? 0} />
       </div>
     )
   } else {
@@ -47,7 +45,6 @@ function BaanRender(props: Props) {
           round={round}
           currentBaan={currentBaan ?? 0}
           preferBaan={preferBaan!}
-          setError={setError}
         />
       </div>
     )

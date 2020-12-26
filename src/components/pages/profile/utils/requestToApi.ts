@@ -1,4 +1,5 @@
 import { AxiosPromise } from 'axios'
+import { intoFailure } from 'components/ErrorProvider'
 import { apiClient } from 'config/axiosInstance'
 
 interface ReqInfo {
@@ -8,13 +9,15 @@ interface ReqInfo {
   memberCount: number
 }
 const getRound = function (): AxiosPromise<number> {
-  return apiClient.get('/global/round').catch((err) => err.response)
+  return apiClient.get('/global/round').catch((err) => {
+    throw intoFailure(err)
+  })
 }
 
 const getAllRequestCount = function (): AxiosPromise<ReqInfo[]> {
-  return apiClient
-    .get('/user/getAllUserPreferBaan')
-    .catch((err) => err.response)
+  return apiClient.get('/user/getAllUserPreferBaan').catch((err) => {
+    throw intoFailure(err)
+  })
 }
 
 const postBaanChange = function (
@@ -23,9 +26,9 @@ const postBaanChange = function (
   const reqBody = {
     preferBaan,
   }
-  return apiClient
-    .post('/user/requestBaanChange', reqBody)
-    .catch((err) => err.response)
+  return apiClient.post('/user/requestBaanChange', reqBody).catch((err) => {
+    throw intoFailure(err)
+  })
 }
 export { getAllRequestCount, getRound, postBaanChange }
 export type { ReqInfo }

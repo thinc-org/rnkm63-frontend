@@ -10,7 +10,7 @@ import MuiDialogContent from '@material-ui/core/DialogContent'
 import { Theme } from '@material-ui/core/styles'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
-import { IRequestError, RequestError } from 'components/common/Error'
+import { fail } from 'components/ErrorProvider'
 import { createBrowserHistory } from 'history'
 import { getLogo } from 'local/BaanInfo'
 import PropTypes from 'prop-types'
@@ -44,12 +44,11 @@ const DialogActions = withStyles((theme: Theme) => ({
 
 interface IComponentData {
   value: IFilterData
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
   key: number
   disabled: boolean
 }
 
-const MediaCard = ({ value, disabled, setError }: IComponentData) => {
+const MediaCard = ({ value, disabled }: IComponentData) => {
   const classes = useStyles()
   const { t } = useTranslation('selectbaan')
   const { i18n } = useTranslation()
@@ -68,11 +67,11 @@ const MediaCard = ({ value, disabled, setError }: IComponentData) => {
   }, [])
 
   const sendToProfile = async (id: number) => {
-    const res = await postRequestBaan(id)
-    if (res.status < 200 || res.status >= 300) {
-      setError(RequestError(res.status, res.headers['x-request-id']))
-    } else {
+    try {
+      await postRequestBaan(id)
       history.push('/')
+    } catch (e) {
+      fail(e)
     }
   }
 

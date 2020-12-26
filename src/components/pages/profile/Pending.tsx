@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from '@material-ui/core'
-import { IRequestError, RequestError } from 'components/common/Error'
+import { fail } from 'components/ErrorProvider'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -16,7 +16,6 @@ interface Props {
   currentBaan: number
   preferBaan: number
   round: number
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 
 const requestType = (currentBaan: number, preferBaan: number) => {
@@ -43,20 +42,18 @@ function Pending(props: Props) {
   const classes = pendingStyles(styleProps)
 
   const cancel = useCallback(async () => {
-    const res = await postBaanChange(null)
-    if (res.status < 200 || res.status >= 300) {
-      props.setError(RequestError(res.status, res.headers['x-request-id']))
-    } else {
+    try {
+      await postBaanChange(null)
       window.location.reload()
+    } catch (e) {
+      fail(e)
     }
-  }, [props])
+  }, [])
 
   useEffect(() => {
     async function fetchData() {
-      const res = await getAllRequestCount()
-      if (res.status < 200 || res.status >= 300) {
-        props.setError(RequestError(res.status, res.headers['x-request-id']))
-      } else {
+      try {
+        const res = await getAllRequestCount()
         const reqInfo = res.data.find((item: ReqInfo) => {
           return item.baanID === (preferBaan === 0 ? currentBaan : preferBaan)
         })
@@ -67,6 +64,8 @@ function Pending(props: Props) {
               (reqInfo.capacity - reqInfo.memberCount)
           )
         }
+      } catch (e) {
+        fail(e)
       }
     }
     fetchData()

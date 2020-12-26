@@ -1,18 +1,17 @@
 {
-  "returnHome": "Back to home",
+  "return": "Back",
   "refreshPage": "Refresh",
   "report": "Report Problem",
   "notfound": {
     "title": "Error 404",
     "detail": "Page not found"
   },
-  "not104": {
-    "title": "For CU104 only"
-  },
   "codes": {
     "500": "Internal Server Error",
     "503": "Service Unavaliable",
+    "400": "Bad request",
+    "401": "Unauthorized",
     "409": "You have already confirmed",
-    "400": "Bad request"
+    "unknown": "Unknown Error"
   }
 }

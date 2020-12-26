@@ -1,4 +1,5 @@
 import axios, { AxiosPromise } from 'axios'
+import { intoFailure } from 'components/ErrorProvider'
 import { apiClient } from 'config/axiosInstance'
 
 import { IFormData } from './registerSchema'
@@ -13,11 +14,15 @@ const postUserData = function (data: IFormData, edit: boolean): AxiosPromise {
     data,
     edit,
   }
-  return apiClient.post('/user/profile', reqBody).catch((err) => err.response)
+  return apiClient.post('/user/profile', reqBody).catch((err) => {
+    throw intoFailure(err)
+  })
 }
 
 const getPolicyStorage = function (): AxiosPromise<Policy> {
-  return apiClient.get('/user/getUploadPolicy').catch((err) => err.response)
+  return apiClient.get('/user/getUploadPolicy').catch((err) => {
+    throw intoFailure(err)
+  })
 }
 
 const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
@@ -38,7 +43,9 @@ const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
         'Content-Type': 'multipart/form-data',
       },
     })
-    .catch((err) => err.response)
+    .catch((err) => {
+      throw intoFailure(err)
+    })
 }
 
 export { getPolicyStorage, postUserData, uploadImageToStorage }

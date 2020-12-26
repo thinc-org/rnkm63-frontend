@@ -1,7 +1,7 @@
 import { Box, Button, RootRef, Typography } from '@material-ui/core'
-import { HandleRequestError } from 'components/common/Error'
-import { IRequestError, RequestError } from 'components/common/Error'
+import { FailureDisplay } from 'components/common/Error'
 import Loading from 'components/common/Loading'
+import { IFailure } from 'components/ErrorProvider'
 import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
   Form as FormikForm,
@@ -12,7 +12,6 @@ import {
 import { History, LocationState } from 'history'
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
 
 import FormDialog from './component/formDialogComponent'
 import FormInput from './FormInput'
@@ -36,7 +35,7 @@ interface FormState {
   submitClick: boolean
   data: IUserData
   isSubmitLoading: boolean
-  submitError: IRequestError | null
+  submitError: IFailure | null
 }
 
 interface FormProps {
@@ -71,37 +70,23 @@ class Form extends React.PureComponent<FormProps, FormState> {
       userData?.data.nickname !== data.nickname
 
     if (imageBlob !== 0) {
-      const resPolicy = await getPolicyStorage()
-      if (resPolicy.status === 401) {
-        history.push('/login')
-      } else if (resPolicy.status === 500) {
+      try {
+        const resPolicy = await getPolicyStorage()
+        await uploadImageToStorage(imageBlob, resPolicy.data)
+      } catch (e) {
         this.setState({
-          submitError: RequestError(
-            resPolicy.status,
-            resPolicy.headers['x-request-id']
-          ),
+          submitError: e,
           isSubmitLoading: false,
         })
-      }
-      const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
-      if (resUpload.status !== 204) {
-        this.setState({
-          submitError: RequestError(
-            resUpload.status,
-            `image-${resUpload.status}`
-          ),
-          isSubmitLoading: false,
-        })
-        return
       }
     }
-    const res = await postUserData(data, edit)
-    if (res.status === 200 || res.status === 201) {
+    try {
+      await postUserData(data, edit)
       loadUser()
       history.push('/form/complete')
-    } else {
+    } catch (e) {
       this.setState({
-        submitError: RequestError(res.status, res.headers['x-request-id']),
+        submitError: e,
         isSubmitLoading: false,
       })
     }
@@ -147,16 +132,10 @@ class Form extends React.PureComponent<FormProps, FormState> {
     })
   }
   render() {
-    const {
-      user: userData,
-      isLoaded: isUserLoaded,
-      error: userLoadError,
-    } = this.context
+    const { user: userData } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
-    if (!isUserLoaded || isSubmitLoading) return <Loading />
-    else if (userLoadError) return <HandleRequestError {...userLoadError} />
-    else if (userData?.isConfirm) return <Redirect to="/" />
-    else if (submitError) return <HandleRequestError {...submitError} />
+    if (isSubmitLoading) return <Loading />
+    else if (submitError) return <FailureDisplay failure={submitError} />
     else
       return (
         <FormUI

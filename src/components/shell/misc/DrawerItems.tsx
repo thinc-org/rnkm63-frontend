@@ -101,7 +101,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userError || userError.status >= 500) && (
+        {(!userError || (userError?.status && userError.status >= 500)) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>

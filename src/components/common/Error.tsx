@@ -8,11 +8,11 @@ import {
 } from '@material-ui/core'
 import { Theme } from '@material-ui/core'
 import { ButtonProps } from '@material-ui/core/Button'
+import { IFailure } from 'components/ErrorProvider'
 import theme from 'config/theme'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link, Redirect } from 'react-router-dom'
-import { useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import SadThincIcon from '../shell/misc/SadThincIcon'
 import LinkButton, { LinkButtonProps } from './LinkButton'
@@ -56,7 +56,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '3rem',
     borderRadius: '1.5rem',
     fontSize: '1.125rem',
-    marginTop: theme.spacing(4),
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
     fontWeight: 700,
     [theme.breakpoints.up('sm')]: {
       button: {
@@ -104,13 +105,13 @@ export function ErrorLink(props: ErrorLinkProps) {
   return <Link component={comp} to={to} replace={replace} />
 }
 
-interface IError {
+interface IErrorDisplay {
   title: string
   detail?: string
   children: React.ReactNode
 }
 
-function Error({ title, detail, children }: IError) {
+export function ErrorDisplay({ title, detail, children }: IErrorDisplay) {
   const classes = useStyles()
   return (
     <Box className={classes.container}>
@@ -126,55 +127,42 @@ function Error({ title, detail, children }: IError) {
   )
 }
 
-export interface IRequestError {
-  status: number
-  requestID: string | null
+interface IFailureDisplay {
+  failure: IFailure
+  children?: React.ReactNode
+  showReport?: boolean
+  showBack?: boolean
 }
 
-export const RequestError = (
-  status: number,
-  requestID: string | null = null
-) => ({
-  status,
-  requestID,
-})
-
-export function HandleRequestError(props: IRequestError) {
+export function FailureDisplay({
+  failure,
+  children,
+  showReport = true,
+  showBack = true,
+}: IFailureDisplay) {
   const { t } = useTranslation('errors')
-  const { requestID, status } = props
-  const location = useLocation()
 
-  if (status === 401 || status === 403) return <Redirect to="/login" />
+  const title =
+    failure?.title ?? t([`codes.${failure.status}`, 'codes.unknown']) ?? ''
+  const detail = failure?.detail ?? ''
 
-  const reportUrl = !requestID
+  const reportUrl = !failure.requestID
     ? 'https://airtable.com/shrdg6IwqtKmNMfkL'
-    : 'https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=' + requestID
+    : `https://airtable.com/shrdg6IwqtKmNMfkL?prefill_X-Request-ID=${failure.requestID}`
 
   return (
-    <Error title={t(`codes.${status}`)}>
-      {props.status === 500 || props.status === 503 || props.status === 400 ? (
-        <ErrorButton
-          href={reportUrl}
-          target="_blank"
-          style={{ marginBottom: theme.spacing(3) }}
-        >
+    <ErrorDisplay title={title} detail={detail}>
+      {showReport && (
+        <ErrorButton href={reportUrl} target="_blank">
           {t('report')}
         </ErrorButton>
-      ) : location?.pathname !== '/' ? (
-        <ErrorLink to="/" style={{ marginBottom: theme.spacing(3) }}>
-          {t('returnHome')}
-        </ErrorLink>
-      ) : (
-        <Link
-          to="/"
-          component={ErrorButton}
-          style={{ marginBottom: theme.spacing(3) }}
-        >
-          {t('refreshPage')}
+      )}
+      {showBack && (
+        <Link to="/" component={ErrorButton}>
+          {t('return')}
         </Link>
       )}
-    </Error>
+      {children}
+    </ErrorDisplay>
   )
 }
-
-export default Error

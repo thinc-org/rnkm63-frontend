@@ -1,5 +1,5 @@
 import { Box, Button } from '@material-ui/core'
-import { IRequestError, RequestError } from 'components/common/Error'
+import { fail } from 'components/ErrorProvider'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -8,19 +8,18 @@ import { roundStyles } from './styles/roundSelectorStyles'
 import { postBaanChange } from './utils/requestToApi'
 interface Props {
   isBaanExist: number
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 function RoundSelector(props: Props) {
   const { t } = useTranslation('profile')
   const classes = roundStyles()
   const leave = useCallback(async () => {
-    const res = await postBaanChange(0)
-    if (res.status < 200 || res.status >= 300) {
-      props.setError(RequestError(res.status, res.headers['x-request-id']))
-    } else {
+    try {
+      await postBaanChange(0)
       window.location.reload()
+    } catch (e) {
+      fail(e)
     }
-  }, [props])
+  }, [])
 
   if (props.isBaanExist) {
     return (
