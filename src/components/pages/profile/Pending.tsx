@@ -37,7 +37,7 @@ function Pending(props: Props) {
   const styleProps = {
     baanNameColor: preferBaan === 0 ? 'Red' : 'Yellow',
     requestColor:
-      reqPercent < 80 ? 'Green' : reqPercent < 100 ? 'Yellow' : 'Red',
+      reqPercent < 80 ? 'Green' : reqPercent <= 100 ? 'Yellow' : 'Red',
   }
   const classes = pendingStyles(styleProps)
 
