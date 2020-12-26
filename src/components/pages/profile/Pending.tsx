@@ -11,12 +11,23 @@ import {
   postBaanChange,
   ReqInfo,
 } from './utils/requestToApi'
+
 interface Props {
   currentBaan: number
   preferBaan: number
   round: number
   setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
+
+const requestType = (currentBaan: number, preferBaan: number) => {
+  if (currentBaan === 0) return 'joinBaan'
+  // currently homeless
+  else if (preferBaan === 0) return 'leaveBaan'
+  // not homeless and request to leave baan
+  else return 'changeBaan'
+  // currentBaan not equal to preferBaan
+}
+
 function Pending(props: Props) {
   const { currentBaan, preferBaan, round } = props
   const { t, i18n } = useTranslation('profile')
@@ -65,16 +76,12 @@ function Pending(props: Props) {
     <Box className={classes.root}>
       <Typography className={classes.title}>
         {t('roundcnt', { count: round }) +
-          (currentBaan === 0
-            ? t('joinBaan')
-            : preferBaan === 0
-            ? t('leaveBaan')
-            : t('changeBaan'))}
+          t(requestType(currentBaan, preferBaan))}
       </Typography>
       <Box className={classes.container}>
         <Box className={classes.content}>
           <Box display="flex" alignItems="center" flexGrow="2">
-            <img src={baanLogo} className={classes.logo} alt="logo"></img>
+            <img src={baanLogo} className={classes.logo} alt="logo" />
             <Box textAlign="left">
               <Typography className={classes.baanName}>
                 {i18n.language.startsWith('en')
