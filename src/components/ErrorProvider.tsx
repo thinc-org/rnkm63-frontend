@@ -16,7 +16,7 @@ I find them to be the most robust.
 
 Hook/context solutions sometimes have weird issue when throwing while rendering.
 */
-export function fail(failure: TIntoFailure) {
+export function fail(failure: IIntoFailure) {
   if (errorProviderRef?.current?.setError)
     errorProviderRef.current.setError(intoFailure(failure))
   else {
@@ -29,18 +29,16 @@ export function fail(failure: TIntoFailure) {
 }
 
 export interface IFailure {
-  status: number | null
-  requestID: string | null
-  title: string | null
-  detail: string | null
+  status?: number | null
+  requestID?: string | null
+  title?: string | null
+  detail?: string | null
 }
 
-interface IIntoFailure extends IFailure, AxiosError {}
-
-type TIntoFailure = Partial<IIntoFailure> | null
+type IIntoFailure = Partial<IFailure | AxiosError> | null
 
 // Try to convert most things into an IFailure
-export function intoFailure(error: TIntoFailure): IFailure {
+export function intoFailure(error: IIntoFailure): IFailure {
   // ?? null because typescript complains about undefined
   const status = error?.status ?? error?.response?.status ?? null
   const requestID =
@@ -80,7 +78,7 @@ class ErrorProvider extends React.Component<
   }
   // We also try to catch errors thrown during rendering.
   // BUT you should `return fail()` instead of throw.
-  componentDidCatch(error: TIntoFailure) {
+  componentDidCatch(error: IIntoFailure) {
     console.warn(error)
     this.setError(intoFailure(error))
   }
