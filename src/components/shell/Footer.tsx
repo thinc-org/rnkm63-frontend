@@ -54,12 +54,7 @@ function Footer() {
   const { t } = useTranslation('footer')
   return (
     <Box className={classes.footer}>
-      <Box
-        display="flex"
-        flexDirection="column"
-        marginTop="15px"
-        paddingX="20px"
-      >
+      <Box display="flex" flexDirection="column" paddingX="20px">
         <Box
           display="flex"
           flexWrap="wrap"

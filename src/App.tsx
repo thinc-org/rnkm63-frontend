@@ -11,7 +11,7 @@ import { UserProvider } from './contexts/UserContext'
 import { BgBottom, BgLeft, BgTop } from './local/backgrounds'
 
 const useStyles = makeStyles({
-  AppContainer: {
+  BackgroundContainer: {
     minHeight: '100vh',
     minWidth: '280px',
     display: 'flex',
@@ -31,21 +31,23 @@ function App() {
   const classes = useStyles()
   return (
     <ThemeProvider theme={theme}>
-      <Router>
-        <Box className={classes.AppContainer} color="text.primary">
-          <UserProvider>
-            <Header />
-            <Container className={classes.PageContainer}>
-              <ErrorProvider>
-                <React.Suspense fallback={<Loading />}>
-                  <Routes />
-                </React.Suspense>
-              </ErrorProvider>
-            </Container>
-            <Footer />
-          </UserProvider>
+      <UserProvider>
+        <Box>
+          <Router>
+            <Box className={classes.BackgroundContainer} color="text.primary">
+              <Header />
+              <Container className={classes.PageContainer}>
+                <ErrorProvider>
+                  <React.Suspense fallback={<Loading />}>
+                    <Routes />
+                  </React.Suspense>
+                </ErrorProvider>
+              </Container>
+            </Box>
+          </Router>
+          <Footer />
         </Box>
-      </Router>
+      </UserProvider>
     </ThemeProvider>
   )
 }
