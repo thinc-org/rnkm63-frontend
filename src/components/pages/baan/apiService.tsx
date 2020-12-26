@@ -1,14 +1,7 @@
-import axios, { AxiosPromise } from 'axios'
-import { API_URL } from 'utils'
+import { AxiosPromise } from 'axios'
+import { apiClient } from 'config/axiosInstance'
 
 import { ICapacityData } from './@types/data'
-
-const config = {
-  headers: { 'No-CSRF': true },
-  withCredentials: true,
-  baseURL: API_URL,
-}
-const apiClient = axios.create(config)
 
 export function getCapacityData(): AxiosPromise<ICapacityData[]> {
   return apiClient

@@ -13,7 +13,7 @@ export const Countdown = (props: Props) => {
 
   const { t } = useTranslation('profile')
 
-  const secs = props.timeLeft < 0 ? props.timeLeft + 15 * 60 : props.timeLeft
+  const secs = props.timeLeft < 0 ? -props.timeLeft : props.timeLeft
   //timeLeft is negative if its between round interval
 
   const [days, setDays] = useState(Math.floor(secs / (60 * 60 * 24)))

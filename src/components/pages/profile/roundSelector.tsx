@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@material-ui/core'
+import { Box, Button } from '@material-ui/core'
 import { IRequestError, RequestError } from 'components/common/Error'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -8,7 +8,6 @@ import { roundStyles } from './styles/roundSelectorStyles'
 import { postBaanChange } from './utils/requestToApi'
 interface Props {
   isBaanExist: number
-  round: number
   setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 function RoundSelector(props: Props) {
@@ -22,13 +21,11 @@ function RoundSelector(props: Props) {
       window.location.reload()
     }
   }, [props])
+
   if (props.isBaanExist) {
     return (
       // if user has baan
       <Box>
-        <Typography variant="h2" className={classes.round}>
-          {t('round') + ' ' + props.round}
-        </Typography>
         <Button
           variant="contained"
           className={classes.exit}
@@ -50,9 +47,6 @@ function RoundSelector(props: Props) {
     return (
       // if user doesn't have baan
       <Box>
-        <Typography variant="h2" className={classes.round}>
-          {t('round') + ' ' + props.round}
-        </Typography>
         <Button
           variant="contained"
           className={`${classes.change} ${classes.select}`}

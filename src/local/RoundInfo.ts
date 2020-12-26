@@ -103,12 +103,23 @@ const roundInfo: Round[] = [
     endTime: '12:00:00',
   },
 ]
-export function getRoundTime(numRound: number): string {
+export function getEndTime(numRound: number): string {
   const sent = roundInfo.find((item: Round) => {
     return item.round === numRound
   })
   if (sent) {
     return `${sent.date} ${sent.endTime}`
+  } else {
+    return '2021-01-12 12:00:00'
+  }
+}
+
+export function getStartTime(numRound: number): string {
+  const sent = roundInfo.find((item: Round) => {
+    return item.round === numRound
+  })
+  if (sent) {
+    return `${sent.date} ${sent.startTime}`
   } else {
     return '2021-01-12 12:00:00'
   }

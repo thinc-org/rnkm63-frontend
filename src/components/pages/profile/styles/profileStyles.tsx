@@ -98,4 +98,14 @@ export const profileStyles = makeStyles((theme: Theme) => ({
       whiteSpace: 'pre-line',
     },
   },
+  round: {
+    fontWeight: 500,
+    fontSize: '60px',
+    lineHeight: '22px',
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
+  },
 }))
