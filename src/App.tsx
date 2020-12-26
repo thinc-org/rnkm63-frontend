@@ -1,6 +1,5 @@
 import { Box, Container, makeStyles, ThemeProvider } from '@material-ui/core'
 import React from 'react'
-import { Helmet } from 'react-helmet'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import { Loading } from './components/common'
@@ -34,35 +33,12 @@ const useStyles = makeStyles({
   },
 })
 
-const trackingID = process.env.REACT_APP_GA_TRACKING_ID
-
-const AnalyticsTracker = () => (
-  <Helmet>
-    <script
-      async
-      src={`https://www.googletagmanager.com/gtag/js?id=${trackingID}`}
-    ></script>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', '${trackingID}');
-              `,
-      }}
-    ></script>
-  </Helmet>
-)
-
 function App() {
   const classes = useStyles()
   return (
     <UserProvider>
       <ThemeProvider theme={theme}>
         <Router>
-          <AnalyticsTracker />
           <Box className={classes.AppContainer} color="text.primary">
             <Header />
             <Container className={classes.PageContainer}>
