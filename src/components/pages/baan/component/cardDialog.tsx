@@ -1,28 +1,26 @@
-import { Box, Typography, withStyles } from '@material-ui/core'
-import Avatar from '@material-ui/core/Avatar'
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card'
-import CardActionArea from '@material-ui/core/CardActionArea'
-import CardContent from '@material-ui/core/CardContent'
-import Dialog from '@material-ui/core/Dialog'
+import {
+  Avatar,
+  Box,
+  Dialog,
+  Theme,
+  Typography,
+  withStyles,
+} from '@material-ui/core'
 import MuiDialogActions from '@material-ui/core/DialogActions'
 import MuiDialogContent from '@material-ui/core/DialogContent'
-import { Theme } from '@material-ui/core/styles'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import { fail } from 'components/ErrorProvider'
-import { createBrowserHistory } from 'history'
+import i18n from 'i18next'
 import { getLogo } from 'local/BaanInfo'
-import PropTypes from 'prop-types'
-import React, { useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
+import React from 'react'
 
 import { IFilterData } from '../@types/data'
-import { postRequestBaan } from '../apiService'
 import { useStyles } from '../style/cardDialogStyle'
-import DialogTitle from './dialogComponent'
+import DialogTitle from './DialogComponent'
+import SubmitButton from './SubmitButton'
 
-const DialogContent = withStyles((theme) => ({
+const DialogContent = withStyles((theme: Theme) => ({
   root: {
     padding: '0',
     margin: '0 89px',
@@ -42,134 +40,72 @@ const DialogActions = withStyles((theme: Theme) => ({
   },
 }))(MuiDialogActions)
 
-interface IComponentData {
+interface ICardDialog {
   value: IFilterData
-  key: number
+  open: boolean
+  handleClose: () => void
   disabled: boolean
+  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 
-const MediaCard = ({ value, disabled }: IComponentData) => {
+const CardDialog = React.memo(function CardDialog(props: ICardDialog) {
+  const { value, open, handleClose, disabled, setError } = props
   const classes = useStyles()
-  const { t } = useTranslation('selectbaan')
-  const { i18n } = useTranslation()
-  const lang = i18n.language.startsWith('en') ? 'en' : 'th'
-  const history = createBrowserHistory({
-    forceRefresh: true,
-  })
-  const [open, setOpen] = React.useState(false)
-  let color = 'white'
-  if (disabled) color = '#A9A9A9'
-
-  const handleClickOpen = useCallback(() => {
-    setOpen(true)
-  }, [])
-
-  const handleClose = useCallback(() => {
-    setOpen(false)
-  }, [])
-
-  const sendToProfile = async (id: number) => {
-    try {
-      await postRequestBaan(id)
-      history.push('/')
-    } catch (e) {
-      fail(e)
-    }
-  }
+  const lang = i18n.language.startsWith('th') ? 'th' : 'en'
+  const color = disabled ? '#A9A9A9' : 'white'
+  const urlLogo = getLogo(value.ID)
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea onClick={handleClickOpen}>
-        <CardContent>
-          <Typography className={classes.card_title}>
-            {value[`name-${lang}` as 'name-en' | 'name-th']}
-          </Typography>
-          <Avatar
-            alt="Remy Sharp"
-            className={classes.avatar_picture_card}
-            src={getLogo(value.ID)}
-          />
-          <Typography className={classes.card_text}>
-            {t('size')}: {value.size}
-            <br></br>
-            {t('seat')}:{' '}
-            <span style={{ color: value.color }}>{value.capacity}</span>
-            <br></br>
-            {t('request')}:{' '}
-            <span style={{ color: value.color }}>{value.request}</span>
-            <br></br>
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <Button
-        className={classes.button_select_card}
-        variant="contained"
-        disabled={disabled}
-        onClick={() => sendToProfile(value.ID)}
-        color="primary"
-        style={{ color: color }}
-      >
-        {t('select')}
-      </Button>
+    <Dialog
+      onClose={handleClose}
+      open={open}
+      className={classes.dialog_popup}
+      PaperProps={{
+        style: {
+          backgroundColor: '#383838',
+        },
+      }}
+    >
+      <Avatar className={classes.avatar_picture} src={urlLogo} />
+      <DialogTitle onClose={handleClose} classes={classes}>
+        {value[`name-${lang}` as 'name-th' | 'name-en']}
+      </DialogTitle>
 
-      <Dialog
-        onClose={handleClose}
-        open={open}
-        className={classes.dialog_popup}
-        PaperProps={{
-          style: {
-            backgroundColor: '#383838',
-          },
-        }}
-      >
-        <Avatar className={classes.avatar_picture} src={getLogo(value.ID)} />
-        <DialogTitle onClose={handleClose} classes={classes}>
-          {value[`name-${lang}` as 'name-th' | 'name-en']}
-        </DialogTitle>
-
-        <DialogContent>
-          <Box className={classes.fbandigicon_item}>
-            <InstagramIcon style={{ color: 'white' }} />
-            <Typography className={classes.fbandigicon_text}>
-              {value.facebook}
-            </Typography>
-          </Box>
-          <Box className={classes.fbandigicon_item}>
-            <FacebookIcon style={{ color: 'white' }} />
-            <Typography className={classes.fbandigicon_text}>
-              {value.instagram}
-            </Typography>
-          </Box>
-          <Typography style={{ marginTop: '10px' }}>
-            {value[`caption-${lang}` as 'caption-en' | 'caption-th'].map(
-              (val: string, idx: number) => {
-                return (
-                  <Typography key={idx} gutterBottom>
-                    {val}
-                  </Typography>
-                )
-              }
-            )}
+      <DialogContent>
+        <Box className={classes.fbandigicon_item}>
+          <InstagramIcon style={{ color: 'white' }} />
+          <Typography className={classes.fbandigicon_text}>
+            {value.facebook}
           </Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            className={classes.button_select}
-            variant="contained"
-            onClick={() => sendToProfile(value.ID)}
-            disabled={disabled}
-            style={{ color: color }}
-          >
-            {t('select')}
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Card>
+        </Box>
+        <Box className={classes.fbandigicon_item}>
+          <FacebookIcon style={{ color: 'white' }} />
+          <Typography className={classes.fbandigicon_text}>
+            {value.instagram}
+          </Typography>
+        </Box>
+        <Typography style={{ marginTop: '10px' }}>
+          {value[`caption-${lang}` as 'caption-en' | 'caption-th'].map(
+            (val: string, idx: number) => {
+              return (
+                <Typography key={idx} gutterBottom>
+                  {val}
+                </Typography>
+              )
+            }
+          )}
+        </Typography>
+      </DialogContent>
+      <DialogActions>
+        <SubmitButton
+          color={color}
+          disabled={disabled}
+          ID={value.ID}
+          setError={setError}
+        />
+      </DialogActions>
+    </Dialog>
   )
-}
+})
 
-MediaCard.propTypes = {
-  value: PropTypes.object,
-}
-
-export default MediaCard
+export default CardDialog

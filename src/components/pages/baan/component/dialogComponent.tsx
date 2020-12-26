@@ -21,6 +21,7 @@ const styles = (theme: Theme) =>
       display: 'block',
       marginLeft: 'auto',
       marginRight: 'auto',
+      paddingTop: theme.spacing(0.5),
       fontSize: '1.75rem',
     },
     centerit: {},

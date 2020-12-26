@@ -2,7 +2,7 @@ import { AxiosPromise } from 'axios'
 import { intoFailure } from 'components/ErrorProvider'
 import { apiClient } from 'config/axiosInstance'
 
-import { ICapacityData } from './@types/data'
+import { ICapacityData } from '../@types/data'
 
 export function getCapacityData(): AxiosPromise<ICapacityData[]> {
   return apiClient.get('/user/getAllUserPreferBaan').catch((err) => {

@@ -18,3 +18,7 @@ export interface ICapacityData {
   memberCount: number
   requestCount: number
 }
+
+export type IFilterSize = {
+  [key: string]: boolean
+}
