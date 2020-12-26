@@ -21,12 +21,7 @@ function searchBaan(
       if (typeof findCapacity === 'undefined') continue
       const capacity = findCapacity.capacity - findCapacity.memberCount
       const request = findCapacity.requestCount
-      if (val.facebook === '') {
-        val.facebook = '-'
-      }
-      if (val.instagram === '') {
-        val.instagram = '-'
-      }
+
       let color = ''
       const mem = request
       const bpOne = 0.8 * capacity
@@ -35,7 +30,7 @@ function searchBaan(
       else color = '#44AD53'
 
       filterData.push({
-        ...val,
+        ID: val.ID,
         capacity,
         request,
         color,

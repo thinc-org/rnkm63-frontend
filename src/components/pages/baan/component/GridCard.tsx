@@ -25,13 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
     paper: {
       padding: theme.spacing(2),
       margin: 'auto',
-      maxWidth: 500,
       backgroundColor: theme.palette.primary.main,
       borderRadius: '20px',
     },
     image: {
-      width: 128,
-      height: 128,
+      width: '100px',
+      height: '100px',
     },
     img: {
       margin: 'auto',
@@ -44,22 +43,24 @@ const useStyles = makeStyles((theme: Theme) =>
 )
 
 interface IGridCard {
-  value: IFilterData
+  data: IFilterData
   setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
   disabled: boolean
   handleClickOpen: () => void
-  setDialogData: (props: IFilterData) => void
+  setDialogData: (props: number) => void
 }
 
 const GridCard = React.memo(function GridCard(props: IGridCard) {
   const style = useStyles()
-  const { value } = props
-  const urlLogo = getLogo(value.ID)
+  const { data } = props
+  const { ID } = data
+  const urlLogo = getLogo(ID)
+  // const value = getBaan(ID)
 
   return (
     <div className={style.root}>
       <Paper className={style.paper}>
-        <Grid container spacing={2} direction="column">
+        <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={style.image}>
               <img className={style.img} alt="complex" src={urlLogo} />
