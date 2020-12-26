@@ -7,7 +7,7 @@ import {
 import Loading from 'components/common/Loading'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
-import { getRoundTime } from 'local/RoundInfo'
+import { getEndTime, getStartTime } from 'local/RoundInfo'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
@@ -45,8 +45,53 @@ function Profile() {
 
   const endOfSelect = new Date('2021-01-13 12:00:00').valueOf()
   const currentTime = new Date().valueOf()
-  const endTime = new Date(getRoundTime(round)).valueOf()
-  const secs = (endTime - currentTime) / 1000
+  const endTime = new Date(getEndTime(round)).valueOf()
+  let secs = (endTime - currentTime) / 1000
+  if (secs < 0) {
+    const nextStartTime = new Date(getStartTime(round + 1)).valueOf()
+    secs = (currentTime - nextStartTime) / 1000
+  }
+
+  let baanRender
+  if (currentTime !== endOfSelect) {
+    if (secs < 0) {
+      // 15 minutes interval between round (secs is negative)
+      baanRender = (
+        <div>
+          <Typography
+            variant="h2"
+            style={{ fontSize: '3rem', fontWeight: 500, marginTop: '5%' }}
+          >
+            {t('process')} {round}...
+          </Typography>
+        </div>
+      )
+    } else if (!userInfo?.preferBaan) {
+      // no prefer baan, A round selector is displayed
+      baanRender = (
+        <div>
+          <Typography variant="h2" className={classes.round}>
+            {t('round') + ' ' + round}
+          </Typography>
+          <RoundSelector
+            isBaanExist={userInfo?.currentBaan ?? 0}
+            setError={setError}
+          />
+        </div>
+      )
+    } else {
+      baanRender = ( // if the user have a prefer baan, a pending status is displayed
+        <div>
+          <Pending
+            round={round}
+            currentBaan={userInfo?.currentBaan ?? 0}
+            preferBaan={userInfo?.preferBaan!}
+            setError={setError}
+          />
+        </div>
+      )
+    }
+  }
 
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
@@ -94,38 +139,11 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        {currentTime === endOfSelect ? (
-          ''
-        ) : secs < 0 ? ( // 15 minutes interval between round (secs is negative)
-          <div>
-            <Typography
-              variant="h2"
-              style={{ fontSize: '3rem', fontWeight: 500, marginTop: '5%' }}
-            >
-              {t('process')} {round}...
-            </Typography>
-            <Countdown timeLeft={secs} roundCount={true} />
-          </div>
-        ) : userInfo?.preferBaan === null ? ( // no prefer baan, A round selector is displayed
-          <div>
-            <RoundSelector
-              isBaanExist={userInfo?.currentBaan}
-              round={round}
-              setError={setError}
-            />
-            <Countdown timeLeft={secs} roundCount={true} />
-          </div>
+        {baanRender}
+        {currentTime !== endOfSelect ? (
+          <Countdown timeLeft={secs} roundCount={true} />
         ) : (
-          // if the user have a prefer baan, a pending status is displayed
-          <div>
-            <Pending
-              round={round}
-              currentBaan={userInfo?.currentBaan}
-              preferBaan={userInfo?.preferBaan!}
-              setError={setError}
-            />
-            <Countdown timeLeft={secs} roundCount={true} />
-          </div>
+          ''
         )}
       </body>
     )

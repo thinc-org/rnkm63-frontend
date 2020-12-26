@@ -1,18 +1,12 @@
-import axios, { AxiosPromise } from 'axios'
-import { API_URL } from 'utils'
+import { AxiosPromise } from 'axios'
+import { apiClient } from 'config/axiosInstance'
+
 interface ReqInfo {
   baanID: number
   requestCount: number
   capacity: number
   memberCount: number
 }
-const config = {
-  headers: { 'No-CSRF': true },
-  withCredentials: true,
-  baseURL: API_URL,
-}
-const apiClient = axios.create(config)
-
 const getRound = function (): AxiosPromise<number> {
   return apiClient.get('/global/round').catch((err) => err.response)
 }
