@@ -110,6 +110,6 @@ export function getRoundTime(numRound: number): string {
   if (sent) {
     return `${sent.date} ${sent.endTime}`
   } else {
-    return '1970-01-01'
+    return '2021-01-12 12:00:00'
   }
 }

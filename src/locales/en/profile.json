@@ -23,5 +23,7 @@
   "joinBaan":"Joining",
   "request":"Total join requests : ",
   "cancel":"Cancel",
-  "change":"Change"
+  "change":"Change",
+  "baanAnnounce": "Baan Announcement in : ",
+  "process" : "Processing Round "
 }
