@@ -24,6 +24,7 @@ function RoundSelector(props: Props) {
   }, [props])
   if (props.isBaanExist) {
     return (
+      // if user has baan
       <Box>
         <Typography variant="h2" className={classes.round}>
           {t('round') + ' ' + props.round}
@@ -47,6 +48,7 @@ function RoundSelector(props: Props) {
     )
   } else {
     return (
+      // if user doesn't have baan
       <Box>
         <Typography variant="h2" className={classes.round}>
           {t('round') + ' ' + props.round}

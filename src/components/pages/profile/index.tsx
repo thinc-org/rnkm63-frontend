@@ -7,6 +7,7 @@ import {
 import Loading from 'components/common/Loading'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
+import { getRoundTime } from 'local/RoundInfo'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Redirect } from 'react-router-dom'
@@ -41,6 +42,11 @@ function Profile() {
     }
     fetchData()
   }, [])
+
+  const endOfSelect = new Date('2021-01-13 12:00:00').valueOf()
+  const currentTime = new Date().valueOf()
+  const endTime = new Date(getRoundTime(round)).valueOf()
+  const secs = (endTime - currentTime) / 1000
 
   if (!isUserLoaded) return <Loading />
   else if (userLoadError) return <HandleRequestError {...userLoadError} />
@@ -88,16 +94,29 @@ function Profile() {
             </Typography>
           </Box>
         </Box>
-        {userInfo?.preferBaan === null ? (
+        {currentTime === endOfSelect ? (
+          ''
+        ) : secs < 0 ? ( // 15 minutes interval between round (secs is negative)
+          <div>
+            <Typography
+              variant="h2"
+              style={{ fontSize: '3rem', fontWeight: 500, marginTop: '5%' }}
+            >
+              {t('process')} {round}...
+            </Typography>
+            <Countdown timeLeft={secs} roundCount={true} />
+          </div>
+        ) : userInfo?.preferBaan === null ? ( // no prefer baan, A round selector is displayed
           <div>
             <RoundSelector
               isBaanExist={userInfo?.currentBaan}
               round={round}
               setError={setError}
             />
-            <Countdown roundCount={true} />
+            <Countdown timeLeft={secs} roundCount={true} />
           </div>
         ) : (
+          // if the user have a prefer baan, a pending status is displayed
           <div>
             <Pending
               round={round}
@@ -105,7 +124,7 @@ function Profile() {
               preferBaan={userInfo?.preferBaan!}
               setError={setError}
             />
-            <Countdown timeLeft={100} roundCount={true} />
+            <Countdown timeLeft={secs} roundCount={true} />
           </div>
         )}
       </body>
