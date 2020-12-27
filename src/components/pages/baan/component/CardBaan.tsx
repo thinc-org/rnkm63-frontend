@@ -5,7 +5,6 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core'
-import { IRequestError } from 'components/common/Error'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,14 +15,13 @@ import SubmitButton from './SubmitButton'
 
 interface IComponentData {
   data: IFilterData
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
   disabled: boolean
   handleClickOpen: () => void
   setDialogData: (props: number) => void
 }
 
 const CardBaan = React.memo(function CardBaan(props: IComponentData) {
-  const { data, disabled, setError, handleClickOpen, setDialogData } = props
+  const { data, disabled, handleClickOpen, setDialogData } = props
   const classes = useStyles()
   const { t, i18n } = useTranslation('selectbaan')
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
@@ -62,12 +60,7 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <SubmitButton
-          color={color}
-          disabled={disabled}
-          ID={value.ID}
-          setError={setError}
-        />
+        <SubmitButton color={color} disabled={disabled} ID={value.ID} />
       </Card>
     </React.Fragment>
   )

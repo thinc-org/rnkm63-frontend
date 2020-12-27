@@ -157,23 +157,12 @@ function Baan() {
           {currentFilterData.map((val) => (
             <React.Fragment key={val.ID}>
               <CardBaan
-                setError={setError}
                 data={val}
                 handleClickOpen={handleClickOpen}
                 setDialogData={setDialogData}
                 disabled={
                   val.ID === userInfo.currentBaan ||
                   val.ID === userInfo.preferBaan
-                }
-                label={
-                  <React.Fragment>
-                    <Typography className={style.formControl}>
-                      {t(`size${val}.text`)}
-                    </Typography>
-                    <Typography className={style.formControlMobile}>
-                      {t(`size${val}.mobile`)}
-                    </Typography>
-                  </React.Fragment>
                 }
               />
             </React.Fragment>
@@ -183,7 +172,6 @@ function Baan() {
           {currentFilterData.map((val) => (
             <React.Fragment key={val.ID}>
               <GridCard
-                setError={setError}
                 data={val}
                 handleClickOpen={handleClickOpen}
                 setDialogData={setDialogData}
@@ -203,11 +191,10 @@ function Baan() {
             dialogDataID === userInfo.currentBaan ||
             dialogDataID === userInfo.preferBaan
           }
-          setError={setError}
         />
       </Box>
-    </Box>
-  )
+    )
+  }
 }
 
 export default Baan
