@@ -16,7 +16,7 @@ function SchedulePage() {
     GetHistory().then((res) => {
       setHistory(res)
     })
-  })
+  }, [])
 
   return (
     <Grid container spacing={2}>
