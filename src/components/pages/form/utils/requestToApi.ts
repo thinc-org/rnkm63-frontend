@@ -19,6 +19,12 @@ const postUserData = function (data: IFormData, edit: boolean): AxiosPromise {
   })
 }
 
+const postLeaveActivity = function (): AxiosPromise {
+  return apiClient.post('/user/leaveActivity').catch((err) => {
+    throw intoFailure(err)
+  })
+}
+
 const getPolicyStorage = function (): AxiosPromise<Policy> {
   return apiClient.get('/user/getUploadPolicy').catch((err) => {
     throw intoFailure(err)
@@ -48,4 +54,9 @@ const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
     })
 }
 
-export { getPolicyStorage, postUserData, uploadImageToStorage }
+export {
+  getPolicyStorage,
+  postLeaveActivity,
+  postUserData,
+  uploadImageToStorage,
+}
