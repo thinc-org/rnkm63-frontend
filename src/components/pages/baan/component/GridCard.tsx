@@ -53,8 +53,11 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.between(500, 525)]: {
         width: '100px',
         height: '100px',
-        marginLeft: '60px',
-        marginTop: '3px',
+        // marginLeft: '60px',
+        // marginTop: '3px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       },
       [theme.breakpoints.down(325)]: {
         width: '70px',
