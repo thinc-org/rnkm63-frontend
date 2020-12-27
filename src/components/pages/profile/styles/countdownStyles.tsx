@@ -32,4 +32,22 @@ export const countdownStyles = makeStyles((theme: Theme) => ({
       lineHeight: '22px',
     },
   },
+  oldCountdownDetail: {
+    fontSize: '2rem',
+    fontWeight: 300,
+    marginTop: '4%',
+    marginBottom: '25px',
+    lineHeight: '22px',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1.5rem',
+      lineHeight: '28px',
+      marginTop: '4%',
+      marginBottom: '9px',
+    },
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '1rem',
+      lineHeight: '28px',
+      marginTop: '4%',
+    },
+  },
 }))
