@@ -58,6 +58,23 @@ export const Countdown = (props: Props) => {
   if (seconds === 0 && minutes === 0 && hours === 0 && days === 0) {
     window.location.reload(false) // reload when the timer or countdown is ended
   }
+
+  if (!props.roundCount) {
+    return (
+      <Box>
+        <Typography variant="h3" className={classes.oldCountdownDetail}>
+          {t('countdownDetail')}
+        </Typography>
+        <Typography variant="h1" className={classes.countdownTimer}>
+          {days} {t('Days', { count: days })} &nbsp;
+          {hours} {t('Hours', { count: hours })} &nbsp;
+          {minutes} {t('Minutes', { count: minutes })} &nbsp;
+          {seconds} {t('Seconds', { count: seconds })}
+        </Typography>
+      </Box>
+    )
+  }
+
   if (props.timeLeft >= 0) {
     return (
       <Box>

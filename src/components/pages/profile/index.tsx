@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 
 import BaanRender from './BaanRender'
 import Countdown from './Countdown'
+import Reenter from './reenter'
 import { profileStyles } from './styles/profileStyles'
 import { getRound } from './utils/requestToApi'
 
@@ -31,6 +32,7 @@ function Profile() {
     fetchData()
   }, [])
 
+  const startSelect = new Date('2021-01-09 12:00:00').valueOf()
   const endOfSelect = new Date('2021-01-13 12:00:00').valueOf()
   const currentTime = new Date().valueOf()
   const endTime = new Date(getEndTime(round)).valueOf()
@@ -81,7 +83,17 @@ function Profile() {
           </Typography>
         </Box>
       </Box>
-      {currentTime !== endOfSelect && (
+      {currentTime < startSelect && userInfo?.currentBaan === -1 ? (
+        <Reenter />
+      ) : currentTime < startSelect ? (
+        <Countdown
+          timeLeft={(startSelect - currentTime) / 1000}
+          roundCount={false}
+        />
+      ) : (
+        ''
+      )}
+      {currentTime < endOfSelect && startSelect < currentTime && (
         <>
           <BaanRender
             round={round}
