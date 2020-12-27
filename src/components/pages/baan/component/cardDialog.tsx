@@ -26,7 +26,7 @@ const DialogContent = withStyles((theme: Theme) => ({
     color: 'white',
     fontSize: '1.5rem',
     [theme.breakpoints.down('xs')]: {
-      margin: '0px 45px',
+      margin: '0px 25px',
       fontSize: '1.125rem',
     },
   },
