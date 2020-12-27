@@ -14,7 +14,6 @@ import i18n from 'i18next'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 
-// import { IFilterData } from '../@types/data'
 import useStyles from '../style/cardDialogStyle'
 import DialogTitle from './dialogComponent'
 import SubmitButton from './SubmitButton'
@@ -90,7 +89,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
             {value.instagram}
           </Typography>
         </Box>
-        <Typography style={{ marginTop: '10px' }}>
+        <Box style={{ marginTop: '10px' }}>
           {value[`caption-${lang}` as 'caption-en' | 'caption-th'].map(
             (val: string, idx: number) => {
               return (
@@ -100,7 +99,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
               )
             }
           )}
-        </Typography>
+        </Box>
       </DialogContent>
       <DialogActions>
         <SubmitButton color={color} disabled={disabled} ID={value.ID} />
