@@ -1,3 +1,4 @@
+import covid from './covid.json'
 import errors from './errors.json'
 import footer from './footer.json'
 import form from './form.json'
@@ -16,6 +17,7 @@ const en = {
   profile,
   shell,
   selectbaan,
+  covid,
 }
 
 export default en

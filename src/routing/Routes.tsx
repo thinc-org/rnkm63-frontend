@@ -2,6 +2,7 @@ import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
 import {
   Baan,
+  Covid,
   Form,
   FormComplete,
   Login,
@@ -37,6 +38,9 @@ export default function Routes() {
     // User hasn't confirmed yet. Show forms.
     return (
       <Switch>
+        {user.currentBaan !== 1 && (
+          <Route path="/covid" exact component={Covid} />
+        )}
         <Route path="/form" exact component={Form} />
         <Route path="/form/complete" exact component={FormComplete} />
         <Route component={RedirectTo('/form')} />
