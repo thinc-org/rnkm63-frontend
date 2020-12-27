@@ -13,7 +13,6 @@ import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-// import useStylesTwo from '../style/cardDialogStyle'
 import { IFilterData } from '../@types/data'
 import SubmitButton from './SubmitButton'
 
@@ -46,18 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     img: {
       margin: 'auto',
-      // display: 'block',
       width: '100px',
       height: '100px',
       borderRadius: '50%',
       [theme.breakpoints.between(479, 525)]: {
-        // width: '100px',
-        // height: '100px',
-        // marginLeft: '60px',
-        // marginTop: '3px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingLeft: theme.spacing(1.5),
       },
       [theme.breakpoints.down(385)]: {
         width: '85px',
@@ -66,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down(325)]: {
         width: '70px',
         height: '70px',
+        paddingLeft: theme.spacing(1.5),
       },
     },
     center_img: {
@@ -74,7 +70,6 @@ const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'center',
     },
     spanStyle: {
-      // color: data.color ,
       fontSize: '18px',
       fontWeight: 'bold',
       alignText: 'center',
@@ -113,7 +108,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
                 <img className={classes.img} alt="complex" src={urlLogo} />
               </ButtonBase>
             </Grid>
-            {/* <Grid item xs={8} sm container > */}
             <Grid
               item
               xs={8}
@@ -126,7 +120,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
                 textAlign: 'center',
               }}
             >
-              {/* <Grid item xs> */}
               <Typography
                 variant="subtitle1"
                 style={{ fontSize: '24px', fontWeight: 'bold' }}
@@ -175,7 +168,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
                   </Typography>
                 </Grid>
               </Grid>
-              {/* </Grid> */}
             </Grid>
           </Grid>
         </CardActionArea>

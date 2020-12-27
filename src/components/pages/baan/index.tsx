@@ -168,7 +168,7 @@ function Baan() {
             </React.Fragment>
           ))}
         </Box>
-        <Grid container xs={12}>
+        <Grid container>
           {currentFilterData.map((val) => (
             <React.Fragment key={val.ID}>
               <GridCard

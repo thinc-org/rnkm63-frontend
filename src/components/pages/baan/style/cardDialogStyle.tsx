@@ -15,20 +15,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  button_select: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    color: 'white',
-    fontSize: '1.125rem',
-    marginBottom: theme.spacing(0.5),
-    width: '207px',
-    borderRadius: '40px',
-    backgroundColor: '#44AD53',
-    '&:hover': {
-      backgroundColor: theme.palette.success.main,
-    },
-  },
   button_select_card: {
     display: 'block',
     marginLeft: 'auto',
