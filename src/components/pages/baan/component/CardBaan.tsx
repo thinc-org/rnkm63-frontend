@@ -1,12 +1,17 @@
-import { Avatar, Card, CardContent, Typography } from '@material-ui/core'
+import {
+  Avatar,
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+} from '@material-ui/core'
 import { IRequestError } from 'components/common/Error'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { IFilterData } from '../@types/data'
-import { useStyles } from '../style/cardDialogStyle'
-import { StyledCardAction } from './StyledCardAction'
+import useStyles from '../style/cardDialogStyle'
 import SubmitButton from './SubmitButton'
 
 interface IComponentData {
@@ -30,7 +35,7 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
   return (
     <React.Fragment>
       <Card className={classes.root}>
-        <StyledCardAction
+        <CardActionArea
           onClick={() => {
             handleClickOpen()
             setDialogData(data.ID)
@@ -56,7 +61,7 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
               <br></br>
             </Typography>
           </CardContent>
-        </StyledCardAction>
+        </CardActionArea>
         <SubmitButton
           color={color}
           disabled={disabled}
