@@ -16,7 +16,7 @@ import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 
 // import { IFilterData } from '../@types/data'
-import { useStyles } from '../style/cardDialogStyle'
+import useStyles from '../style/cardDialogStyle'
 import DialogTitle from './dialogComponent'
 import SubmitButton from './SubmitButton'
 

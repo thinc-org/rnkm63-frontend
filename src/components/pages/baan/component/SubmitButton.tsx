@@ -4,7 +4,7 @@ import { createBrowserHistory } from 'history'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useStyles } from '../style/cardDialogStyle'
+import useStyles from '../style/cardDialogStyle'
 import { postRequestBaan } from '../utils/apiService'
 
 interface ISubmitButton {

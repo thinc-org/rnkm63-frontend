@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1.5),
     backgroundColor: '#383838',
@@ -63,6 +63,9 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(0),
     fontSize: '1.25rem',
     textAlign: 'center',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '18px',
+    },
   },
   fbandigicon_item: {
     alignItems: 'center',
@@ -89,6 +92,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
+    [theme.breakpoints.down('xs')]: {
+      height: '75px',
+      width: '75px',
+    },
   },
   dialog_popup: {
     backdropFilter: 'blur(8px)',
@@ -97,3 +104,5 @@ export const useStyles = makeStyles((theme) => ({
     top: '105px',
   },
 }))
+
+export default useStyles
