@@ -1,10 +1,11 @@
 import {
   Box,
   ButtonBase,
+  Card,
+  CardActionArea,
   createStyles,
   Grid,
   makeStyles,
-  Paper,
   Theme,
   Typography,
 } from '@material-ui/core'
@@ -23,6 +24,9 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         display: 'none',
       },
+      [theme.breakpoints.between(499, 526)]: {
+        width: '500px',
+      },
       paddingBottom: theme.spacing(2),
     },
     paper: {
@@ -36,17 +40,31 @@ const useStyles = makeStyles((theme: Theme) =>
     image: {
       width: 100,
       height: 100,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     img: {
       margin: 'auto',
-      display: 'block',
+      // display: 'block',
       width: '85px',
       height: '85px',
       borderRadius: '50%',
+      [theme.breakpoints.between(500, 525)]: {
+        width: '100px',
+        height: '100px',
+        marginLeft: '60px',
+        marginTop: '3px',
+      },
       [theme.breakpoints.down(325)]: {
         width: '70px',
         height: '70px',
       },
+    },
+    center_img: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     spanStyle: {
       // color: data.color ,
@@ -66,7 +84,7 @@ interface IGridCard {
 
 const GridCard = React.memo(function GridCard(props: IGridCard) {
   const classes = useStyles()
-  const { disabled, setDialogData, handleClickOpen, data } = props
+  const { disabled, data } = props
   const value = getBaan(data.ID)
   const urlLogo = getLogo(data.ID)
   const { t, i18n } = useTranslation('selectbaan')
@@ -75,78 +93,88 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
 
   return (
     <div className={classes.root}>
-      <Paper
-        className={classes.paper}
-        onClick={() => {
-          handleClickOpen()
-          setDialogData(data.ID)
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={4} container>
-            <ButtonBase className={classes.image}>
-              <img className={classes.img} alt="complex" src={urlLogo} />
-            </ButtonBase>
-          </Grid>
-          <Grid
-            item
-            xs={8}
-            container
-            direction="column"
-            style={{
-              padding: '10px',
-              paddingRight: '0px',
-              textAlign: 'center',
-            }}
-          >
-            <Typography
-              variant="subtitle1"
-              style={{ fontSize: '24px', fontWeight: 'bold' }}
+      <Card className={classes.paper}>
+        <CardActionArea
+          onClick={() => {
+            props.handleClickOpen()
+            props.setDialogData(data.ID)
+          }}
+        >
+          <Grid container spacing={2}>
+            <Grid item xs={4} container className={classes.center_img}>
+              <ButtonBase className={classes.image}>
+                <img className={classes.img} alt="complex" src={urlLogo} />
+              </ButtonBase>
+            </Grid>
+            {/* <Grid item xs={8} sm container > */}
+            <Grid
+              item
+              xs={8}
+              container
+              direction="column"
+              style={{
+                padding: '10px',
+                paddingRight: '0px',
+                textAlign: 'center',
+              }}
             >
-              <span>{value[`name-${lang}` as 'name-en' | 'name-th']}</span>
-            </Typography>
-            <Grid item container xs direction="row" style={{ color: 'white' }}>
-              <Grid item xs>
-                <Typography variant="body2" gutterBottom>
-                  {t('size')}
-                </Typography>
-                <Typography variant="body2" className={classes.spanStyle}>
-                  {value.size}
-                </Typography>
+              {/* <Grid item xs> */}
+              <Typography
+                variant="subtitle1"
+                style={{ fontSize: '24px', fontWeight: 'bold' }}
+              >
+                <span>{value[`name-${lang}` as 'name-en' | 'name-th']}</span>
+              </Typography>
+              <Grid
+                item
+                container
+                xs
+                direction="row"
+                style={{ color: 'white' }}
+              >
+                <Grid item xs>
+                  <Typography variant="body2" gutterBottom>
+                    {t('size')}
+                  </Typography>
+                  <Typography variant="body2" className={classes.spanStyle}>
+                    {value.size}
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography variant="body2" gutterBottom>
+                    {t('seat')}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    <span
+                      className={classes.spanStyle}
+                      style={{ color: data.color }}
+                    >
+                      {data.capacity}
+                    </span>
+                  </Typography>
+                </Grid>
+                <Grid item xs>
+                  <Typography variant="body2" gutterBottom>
+                    {t('request')}
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary">
+                    <span
+                      className={classes.spanStyle}
+                      style={{ color: data.color }}
+                    >
+                      {data.request}
+                    </span>
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid item xs>
-                <Typography variant="body2" gutterBottom>
-                  {t('seat')}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  <span
-                    className={classes.spanStyle}
-                    style={{ color: data.color }}
-                  >
-                    {data.capacity}
-                  </span>
-                </Typography>
-              </Grid>
-              <Grid item xs>
-                <Typography variant="body2" gutterBottom>
-                  {t('request')}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  <span
-                    className={classes.spanStyle}
-                    style={{ color: data.color }}
-                  >
-                    {data.request}
-                  </span>
-                </Typography>
-              </Grid>
+              {/* </Grid> */}
             </Grid>
           </Grid>
-        </Grid>
+        </CardActionArea>
         <Box style={{ paddingTop: '5px', alignItems: 'right' }}>
           <SubmitButton color={color} disabled={disabled} ID={data.ID} />
         </Box>
-      </Paper>
+      </Card>
     </div>
   )
 })
