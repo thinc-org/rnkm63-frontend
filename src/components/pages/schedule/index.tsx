@@ -5,11 +5,18 @@ import indexStyle from './indexStyle'
 import { HistoryList } from './HistoryList'
 import { withSuspense } from '../../hoc'
 import { ScheduleTable } from './ScheduleTable'
-import { GetHistory } from '../../../controllers/GetHistory'
+import { GetHistory, History } from '../../../controllers/GetHistory'
 
 function SchedulePage() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
+  const [history, setHistory] = React.useState<Array<History> | null>(null)
+
+  React.useEffect(() => {
+    GetHistory().then((res) => {
+      setHistory(res)
+    })
+  })
 
   return (
     <Grid container spacing={2}>
@@ -26,6 +33,7 @@ function SchedulePage() {
           <Typography className={style.historyTitle}>
             {t('history_title')}
           </Typography>
+          <HistoryList data={history} />
         </Card>
       </Grid>
     </Grid>

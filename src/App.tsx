@@ -12,6 +12,7 @@ import {
   NotFound,
   NotFreshy,
   FormComplete,
+  Schedule,
 } from './components/pages'
 import { Loading } from './components/common'
 import { UserProvider } from './contexts/UserContext'
@@ -47,6 +48,7 @@ function App() {
                   <Route path="/form" exact component={Form} />
                   <Route path="/form/complete" exact component={FormComplete} />
                   <Route path="/not104" exact component={NotFreshy} />
+                  <Route path="/schedule" exact component={Schedule} />
                   <Route path="/" exact component={Profile} />
                   <Route component={NotFound} />
                 </Switch>

@@ -4,8 +4,6 @@ const style = makeStyles((theme: Theme) => ({
   scheduleContainer: {
     background: theme.palette.background.default,
     padding: 16,
-    marginLeft: 10,
-    marginRight: 10,
     borderRadius: 10,
     marginBottom: 20,
   },
@@ -58,6 +56,10 @@ const style = makeStyles((theme: Theme) => ({
   scheduleTable: {
     background: theme.palette.primary.main,
     borderRadius: 25,
+  },
+  tableText: {
+    fontSize: '0.8rem',
+    fontWeight: 500,
   },
 }))
 

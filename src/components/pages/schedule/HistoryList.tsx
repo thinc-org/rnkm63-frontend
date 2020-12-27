@@ -3,16 +3,10 @@ import { Typography, Box, Chip, Grid } from '@material-ui/core'
 import indexStyle from './indexStyle'
 import { useTranslation } from 'react-i18next'
 import { getBaan } from '../profile/BaanInfo'
-
-type History = {
-  fromBaan: number | null
-  preferBaan: number | null
-  assignedBaan: number | null
-  round: number
-}
+import { History } from '../../../controllers/GetHistory'
 
 type Props = {
-  data: Array<History>
+  data: Array<History> | null
 }
 
 function ToNumber(input: number | null): number {
@@ -89,24 +83,41 @@ function HistoryList({ data }: Props) {
       }
     } else if (ToNumber(history.fromBaan) > 0) {
       if (history.preferBaan === history.assignedBaan) {
-        return (
-          <>
-            <Grid item>
-              <Typography className={style.successAction}>
-                {t('moved_to')}
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography className={style.historyBann}>
-                {
-                  getBaan(ToNumber(history.assignedBaan))[
-                    'name-' + i18n.language
-                  ]
-                }
-              </Typography>
-            </Grid>
-          </>
-        )
+        if (history.preferBaan === 0) {
+          return (
+            <>
+              <Grid item>
+                <Typography className={style.successAction}>
+                  {t('left')}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={style.historyBann}>
+                  {getBaan(ToNumber(history.fromBaan))['name-' + i18n.language]}
+                </Typography>
+              </Grid>
+            </>
+          )
+        } else {
+          return (
+            <>
+              <Grid item>
+                <Typography className={style.successAction}>
+                  {t('moved_to')}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <Typography className={style.historyBann}>
+                  {
+                    getBaan(ToNumber(history.assignedBaan))[
+                      'name-' + i18n.language
+                    ]
+                  }
+                </Typography>
+              </Grid>
+            </>
+          )
+        }
       } else {
         return (
           <>
@@ -132,17 +143,21 @@ function HistoryList({ data }: Props) {
     }
   }
 
-  const List = data.map((history: History) => {
-    order += 1
-    return (
-      <Grid className={style.historyLine} container key={order}>
-        <Grid item>
-          <Chip size="small" className={style.orderBox} label={order} />
+  const List = data ? (
+    data.map((history: History) => {
+      order += 1
+      return (
+        <Grid className={style.historyLine} container key={order}>
+          <Grid item>
+            <Chip size="small" className={style.orderBox} label={order} />
+          </Grid>
+          {GetAction(history)}
         </Grid>
-        {GetAction(history)}
-      </Grid>
-    )
-  })
+      )
+    })
+  ) : (
+    <></>
+  )
   return <Box>{List}</Box>
 }
 
