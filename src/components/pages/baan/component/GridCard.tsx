@@ -49,7 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingLeft: theme.spacing(1.5),
       },
       [theme.breakpoints.down(385)]: {
         width: '85px',
@@ -58,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.down(325)]: {
         width: '70px',
         height: '70px',
-        paddingLeft: theme.spacing(1.5),
       },
     },
     center_img: {
