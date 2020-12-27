@@ -6,9 +6,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#383838',
     height: 'auto',
     width: '207px',
-    [theme.breakpoints.down(526)]: {
-      display: 'none',
-    },
   },
   centerit: {
     display: 'block',
