@@ -16,8 +16,6 @@ const style = makeStyles((theme: Theme) => ({
   historyContainer: {
     background: theme.palette.background.default,
     padding: 30,
-    marginLeft: 10,
-    marginRight: 10,
     marginBottom: 30,
     borderRadius: 8,
   },
@@ -30,6 +28,7 @@ const style = makeStyles((theme: Theme) => ({
   historyBann: {
     fontWeight: 700,
     marginLeft: 8,
+    fontSize: '0.8rem',
   },
   historyLine: {
     marginBottom: 20,
@@ -40,18 +39,22 @@ const style = makeStyles((theme: Theme) => ({
   successAction: {
     color: theme.palette.success.main,
     fontWeight: 700,
+    fontSize: '0.8rem',
   },
   failAction: {
     color: theme.palette.error.main,
     fontWeight: 700,
+    fontSize: '0.8rem',
   },
   warningAction: {
     color: theme.palette.warning.main,
     fontWeight: 700,
+    fontSize: '0.8 rem',
   },
   noRequest: {
     color: theme.palette.primary.main,
     fontWeight: 700,
+    fontSize: '0.8rem',
   },
   scheduleTable: {
     background: theme.palette.primary.main,

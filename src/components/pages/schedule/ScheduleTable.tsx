@@ -21,7 +21,11 @@ function ScheduleTable() {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell className={style.tableText} align="center">
+            <TableCell
+              padding="none"
+              className={style.tableText}
+              align="center"
+            >
               {t('table_round_title')}
             </TableCell>
             <TableCell className={style.tableText} align="center">
