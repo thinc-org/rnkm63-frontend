@@ -229,9 +229,23 @@ function FormUI(props: IFormUI) {
         {(props) => {
           return (
             <FormikForm>
-              <Typography className={style.title}>
-                {!userData.data ? t('register') : t('editProfile')}
-              </Typography>
+              <Box
+                display="flex"
+                alignItems="center"
+                justifyContent="space-between"
+              >
+                <Typography className={style.title}>
+                  {!userData.data ? t('register') : t('editProfile')}
+                </Typography>
+                <Box width="312px" className={style.leaveContainer}>
+                  <Button className={style.leaveEvent}>
+                    {t('leaveButton')}
+                  </Button>
+                  <Typography className={style.leaveEventDescription}>
+                    {t('leaveDescription')}
+                  </Typography>
+                </Box>
+              </Box>
               <Box className={style.content}>
                 <RootRef rootRef={imageRef}>
                   <Box className={style.image}>
@@ -246,6 +260,11 @@ function FormUI(props: IFormUI) {
                     />
                   </Box>
                 </RootRef>
+                <Box>
+                  <Button className={style.leaveMobile}>
+                    {t('leaveButton')}
+                  </Button>
+                </Box>
                 <Box className={style.formInput}>
                   <FormInput />
                 </Box>

@@ -118,6 +118,39 @@ const indexStyle = makeStyles(
       display: 'flex',
       justifyContent: 'space-evenly',
     },
+    leaveContainer: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'none',
+      },
+    },
+    leaveEvent: {
+      background: theme.palette.error.main,
+      borderRadius: '40px',
+      width: '312px',
+      fontSize: '18px',
+      '&:hover': {
+        backgroundColor: theme.palette.error.main,
+      },
+    },
+    leaveEventDescription: {
+      paddingTop: theme.spacing(1),
+      textAlign: 'center',
+      color: '#F2C94C',
+      fontSize: '12px',
+    },
+    leaveMobile: {
+      width: '100%',
+      background: theme.palette.error.main,
+      borderRadius: '40px',
+      fontSize: '18px',
+      '&:hover': {
+        backgroundColor: theme.palette.error.main,
+      },
+      marginBottom: theme.spacing(1),
+      [theme.breakpoints.up('md')]: {
+        display: 'none',
+      },
+    },
   }),
   { index: 1 }
 )
