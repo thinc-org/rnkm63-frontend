@@ -16,7 +16,12 @@ import { baanInfo } from 'local/BaanInfo'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ICapacityData, IFilterData, IFilterSize } from './@types/data'
+import {
+  BaanSize,
+  ICapacityData,
+  IFilterData,
+  IFilterSize,
+} from './@types/data'
 import CardBaan from './component/CardBaan'
 import CardDialog from './component/cardDialog'
 import GridCard from './component/GridCard'
@@ -68,7 +73,6 @@ function Baan() {
   useEffect(() => {
     if (capacityData.length === 0) return
     const filterData: IFilterData[] = searchBaan(
-      baanInfo,
       filterSize,
       searchValue,
       capacityData
@@ -109,12 +113,12 @@ function Baan() {
             alignItems="center"
             className={style.filterContainer}
           >
-            {Object.keys(filterSize).map((val: string, idx: number) => (
+            {['S', 'M', 'L', 'XL'].map((value, idx: number) => (
               <Box key={idx}>
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={filterSize[val]}
+                      checked={filterSize[value as BaanSize]}
                       onChange={(e) =>
                         setFilterSize({
                           ...filterSize,
@@ -123,22 +127,22 @@ function Baan() {
                       }
                       color="default"
                       className={style.checkBox}
-                      name={val}
+                      name={value}
                     />
                   }
                   label={
                     <React.Fragment>
                       <Typography className={style.formControl}>
-                        {t(`size${val}.text`)}
+                        {t(`size${value}.text`)}
                       </Typography>
                       <Typography className={style.formControlMobile}>
-                        {t(`size${val}.mobile`)}
+                        {t(`size${value}.mobile`)}
                       </Typography>
                     </React.Fragment>
                   }
                 />
                 <FormHelperText className={style.formHelperText}>
-                  {t(`size${val}.size`)}
+                  {t(`size${value}.size`)}
                 </FormHelperText>
               </Box>
             ))}

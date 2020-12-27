@@ -1,9 +1,13 @@
-import { Baan } from 'local/BaanInfo'
+import { baanInfo } from 'local/BaanInfo'
 
-import { ICapacityData, IFilterData, IFilterSize } from '../@types/data'
+import {
+  BaanSize,
+  ICapacityData,
+  IFilterData,
+  IFilterSize,
+} from '../@types/data'
 
 function searchBaan(
-  baanInfo: Baan[],
   filterSize: IFilterSize,
   searchValue: string,
   capacityData: ICapacityData[]
@@ -14,7 +18,10 @@ function searchBaan(
       .toUpperCase()
       .indexOf(searchValue.toUpperCase())
     const cmpTextTh = val['name-th'].indexOf(searchValue)
-    if (filterSize[val.size] && (cmpTextEn > -1 || cmpTextTh > -1)) {
+    if (
+      filterSize[val.size as BaanSize] &&
+      (cmpTextEn > -1 || cmpTextTh > -1)
+    ) {
       const findCapacity = capacityData.find((p) => {
         return val.ID === p.baanID
       })

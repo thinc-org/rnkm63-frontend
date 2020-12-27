@@ -53,13 +53,6 @@ const CardDialog = function CardDialog(props: ICardDialog) {
   const urlLogo = getLogo(ID)
   const value = getBaan(ID)
 
-  if (value.facebook === '') {
-    value.facebook = '-'
-  }
-  if (value.instagram === '') {
-    value.instagram = '-'
-  }
-
   return (
     <Dialog
       onClose={handleClose}
