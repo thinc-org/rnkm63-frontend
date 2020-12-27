@@ -11,8 +11,13 @@ import { UserProvider } from './contexts/UserContext'
 import { BgBottom, BgLeft, BgTop } from './local/backgrounds'
 
 const useStyles = makeStyles({
-  BackgroundContainer: {
+  AppContainer: {
     minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  BackgroundContainer: {
+    flex: 1,
     minWidth: '280px',
     display: 'flex',
     flexDirection: 'column',
@@ -32,7 +37,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <UserProvider>
-        <Box>
+        <Box className={classes.AppContainer}>
           <Router>
             <Box className={classes.BackgroundContainer} color="text.primary">
               <Header />
