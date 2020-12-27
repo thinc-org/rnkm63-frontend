@@ -118,6 +118,7 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
               style={{
                 padding: '10px',
                 paddingRight: '0px',
+                paddingLeft: '0px',
                 textAlign: 'center',
               }}
             >
