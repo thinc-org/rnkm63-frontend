@@ -3,7 +3,7 @@ import { intoFailure } from 'components/ErrorProvider'
 
 import { API_URL } from '../utils'
 
-export type History = {
+export type ActivityHistory = {
   fromBaan: number
   preferBaan: number | null
   assignedBaan: number
@@ -16,11 +16,12 @@ const config = {
   baseURL: API_URL,
 }
 
-const apiClient = axios.create(config)
-
-async function GetHistory(): Promise<Array<History>> {
+async function GetHistory(): Promise<Array<ActivityHistory>> {
   try {
-    const res = await apiClient.get<Array<History>>('/assignment/getHistory')
+    const res = await axios.get<Array<ActivityHistory>>(
+      '/assignment/getHistory',
+      config
+    )
     if (res.status !== 200) throw intoFailure(res)
     return res.data
   } catch (e) {

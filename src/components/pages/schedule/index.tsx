@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
 
 import { GetHistory } from '../../../controllers/GetHistory'
+import Loading from '../../common/Loading'
 import { withSuspense } from '../../hoc'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
@@ -15,9 +16,8 @@ function SchedulePage() {
   const style = indexStyle()
 
   const { data, error } = useSWR('/assignment/getHistory', GetHistory)
-  const history = data
   if (error) return fail(error)
-  if (!history) return <div>loading...</div>
+  if (!data) return <Loading />
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
@@ -33,7 +33,7 @@ function SchedulePage() {
           <Typography className={style.historyTitle}>
             {t('history_title')}
           </Typography>
-          <HistoryList data={history} />
+          <HistoryList data={data} />
         </Card>
       </Grid>
     </Grid>
