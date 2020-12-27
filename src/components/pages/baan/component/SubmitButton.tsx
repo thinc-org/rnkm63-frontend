@@ -37,6 +37,7 @@ const SubmitButton = React.memo(function FormDialog(props: ISubmitButton) {
       disabled={disabled}
       onClick={() => sendToProfile(ID)}
       color="primary"
+      // fullWidth={true}
       style={{ color: color }}
     >
       {t('select')}
