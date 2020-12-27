@@ -4,9 +4,9 @@ import { intoFailure } from 'components/ErrorProvider'
 import { API_URL } from '../utils'
 
 export type History = {
-  fromBaan: number | null
+  fromBaan: number
   preferBaan: number | null
-  assignedBaan: number | null
+  assignedBaan: number
   round: number
 }
 
@@ -18,11 +18,9 @@ const config = {
 
 const apiClient = axios.create(config)
 
-async function GetHistory(): Promise<Array<History> | null> {
+async function GetHistory(): Promise<Array<History>> {
   try {
-    const res = await apiClient.get<Array<History> | null>(
-      '/assignment/getHistory'
-    )
+    const res = await apiClient.get<Array<History>>('/assignment/getHistory')
     if (res.status !== 200) throw intoFailure(res)
     return res.data
   } catch (e) {

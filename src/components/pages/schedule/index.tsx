@@ -1,8 +1,10 @@
 import { Card, Grid, Typography } from '@material-ui/core'
+import { fail } from 'components/ErrorProvider'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import useSWR from 'swr'
 
-import { GetHistory, History } from '../../../controllers/GetHistory'
+import { GetHistory } from '../../../controllers/GetHistory'
 import { withSuspense } from '../../hoc'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
@@ -11,14 +13,11 @@ import { ScheduleTable } from './ScheduleTable'
 function SchedulePage() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
-  const [history, setHistory] = React.useState<Array<History> | null>(null)
 
-  React.useEffect(() => {
-    GetHistory().then((res) => {
-      setHistory(res)
-    })
-  }, [])
-
+  const { data, error } = useSWR('/assignment/getHistory', GetHistory)
+  const history = data
+  if (error) return fail(error)
+  if (!history) return <div>loading...</div>
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>

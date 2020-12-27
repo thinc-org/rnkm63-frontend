@@ -10,31 +10,16 @@ type Props = {
   data: Array<History> | null
 }
 
-function ToNumber(input: number | null): number {
-  if (typeof input == 'number') {
-    return input
-  } else {
-    return -1
-  }
-}
-
 function HistoryList({ data }: Props) {
-  const { t, i18n } = useTranslation('schedule')
+  const { t } = useTranslation('schedule')
   const style = indexStyle()
-  let order = 0
 
-  function getBaanWithLang(baan_num: number | null): string {
-    if (baan_num) {
-      return i18n.language === 'en'
-        ? getBaan(ToNumber(baan_num))['name-en']
-        : getBaan(ToNumber(baan_num))['name-th']
-    } else {
-      return '-'
-    }
+  function getBaanWithLang(baan_num: number): string {
+    return getBaan(baan_num)['name-th']
   }
 
   function GetAction(history: History) {
-    if (ToNumber(history.fromBaan) === 0) {
+    if (history.fromBaan === 0) {
       if (history.preferBaan === history.assignedBaan) {
         return (
           <>
@@ -61,7 +46,7 @@ function HistoryList({ data }: Props) {
               </Grid>
               <Grid item>
                 <Typography className={style.historyBann}>
-                  {getBaanWithLang(history.preferBaan)}
+                  {getBaanWithLang(history.preferBaan ?? -1)}
                 </Typography>
               </Grid>
             </Grid>
@@ -80,7 +65,7 @@ function HistoryList({ data }: Props) {
           </Grid>
         )
       }
-    } else if (ToNumber(history.fromBaan) > 0) {
+    } else if (history.fromBaan > 0) {
       if (history.preferBaan === history.assignedBaan) {
         if (history.preferBaan === 0) {
           return (
@@ -123,7 +108,7 @@ function HistoryList({ data }: Props) {
             </Grid>
             <Grid item>
               <Typography className={style.historyBann}>
-                {getBaanWithLang(history.preferBaan)}
+                {getBaanWithLang(history.preferBaan ?? -1)}
               </Typography>
             </Grid>
           </>
@@ -138,21 +123,18 @@ function HistoryList({ data }: Props) {
     }
   }
 
-  const List = data ? (
-    data.map((history: History) => {
-      order += 1
-      return (
-        <Grid className={style.historyLine} container key={order}>
-          <Grid item>
-            <Chip size="small" className={style.orderBox} label={order} />
+  const List = data
+    ? data.map((history: History, index: number) => {
+        return (
+          <Grid className={style.historyLine} container key={index}>
+            <Grid item>
+              <Chip size="small" className={style.orderBox} label={index} />
+            </Grid>
+            {GetAction(history)}
           </Grid>
-          {GetAction(history)}
-        </Grid>
-      )
-    })
-  ) : (
-    <></>
-  )
+        )
+      })
+    : null
   return <Box>{List}</Box>
 }
 

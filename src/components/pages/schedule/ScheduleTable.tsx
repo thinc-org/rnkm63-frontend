@@ -15,7 +15,6 @@ import { scheduleData } from './ScheduleData'
 function ScheduleTable() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
-  let i = 0
 
   return (
     <TableContainer className={style.scheduleTable}>
@@ -41,10 +40,9 @@ function ScheduleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {scheduleData.map((act) => {
-            i += 1
+          {scheduleData.map((act, index: number) => {
             return (
-              <TableRow key={i}>
+              <TableRow key={index}>
                 <TableCell className={style.tableText} align="center">
                   {act.round}
                 </TableCell>
