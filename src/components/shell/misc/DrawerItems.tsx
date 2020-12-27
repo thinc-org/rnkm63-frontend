@@ -57,7 +57,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {userError && (
+        {!userError && (
           <ListItem component={Link} to={'/baan'}>
             <Button className={classes.eachList}>
               <ListItemIcon className={classes.selectBaan}>
