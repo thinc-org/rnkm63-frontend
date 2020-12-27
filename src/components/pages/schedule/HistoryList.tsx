@@ -1,9 +1,10 @@
+import { Box, Chip, Grid, Typography } from '@material-ui/core'
 import React from 'react'
-import { Typography, Box, Chip, Grid } from '@material-ui/core'
-import indexStyle from './indexStyle'
 import { useTranslation } from 'react-i18next'
-import { getBaan } from '../profile/BaanInfo'
+
 import { History } from '../../../controllers/GetHistory'
+import { getBaan } from '../../../local/BaanInfo'
+import indexStyle from './indexStyle'
 
 type Props = {
   data: Array<History> | null
@@ -22,6 +23,16 @@ function HistoryList({ data }: Props) {
   const style = indexStyle()
   let order = 0
 
+  function getBaanWithLang(baan_num: number | null): string {
+    if (baan_num) {
+      return i18n.language === 'en'
+        ? getBaan(ToNumber(baan_num))['name-en']
+        : getBaan(ToNumber(baan_num))['name-th']
+    } else {
+      return '-'
+    }
+  }
+
   function GetAction(history: History) {
     if (ToNumber(history.fromBaan) === 0) {
       if (history.preferBaan === history.assignedBaan) {
@@ -34,11 +45,7 @@ function HistoryList({ data }: Props) {
             </Grid>
             <Grid item>
               <Typography className={style.historyBann}>
-                {
-                  getBaan(ToNumber(history.assignedBaan))[
-                    'name-' + i18n.language
-                  ]
-                }
+                {getBaanWithLang(history.assignedBaan)}
               </Typography>
             </Grid>
           </>
@@ -54,11 +61,7 @@ function HistoryList({ data }: Props) {
               </Grid>
               <Grid item>
                 <Typography className={style.historyBann}>
-                  {
-                    getBaan(ToNumber(history.preferBaan))[
-                      'name-' + i18n.language
-                    ]
-                  }
+                  {getBaanWithLang(history.preferBaan)}
                 </Typography>
               </Grid>
             </Grid>
@@ -70,11 +73,7 @@ function HistoryList({ data }: Props) {
               </Grid>
               <Grid item>
                 <Typography className={style.historyBann}>
-                  {
-                    getBaan(ToNumber(history.assignedBaan))[
-                      'name-' + i18n.language
-                    ]
-                  }
+                  {getBaanWithLang(history.assignedBaan)}
                 </Typography>
               </Grid>
             </Grid>
@@ -93,7 +92,7 @@ function HistoryList({ data }: Props) {
               </Grid>
               <Grid item>
                 <Typography className={style.historyBann}>
-                  {getBaan(ToNumber(history.fromBaan))['name-' + i18n.language]}
+                  {getBaanWithLang(history.fromBaan)}
                 </Typography>
               </Grid>
             </>
@@ -108,11 +107,7 @@ function HistoryList({ data }: Props) {
               </Grid>
               <Grid item>
                 <Typography className={style.historyBann}>
-                  {
-                    getBaan(ToNumber(history.assignedBaan))[
-                      'name-' + i18n.language
-                    ]
-                  }
+                  {getBaanWithLang(history.assignedBaan)}
                 </Typography>
               </Grid>
             </>
@@ -128,7 +123,7 @@ function HistoryList({ data }: Props) {
             </Grid>
             <Grid item>
               <Typography className={style.historyBann}>
-                {getBaan(ToNumber(history.preferBaan))['name-' + i18n.language]}
+                {getBaanWithLang(history.preferBaan)}
               </Typography>
             </Grid>
           </>

@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { intoFailure } from 'components/ErrorProvider'
+
 import { API_URL } from '../utils'
-import { RequestError } from '../components/common/Error'
 
 export type History = {
   fromBaan: number | null
@@ -22,11 +23,10 @@ async function GetHistory(): Promise<Array<History> | null> {
     const res = await apiClient.get<Array<History> | null>(
       '/assignment/getHistory'
     )
-    if (res.status !== 200)
-      throw RequestError(res.status, res.headers['x-request-id'])
+    if (res.status !== 200) throw intoFailure(res)
     return res.data
   } catch (e) {
-    throw RequestError(e.response.status, e.response.headers['x-request-id'])
+    throw intoFailure(e)
   }
 }
 
