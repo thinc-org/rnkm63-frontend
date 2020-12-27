@@ -38,7 +38,7 @@ export default function Routes() {
     // User hasn't confirmed yet. Show forms.
     return (
       <Switch>
-        {user.currentBaan !== 1 && (
+        {user.currentBaan !== -1 && (
           <Route path="/covid" exact component={Covid} />
         )}
         <Route path="/form" exact component={Form} />
