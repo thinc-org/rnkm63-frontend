@@ -49,7 +49,7 @@ const style = makeStyles((theme: Theme) => ({
   warningAction: {
     color: theme.palette.warning.main,
     fontWeight: 700,
-    fontSize: '0.8 rem',
+    fontSize: '0.8rem',
   },
   noRequest: {
     color: theme.palette.primary.main,

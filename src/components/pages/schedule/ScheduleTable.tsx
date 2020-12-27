@@ -32,10 +32,7 @@ function ScheduleTable() {
               {t('table_date_title')}
             </TableCell>
             <TableCell className={style.tableText} align="center">
-              {t('table_start_title')}
-            </TableCell>
-            <TableCell className={style.tableText} align="center">
-              {t('table_end_title')}
+              {t('table_time_title')}
             </TableCell>
           </TableRow>
         </TableHead>
@@ -50,10 +47,7 @@ function ScheduleTable() {
                   {act.date} {t('jan')}
                 </TableCell>
                 <TableCell className={style.tableText} align="center">
-                  {act.start}
-                </TableCell>
-                <TableCell className={style.tableText} align="center">
-                  {act.end}
+                  {act.start} - {act.end}
                 </TableCell>
               </TableRow>
             )
