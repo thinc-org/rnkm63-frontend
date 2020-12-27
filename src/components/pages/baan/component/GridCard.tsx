@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         display: 'none',
       },
-      [theme.breakpoints.between(499, 526)]: {
+      [theme.breakpoints.between(479, 526)]: {
         width: '500px',
       },
       paddingBottom: theme.spacing(2),
@@ -47,17 +47,21 @@ const useStyles = makeStyles((theme: Theme) =>
     img: {
       margin: 'auto',
       // display: 'block',
-      width: '85px',
-      height: '85px',
+      width: '100px',
+      height: '100px',
       borderRadius: '50%',
-      [theme.breakpoints.between(500, 525)]: {
-        width: '100px',
-        height: '100px',
+      [theme.breakpoints.between(479, 525)]: {
+        // width: '100px',
+        // height: '100px',
         // marginLeft: '60px',
         // marginTop: '3px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+      },
+      [theme.breakpoints.down(385)]: {
+        width: '85px',
+        height: '85px',
       },
       [theme.breakpoints.down(325)]: {
         width: '70px',
