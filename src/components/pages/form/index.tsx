@@ -1,35 +1,45 @@
-import React from 'react'
-import { Button, Box, Typography } from '@material-ui/core'
-import Image from './Image'
-import FormInput from './FormInput'
-import FormDialog from './utils/component/formDialogComponent'
-import { indexStyle } from './style'
-import { useTranslation } from 'react-i18next'
-import { Redirect } from 'react-router-dom'
-import { Formik, Form as FormikForm } from 'formik'
-import { HandleRequestError } from '../../common/Error'
-import { registerSchema, formInitialValues } from './utils/registerSchema'
+import { Box, Button, RootRef, Typography } from '@material-ui/core'
+import { FailureDisplay } from 'components/common/Error'
+import Loading from 'components/common/Loading'
+import { IFailure } from 'components/ErrorProvider'
+import { IUser, IUserData, UserContext } from 'contexts/UserContext'
 import {
+  Form as FormikForm,
+  Formik,
+  validateYupSchema,
+  yupToFormErrors,
+} from 'formik'
+import { History, LocationState } from 'history'
+import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import FormDialog from './component/formDialogComponent'
+import FormInput from './FormInput'
+import Image from './Image'
+import { indexStyle } from './style'
+import {
+  formInitialValues,
+  IFormData,
+  registerSchema,
+} from './utils/registerSchema'
+import {
+  getPolicyStorage,
   postUserData,
   uploadImageToStorage,
-  getPolicyStorage,
 } from './utils/requestToApi'
-
-import { UserContext, IUserData, IUser } from '../../../contexts/UserContext'
-import { RequestError, IRequestError } from '../../common/Error'
-import Loading from '../../common/Loading'
 
 interface FormState {
   imageBlob: any
   confirmOpen: boolean
   imageRequired: boolean
+  submitClick: boolean
   data: IUserData
   isSubmitLoading: boolean
-  submitError: IRequestError | null
+  submitError: IFailure | null
 }
 
 interface FormProps {
-  history: any
+  history: History<LocationState>
 }
 
 class Form extends React.PureComponent<FormProps, FormState> {
@@ -40,6 +50,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       imageBlob: 0,
       confirmOpen: false,
       imageRequired: false,
+      submitClick: false,
       data: formInitialValues,
       isSubmitLoading: false,
       submitError: null,
@@ -59,23 +70,23 @@ class Form extends React.PureComponent<FormProps, FormState> {
       userData?.data.nickname !== data.nickname
 
     if (imageBlob !== 0) {
-      const resPolicy = await getPolicyStorage()
-      const resUpload = await uploadImageToStorage(imageBlob, resPolicy.data)
-      if (resUpload.status === 400) {
+      try {
+        const resPolicy = await getPolicyStorage()
+        await uploadImageToStorage(imageBlob, resPolicy.data)
+      } catch (e) {
         this.setState({
-          submitError: RequestError(resUpload.status, null),
+          submitError: e,
           isSubmitLoading: false,
         })
-        return
       }
     }
-    const res = await postUserData(data, edit)
-    if (res.status === 200 || res.status === 201) {
+    try {
+      await postUserData(data, edit)
       loadUser()
       history.push('/form/complete')
-    } else {
+    } catch (e) {
       this.setState({
-        submitError: RequestError(res.status, res.headers['x-request-id']),
+        submitError: e,
         isSubmitLoading: false,
       })
     }
@@ -95,9 +106,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
     const { userData } = this.context
 
     if ((!userData?.data || userData?.isImgWrong) && imageBlob === 0) {
-      this.setState({
-        imageRequired: true,
-      })
+      return
     } else {
       this.setState(
         {
@@ -112,25 +121,33 @@ class Form extends React.PureComponent<FormProps, FormState> {
       imageBlob: blob,
     })
   }
+  setImageRequired: (param: boolean) => void = (param) => {
+    this.setState({
+      imageRequired: param,
+    })
+  }
+  setSubmitClick: (param: boolean) => void = (param) => {
+    this.setState({
+      submitClick: param,
+    })
+  }
   render() {
-    const {
-      user: userData,
-      isLoaded: isUserLoaded,
-      error: userLoadError,
-    } = this.context
+    const { user: userData } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
-    if (!isUserLoaded || isSubmitLoading) return <Loading />
-    else if (userLoadError) return <HandleRequestError {...userLoadError} />
-    else if (userData?.isConfirm) return <Redirect to="/" />
-    else if (submitError) return <HandleRequestError {...submitError} />
+    if (isSubmitLoading) return <Loading />
+    else if (submitError) return <FailureDisplay failure={submitError} />
     else
       return (
         <FormUI
           userData={userData}
+          imageRequired={imageRequired}
+          imageBlob={this.state.imageBlob}
+          isConfirmOpen={this.state.confirmOpen}
+          submitClick={this.state.submitClick}
+          setSubmitClick={this.setSubmitClick}
           confirm={this.confirm}
           setImageBlob={this.setImageBlob}
-          imageRequired={imageRequired}
-          isConfirmOpen={this.state.confirmOpen}
+          setImageRequired={this.setImageRequired}
           closeDialog={this.closeDialog}
           submit={this.submit}
         />
@@ -140,10 +157,14 @@ class Form extends React.PureComponent<FormProps, FormState> {
 
 interface IFormUI {
   userData: IUser
-  confirm: (value: IUserData) => void
-  setImageBlob: (blob: any) => void
   imageRequired: boolean
   isConfirmOpen: boolean
+  imageBlob: Blob | number
+  submitClick: boolean
+  setSubmitClick: (param: boolean) => void
+  setImageBlob: (blob: any) => void
+  setImageRequired: (param: boolean) => void
+  confirm: (value: IUserData) => void
   closeDialog: () => void
   submit: () => void
 }
@@ -151,48 +172,102 @@ interface IFormUI {
 function FormUI(props: IFormUI) {
   const {
     userData,
-    confirm,
-    setImageBlob,
+    imageBlob,
     imageRequired,
     isConfirmOpen,
+    submitClick,
+    setSubmitClick,
+    confirm,
+    setImageBlob,
+    setImageRequired,
     closeDialog,
     submit,
   } = props
   const { t } = useTranslation('form')
   const style = indexStyle()
+  const imageRef = useRef<HTMLInputElement>(null)
+
+  if (userData.isNameWrong && !!userData.data) {
+    userData.data.nickname = ''
+  }
+
   return (
     <Box className={style.container}>
       <Formik
         initialValues={userData?.data ?? formInitialValues}
         onSubmit={confirm}
-        validationSchema={registerSchema}
+        validate={(values) => {
+          let imgFail = false
+          if (
+            (!userData?.data || userData?.isImgWrong) &&
+            imageBlob === 0 &&
+            submitClick
+          ) {
+            setImageRequired(true)
+            imgFail = true
+          }
+          try {
+            validateYupSchema<IFormData>(values, registerSchema, true)
+          } catch (err) {
+            const objErr = yupToFormErrors(err)
+            if (imgFail && submitClick) {
+              imageRef.current?.scrollIntoView()
+            } else if (submitClick) {
+              const firstErrorKey = Object.keys(objErr)[0]
+              global.window.document.getElementsByName(firstErrorKey)[0].focus()
+            }
+            setSubmitClick(false)
+            return objErr
+          }
+          if (imgFail) {
+            imageRef.current?.scrollIntoView()
+          }
+          setSubmitClick(false)
+          return
+        }}
       >
-        <FormikForm>
-          <Typography className={style.title}>
-            {!userData.data ? t('register') : t('editProfile')}
-          </Typography>
-          <Box className={style.content}>
-            <Box className={style.image}>
-              <Image
-                setImageBlob={setImageBlob}
-                preImage={userData?.data?.imgURL ?? ''}
-                imageRequired={imageRequired}
-                isImgWrong={userData.isImgWrong || !userData.data}
-              />
-            </Box>
-            <Box className={style.formInput}>
-              <FormInput />
-            </Box>
-          </Box>
-          <Box>
-            <Button classes={{ root: style.submitButton }} type="submit">
-              {t('submit')}
-            </Button>
-            <Typography className={style.submitNote}>
-              {t('submitNote')}
-            </Typography>
-          </Box>
-        </FormikForm>
+        {(props) => {
+          return (
+            <FormikForm>
+              <Typography className={style.title}>
+                {!userData.data ? t('register') : t('editProfile')}
+              </Typography>
+              <Box className={style.content}>
+                <RootRef rootRef={imageRef}>
+                  <Box className={style.image}>
+                    <Image
+                      setImageBlob={setImageBlob}
+                      preImage={
+                        userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
+                      }
+                      imageRequired={imageRequired}
+                      setImageRequired={setImageRequired}
+                      isImgWrong={userData.isImgWrong || !userData.data}
+                    />
+                  </Box>
+                </RootRef>
+                <Box className={style.formInput}>
+                  <FormInput />
+                </Box>
+              </Box>
+              <Box>
+                <Button
+                  classes={{ root: style.submitButton }}
+                  type="submit"
+                  onClick={() => {
+                    setSubmitClick(true)
+                    props.isSubmitting = true
+                  }}
+                >
+                  {t('submit')}
+                </Button>
+                <Typography className={style.submitNote}>
+                  {t('submitNote')}
+                </Typography>
+              </Box>
+            </FormikForm>
+          )
+        }}
       </Formik>
       <FormDialog
         confirmOpen={isConfirmOpen}

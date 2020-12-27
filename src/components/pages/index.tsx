@@ -1,9 +1,9 @@
-import Profile from './profile'
+import Baan from './baan'
 import Form from './form'
-import Login from './login'
-import NotFound from './notfound'
 import FormComplete from './form/complete'
-import NotFreshy from './notfreshy'
+
+import Login from './login'
+import Profile from './profile'
 import Schedule from './schedule'
 
-export { Profile, Form, Login, NotFound, NotFreshy, FormComplete, Schedule }
+export { Baan, Form, FormComplete, Login, Profile, Schedule }

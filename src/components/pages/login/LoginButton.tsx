@@ -1,6 +1,7 @@
-import React from 'react'
 import { Button } from '@material-ui/core'
-import { Connect } from '../../../controllers/LoginController'
+import { Connect } from 'controllers/LoginController'
+import React from 'react'
+
 import indexStyle from './indexStyle'
 
 type Props = {

@@ -1,4 +1,4 @@
-import { Theme, makeStyles, createStyles } from '@material-ui/core'
+import { createStyles, makeStyles, Theme } from '@material-ui/core'
 import red from '@material-ui/core/colors/red'
 
 interface propsStyle {
@@ -52,10 +52,7 @@ const imageStyle = makeStyles(
         borderStyle: 'solid',
         borderColor: 'red',
         borderWidth: (props: propsStyle) => {
-          if (!props.editStatus) {
-            return '0px'
-          }
-          return '5px'
+          return !props.editStatus ? 0 : 5
         },
         background: '#C4C4C4',
         marginBottom: theme.spacing(1),
@@ -118,13 +115,12 @@ const imageStyle = makeStyles(
       },
       dialog: {
         overflowY: 'scroll',
-        background: 'white',
+        background: '#383838',
         borderRadius: '0px',
       },
       dialogTitle: {
         display: 'flex',
         alignSelf: 'center',
-        color: 'black',
       },
       zoomSlider: {
         display: 'flex',
@@ -141,7 +137,7 @@ const imageStyle = makeStyles(
       },
       cropDescription: {
         fontSize: '1.125rem',
-        fontWeight: 500,
+        color: theme.palette.text.primary,
         paddingBottom: theme.spacing(0.5),
         [theme.breakpoints.down('xs')]: {
           fontSize: '0.875rem',

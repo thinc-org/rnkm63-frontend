@@ -1,27 +1,28 @@
-import React, { useCallback, useEffect, useState } from 'react'
 import {
+  Box,
   Button,
-  Slide,
   Dialog,
+  DialogContentText,
   DialogTitle,
   IconButton,
-  DialogContentText,
+  Slide,
   Slider,
-  Box,
   Typography,
 } from '@material-ui/core'
-import { useTranslation } from 'react-i18next'
 import { TransitionProps } from '@material-ui/core/transitions/transition'
-import {
-  getCroppedImg,
-  getResizedImage,
-  checkImageSize,
-} from './utils/imageHelper'
-import Cropper from 'react-easy-crop'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
+import React, { useCallback, useEffect, useState } from 'react'
+import Cropper from 'react-easy-crop'
+import { useTranslation } from 'react-i18next'
+
 import { imageStyle } from './style'
+import {
+  checkImageSize,
+  getCroppedImg,
+  getResizedImage,
+} from './utils/imageHelper'
 
 interface resultImg {
   blob: Blob
@@ -43,7 +44,13 @@ const Transition = React.forwardRef(function Transition(
 
 const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const { t } = useTranslation('form')
-  const { setImageBlob, preImage, isImgWrong, imageRequired } = props
+  const {
+    setImageBlob,
+    preImage,
+    isImgWrong,
+    imageRequired,
+    setImageRequired,
+  } = props
 
   const [upImg, setUpImg] = useState('')
   const [cropState, setCropState] = useState(false)
@@ -67,7 +74,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         const reader = new FileReader()
         const file = e.target.files[0]
 
-        if (!checkImageSize(file, true)) {
+        if (!checkImageSize(file, true, 10240)) {
           setFileSizeError(true)
           return
         }
@@ -105,7 +112,8 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setFinalImg(img.urlFile)
     setImageBlob(img.blob)
     setEditStatus(true)
-  }, [upImg, croppedAreaPixels, setImageBlob])
+    setImageRequired(false)
+  }, [upImg, croppedAreaPixels, setImageBlob, setImageRequired])
 
   const closeDialog = useCallback(() => {
     setCropState(false)
@@ -128,14 +136,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   }, [preImage])
 
   return (
-    <Box
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'column',
-        margin: 0,
-      }}
-    >
+    <Box display="flex" alignItems="center" flexDirection="column" m={0}>
       <Dialog
         open={cropState}
         maxWidth="sm"
@@ -143,6 +144,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         PaperProps={{
           classes: { root: style.dialog },
         }}
+        disableBackdropClick={true}
         TransitionComponent={Transition}
         keepMounted
         onClose={closeDialog}
@@ -161,16 +163,14 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           {t('dialogTitle')}
         </DialogTitle>
 
-        {!!upImg ? (
-          <Box>
+        {upImg ? (
+          <div>
             <Box
-              style={{
-                height: '100%',
-                width: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                alignContent: 'center',
-              }}
+              height="100%"
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignContent="center"
             >
               <Box className={style.cropContainer}>
                 <Cropper
@@ -187,21 +187,22 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               </Box>
             </Box>
             <Box className={style.zoomSlider}>
-              <ZoomOutIcon style={{ paddingRight: '10px', color: 'black' }} />
+              <ZoomOutIcon style={{ paddingRight: '10px' }} />
               <Slider
                 defaultValue={1}
                 value={zoom}
+                color="secondary"
                 min={1}
                 max={maxZoom}
                 step={0.1}
                 onChange={zoomOnChange}
               />
-              <ZoomInIcon style={{ paddingLeft: '10px', color: 'black' }} />
+              <ZoomInIcon style={{ paddingLeft: '10px' }} />
             </Box>
-          </Box>
+          </div>
         ) : (
           <Box className={style.cropContainer}>
-            <Box style={{ width: '100%', height: '100%' }}>
+            <Box width="100%" height="100%">
               <input
                 accept="image/*"
                 className={style.input}
@@ -233,7 +234,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
               </Typography>
             ))}
         </DialogContentText>
-        {!!upImg ? (
+        {upImg ? (
           <Button
             variant="contained"
             color="primary"
@@ -245,21 +246,15 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         ) : null}
       </Dialog>
 
-      {!!finalImg ? (
+      {finalImg ? (
         <Box>
           <img src={finalImg} className={style.image} alt=""></img>
         </Box>
       ) : (
-        <Box className={style.image}></Box>
+        <Box className={style.image} />
       )}
-      <Box
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          flexDirection: 'column',
-        }}
-      >
-        {isImgWrong ? (
+      <Box display="flex" alignItems="center" flexDirection="column">
+        {isImgWrong && (
           <Button
             variant="contained"
             color="primary"
@@ -268,7 +263,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           >
             {t('uploadTextButton')}
           </Button>
-        ) : null}
+        )}
         <Typography
           hidden={editStatus || !isImgWrong}
           className={style.reasonText}

@@ -1,23 +1,26 @@
-import React from 'react'
-
 import {
   Box,
   Card,
-  Typography,
-  ThemeProvider,
   createMuiTheme,
+  ThemeProvider,
+  Typography,
 } from '@material-ui/core'
+import Loading from 'components/common/Loading'
+import { fail, IFailure } from 'components/ErrorProvider'
+import { withSuspense } from 'components/hoc'
+import { UserContext } from 'contexts/UserContext'
+import { SendTicketToBack } from 'controllers/LoginController'
+import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+
+import indexStyle from './indexStyle'
 import LoginButton from './LoginButton'
 import LoginCheckbox from './LoginCheckbox'
-import { SendTicketToBack } from '../../../controllers/LoginController'
-import { useTranslation } from 'react-i18next'
-import indexStyle from './indexStyle'
-import { withSuspense } from '../../hoc'
-import { useHistory, Redirect } from 'react-router-dom'
-import { UserContext } from '../../../contexts/UserContext'
-import Loading from '../../common/Loading'
 
 const theme = createMuiTheme({
+  typography: {
+    fontFamily: ['Rubik', 'Kanit', 'sans-serif'].join(','),
+  },
   palette: {
     type: 'light',
     primary: {
@@ -37,41 +40,48 @@ const theme = createMuiTheme({
 function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
-  const history = useHistory()
+  const [isLoggingIn, setIsLoggingIn] = React.useState(true)
+  //STEP: 0 = start (not logged in). 1 = verifying ticket. 2 = ticket verified and cookie set. 3 = user loaded and everything done
   const style = indexStyle()
-  const {
-    load: loadUser,
-    user,
-    isLoaded: isUserLoaded,
-    error: userLoadError,
-  } = React.useContext(UserContext)
+  const { load: loadUser } = React.useContext(UserContext)
 
-  const onLoginError = React.useCallback(
-    (status: number) => {
-      if (status === 403) {
-        history.push('/not104')
-      }
+  const onVerifyComplete = React.useCallback(() => {
+    setIsLoggingIn(false)
+    loadUser()
+  }, [loadUser])
+
+  const onVerifyError = React.useCallback(
+    (e: IFailure) => {
+      if (e.status === 403)
+        fail({
+          ...e,
+          title: t('not104'),
+        })
+      else fail(e)
     },
-    [history]
+    [t]
   )
 
   React.useEffect(() => {
     let query = new URLSearchParams(window.location.search)
     let ticket = query.get('ticket')
     if (ticket !== null) {
-      setLoading(true)
-      SendTicketToBack(ticket).then(loadUser).catch(onLoginError)
+      setIsLoggingIn(true)
+      SendTicketToBack(ticket).then(onVerifyComplete).catch(onVerifyError)
+    } else {
+      setIsLoggingIn(false)
     }
-  }, [loadUser, onLoginError])
+  }, [onVerifyComplete, onVerifyError])
 
-  const toggleAgree = () => {
+  const toggleAgree = useCallback(() => {
     setAgree(!agree)
-  }
+  }, [agree])
 
-  if (isUserLoaded && user && !userLoadError) return <Redirect to="/form" />
-  if (!isUserLoaded || loading) return <Loading />
-  else
+  if (isLoggingIn) {
+    // If we are verifying the ticket OR waiting for get /user/profile, show <Loading />.
+    return <Loading />
+  } else {
+    // If we are neither waiting for anything nor showing any error, show to login UI.
     return (
       <Box className={style.login}>
         <Typography className={style.title}>{t('title')}</Typography>
@@ -86,6 +96,7 @@ function Login() {
         </ThemeProvider>
       </Box>
     )
+  }
 }
 
 export default withSuspense(Login)

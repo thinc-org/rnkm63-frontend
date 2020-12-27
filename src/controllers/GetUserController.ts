@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { API_URL } from '../utils'
-import { IUser } from '../contexts/UserContext'
-import { RequestError } from '../components/common/Error'
+import { intoFailure } from 'components/ErrorProvider'
+import { IUser } from 'contexts/UserContext'
+import { API_URL } from 'utils'
 
 const config = {
   headers: { 'No-CSRF': true },
@@ -14,11 +14,10 @@ const apiClient = axios.create(config)
 async function getUser(): Promise<IUser | null> {
   try {
     const res = await apiClient.get<IUser | null>('/user/profile')
-    if (res.status !== 200)
-      throw RequestError(res.status, res.headers['x-request-id'])
+    if (res.status !== 200) throw intoFailure(res)
     return res.data
   } catch (e) {
-    throw RequestError(e.response.status, e.response.headers['x-request-id'])
+    throw intoFailure(e)
   }
 }
 

@@ -1,14 +1,15 @@
 import {
   FormControl,
-  FormLabel,
-  TextField,
   FormHelperText,
+  FormLabel,
   Select,
+  TextField,
 } from '@material-ui/core'
+import { useField } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { formStyle } from '../../style'
-import { useField } from 'formik'
+
+import { formStyle } from '../style'
 
 interface IFormField {
   name: string
@@ -101,7 +102,7 @@ const FormSelectFieldInner = React.memo(function FormSelectFieldInner(
         error={touched && Boolean(error)}
         onChange={onChange}
       >
-        <option aria-label="None" value="" />
+        <option aria-label="None" value="" style={{ background: 'white' }} />
         {options.map((option) => (
           <FormSelectFieldOption
             key={`${option.value}-${option.text}`}
@@ -118,10 +119,10 @@ const FormSelectFieldOption = React.memo(function FormSelectFieldOption(
 ) {
   const { t } = useTranslation('form')
   return (
-    <option style={{ color: 'black' }} value={props.value}>
+    <option style={{ color: 'black', background: 'white' }} value={props.value}>
       {t(props.text)}
     </option>
   )
 })
 
-export { FormTextField, FormSelectField }
+export { FormSelectField, FormTextField }

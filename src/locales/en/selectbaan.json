@@ -1,0 +1,34 @@
+{
+  "titleMoveBaan": "Change Baan",
+  "titleJoinBaan": "Join Baan",
+  "titleDescription": "Click on the Baan name to see more details",
+  "searchPlaceholder": "Search...",
+  "searchButton": "Search",
+  "statusGreen": "Available",
+  "statusYellow": "Almost full",
+  "statusRed": "Exceeded capacity",
+  "sizeS": {
+    "text": "Size S",
+    "size": "( 100-120 members )",
+    "mobile": "S"
+  },
+  "sizeM": {
+    "text": "Size M",
+    "size": "( 120-180 members )",
+    "mobile": "M"
+  },
+  "sizeL": {
+    "text": "Size L",
+    "size": "( 180-250 members )",
+    "mobile": "L"
+  },
+  "sizeXL": {
+    "text": "Size XL",
+    "size": "( 250+ members )",
+    "mobile": "XL"
+  },
+  "size": "Size",
+  "seat": "Seat",
+  "request": "Request",
+  "select": "Select"
+}

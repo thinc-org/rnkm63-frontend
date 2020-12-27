@@ -1,16 +1,13 @@
 import { Box, makeStyles, Typography } from '@material-ui/core'
+import { withSuspense } from 'components/hoc'
+import EISA from 'local/EISA.svg'
+import kohkae from 'local/kohkae.svg' //Left
+import Major from 'local/Major.svg' //Right
+import SGCUIcon from 'local/SGCU.svg'
+import SPT from 'local/SPT.svg'
+import THINCIcon from 'local/thinc_logo.svg'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-
-import SGCUIcon from '../../local/SGCU.svg'
-import THINCIcon from '../../local/thinc_logo.svg'
-import kohkae from '../../local/kohkae.svg' //Left
-import EISA from '../../local/EISA.svg'
-import Major from '../../local/Major.svg' //Right
-import SPT from '../../local/SPT.svg'
-import ThaiBev from '../../local/ThaiBev.svg'
-
-import { withSuspense } from '../hoc'
 
 const useStyles = makeStyles({
   root: {
@@ -27,14 +24,17 @@ const useStyles = makeStyles({
   },
   sponsorIcon: {
     marginRight: '15px',
+    marginBottom: '7px',
     height: '30px',
   },
   sgcuIcon: {
     height: '30px',
+    marginBottom: '7px',
     marginRight: '15px',
   },
   thincIcon: {
     height: '30px',
+    marginBottom: '7px',
     marginRight: '15px',
   },
   footerFont: {
@@ -54,17 +54,29 @@ function Footer() {
   const { t } = useTranslation('footer')
   return (
     <Box className={classes.footer}>
-      <Box display="flex" flexDirection="column" marginTop="15px">
+      <Box
+        display="flex"
+        flexDirection="column"
+        marginTop="15px"
+        paddingX="20px"
+      >
         <Box
           display="flex"
+          flexWrap="wrap"
           flexDirection="row"
           justifyContent="center"
-          marginBottom="6px"
-          paddingLeft="25px"
+          marginBottom="3px"
         >
           <img src={SGCUIcon} alt="" className={classes.sgcuIcon} />
           <img src={THINCIcon} alt="" className={classes.thincIcon} />
-          <img src={ThaiBev} alt="" className={classes.sponsorIcon} />
+        </Box>
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          flexDirection="row"
+          justifyContent="center"
+          marginBottom="3px"
+        >
           <img src={EISA} alt="" className={classes.sponsorIcon} />
           <img src={kohkae} alt="" className={classes.sponsorIcon} />
           <img src={Major} alt="" className={classes.sponsorIcon} />

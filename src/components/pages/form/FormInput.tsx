@@ -1,14 +1,14 @@
-import React from 'react'
+import { Grid, Typography } from '@material-ui/core'
 import Link from '@material-ui/core/Link'
-import theme from '../../../config/theme'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+
+import { FormSelectField, FormTextField } from './component/formComponent'
+import { formStyle } from './style'
 import {
   FORM_PREFIX_FIELD_OPTIONS,
   FORM_RELIGION_FIELD_OPTIONS,
 } from './utils/registerSchema'
-import { formStyle } from './style'
-import { Grid, Typography } from '@material-ui/core'
-import { FormSelectField, FormTextField } from './utils/component/formComponent'
-import { useTranslation } from 'react-i18next'
 
 function FormInput() {
   const classes = formStyle()
@@ -20,14 +20,12 @@ function FormInput() {
         {t('requireNote')}
       </Typography>
       <Grid container className={classes.inside}>
-        {theme.breakpoints.up('sm') ? (
-          <Grid item sm={2}>
-            <FormSelectField
-              name="prefixname"
-              options={FORM_PREFIX_FIELD_OPTIONS}
-            />
-          </Grid>
-        ) : null}
+        <Grid item xs={12} sm={2}>
+          <FormSelectField
+            name="prefixname"
+            options={FORM_PREFIX_FIELD_OPTIONS}
+          />
+        </Grid>
 
         <Grid item xs={12} sm={4}>
           <FormTextField name="realname" />
@@ -46,20 +44,12 @@ function FormInput() {
             options={FORM_RELIGION_FIELD_OPTIONS}
           />
         </Grid>
-        <Typography
-          style={{
-            color: theme.palette.warning.main,
-            margin: theme.spacing(0.5),
-            fontSize: '0.75rem',
-          }}
-        >
+        <Typography className={classes.nicknameNote}>
           {t('nicknameNote')}
           <Link
             href="https://www.facebook.com/chulafreshmen"
             target="_blank"
-            style={{
-              color: '#97c0f3',
-            }}
+            className={classes.link}
           >
             CU for Freshman
           </Link>

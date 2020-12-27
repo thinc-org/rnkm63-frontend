@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 
-export const profileStyles = makeStyles((theme: any) => ({
+export const profileStyles = makeStyles((theme: Theme) => ({
   profile: {
     textAlign: 'center',
     marginBottom: '75px',
@@ -23,7 +23,7 @@ export const profileStyles = makeStyles((theme: any) => ({
   imageSize: {
     borderRadius: '25px',
     width: '200px',
-    height: '250px',
+    height: '267px',
     [theme.breakpoints.down('xs')]: {
       width: '150px',
       height: '200px',
@@ -36,13 +36,14 @@ export const profileStyles = makeStyles((theme: any) => ({
     [theme.breakpoints.down('sm')]: {
       width: '65%',
       marginTop: '50px',
+      marginBottom: '50px',
     },
     [theme.breakpoints.down('xs')]: {
       width: '90%',
     },
   },
   title: {
-    color: '#54D166',
+    color: theme.palette.success.main,
     textAlign: 'left',
     marginTop: '0px',
     marginBottom: '0px',
@@ -79,7 +80,7 @@ export const profileStyles = makeStyles((theme: any) => ({
     },
   },
   baanWarning: {
-    color: '#F2C94C',
+    color: theme.palette.warning.main,
     margin: '-28px 0px',
     textAlign: 'left',
     fontSize: '0.75rem',
@@ -95,6 +96,16 @@ export const profileStyles = makeStyles((theme: any) => ({
       fontSize: '0.7rem',
       wordWrap: 'break-word',
       whiteSpace: 'pre-line',
+    },
+  },
+  round: {
+    fontWeight: 500,
+    fontSize: '60px',
+    lineHeight: '22px',
+    marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
     },
   },
 }))

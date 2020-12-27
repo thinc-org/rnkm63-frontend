@@ -1,0 +1,34 @@
+{
+  "titleMoveBaan": "ย้ายบ้าน",
+  "titleJoinBaan": "เข้าร่วมบ้าน",
+  "titleDescription": "คลิกที่ชื่อบ้านเพื่อดูข้อมูลเพิ่มเติม",
+  "searchPlaceholder": "ค้นหา...",
+  "searchButton": "ค้นหา",
+  "statusGreen": "ยังไม่เกินจำนวนรับ",
+  "statusYellow": "กำลังเกินจำนวนรับ",
+  "statusRed": "เกินจำนวนรับแล้ว",
+  "sizeS": {
+    "text": "ไซส์ S",
+    "size": "( 100-120 คน )",
+    "mobile": "S"
+  },
+  "sizeM": {
+    "text": "ไซส์ M",
+    "size": "( 120-180 คน )",
+    "mobile": "M"
+  },
+  "sizeL": {
+    "text": "ไซส์ L",
+    "size": "( 180-250 คน )",
+    "mobile": "L"
+  },
+  "sizeXL": {
+    "text": "ไซส์ XL",
+    "size": "( 250+ คน )",
+    "mobile": "XL"
+  },
+  "size": "ขนาด",
+  "seat": "ที่ว่าง",
+  "request": "คำขอ",
+  "select": "เลือก"
+}

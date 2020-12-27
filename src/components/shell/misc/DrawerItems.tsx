@@ -1,24 +1,22 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
 import {
+  Box,
+  Button,
   List,
   ListItem,
   ListItemIcon,
   makeStyles,
-  Button,
-  Box,
 } from '@material-ui/core'
-
-// import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
+import { green, red } from '@material-ui/core/colors'
+import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
+import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
-import BugReportOutlinedIcon from '@material-ui/icons/BugReportOutlined'
-
-import { green, red } from '@material-ui/core/colors'
-
+import { UserContext } from 'contexts/UserContext'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+
 import LogOutButton from './LogOutButton'
-import { UserContext } from '../../../contexts/UserContext'
 
 const useStyles = makeStyles({
   eachList: {
@@ -31,7 +29,7 @@ const useStyles = makeStyles({
       opacity: '0.5',
     },
   },
-  selectBann: {
+  selectBaan: {
     color: green[500],
   },
   logOut: {
@@ -42,7 +40,7 @@ const useStyles = makeStyles({
 const ItemDrawer = () => {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { user, error: userError } = React.useContext(UserContext)
+  const { error: userError, user: userInfo } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
@@ -50,13 +48,43 @@ const ItemDrawer = () => {
         <ListItem>
           <Button className={classes.eachList} component={Link} to={'/'}>
             <ListItemIcon>
-              <HomeOutlinedIcon />
+              <HomeOutlinedIcon style={{ color: 'white' }} />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
               {t('home')}
             </Box>
           </Button>
         </ListItem>
+
+        {!userError && (
+          <ListItem component={Link} to={'/baan'}>
+            <Button className={classes.eachList}>
+              <ListItemIcon className={classes.selectBaan}>
+                <HomeOutlinedIcon />
+              </ListItemIcon>
+              <Box
+                fontSize={16}
+                fontWeight="fontWeightBold"
+                className={classes.selectBaan}
+              >
+                {userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
+
+        {!userError && (
+          <ListItem component={Link} to={'/schedule'}>
+            <Button className={classes.eachList}>
+              <ListItemIcon>
+                <EventNoteRoundedIcon style={{ color: 'white' }} />
+              </ListItemIcon>
+              <Box fontSize={16} fontWeight="fontWeightBold">
+                {t('schedule')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
 
         <ListItem>
           <Button
@@ -65,7 +93,7 @@ const ItemDrawer = () => {
             className={classes.eachList}
           >
             <ListItemIcon>
-              <BugReportOutlinedIcon />
+              <BugReportOutlinedIcon style={{ color: 'white' }} />
             </ListItemIcon>
             <Box fontSize={16} fontWeight="fontWeightBold">
               {t('report')}
@@ -73,23 +101,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {/* For Phase 2 */}
-        {/* <ListItem className={classes.eachList} component={Link} to={'/'}> }
-          <ListItemIcon className={classes.HomeSchIcon}>
-            <EventNoteRoundedIcon />
-          </ListItemIcon>
-          <ListItemText>{t('Schedule')}</ListItemText>
-        </ListItem>
-
-        <ListItem className={classes.eachList} component={Link} to={'/'}>
-          <ListItemIcon className={classes.selectBann}>
-            <HomeOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.selectBann}>
-            {t('Bann')}
-          </ListItemText>
-        </ListItem>*/}
-        {!!user && !userError && (
+        {(!userError || (userError?.status && userError.status >= 500)) && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>
