@@ -153,7 +153,12 @@ function Baan() {
           </Box>
         </FormGroup>
         <StatusColor />
-        <Box display="flex" flexWrap="wrap" justifyContent="center">
+        <Box
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="center"
+          className={style.cardContainer}
+        >
           {currentFilterData.map((val) => (
             <React.Fragment key={val.ID}>
               <CardBaan
@@ -168,7 +173,7 @@ function Baan() {
             </React.Fragment>
           ))}
         </Box>
-        <Grid container>
+        <Grid container className={style.gridContainer}>
           {currentFilterData.map((val) => (
             <React.Fragment key={val.ID}>
               <GridCard

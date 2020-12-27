@@ -20,9 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
-      },
       [theme.breakpoints.between(479, 526)]: {
         width: '500px',
       },
