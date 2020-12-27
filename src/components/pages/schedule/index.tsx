@@ -1,11 +1,12 @@
+import { Card, Grid, Typography } from '@material-ui/core'
 import React from 'react'
-import { Typography, Card, Grid } from '@material-ui/core'
 import { useTranslation } from 'react-i18next'
-import indexStyle from './indexStyle'
-import { HistoryList } from './HistoryList'
-import { withSuspense } from '../../hoc'
-import { ScheduleTable } from './ScheduleTable'
+
 import { GetHistory, History } from '../../../controllers/GetHistory'
+import { withSuspense } from '../../hoc'
+import { HistoryList } from './HistoryList'
+import indexStyle from './indexStyle'
+import { ScheduleTable } from './ScheduleTable'
 
 function SchedulePage() {
   const { t } = useTranslation('schedule')

@@ -4,9 +4,9 @@ import form from './form.json'
 import formComplete from './formComplete.json'
 import login from './login.json'
 import profile from './profile.json'
+import schedule from './schedule.json'
 import selectbaan from './selectbaan.json'
 import shell from './shell.json'
-import schedule from './schedule.json'
 
 const en = {
   errors,
@@ -15,8 +15,8 @@ const en = {
   formComplete,
   login,
   profile,
-  shell,
   schedule,
+  shell,
   selectbaan,
 }
 

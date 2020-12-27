@@ -1,14 +1,15 @@
-import React from 'react'
 import {
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  TableCell,
-  TableBody,
 } from '@material-ui/core'
-import indexStyle from './indexStyle'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
+
+import indexStyle from './indexStyle'
 import { scheduleData } from './ScheduleData'
 
 function ScheduleTable() {
