@@ -50,13 +50,13 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             />
             <Typography className={classes.card_text}>
               {t('size')}: {value.size}
-              <br></br>
+              <br />
               {t('seat')}:{' '}
               <span style={{ color: data.color }}>{data.capacity}</span>
-              <br></br>
+              <br />
               {t('request')}:{' '}
               <span style={{ color: data.color }}>{data.request}</span>
-              <br></br>
+              <br />
             </Typography>
           </CardContent>
         </CardActionArea>

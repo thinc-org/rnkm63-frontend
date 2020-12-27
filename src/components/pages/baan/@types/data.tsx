@@ -1,3 +1,5 @@
+export type BaanSize = 'S' | 'M' | 'L' | 'XL'
+
 export interface IFilterData {
   ID: number
   capacity: number
@@ -12,6 +14,4 @@ export interface ICapacityData {
   requestCount: number
 }
 
-export type IFilterSize = {
-  [key: string]: boolean
-}
+export type IFilterSize = Record<BaanSize, boolean>
