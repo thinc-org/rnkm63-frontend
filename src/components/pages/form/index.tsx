@@ -24,6 +24,7 @@ import {
 } from './utils/registerSchema'
 import {
   getPolicyStorage,
+  postLeaveActivity,
   postUserData,
   uploadImageToStorage,
 } from './utils/requestToApi'
@@ -91,6 +92,20 @@ class Form extends React.PureComponent<FormProps, FormState> {
       })
     }
   }
+  leaveActivity: () => void = async () => {
+    const { load: loadUser } = this.context
+    const { history } = this.props
+    try {
+      await postLeaveActivity()
+      loadUser()
+      history.push('/')
+    } catch (e) {
+      this.setState({
+        submitError: e,
+        isSubmitLoading: false,
+      })
+    }
+  }
   openDialog: () => void = () => {
     this.setState({
       confirmOpen: true,
@@ -150,6 +165,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
           setImageRequired={this.setImageRequired}
           closeDialog={this.closeDialog}
           submit={this.submit}
+          leaveActivity={this.leaveActivity}
         />
       )
   }
@@ -167,6 +183,7 @@ interface IFormUI {
   confirm: (value: IUserData) => void
   closeDialog: () => void
   submit: () => void
+  leaveActivity: () => void
 }
 
 function FormUI(props: IFormUI) {
@@ -182,6 +199,7 @@ function FormUI(props: IFormUI) {
     setImageRequired,
     closeDialog,
     submit,
+    leaveActivity,
   } = props
   const { t } = useTranslation('form')
   const style = indexStyle()
@@ -238,12 +256,19 @@ function FormUI(props: IFormUI) {
                   {!userData.data ? t('register') : t('editProfile')}
                 </Typography>
                 <Box width="312px" className={style.leaveContainer}>
-                  <Button className={style.leaveEvent}>
-                    {t('leaveButton')}
-                  </Button>
-                  <Typography className={style.leaveEventDescription}>
-                    {t('leaveDescription')}
-                  </Typography>
+                  {userData.data && userData.currentBaan !== -1 && (
+                    <>
+                      <Button
+                        className={style.leaveEvent}
+                        onClick={() => leaveActivity()}
+                      >
+                        {t('leaveButton')}
+                      </Button>
+                      <Typography className={style.leaveEventDescription}>
+                        {t('leaveDescription')}
+                      </Typography>
+                    </>
+                  )}
                 </Box>
               </Box>
               <Box className={style.content}>
@@ -261,9 +286,14 @@ function FormUI(props: IFormUI) {
                   </Box>
                 </RootRef>
                 <Box>
-                  <Button className={style.leaveMobile}>
-                    {t('leaveButton')}
-                  </Button>
+                  {userData.data && userData.currentBaan !== -1 && (
+                    <Button
+                      className={style.leaveMobile}
+                      onClick={() => leaveActivity()}
+                    >
+                      {t('leaveButton')}
+                    </Button>
+                  )}
                 </Box>
                 <Box className={style.formInput}>
                   <FormInput />
