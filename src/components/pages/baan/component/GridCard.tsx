@@ -8,7 +8,6 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core'
-import { IRequestError } from 'components/common/Error'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -60,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface IGridCard {
   data: IFilterData
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
   disabled: boolean
   handleClickOpen: () => void
   setDialogData: (props: number) => void
@@ -68,23 +66,20 @@ interface IGridCard {
 
 const GridCard = React.memo(function GridCard(props: IGridCard) {
   const classes = useStyles()
-  const { data } = props
-  const { ID } = data
-  const value = getBaan(ID)
-  // const style = useStylesTwo()
+  const { disabled, setDialogData, handleClickOpen, data } = props
+  const value = getBaan(data.ID)
   const urlLogo = getLogo(data.ID)
   const { t, i18n } = useTranslation('selectbaan')
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
-  const color = props.disabled ? '#A9A9A9' : 'white'
-  // const numColor = data.color
+  const color = disabled ? '#A9A9A9' : 'white'
 
   return (
     <div className={classes.root}>
       <Paper
         className={classes.paper}
         onClick={() => {
-          props.handleClickOpen()
-          props.setDialogData(data.ID)
+          handleClickOpen()
+          setDialogData(data.ID)
         }}
       >
         <Grid container spacing={2}>
@@ -93,7 +88,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
               <img className={classes.img} alt="complex" src={urlLogo} />
             </ButtonBase>
           </Grid>
-          {/* <Grid item xs={8} sm container > */}
           <Grid
             item
             xs={8}
@@ -105,7 +99,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
               textAlign: 'center',
             }}
           >
-            {/* <Grid item xs> */}
             <Typography
               variant="subtitle1"
               style={{ fontSize: '24px', fontWeight: 'bold' }}
@@ -148,17 +141,10 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
                 </Typography>
               </Grid>
             </Grid>
-            {/* </Grid> */}
           </Grid>
-          {/* </Grid> */}
         </Grid>
         <Box style={{ paddingTop: '5px', alignItems: 'right' }}>
-          <SubmitButton
-            color={color}
-            disabled={props.disabled}
-            ID={data.ID}
-            setError={props.setError}
-          />
+          <SubmitButton color={color} disabled={disabled} ID={data.ID} />
         </Box>
       </Paper>
     </div>

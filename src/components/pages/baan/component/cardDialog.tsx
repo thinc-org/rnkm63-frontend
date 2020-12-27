@@ -10,7 +10,6 @@ import MuiDialogActions from '@material-ui/core/DialogActions'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
-import { fail } from 'components/ErrorProvider'
 import i18n from 'i18next'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
@@ -45,11 +44,10 @@ interface ICardDialog {
   open: boolean
   handleClose: () => void
   disabled: boolean
-  setError: React.Dispatch<React.SetStateAction<IRequestError | null>>
 }
 
 const CardDialog = function CardDialog(props: ICardDialog) {
-  const { ID, open, handleClose, disabled, setError } = props
+  const { ID, open, handleClose, disabled } = props
   const classes = useStyles()
   const lang = i18n.language.startsWith('th') ? 'th' : 'en'
   const color = disabled ? '#A9A9A9' : 'white'
@@ -105,12 +103,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
         </Typography>
       </DialogContent>
       <DialogActions>
-        <SubmitButton
-          color={color}
-          disabled={disabled}
-          ID={value.ID}
-          setError={setError}
-        />
+        <SubmitButton color={color} disabled={disabled} ID={value.ID} />
       </DialogActions>
     </Dialog>
   )
