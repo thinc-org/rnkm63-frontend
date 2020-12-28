@@ -406,8 +406,8 @@ export const baanInfo: Baan[] = [
     'caption-en': ['Koh', '', 'Live like we’re drunk'],
     facebook: '',
     instagram: '',
-    iglink: '-',
-    fblink: '-',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 19,
