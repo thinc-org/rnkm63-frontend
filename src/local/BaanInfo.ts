@@ -7,6 +7,8 @@ export interface Baan {
   'caption-en': string[]
   facebook: string
   instagram: string
+  iglink: string
+  fblink: string
 }
 
 export const baanInfo: Baan[] = [
@@ -19,6 +21,8 @@ export const baanInfo: Baan[] = [
     'caption-en': [],
     facebook: '-',
     instagram: '-',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 1,
@@ -33,6 +37,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'บ้านอินดี้ (BAAN INDY)',
     instagram: 'baanindy.official',
+    iglink: 'https://www.instagram.com/baanindy.official/',
+    fblink: 'https://www.facebook.com/BaanIndyCU',
   },
   {
     ID: 3,
@@ -58,6 +64,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'BaanRang CHULA',
     instagram: 'baanrang.official',
+    iglink: 'https://www.instagram.com/baanrang.official/',
+    fblink: 'https://www.facebook.com/baanrang.official',
   },
   {
     ID: 4,
@@ -89,6 +97,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 6,
@@ -115,6 +125,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 7,
@@ -152,6 +164,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'jodeh_official',
     instagram: 'Jodeh Huesa',
+    iglink: 'https://www.instagram.com/jodeh_official/',
+    fblink: 'https://www.facebook.com/jodehcu',
   },
   {
     ID: 8,
@@ -173,6 +187,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 9,
@@ -209,6 +225,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'Baan Por',
     instagram: 'baanpor.official',
+    iglink: 'https://www.instagram.com/baanpor.official/',
+    fblink: 'https://www.facebook.com/baanpor',
   },
   {
     ID: 10,
@@ -232,6 +250,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'บ้านสด จุฬา',
     instagram: 'baansod.official',
+    iglink: 'https://www.instagram.com/baansod.official/',
+    fblink: 'https://www.facebook.com/baansodcu',
   },
   {
     ID: 11,
@@ -252,6 +272,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'บ้านโซ้ยตี๋หลีหมวย soeiteelheemouy',
     instagram: 'baansoeiteelheemouy',
+    iglink: 'https://www.instagram.com/baansoeiteelheemouy/',
+    fblink: 'https://www.facebook.com/baansoeiteelheemouy',
   },
   {
     ID: 12,
@@ -280,6 +302,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'Baan Buchayun',
     instagram: 'baan_buchayun',
+    iglink: 'https://www.instagram.com/baan_buchayun/',
+    fblink: 'https://www.facebook.com/BaanBuchayun',
   },
   {
     ID: 13,
@@ -301,6 +325,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'บ้านบึ้ม',
     instagram: 'baan_buem',
+    iglink: 'https://www.instagram.com/baan_buem/',
+    fblink: 'https://www.facebook.com/baanbuem',
   },
   {
     ID: 14,
@@ -335,6 +361,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'บ้านดัง',
     instagram: 'Baandung.official',
+    iglink: 'https://www.instagram.com/baandung.official/',
+    fblink: 'https://www.facebook.com/baandung/',
   },
   {
     ID: 15,
@@ -362,6 +390,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'BaanKids',
     instagram: 'baankids.official',
+    iglink: 'https://www.instagram.com/baankids.official/',
+    fblink: 'https://www.facebook.com/BaanKids',
   },
   {
     ID: 16,
@@ -376,6 +406,8 @@ export const baanInfo: Baan[] = [
     'caption-en': ['Koh', '', 'Live like we’re drunk'],
     facebook: '',
     instagram: '',
+    iglink: '-',
+    fblink: '-',
   },
   {
     ID: 19,
@@ -412,6 +444,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'Baan Preaw CU',
     instagram: 'baanpreaw.official',
+    iglink: 'https://www.instagram.com/baanpreaw.official/',
+    fblink: 'https://www.facebook.com/BaanPreawCu',
   },
   {
     ID: 20,
@@ -440,6 +474,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'Baan Wang',
     instagram: 'baanwang_',
+    iglink: 'https://www.instagram.com/baanwang_/',
+    fblink: 'https://www.facebook.com/BaanWangChula',
   },
   {
     ID: 21,
@@ -460,6 +496,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'BaanWanted',
     instagram: 'baan_wanted',
+    iglink: 'https://www.instagram.com/baan_wanted/',
+    fblink: 'https://www.facebook.com/BaanWanted',
   },
   {
     ID: 22,
@@ -502,6 +540,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 24,
@@ -527,6 +567,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: 'Baan AGAPE Chula',
     instagram: 'baanagapechula',
+    iglink: 'https://www.instagram.com/baanagapechula/',
+    fblink: 'https://www.facebook.com/baanagape',
   },
   {
     ID: 27,
@@ -549,6 +591,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 29,
@@ -570,6 +614,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
   {
     ID: 34,
@@ -580,6 +626,8 @@ export const baanInfo: Baan[] = [
     'caption-en': ['Seiyw', '', 'Seiywnarok, We are legendary!'],
     facebook: 'บ้านเสี่ยว',
     instagram: 'baanseiyw.official',
+    iglink: 'https://www.instagram.com/baanseiyw.official/',
+    fblink: 'https://www.facebook.com/BaanSeiyw',
   },
   {
     ID: 36,
@@ -598,6 +646,8 @@ export const baanInfo: Baan[] = [
     ],
     facebook: '',
     instagram: '',
+    iglink: '',
+    fblink: '',
   },
 ]
 
@@ -619,6 +669,8 @@ export function getBaan(baanNumber: number): Baan {
       'caption-en': [],
       facebook: '',
       instagram: '',
+      iglink: '',
+      fblink: '',
     }
   }
 }
