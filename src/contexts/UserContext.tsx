@@ -20,8 +20,6 @@ export interface IUserData {
   facebook: string
   lineID: string
   imgURL: string
-  facultyEn?: string
-  facultyTh?: string
 }
 
 export interface IUser {
@@ -34,6 +32,7 @@ export interface IUser {
   isTransfer: boolean
   currentBaan: number
   preferBaan: number | null
+  facultyID: string
 }
 
 /*TYPE GUARDS*/

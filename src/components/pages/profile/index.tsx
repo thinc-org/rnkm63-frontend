@@ -2,6 +2,7 @@ import { Box, Typography } from '@material-ui/core'
 import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
+import getFaculty from 'local/facultyInfo'
 import { getEndTime, getStartTime } from 'local/RoundInfo'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -67,8 +68,8 @@ function Profile() {
           </Typography>
           <Typography variant="h3" className={classes.valueDetails}>
             {i18n.language.startsWith('en')
-              ? (userInfo.data?.facultyEn ?? '-').replace('Faculty of', '')
-              : (userInfo.data?.facultyTh ?? '-').replace('คณะ', '')}
+              ? getFaculty(userInfo.facultyID).name_en
+              : getFaculty(userInfo.facultyID).name_th}
           </Typography>
         </Box>
         <Box>
