@@ -119,6 +119,7 @@ const indexStyle = makeStyles(
       justifyContent: 'space-evenly',
     },
     leaveContainer: {
+      width: '280px',
       [theme.breakpoints.down('sm')]: {
         display: 'none',
       },
@@ -126,7 +127,7 @@ const indexStyle = makeStyles(
     leaveEvent: {
       background: theme.palette.error.main,
       borderRadius: '40px',
-      width: '312px',
+      width: '280px',
       fontSize: '18px',
       '&:hover': {
         backgroundColor: theme.palette.error.main,
