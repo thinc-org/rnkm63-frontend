@@ -46,19 +46,19 @@ const ItemDrawer = () => {
   return (
     <React.Fragment>
       <List>
-        <ListItem>
-          <Button className={classes.eachList} component={Link} to={'/'}>
-            <ListItemIcon>
-              <HomeOutlinedIcon style={{ color: 'white' }} />
-            </ListItemIcon>
-            <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('home')}
-            </Box>
-          </Button>
-        </ListItem>
-
         {!userError && userInfo?.isConfirm && (
           <>
+            <ListItem>
+              <Button className={classes.eachList} component={Link} to={'/'}>
+                <ListItemIcon>
+                  <HomeOutlinedIcon style={{ color: 'white' }} />
+                </ListItemIcon>
+                <Box fontSize={16} fontWeight="fontWeightBold">
+                  {t('home')}
+                </Box>
+              </Button>
+            </ListItem>
+
             <ListItem component={Link} to={'/baan'}>
               <Button className={classes.eachList}>
                 <ListItemIcon className={classes.selectBaan}>
