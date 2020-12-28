@@ -71,7 +71,7 @@ function Header() {
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {!userError && (
+          {!userError && userInfo?.isConfirm && (
             <>
               <LinkPage name={t('home')} link={'/'} />
               <LinkPage
