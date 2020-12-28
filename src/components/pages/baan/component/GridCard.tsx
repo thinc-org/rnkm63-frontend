@@ -166,7 +166,7 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
             </Grid>
           </Grid>
         </CardActionArea>
-        <Box style={{ paddingTop: '5px', alignItems: 'right' }}>
+        <Box paddingTop={1} alignItems="right">
           <SubmitButton color={color} disabled={disabled} ID={data.ID} />
         </Box>
       </Card>
