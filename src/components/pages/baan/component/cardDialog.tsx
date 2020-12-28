@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   Dialog,
+  Link,
   Theme,
   Typography,
   withStyles,
@@ -73,13 +74,37 @@ const CardDialog = function CardDialog(props: ICardDialog) {
         <Box className={classes.fbandigicon_item}>
           <InstagramIcon style={{ color: 'white' }} />
           <Typography className={classes.fbandigicon_text}>
-            {value.facebook}
+            {value.iglink !== '' ? (
+              <Link href={value.iglink} color="inherit">
+                {value.instagram}
+              </Link>
+            ) : (
+              <Link
+                href={value.iglink}
+                color="inherit"
+                style={{ pointerEvents: 'none' }}
+              >
+                {value.instagram}
+              </Link>
+            )}
           </Typography>
         </Box>
         <Box className={classes.fbandigicon_item}>
           <FacebookIcon style={{ color: 'white' }} />
           <Typography className={classes.fbandigicon_text}>
-            {value.instagram}
+            {value.fblink !== '' ? (
+              <Link href={value.fblink} color="inherit">
+                {value.facebook}
+              </Link>
+            ) : (
+              <Link
+                href={value.fblink}
+                color="inherit"
+                style={{ pointerEvents: 'none' }}
+              >
+                {value.facebook}
+              </Link>
+            )}
           </Typography>
         </Box>
         <Box style={{ marginTop: '10px' }}>
