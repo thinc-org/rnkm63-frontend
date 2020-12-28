@@ -2,12 +2,12 @@ import { Box, Chip, Grid, Typography } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ActivityHistory } from '../../../controllers/GetHistory'
+import { AssignmentLog } from '../../../controllers/GetHistory'
 import { getBaan } from '../../../local/BaanInfo'
 import indexStyle from './indexStyle'
 
 type Props = {
-  data: Array<ActivityHistory> | null
+  data: Array<AssignmentLog> | null
 }
 
 function HistoryList({ data }: Props) {
@@ -20,8 +20,8 @@ function HistoryList({ data }: Props) {
       : getBaan(baan_num)['name-th']
   }
 
-  function GetAction(history: ActivityHistory) {
-    // not a request
+  function GetAction(history: AssignmentLog) {
+    // no request
     if (history.preferBaan === null) {
       return (
         <Grid item>
@@ -40,7 +40,7 @@ function HistoryList({ data }: Props) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography className={style.historyBann}>
+            <Typography className={style.historyBaan}>
               {getBaanWithLang(history.assignedBaan)}
             </Typography>
           </Grid>
@@ -59,7 +59,7 @@ function HistoryList({ data }: Props) {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography className={style.historyBann}>
+              <Typography className={style.historyBaan}>
                 {getBaanWithLang(history.preferBaan ?? -1)}
               </Typography>
             </Grid>
@@ -71,7 +71,7 @@ function HistoryList({ data }: Props) {
               </Typography>
             </Grid>
             <Grid item>
-              <Typography className={style.historyBann}>
+              <Typography className={style.historyBaan}>
                 {getBaanWithLang(history.assignedBaan)}
               </Typography>
             </Grid>
@@ -88,7 +88,7 @@ function HistoryList({ data }: Props) {
             <Typography className={style.successAction}>{t('left')}</Typography>
           </Grid>
           <Grid item>
-            <Typography className={style.historyBann}>
+            <Typography className={style.historyBaan}>
               {getBaanWithLang(history.fromBaan)}
             </Typography>
           </Grid>
@@ -106,7 +106,7 @@ function HistoryList({ data }: Props) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography className={style.historyBann}>
+            <Typography className={style.historyBaan}>
               {getBaanWithLang(history.assignedBaan)}
             </Typography>
           </Grid>
@@ -124,7 +124,7 @@ function HistoryList({ data }: Props) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography className={style.historyBann}>
+            <Typography className={style.historyBaan}>
               {getBaanWithLang(history.preferBaan ?? -1)}
             </Typography>
           </Grid>
@@ -134,7 +134,7 @@ function HistoryList({ data }: Props) {
   }
 
   const List = data
-    ? data.map((history: ActivityHistory, index: number) => {
+    ? data.map((history: AssignmentLog, index: number) => {
         return (
           <Grid className={style.historyLine} container key={index}>
             <Grid item>

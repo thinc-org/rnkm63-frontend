@@ -1,28 +1,18 @@
-import axios from 'axios'
 import { intoFailure } from 'components/ErrorProvider'
+import { apiClient } from 'config/axiosInstance'
 
-import { API_URL } from '../utils'
-
-export type ActivityHistory = {
+export type AssignmentLog = {
   fromBaan: number
   preferBaan: number | null
   assignedBaan: number
   round: number
 }
 
-const config = {
-  headers: { 'No-CSRF': true },
-  withCredentials: true,
-  baseURL: API_URL,
-}
-
-async function GetHistory(): Promise<Array<ActivityHistory>> {
+async function GetHistory(): Promise<Array<AssignmentLog>> {
   try {
-    const res = await axios.get<Array<ActivityHistory>>(
-      '/assignment/getHistory',
-      config
+    const res = await apiClient.get<Array<AssignmentLog>>(
+      '/assignment/getHistory'
     )
-    if (res.status !== 200) throw intoFailure(res)
     return res.data
   } catch (e) {
     throw intoFailure(e)

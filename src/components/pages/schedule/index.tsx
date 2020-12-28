@@ -6,7 +6,6 @@ import useSWR from 'swr'
 
 import { GetHistory } from '../../../controllers/GetHistory'
 import Loading from '../../common/Loading'
-import { withSuspense } from '../../hoc'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
 import { ScheduleTable } from './ScheduleTable'
@@ -40,4 +39,4 @@ function SchedulePage() {
   )
 }
 
-export default withSuspense(SchedulePage)
+export default SchedulePage

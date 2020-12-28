@@ -25,7 +25,7 @@ const style = makeStyles((theme: Theme) => ({
     marginBottom: 20,
     textAlign: 'center',
   },
-  historyBann: {
+  historyBaan: {
     fontWeight: 700,
     marginLeft: 8,
     fontSize: '0.8rem',
