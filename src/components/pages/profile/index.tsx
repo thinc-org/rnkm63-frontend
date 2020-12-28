@@ -83,27 +83,28 @@ function Profile() {
           </Typography>
         </Box>
       </Box>
-      {currentTime < startSelect && userInfo?.currentBaan === -1 ? (
+      {currentTime < startSelect && userInfo?.currentBaan === -1 ? ( //non-participant, display reenter button
         <Reenter />
-      ) : currentTime < startSelect ? (
-        <Countdown
-          timeLeft={(startSelect - currentTime) / 1000}
-          roundCount={false}
-        />
       ) : (
-        ''
-      )}
-      {currentTime < endOfSelect && startSelect < currentTime && (
-        <>
-          <BaanRender
-            round={round}
-            secs={secs}
-            preferBaan={userInfo.preferBaan}
-            currentBaan={userInfo.currentBaan}
+        currentTime < startSelect && ( //participant, display countdown before round 2
+          <Countdown
+            timeLeft={(startSelect - currentTime) / 1000}
+            roundCount={false}
           />
-          <Countdown timeLeft={secs} roundCount={true} />
-        </>
+        )
       )}
+      {currentTime < endOfSelect &&
+        startSelect < currentTime && ( // round 2
+          <>
+            <BaanRender
+              round={round}
+              secs={secs}
+              preferBaan={userInfo.preferBaan}
+              currentBaan={userInfo.currentBaan}
+            />
+            <Countdown timeLeft={secs} roundCount={true} />
+          </>
+        )}
     </body>
   )
 }
