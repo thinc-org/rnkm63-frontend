@@ -244,79 +244,77 @@ function FormUI(props: IFormUI) {
           return
         }}
       >
-        {(props) => {
-          return (
-            <FormikForm>
-              <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="space-between"
-              >
-                <Typography className={style.title}>
-                  {!userData.data ? t('register') : t('editProfile')}
-                </Typography>
-                <Box width="312px" className={style.leaveContainer}>
-                  {userData.data && userData.currentBaan !== -1 && (
-                    <>
-                      <Button
-                        className={style.leaveEvent}
-                        onClick={() => leaveActivity()}
-                      >
-                        {t('leaveButton')}
-                      </Button>
-                      <Typography className={style.leaveEventDescription}>
-                        {t('leaveDescription')}
-                      </Typography>
-                    </>
-                  )}
-                </Box>
-              </Box>
-              <Box className={style.content}>
-                <RootRef rootRef={imageRef}>
-                  <Box className={style.image}>
-                    <Image
-                      setImageBlob={setImageBlob}
-                      preImage={
-                        userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
-                      }
-                      imageRequired={imageRequired}
-                      setImageRequired={setImageRequired}
-                      isImgWrong={userData.isImgWrong || !userData.data}
-                    />
-                  </Box>
-                </RootRef>
-                <Box>
-                  {userData.data && userData.currentBaan !== -1 && (
+        {(props) => (
+          <FormikForm>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Typography className={style.title}>
+                {!userData.data ? t('register') : t('editProfile')}
+              </Typography>
+              <Box width="312px" className={style.leaveContainer}>
+                {userData.data && userData.currentBaan !== -1 && (
+                  <>
                     <Button
-                      className={style.leaveMobile}
+                      className={style.leaveEvent}
                       onClick={() => leaveActivity()}
                     >
                       {t('leaveButton')}
                     </Button>
-                  )}
-                </Box>
-                <Box className={style.formInput}>
-                  <FormInput />
-                </Box>
+                    <Typography className={style.leaveEventDescription}>
+                      {t('leaveDescription')}
+                    </Typography>
+                  </>
+                )}
               </Box>
+            </Box>
+            <Box className={style.content}>
+              <RootRef rootRef={imageRef}>
+                <Box className={style.image}>
+                  <Image
+                    setImageBlob={setImageBlob}
+                    preImage={
+                      userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
+                    }
+                    imageRequired={imageRequired}
+                    setImageRequired={setImageRequired}
+                    isImgWrong={userData.isImgWrong || !userData.data}
+                  />
+                </Box>
+              </RootRef>
               <Box>
-                <Button
-                  classes={{ root: style.submitButton }}
-                  type="submit"
-                  onClick={() => {
-                    setSubmitClick(true)
-                    props.isSubmitting = true
-                  }}
-                >
-                  {t('submit')}
-                </Button>
-                <Typography className={style.submitNote}>
-                  {t('submitNote')}
-                </Typography>
+                {userData.data && userData.currentBaan !== -1 && (
+                  <Button
+                    className={style.leaveMobile}
+                    onClick={() => leaveActivity()}
+                  >
+                    {t('leaveButton')}
+                  </Button>
+                )}
               </Box>
-            </FormikForm>
-          )
-        }}
+              <Box className={style.formInput}>
+                <FormInput />
+              </Box>
+            </Box>
+            <Box>
+              <Button
+                classes={{ root: style.submitButton }}
+                type="submit"
+                onClick={() => {
+                  setSubmitClick(true)
+                  props.isSubmitting = true
+                }}
+              >
+                {t('submit')}
+              </Button>
+              <Typography className={style.submitNote}>
+                {t('submitNote')}
+              </Typography>
+            </Box>
+          </FormikForm>
+        )}
       </Formik>
       <FormDialog
         confirmOpen={isConfirmOpen}
