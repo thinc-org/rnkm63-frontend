@@ -3,7 +3,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { AssignmentLog } from '../../../controllers/GetHistory'
-import { getBaan } from '../../../local/BaanInfo'
 import indexStyle from './indexStyle'
 
 type Props = {
@@ -11,13 +10,11 @@ type Props = {
 }
 
 function HistoryList({ data }: Props) {
-  const { t, i18n } = useTranslation('schedule')
+  let { t } = useTranslation(['schedule', 'baan'])
   const style = indexStyle()
 
   function getBaanWithLang(baan_num: number): string {
-    return i18n.language === 'en'
-      ? getBaan(baan_num)['name-en']
-      : getBaan(baan_num)['name-th']
+    return t('baan:'.concat(JSON.stringify(baan_num)))
   }
 
   function GetAction(history: AssignmentLog) {

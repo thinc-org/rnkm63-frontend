@@ -1,3 +1,4 @@
+import baan from './baan.json'
 import errors from './errors.json'
 import footer from './footer.json'
 import form from './form.json'
@@ -9,6 +10,7 @@ import selectbaan from './selectbaan.json'
 import shell from './shell.json'
 
 const th = {
+  baan,
   errors,
   footer,
   form,
