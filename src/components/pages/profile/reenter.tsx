@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core'
-import { Box, Button } from '@material-ui/core'
+import { Button } from '@material-ui/core'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -10,7 +10,7 @@ function Reenter() {
   const { t } = useTranslation('profile')
   const classes = roundStyles()
   return (
-    <Box>
+    <>
       <Typography variant="h2" className={classes.round}>
         {t('enterAct')}
       </Typography>
@@ -22,7 +22,7 @@ function Reenter() {
       >
         {t('enterActButton')}
       </Button>
-    </Box>
+    </>
   )
 }
 
