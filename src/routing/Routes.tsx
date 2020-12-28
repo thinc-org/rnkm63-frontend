@@ -30,17 +30,18 @@ export default function Routes() {
 
   // Each route in the table below will only be allowed if its condition is true.
   // If the URL matches no valid route, we redirect to the first route that is allowed. (see firstMatchPath below)
-  // So put routes with higher priority first. E.g. /form comes before /form/complete.
+  // So put routes with higher priority first. E.g. Profile comes before Baan and Schedule,
+  //    so if a user with isConfirm=true enters an invalid path, they gets redirected to Profile
 
   // prettier-ignore
   const routes = [
         {path: '/login',          component: Login,          condition: isLoggedOut                         },
         {path: '/form',           component: Form,           condition: !isConfirm                          },
-        {path: '/form/complete',  component: FormComplete,   condition: !isConfirm                          },
         {path: '/covid',          component: Covid,          condition: !isConfirm && currentBaan !== -1    },
         {path: '/',               component: Profile,        condition: isConfirm || currentBaan === -1     },
         {path: '/baan',           component: Baan,           condition: isConfirm                           },
         {path: '/schedule',       component: Schedule,       condition: isConfirm                           },
+        {path: '/form/complete',  component: FormComplete,   condition: isConfirm                           },
   ]
 
   const firstMatchPath = routes.find((r) => r.condition)?.path ?? '/' // There would always be a match for the find(). The ?? "/" is just to placate typescript.
