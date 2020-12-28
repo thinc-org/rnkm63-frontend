@@ -284,16 +284,14 @@ function FormUI(props: IFormUI) {
                   />
                 </Box>
               </RootRef>
-              <Box>
-                {userData.data && userData.currentBaan !== -1 && (
-                  <Button
-                    className={style.leaveMobile}
-                    onClick={() => leaveActivity()}
-                  >
-                    {t('leaveButton')}
-                  </Button>
-                )}
-              </Box>
+              {userData.data && userData.currentBaan !== -1 && (
+                <Button
+                  className={style.leaveMobile}
+                  onClick={() => leaveActivity()}
+                >
+                  {t('leaveButton')}
+                </Button>
+              )}
               <Box className={style.formInput}>
                 <FormInput />
               </Box>
