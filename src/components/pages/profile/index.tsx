@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import BaanRender from './BaanRender'
-import Countdown from './Countdown'
+import CountdownTimer from './Countdown'
 import Reenter from './reenter'
 import { profileStyles } from './styles/profileStyles'
 import { getRound } from './utils/requestToApi'
@@ -35,12 +35,12 @@ function Profile() {
   const startSelect = new Date('2021-01-09 12:00:00').valueOf()
   const endOfSelect = new Date('2021-01-13 12:00:00').valueOf()
   const currentTime = new Date().valueOf()
-  const endTime = new Date(getEndTime(round)).valueOf()
-  let secs = (endTime - currentTime) / 1000
-  if (secs < 0) {
-    const nextStartTime = new Date(getStartTime(round + 1)).valueOf()
-    secs = (currentTime - nextStartTime) / 1000
-  }
+
+  const endTimeString = getEndTime(round)
+  const nextStartTime = getStartTime(round + 1)
+  const endTime = new Date(endTimeString).valueOf()
+  let secs = endTime - currentTime
+  let process = secs < 0 ? true : false
 
   if (!userInfo) return fail({})
   return (
@@ -87,9 +87,10 @@ function Profile() {
         <Reenter />
       ) : (
         currentTime < startSelect && ( //participant, display countdown before round 2
-          <Countdown
-            timeLeft={(startSelect - currentTime) / 1000}
+          <CountdownTimer
+            timeLeft={getStartTime(1)}
             roundCount={false}
+            processing={false}
           />
         )
       )}
@@ -102,7 +103,11 @@ function Profile() {
               preferBaan={userInfo.preferBaan}
               currentBaan={userInfo.currentBaan}
             />
-            <Countdown timeLeft={secs} roundCount={true} />
+            <CountdownTimer
+              timeLeft={secs < 0 ? nextStartTime : endTimeString}
+              roundCount={true}
+              processing={process}
+            />
           </>
         )}
     </body>
