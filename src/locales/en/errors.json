@@ -7,13 +7,13 @@
     "detail": "Page not found"
   },
   "codes": {
-    "104": "For CU104 only",
-    "500": "Internal Server Error",
-    "503": "Service Unavaliable",
     "400": "Bad request",
     "401": "Unauthorized",
     "403": "Forbidden",
     "409": "You have already confirmed",
+    "499": "For CU104 only",
+    "500": "Internal Server Error",
+    "503": "Service Unavaliable",
     "unknown": "Unknown Error"
   }
 }
