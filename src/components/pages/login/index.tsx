@@ -12,6 +12,7 @@ import { UserContext } from 'contexts/UserContext'
 import { SendTicketToBack } from 'controllers/LoginController'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
 
 import indexStyle from './indexStyle'
 import LoginButton from './LoginButton'
@@ -41,14 +42,15 @@ function Login() {
   const { t } = useTranslation('login')
   const [agree, setAgree] = React.useState(false)
   const [isLoggingIn, setIsLoggingIn] = React.useState(true)
-  //STEP: 0 = start (not logged in). 1 = verifying ticket. 2 = ticket verified and cookie set. 3 = user loaded and everything done
+  const history = useHistory()
   const style = indexStyle()
   const { load: loadUser } = React.useContext(UserContext)
 
-  const onVerifyComplete = React.useCallback(() => {
+  const onVerifyComplete = React.useCallback(async () => {
     setIsLoggingIn(false)
-    loadUser()
-  }, [loadUser])
+    await loadUser()
+    history.push('/covid')
+  }, [loadUser, history])
 
   const onVerifyError = React.useCallback(
     (e: IFailure) => {

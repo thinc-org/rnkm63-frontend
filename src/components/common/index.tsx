@@ -1,4 +1,4 @@
-import LinkButton from './LinkButton'
+import { Button, LinkButton } from './Button'
 import Loading from './Loading'
 
-export { LinkButton, Loading }
+export { Button, LinkButton, Loading }

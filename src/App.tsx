@@ -14,11 +14,11 @@ const useStyles = makeStyles({
   AppContainer: {
     minHeight: '100vh',
     display: 'flex',
+    minWidth: '280px',
     flexDirection: 'column',
   },
   BackgroundContainer: {
     flex: 1,
-    minWidth: '280px',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#212121',
