@@ -67,7 +67,9 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={!userError ? 'center' : 'flex-end'}
+        justifyContent={
+          !userError && userInfo?.currentBaan !== -1 ? 'center' : 'flex-end'
+        }
         className={classes.headerPart}
       >
         <Hidden xsDown>
