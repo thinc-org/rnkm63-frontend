@@ -52,17 +52,12 @@ function Login() {
     history.push('/covid')
   }, [loadUser, history])
 
-  const onVerifyError = React.useCallback(
-    (e: IFailure) => {
-      if (e.status === 403)
-        fail({
-          ...e,
-          title: t('not104'),
-        })
-      else fail(e)
-    },
-    [t]
-  )
+  const onVerifyError = React.useCallback((e: IFailure) => {
+    if (e.status === 403) {
+      e.status = 104
+    }
+    fail(e)
+  }, [])
 
   React.useEffect(() => {
     let query = new URLSearchParams(window.location.search)
