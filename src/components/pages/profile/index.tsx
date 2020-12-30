@@ -95,7 +95,8 @@ function Profile() {
           />
         )
       )}
-      {currentTime < endOfSelect &&
+      {userInfo?.currentBaan !== -1 &&
+        currentTime < endOfSelect &&
         startSelect < currentTime && ( // round 2
           <>
             <BaanRender
