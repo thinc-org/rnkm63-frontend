@@ -29,11 +29,11 @@ function searchBaan(
       const capacity = findCapacity.capacity - findCapacity.memberCount
       const request = findCapacity.requestCount
 
-      let color = ''
+      let color = '#D34949'
       const mem = request
       const bpOne = 0.8 * capacity
-      if (mem > capacity) color = 'red'
-      else if (mem <= capacity && bpOne <= mem) color = 'yellow'
+      if (mem > capacity) color = '#D34949'
+      else if (mem <= capacity && bpOne <= mem) color = '#F2C94C'
       else color = '#44AD53'
 
       filterData.push({
