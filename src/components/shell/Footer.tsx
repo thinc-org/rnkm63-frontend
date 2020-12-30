@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from '@material-ui/core'
+import { Box, makeStyles, Theme, Typography } from '@material-ui/core'
 import { withSuspense } from 'components/hoc'
 import EISA from 'local/EISA.svg'
 import kohkae from 'local/kohkae.svg' //Left
@@ -9,17 +9,23 @@ import THINCIcon from 'local/thinc_logo.svg'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   icon: {
     margin: '0 8px 12px 8px',
     height: '32px',
+    [theme.breakpoints.up('sm')]: {
+      height: '36px',
+    },
   },
   footerFont: {
     color: '#8D8D8D',
     textAlign: 'center',
     fontSize: '0.625em',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '0.875em',
+    },
   },
-})
+}))
 function Footer() {
   const classes = useStyles()
   const { t } = useTranslation('footer')
