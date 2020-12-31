@@ -12,7 +12,7 @@ import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import { UserContext } from 'contexts/UserContext'
-import iconSelectBaan from 'local/iconSelectBaan.svg'
+import iconSelectBaan from 'local/iconSelectBaan.png'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -62,7 +62,11 @@ const ItemDrawer = () => {
             <ListItem component={Link} to={'/baan'}>
               <Button className={classes.eachList}>
                 <ListItemIcon className={classes.selectBaan}>
-                  <img alt="" src={iconSelectBaan} />
+                  <img
+                    alt=""
+                    src={iconSelectBaan}
+                    style={{ width: '20px', height: '20px' }}
+                  />
                 </ListItemIcon>
                 <Box
                   fontSize={16}
