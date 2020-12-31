@@ -36,9 +36,9 @@ export default function Routes() {
   // prettier-ignore
   const routes = [
         {path: '/login',          component: Login,          condition: isLoggedOut                                         },
+        {path: '/',               component: Profile,        condition: isConfirm || currentBaan === -1                     },
         {path: '/form',           component: Form,           condition: !isLoggedOut && !isConfirm                          },
         {path: '/covid',          component: Covid,          condition: !isLoggedOut && !isConfirm && currentBaan !== -1    },
-        {path: '/',               component: Profile,        condition: isConfirm || currentBaan === -1                     },
         {path: '/baan',           component: Baan,           condition: isConfirm                                           },
         {path: '/schedule',       component: Schedule,       condition: isConfirm                                           },
         {path: '/form/complete',  component: FormComplete,   condition: isConfirm                                           },
