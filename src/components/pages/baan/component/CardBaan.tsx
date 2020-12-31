@@ -38,6 +38,10 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             handleClickOpen()
             setDialogData(data.ID)
           }}
+          classes={{
+            root: classes.actionArea,
+            focusHighlight: classes.focusHighlight,
+          }}
         >
           <CardContent>
             <Typography className={classes.card_title}>

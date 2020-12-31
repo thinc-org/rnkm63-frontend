@@ -25,6 +25,12 @@ const useStyles = makeStyles((theme: Theme) =>
       },
       paddingBottom: theme.spacing(2),
     },
+    actionArea: {
+      '&:hover $focusHighlight': {
+        opacity: 0,
+      },
+    },
+    focusHighlight: {},
     paper: {
       padding: theme.spacing(1),
       margin: 'auto',
@@ -95,6 +101,10 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
           onClick={() => {
             props.handleClickOpen()
             props.setDialogData(data.ID)
+          }}
+          classes={{
+            root: classes.actionArea,
+            focusHighlight: classes.focusHighlight,
           }}
         >
           <Grid container spacing={2}>
