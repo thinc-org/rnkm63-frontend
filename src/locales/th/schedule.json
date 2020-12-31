@@ -1,0 +1,15 @@
+{
+  "schedule_title": "กำหนดการ",
+  "history_title": "ประวัติคำขอ",
+  "table_round_title": "รอบ",
+  "table_date_title": "วันที่",
+  "table_time_title": "เวลา",
+  "could_not_join": "เข้าร่วมไม่สำเร็จ",
+  "joined": "เข้าร่วมสำเร็จ",
+  "left": "ออกจาก",
+  "moved_to": "ย้ายไปสำเร็จ",
+  "could_not_moved_to": "ย้ายไปไม่สำเร็จ",
+  "instead_join": "ย้ายเข้าไปร่วม",
+  "no_request": "ไม่มีคำขอ",
+  "jan": "ม.ค."
+}
