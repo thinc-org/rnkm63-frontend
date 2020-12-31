@@ -5,10 +5,10 @@ export interface Baan {
   'name-en': string
   'caption-th': string[]
   'caption-en': string[]
-  facebook: string
-  instagram: string
-  iglink: string
-  fblink: string
+  facebook?: string
+  instagram?: string
+  iglink?: string
+  fblink?: string
 }
 
 export const baanInfo: Baan[] = [
@@ -21,8 +21,6 @@ export const baanInfo: Baan[] = [
     'caption-en': [],
     facebook: '-',
     instagram: '-',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 1,
@@ -95,10 +93,6 @@ export const baanInfo: Baan[] = [
       '',
       'Only you can help us! See you on January 23-24.',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 6,
@@ -123,10 +117,6 @@ export const baanInfo: Baan[] = [
       '',
       '-REAL STICK WITH REAL-',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 7,
@@ -185,10 +175,6 @@ export const baanInfo: Baan[] = [
       'KOOM Needs to revolution.',
       'Our new empire is beginning.',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 9,
@@ -404,10 +390,6 @@ export const baanInfo: Baan[] = [
       'ทุกคนอาจจะงงว่าบ้านโคะคือบ้านแบบไหน👀และเหมาะกับใคร ตอบได้เลยว่าบ้านโคะเป็นบ้านแห่งความหลากหลายทางความคิดสร้างสรรค์และความสนุกสนาน แล้วมาสุดมันส์ไปด้วยกันนน🤟🏼',
     ],
     'caption-en': ['Koh', '', 'Live like we’re drunk'],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 19,
@@ -538,10 +520,6 @@ export const baanInfo: Baan[] = [
       '',
       'So, are you ready?? Put your hands up!🙌🏻',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 24,
@@ -589,10 +567,6 @@ export const baanInfo: Baan[] = [
       '',
       'Indiana’s Journey in Giza — you are our treasure.',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 29,
@@ -612,10 +586,6 @@ export const baanInfo: Baan[] = [
       'Welcome, all wizards and witches to Rubnongkaomai.🎉🎉🎉',
       'Prepare yourself for new adventures, activities, and games that are waiting for you. Let the wizards and witches of all 4 houses get ready to join the story of Harry Potter and define the end of our story together.',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
   {
     ID: 34,
@@ -644,10 +614,6 @@ export const baanInfo: Baan[] = [
       '',
       'Working from home won’t be boring anymore if you come to join us.',
     ],
-    facebook: '',
-    instagram: '',
-    iglink: '',
-    fblink: '',
   },
 ]
 
@@ -667,10 +633,6 @@ export function getBaan(baanNumber: number): Baan {
       'name-en': '-',
       'caption-th': [],
       'caption-en': [],
-      facebook: '',
-      instagram: '',
-      iglink: '',
-      fblink: '',
     }
   }
 }
