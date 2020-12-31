@@ -67,11 +67,11 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={!userError ? 'center' : 'flex-end'}
+        justifyContent={userInfo?.isConfirm ? 'center' : 'flex-end'}
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {!userError && (
+          {!userError && userInfo?.isConfirm && (
             <>
               <LinkPage name={t('home')} link={'/'} />
               <LinkPage

@@ -1,5 +1,5 @@
 import { Box, Typography } from '@material-ui/core'
-import LinkButton from 'components/common/LinkButton'
+import { LinkButton } from 'components/common'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'

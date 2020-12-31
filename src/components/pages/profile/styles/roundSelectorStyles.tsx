@@ -17,6 +17,7 @@ export const roundStyles = makeStyles((theme: Theme) => ({
     width: '320px',
     borderRadius: '20px',
     margin: '20px 10px',
+    textTransform: 'none',
     [theme.breakpoints.down('sm')]: {
       margin: '10px 10px',
       width: '220px',
@@ -31,6 +32,7 @@ export const roundStyles = makeStyles((theme: Theme) => ({
     width: '320px',
     borderRadius: '20px',
     margin: '20px 10px',
+    textTransform: 'none',
     [theme.breakpoints.down('sm')]: {
       margin: '10px 10px',
       width: '220px',

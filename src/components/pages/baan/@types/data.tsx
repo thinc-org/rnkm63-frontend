@@ -1,12 +1,7 @@
+export type BaanSize = 'S' | 'M' | 'L' | 'XL'
+
 export interface IFilterData {
   ID: number
-  size: string
-  'name-en': string
-  'name-th': string
-  'caption-th': string[]
-  'caption-en': string[]
-  facebook: string
-  instagram: string
   capacity: number
   request: number
   color: string
@@ -18,3 +13,5 @@ export interface ICapacityData {
   memberCount: number
   requestCount: number
 }
+
+export type IFilterSize = Record<BaanSize, boolean>

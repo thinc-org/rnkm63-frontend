@@ -11,8 +11,8 @@
   "timeLeft": "เวลาที่เหลือ : ",
   "round": "รอบที่ ",
   "exitHouse": "ออกจากบ้าน",
-  "changeHouse": "เปลี่ยนบ้าน",
-  "selectHouse": "เลือกบ้าน",
+  "changeHouse": "ย้ายบ้าน",
+  "selectHouse": "เข้าร่วมบ้าน",
   "roundcnt": "รอบที่ {{count}} : ",
   "leaveBaan":"ยื่นออกจาก",
   "changeBaan":"ยื่นย้ายไป",
@@ -21,5 +21,7 @@
   "cancel":"ยกเลิก",
   "change":"เปลี่ยน",
   "baanAnnounce": "ประกาศผลใน : ",
+  "enterAct" : "ไม่เข้าร่วมกิจกรรม",
+  "enterActButton": "เข้าร่วมกิจกรรม",
   "process" : "รอการประมวลผลรอบที่ "
 }

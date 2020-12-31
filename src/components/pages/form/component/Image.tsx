@@ -17,12 +17,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
 
-import { imageStyle } from './style'
+import { imageStyle } from '../style'
 import {
   checkImageSize,
   getCroppedImg,
   getResizedImage,
-} from './utils/imageHelper'
+} from '../utils/imageHelper'
 
 interface resultImg {
   blob: Blob

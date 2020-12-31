@@ -98,4 +98,14 @@ export const indexStyle = makeStyles((theme: Theme) => ({
       display: 'none',
     },
   },
+  gridContainer: {
+    [theme.breakpoints.up(526)]: {
+      display: 'none',
+    },
+  },
+  cardContainer: {
+    [theme.breakpoints.down(526)]: {
+      display: 'none',
+    },
+  },
 }))

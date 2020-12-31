@@ -1,4 +1,5 @@
 import baan from './baan.json'
+import covid from './covid.json'
 import errors from './errors.json'
 import footer from './footer.json'
 import form from './form.json'
@@ -20,6 +21,7 @@ const en = {
   schedule,
   shell,
   selectbaan,
+  covid,
 }
 
 export default en

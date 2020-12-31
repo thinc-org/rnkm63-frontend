@@ -2,6 +2,5 @@
   "title": "Login",
   "description": "The registration process requires you to authenticate with your CUNET account. To proceed, you need to agree with the following:",
   "agreement": "I consent to the collection, use, and disclosure of my personal data from the CUNET system for registration of Rubnongkaomai 2020 event.",
-  "login": "Login with CUNET Account",
-  "not104": "For CU104 only"
+  "login": "Login with CUNET Account"
 }

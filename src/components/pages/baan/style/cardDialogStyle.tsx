@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(1.5),
     backgroundColor: '#383838',
@@ -11,17 +11,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
-  },
-  button_select: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    color: 'white',
-    fontSize: '1.125rem',
-    marginBottom: theme.spacing(0.5),
-    width: '207px',
-    borderRadius: '40px',
-    backgroundColor: '#44AD53',
   },
   button_select_card: {
     display: 'block',
@@ -34,6 +23,9 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '40px',
     height: '40px',
     backgroundColor: '#44AD53',
+    '&:hover': {
+      backgroundColor: theme.palette.success.main,
+    },
   },
   dialog_title: {
     textAlign: 'center',
@@ -54,6 +46,9 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(0),
     fontSize: '1.25rem',
     textAlign: 'center',
+    [theme.breakpoints.down('xs')]: {
+      fontSize: '18px',
+    },
   },
   fbandigicon_item: {
     alignItems: 'center',
@@ -80,6 +75,10 @@ export const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
+    [theme.breakpoints.down('xs')]: {
+      height: '75px',
+      width: '75px',
+    },
   },
   dialog_popup: {
     backdropFilter: 'blur(8px)',
@@ -88,3 +87,5 @@ export const useStyles = makeStyles((theme) => ({
     top: '105px',
   },
 }))
+
+export default useStyles

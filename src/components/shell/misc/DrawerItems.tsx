@@ -12,6 +12,7 @@ import EventNoteRoundedIcon from '@material-ui/icons/EventNoteRounded'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
 import MeetingRoomIcon from '@material-ui/icons/MeetingRoom'
 import { UserContext } from 'contexts/UserContext'
+import iconSelectBaan from 'local/iconSelectBaan.svg'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -45,45 +46,47 @@ const ItemDrawer = () => {
   return (
     <React.Fragment>
       <List>
-        <ListItem>
-          <Button className={classes.eachList} component={Link} to={'/'}>
-            <ListItemIcon>
-              <HomeOutlinedIcon style={{ color: 'white' }} />
-            </ListItemIcon>
-            <Box fontSize={16} fontWeight="fontWeightBold">
-              {t('home')}
-            </Box>
-          </Button>
-        </ListItem>
+        {!userError && userInfo?.isConfirm && (
+          <>
+            <ListItem>
+              <Button className={classes.eachList} component={Link} to={'/'}>
+                <ListItemIcon>
+                  <HomeOutlinedIcon style={{ color: 'white' }} />
+                </ListItemIcon>
+                <Box fontSize={16} fontWeight="fontWeightBold">
+                  {t('home')}
+                </Box>
+              </Button>
+            </ListItem>
 
-        {!userError && (
-          <ListItem component={Link} to={'/baan'}>
-            <Button className={classes.eachList}>
-              <ListItemIcon className={classes.selectBaan}>
-                <HomeOutlinedIcon />
-              </ListItemIcon>
-              <Box
-                fontSize={16}
-                fontWeight="fontWeightBold"
-                className={classes.selectBaan}
-              >
-                {userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')}
-              </Box>
-            </Button>
-          </ListItem>
-        )}
+            <ListItem component={Link} to={'/baan'}>
+              <Button className={classes.eachList}>
+                <ListItemIcon className={classes.selectBaan}>
+                  <img alt="" src={iconSelectBaan} />
+                </ListItemIcon>
+                <Box
+                  fontSize={16}
+                  fontWeight="fontWeightBold"
+                  className={classes.selectBaan}
+                >
+                  {userInfo?.currentBaan !== 0
+                    ? t('changeBaan')
+                    : t('joinBaan')}
+                </Box>
+              </Button>
+            </ListItem>
 
-        {!userError && (
-          <ListItem component={Link} to={'/schedule'}>
-            <Button className={classes.eachList}>
-              <ListItemIcon>
-                <EventNoteRoundedIcon style={{ color: 'white' }} />
-              </ListItemIcon>
-              <Box fontSize={16} fontWeight="fontWeightBold">
-                {t('schedule')}
-              </Box>
-            </Button>
-          </ListItem>
+            <ListItem component={Link} to={'/schedule'}>
+              <Button className={classes.eachList}>
+                <ListItemIcon>
+                  <EventNoteRoundedIcon style={{ color: 'white' }} />
+                </ListItemIcon>
+                <Box fontSize={16} fontWeight="fontWeightBold">
+                  {t('schedule')}
+                </Box>
+              </Button>
+            </ListItem>
+          </>
         )}
 
         <ListItem>
