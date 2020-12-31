@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core'
 
 const style = makeStyles((theme: Theme) => ({
   scheduleContainer: {
-    background: theme.palette.background.default,
+    background: theme.palette.primary.main,
     padding: 16,
     borderRadius: 10,
     marginBottom: 20,
@@ -14,8 +14,8 @@ const style = makeStyles((theme: Theme) => ({
     textAlign: 'center',
   },
   historyContainer: {
-    background: theme.palette.background.default,
-    padding: 30,
+    background: theme.palette.primary.main,
+    padding: '20px 30px 30px 30px',
     marginBottom: 30,
     borderRadius: 8,
   },
@@ -57,12 +57,16 @@ const style = makeStyles((theme: Theme) => ({
     fontSize: '0.8rem',
   },
   scheduleTable: {
-    background: theme.palette.primary.main,
+    background: '#8A8A8A',
     borderRadius: 25,
   },
   tableText: {
+    color: theme.palette.text.secondary,
     fontSize: '0.8rem',
     fontWeight: 500,
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.2rem',
+    },
   },
 }))
 

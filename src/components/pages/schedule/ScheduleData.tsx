@@ -15,12 +15,12 @@ const scheduleData = [
     round: 3,
     date: '10',
     start: '00.15',
-    end: '6.00',
+    end: '06.00',
   },
   {
     round: 4,
     date: '10',
-    start: '6.15',
+    start: '06.15',
     end: '12.00',
   },
   {
@@ -38,13 +38,13 @@ const scheduleData = [
   {
     round: 7,
     date: '11',
-    start: '0.15',
-    end: '6.00',
+    start: '00.15',
+    end: '06.00',
   },
   {
     round: 8,
     date: '11',
-    start: '6.15',
+    start: '06.15',
     end: '12.00',
   },
   {
@@ -62,13 +62,13 @@ const scheduleData = [
   {
     round: 11,
     date: '12',
-    start: '0.15',
-    end: '6.00',
+    start: '00.15',
+    end: '06.00',
   },
   {
     round: 12,
     date: '12',
-    start: '6.15',
+    start: '06.15',
     end: '12.00',
   },
   {
@@ -86,13 +86,13 @@ const scheduleData = [
   {
     round: 15,
     date: '13',
-    start: '0.15',
-    end: '6.00',
+    start: '00.15',
+    end: '06.00',
   },
   {
     round: 16,
     date: '13',
-    start: '6.15',
+    start: '06.15',
     end: '12.00',
   },
 ]
