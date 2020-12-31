@@ -7,6 +7,12 @@ const useStyles = makeStyles((theme) => ({
     height: 'auto',
     width: '207px',
   },
+  actionArea: {
+    '&:hover $focusHighlight': {
+      opacity: 0,
+    },
+  },
+  focusHighlight: {},
   centerit: {
     display: 'block',
     marginLeft: 'auto',

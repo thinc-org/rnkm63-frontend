@@ -35,6 +35,8 @@ const styles = (theme: Theme) =>
     avatar_picture: {},
     avatar_picture_card: {},
     dialog_popup: {},
+    focusHighlight: {},
+    actionArea: {},
   })
 
 interface DialogTitleProps extends WithStyles<typeof styles> {
