@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
+import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { baanInfo } from 'local/BaanInfo'
@@ -44,7 +45,9 @@ function Baan() {
   const [open, setOpen] = React.useState(false)
   const [dialogDataID, setDialogData] = useState<number>(0)
   const [capacityData, setCapacityData] = useState<ICapacityData[]>([])
-  const [currentFilterData, setCurrentFilterData] = useState<IFilterData[]>([])
+  const [currentFilterData, setCurrentFilterData] = useState<
+    IFilterData[] | null
+  >(null)
   const { t } = useTranslation('selectbaan')
   const style = indexStyle()
 
@@ -82,6 +85,7 @@ function Baan() {
   }, [searchValue, filterSize, capacityData])
 
   if (!userInfo) return null
+  else if (!currentFilterData) return <Loading />
   else {
     return (
       <Box className={style.container}>
