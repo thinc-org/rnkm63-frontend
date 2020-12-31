@@ -15,7 +15,7 @@ const style = makeStyles((theme: Theme) => ({
   },
   historyContainer: {
     background: theme.palette.primary.main,
-    padding: '20px 30px 30px 30px',
+    padding: 30,
     marginBottom: 30,
     borderRadius: 8,
   },
@@ -57,11 +57,11 @@ const style = makeStyles((theme: Theme) => ({
     fontSize: '0.8rem',
   },
   scheduleTable: {
-    background: '#8A8A8A',
+    background: theme.palette.primary.main,
     borderRadius: 25,
   },
   tableText: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.text.primary,
     fontSize: '0.8rem',
     fontWeight: 500,
     [theme.breakpoints.up('sm')]: {
