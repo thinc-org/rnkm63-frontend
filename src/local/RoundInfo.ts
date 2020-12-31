@@ -108,9 +108,9 @@ export function getEndTime(numRound: number): string {
     return item.round === numRound
   })
   if (sent) {
-    return `${sent.date} ${sent.endTime}`
+    return `${sent.date}T${sent.endTime}`
   } else {
-    return '2021-01-12 12:00:00'
+    return '2021-01-12T12:00:00'
   }
 }
 
@@ -119,8 +119,8 @@ export function getStartTime(numRound: number): string {
     return item.round === numRound
   })
   if (sent) {
-    return `${sent.date} ${sent.startTime}`
+    return `${sent.date}T${sent.startTime}`
   } else {
-    return '2021-01-12 12:00:00'
+    return '2021-01-12T12:00:00'
   }
 }
