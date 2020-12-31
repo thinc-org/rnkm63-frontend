@@ -33,8 +33,8 @@ function Profile() {
     fetchData()
   }, [])
 
-  const startSelect = new Date('2021-01-09T12:00:00').valueOf()
-  const endOfSelect = new Date('2021-01-13T12:00:00').valueOf()
+  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
+  const endOfSelect = new Date('2021-01-13T12:00:00+07:00').valueOf()
   const currentTime = new Date().valueOf()
 
   const endTimeString = getEndTime(round)
