@@ -112,18 +112,13 @@ const FormUI = React.memo(function FormUI(props: IFormUI) {
                 {t('leaveButton')}
               </Button>
             )}
-            <Box className={style.submitContainer}>
-              <Button
-                classes={{ root: style.submitButton }}
-                type="submit"
-                onClick={onSubmitClick}
-              >
-                {t('submit')}
-              </Button>
-              <Typography className={style.submitNote}>
-                {t('submitNote')}
-              </Typography>
-            </Box>
+            <Button
+              classes={{ root: style.submitButton }}
+              type="submit"
+              onClick={onSubmitClick}
+            >
+              {t('submit')}
+            </Button>
           </Box>
         </FormikForm>
       </Formik>
