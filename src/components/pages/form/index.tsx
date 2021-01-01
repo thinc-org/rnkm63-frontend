@@ -20,6 +20,7 @@ interface FormState {
   confirmOpen: boolean
   imageRequired: boolean
   submitClick: boolean
+  leaveOpen: boolean
   data: IUserData
   isSubmitLoading: boolean
   submitError: IFailure | null
@@ -37,6 +38,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       imageBlob: 0,
       confirmOpen: false,
       imageRequired: false,
+      leaveOpen: false,
       submitClick: false,
       data: formInitialValues,
       isSubmitLoading: false,
@@ -117,6 +119,16 @@ class Form extends React.PureComponent<FormProps, FormState> {
       )
     }
   }
+  openLeaveDialog: () => void = () => {
+    this.setState({
+      leaveOpen: true,
+    })
+  }
+  closeLeaveDialog: () => void = () => {
+    this.setState({
+      leaveOpen: false,
+    })
+  }
   setImageBlob: (blob: any) => void = (blob) => {
     this.setState({
       imageBlob: blob,
@@ -132,6 +144,7 @@ class Form extends React.PureComponent<FormProps, FormState> {
       submitClick: param,
     })
   }
+
   render() {
     const { user: userData } = this.context
     const { submitError, imageRequired, isSubmitLoading } = this.state
@@ -146,15 +159,22 @@ class Form extends React.PureComponent<FormProps, FormState> {
             imageBlob={this.state.imageBlob}
             submitClick={this.state.submitClick}
             setSubmitClick={this.setSubmitClick}
+            openLeaveDialog={this.openLeaveDialog}
             confirm={this.confirm}
             setImageBlob={this.setImageBlob}
             setImageRequired={this.setImageRequired}
-            leaveActivity={this.leaveActivity}
           />
           <FormDialog
             confirmOpen={this.state.confirmOpen}
             closeDialog={this.closeDialog}
             submit={this.submit}
+            text="confirm"
+          />
+          <FormDialog
+            confirmOpen={this.state.leaveOpen}
+            closeDialog={this.closeLeaveDialog}
+            submit={this.leaveActivity}
+            text="leave"
           />
         </React.Fragment>
       )
