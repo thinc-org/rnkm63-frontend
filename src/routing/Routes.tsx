@@ -53,21 +53,19 @@ export default function Routes() {
         {path: '/baan',           component: Baan,           condition: isConfirm                                           },
         {path: '/schedule',       component: Schedule,       condition: isConfirm                                           },
         {path: '/form/complete',  component: FormComplete,   condition: isConfirm                                           },
-  ]
+  ].filter(({condition}) => condition)
 
   const firstMatchPath = routes.find((r) => r.condition)?.path ?? '/' // There would always be a match for the find(). The ?? "/" is just to placate typescript.
 
   return (
     <>
-      <Header />
+      <Header allowedRoutes={routes.map(({ path }) => path)} />
       <Container className={classes.PageContainer}>
         <ErrorProvider>
           <Switch>
-            {routes
-              .filter((r) => r.condition)
-              .map(({ path, component }) => (
-                <Route path={path} exact component={component} key={path} />
-              ))}
+            {routes.map(({ path, component }) => (
+              <Route path={path} exact component={component} key={path} />
+            ))}
             <Route component={RedirectTo(firstMatchPath)} />
           </Switch>
         </ErrorProvider>

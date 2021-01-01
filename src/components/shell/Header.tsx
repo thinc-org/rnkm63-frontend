@@ -45,10 +45,18 @@ const useStyles = makeStyles({
   },
 })
 
-function Header() {
+interface IHeader {
+  allowedRoutes: string[]
+}
+
+function Header(props: IHeader) {
   const classes = useStyles()
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
+
+  const { allowedRoutes } = props
+
+  console.log(allowedRoutes)
 
   return (
     <Box
