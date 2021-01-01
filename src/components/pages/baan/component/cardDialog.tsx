@@ -78,6 +78,8 @@ const CardDialog = function CardDialog(props: ICardDialog) {
               href={value.iglink}
               color="inherit"
               style={{ pointerEvents: value?.iglink ? 'auto' : 'none' }}
+              target="_blank"
+              rel="noreferrer"
             >
               {value.instagram}
             </Link>
@@ -90,6 +92,8 @@ const CardDialog = function CardDialog(props: ICardDialog) {
               href={value.fblink}
               color="inherit"
               style={{ pointerEvents: value?.fblink ? 'auto' : 'none' }}
+              target="_blank"
+              rel="noreferrer"
             >
               {value.facebook}
             </Link>

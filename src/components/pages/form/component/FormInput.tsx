@@ -51,7 +51,7 @@ const FormInput = React.memo(function FormInput() {
             target="_blank"
             className={classes.link}
           >
-            CU for Freshman
+            CU for Freshmen
           </Link>
         </Typography>
       </Grid>
