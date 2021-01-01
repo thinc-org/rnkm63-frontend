@@ -29,7 +29,10 @@ const useStyles = makeStyles({
 function Covid() {
   const classes = useStyles()
   const { t } = useTranslation('covid')
-  const Content = React.lazy(t('content', { returnObjects: true }))
+  const Content = React.useMemo(
+    () => React.lazy(t('content', { returnObjects: true })),
+    [t]
+  )
   return (
     <Box flexDirection="column" alignItems="stretch" textAlign="center">
       <Typography variant="h2">{t('title')}</Typography>
