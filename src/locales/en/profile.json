@@ -18,14 +18,14 @@
   "changeHouse": "Change Baan",
   "selectHouse": "Select Baan",
   "roundcnt": "Round {{count}} : ",
-  "leaveBaan":"Leaving from",
-  "changeBaan":"Changing to",
-  "joinBaan":"Joining",
-  "request":"Total join requests : ",
-  "cancel":"Cancel",
-  "change":"Change",
+  "leaveBaan": "Leaving from",
+  "changeBaan": "Moving to",
+  "joinBaan": "Joining",
+  "request": "Total join requests : ",
+  "cancel": "Cancel",
+  "change": "Change",
   "baanAnnounce": "Baan Announcement in : ",
-  "enterAct" : "Not participating",
-  "enterActButton" : "Join event",
-  "process" : "Processing Round "
+  "enterAct": "Not participating",
+  "enterActButton": "Join event",
+  "process": "Processing Round "
 }
