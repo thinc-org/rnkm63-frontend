@@ -47,6 +47,7 @@ const useStyles = makeStyles({
 
 interface IHeader {
   allowedRoutes: string[]
+  isLoggedOut: boolean
 }
 
 function Header(props: IHeader) {
@@ -54,9 +55,10 @@ function Header(props: IHeader) {
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
-  const { allowedRoutes } = props
+  const { allowedRoutes, isLoggedOut } = props
 
   console.log(allowedRoutes)
+  console.log(isLoggedOut)
 
   return (
     <Box
