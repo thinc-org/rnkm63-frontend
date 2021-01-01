@@ -1,5 +1,7 @@
+import { Container, makeStyles } from '@material-ui/core'
 import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
+import ErrorProvider from 'components/ErrorProvider'
 import {
   Baan,
   Covid,
@@ -9,15 +11,24 @@ import {
   Profile,
   Schedule,
 } from 'components/pages'
+import { Header } from 'components/shell'
 import { UserContext } from 'contexts/UserContext'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+
+const useStyles = makeStyles({
+  PageContainer: {
+    flex: 1,
+  },
+})
 
 function RedirectTo(to: string): React.FC {
   return () => <Redirect to={to} />
 }
 
 export default function Routes() {
+  const classes = useStyles()
+
   const { user, isLoaded, error } = React.useContext(UserContext)
   if (!isLoaded) return <Loading />
 
@@ -47,13 +58,20 @@ export default function Routes() {
   const firstMatchPath = routes.find((r) => r.condition)?.path ?? '/' // There would always be a match for the find(). The ?? "/" is just to placate typescript.
 
   return (
-    <Switch>
-      {routes
-        .filter((r) => r.condition)
-        .map(({ path, component }) => (
-          <Route path={path} exact component={component} key={path} />
-        ))}
-      <Route component={RedirectTo(firstMatchPath)} />
-    </Switch>
+    <>
+      <Header />
+      <Container className={classes.PageContainer}>
+        <ErrorProvider>
+          <Switch>
+            {routes
+              .filter((r) => r.condition)
+              .map(({ path, component }) => (
+                <Route path={path} exact component={component} key={path} />
+              ))}
+            <Route component={RedirectTo(firstMatchPath)} />
+          </Switch>
+        </ErrorProvider>
+      </Container>
+    </>
   )
 }
