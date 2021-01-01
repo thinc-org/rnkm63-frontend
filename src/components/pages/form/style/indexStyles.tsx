@@ -41,7 +41,7 @@ const indexStyle = makeStyles(
     submitButton: {
       background: theme.palette.success.main,
       borderRadius: '40px',
-      width: '100%',
+      width: '50%',
       height: '43px',
       display: 'block',
       fontSize: '1rem',
@@ -51,19 +51,9 @@ const indexStyle = makeStyles(
       '&:hover': {
         background: theme.palette.success.main,
       },
-      [theme.breakpoints.up('sm')]: {
-        width: '100%',
+      [theme.breakpoints.up('md')]: {
+        width: '434px',
         fontSize: '1.125rem',
-      },
-    },
-    submitNote: {
-      textAlign: 'center',
-      color: theme.palette.warning.main,
-      fontWeight: 400,
-      fontSize: '	0.75rem',
-      marginTop: theme.spacing(1.5),
-      [theme.breakpoints.up('sm')]: {
-        marginTop: theme.spacing(2),
       },
     },
     dialog: {
@@ -148,11 +138,6 @@ const indexStyle = makeStyles(
         display: 'flex',
       },
     },
-    submitContainer: {
-      display: 'block',
-      width: '50%',
-      margin: 'auto',
-    },
     leaveMobile: {
       width: '50%',
       height: '43px',
@@ -165,7 +150,6 @@ const indexStyle = makeStyles(
       '&:hover': {
         backgroundColor: theme.palette.error.main,
       },
-      marginBottom: theme.spacing(1),
       [theme.breakpoints.down(320)]: {
         fontSize: '0.8rem',
       },
