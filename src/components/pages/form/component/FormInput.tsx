@@ -10,7 +10,7 @@ import {
 } from '../utils/registerSchema'
 import { FormSelectField, FormTextField } from './formComponent'
 
-function FormInput() {
+const FormInput = React.memo(function FormInput() {
   const classes = formStyle()
   const { t } = useTranslation('form')
 
@@ -95,6 +95,6 @@ function FormInput() {
       </Grid>
     </React.Fragment>
   )
-}
+})
 
 export default FormInput

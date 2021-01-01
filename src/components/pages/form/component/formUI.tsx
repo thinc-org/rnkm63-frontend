@@ -22,7 +22,7 @@ interface IFormUI {
   leaveActivity: () => void
 }
 
-function FormUI(props: IFormUI) {
+const FormUI = React.memo(function FormUI(props: IFormUI) {
   const {
     userData,
     imageBlob,
@@ -41,6 +41,10 @@ function FormUI(props: IFormUI) {
   if (userData.isNameWrong && !!userData.data) {
     userData.data.nickname = ''
   }
+
+  const onSubmitClick = React.useCallback(() => {
+    setSubmitClick(true)
+  }, [setSubmitClick])
 
   return (
     <Box className={style.container}>
@@ -74,7 +78,7 @@ function FormUI(props: IFormUI) {
                   <React.Fragment>
                     <Button
                       className={style.leaveEvent}
-                      onClick={() => leaveActivity()}
+                      onClick={leaveActivity}
                     >
                       {t('leaveButton')}
                     </Button>
@@ -101,10 +105,7 @@ function FormUI(props: IFormUI) {
               </RootRef>
               <Box>
                 {userData.data && userData.currentBaan !== -1 && (
-                  <Button
-                    className={style.leaveMobile}
-                    onClick={() => leaveActivity()}
-                  >
+                  <Button className={style.leaveMobile} onClick={leaveActivity}>
                     {t('leaveButton')}
                   </Button>
                 )}
@@ -116,10 +117,7 @@ function FormUI(props: IFormUI) {
             <Button
               classes={{ root: style.submitButton }}
               type="submit"
-              onClick={() => {
-                setSubmitClick(true)
-                props.isSubmitting = true
-              }}
+              onClick={onSubmitClick}
             >
               {t('submit')}
             </Button>
@@ -131,6 +129,6 @@ function FormUI(props: IFormUI) {
       </Formik>
     </Box>
   )
-}
+})
 
 export default FormUI
