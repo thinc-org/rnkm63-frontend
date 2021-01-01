@@ -6,20 +6,37 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
   content: {
-    whiteSpace: 'pre-wrap',
+    textAlign: 'start',
+    '& li': {
+      listStyle: 'none',
+      display: 'table',
+      '&:before': {
+        display: 'table-cell',
+        paddingEnd: '0.5em',
+        content: 'counters(item, ".")". "',
+        counterIncrement: 'item',
+      },
+      '& p': {
+        display: 'inline',
+      },
+    },
+    '& ul': {
+      counterReset: 'item',
+    },
   },
 })
 
 function Covid() {
   const classes = useStyles()
   const { t } = useTranslation('covid')
+  const Content = React.lazy(t('content', { returnObjects: true }))
   return (
     <Box flexDirection="column" alignItems="stretch" textAlign="center">
       <Typography variant="h2">{t('title')}</Typography>
       <Paper elevation={3}>
         <Box padding="2rem">
-          <Typography variant="body1" className={classes.content}>
-            {t('content')}
+          <Typography className={classes.content}>
+            <Content />
           </Typography>
         </Box>
       </Paper>
