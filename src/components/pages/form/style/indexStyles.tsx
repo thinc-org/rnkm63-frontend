@@ -42,16 +42,18 @@ const indexStyle = makeStyles(
       background: theme.palette.success.main,
       borderRadius: '40px',
       width: '100%',
+      height: '43px',
       display: 'block',
-      margin: 'auto',
-      fontSize: '1.125rem',
+      fontSize: '1rem',
       fontWeight: 700,
+      margin: 'auto',
       textTransform: 'none',
       '&:hover': {
         background: theme.palette.success.main,
       },
       [theme.breakpoints.up('sm')]: {
-        width: '434px',
+        width: '100%',
+        fontSize: '1.125rem',
       },
     },
     submitNote: {
@@ -128,6 +130,8 @@ const indexStyle = makeStyles(
       background: theme.palette.error.main,
       borderRadius: '40px',
       width: '280px',
+      textTransform: 'none',
+      fontWeight: 700,
       fontSize: '18px',
       '&:hover': {
         backgroundColor: theme.palette.error.main,
@@ -139,15 +143,32 @@ const indexStyle = makeStyles(
       color: '#F2C94C',
       fontSize: '12px',
     },
+    confirmContainer: {
+      [theme.breakpoints.down('sm')]: {
+        display: 'flex',
+      },
+    },
+    submitContainer: {
+      display: 'block',
+      width: '50%',
+      margin: 'auto',
+    },
     leaveMobile: {
-      width: '100%',
+      width: '50%',
+      height: '43px',
+      textTransform: 'none',
+      fontWeight: 700,
       background: theme.palette.error.main,
       borderRadius: '40px',
-      fontSize: '18px',
+      fontSize: '1rem',
+      marginRight: theme.spacing(1.5),
       '&:hover': {
         backgroundColor: theme.palette.error.main,
       },
       marginBottom: theme.spacing(1),
+      [theme.breakpoints.down(320)]: {
+        fontSize: '0.8rem',
+      },
       [theme.breakpoints.up('md')]: {
         display: 'none',
       },

@@ -13,6 +13,7 @@ import { indexStyle } from '../style'
 
 interface IFormDialog {
   confirmOpen: boolean
+  text: string
   closeDialog: () => void
   submit: () => void
 }
@@ -20,7 +21,7 @@ interface IFormDialog {
 const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
   const style = indexStyle()
   const { t } = useTranslation('form')
-  const { confirmOpen, closeDialog, submit } = props
+  const { confirmOpen, closeDialog, submit, text } = props
   return (
     <Dialog
       open={confirmOpen}
@@ -37,7 +38,7 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
       </DialogTitle>
       <DialogContent>
         <Typography className={style.dialogContent}>
-          {t('confirmDescription')}
+          {t(`${text}DialogDescription`)}
         </Typography>
       </DialogContent>
       <DialogActions classes={{ root: style.dialogAction }}>

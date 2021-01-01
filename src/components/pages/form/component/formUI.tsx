@@ -17,9 +17,9 @@ interface IFormUI {
   submitClick: boolean
   setSubmitClick: (param: boolean) => void
   setImageBlob: (blob: any) => void
+  openLeaveDialog: () => void
   setImageRequired: (param: boolean) => void
   confirm: (value: IUserData) => void
-  leaveActivity: () => void
 }
 
 const FormUI = React.memo(function FormUI(props: IFormUI) {
@@ -31,8 +31,8 @@ const FormUI = React.memo(function FormUI(props: IFormUI) {
     setSubmitClick,
     confirm,
     setImageBlob,
+    openLeaveDialog,
     setImageRequired,
-    leaveActivity,
   } = props
   const { t } = useTranslation('form')
   const style = indexStyle()
@@ -63,69 +63,69 @@ const FormUI = React.memo(function FormUI(props: IFormUI) {
           )
         }}
       >
-        {(props) => (
-          <FormikForm>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <Typography className={style.title}>
-                {!userData.data ? t('register') : t('editProfile')}
-              </Typography>
-              <Box className={style.leaveContainer}>
-                {userData.data && userData.currentBaan !== -1 && (
-                  <React.Fragment>
-                    <Button
-                      className={style.leaveEvent}
-                      onClick={leaveActivity}
-                    >
-                      {t('leaveButton')}
-                    </Button>
-                    <Typography className={style.leaveEventDescription}>
-                      {t('leaveDescription')}
-                    </Typography>
-                  </React.Fragment>
-                )}
-              </Box>
-            </Box>
-            <Box className={style.content}>
-              <RootRef rootRef={imageRef}>
-                <Box className={style.image}>
-                  <Image
-                    setImageBlob={setImageBlob}
-                    preImage={
-                      userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
-                    }
-                    imageRequired={imageRequired}
-                    setImageRequired={setImageRequired}
-                    isImgWrong={userData.isImgWrong || !userData.data}
-                  />
-                </Box>
-              </RootRef>
-              <Box>
-                {userData.data && userData.currentBaan !== -1 && (
-                  <Button className={style.leaveMobile} onClick={leaveActivity}>
+        <FormikForm>
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
+            <Typography className={style.title}>
+              {!userData.data ? t('register') : t('editProfile')}
+            </Typography>
+            <Box className={style.leaveContainer}>
+              {userData.data && userData.currentBaan !== -1 && (
+                <React.Fragment>
+                  <Button
+                    className={style.leaveEvent}
+                    onClick={openLeaveDialog}
+                  >
                     {t('leaveButton')}
                   </Button>
-                )}
-              </Box>
-              <Box className={style.formInput}>
-                <FormInput />
-              </Box>
+                  <Typography className={style.leaveEventDescription}>
+                    {t('leaveDescription')}
+                  </Typography>
+                </React.Fragment>
+              )}
             </Box>
-            <Button
-              classes={{ root: style.submitButton }}
-              type="submit"
-              onClick={onSubmitClick}
-            >
-              {t('submit')}
-            </Button>
-            <Typography className={style.submitNote}>
-              {t('submitNote')}
-            </Typography>
-          </FormikForm>
-        )}
+          </Box>
+          <Box className={style.content}>
+            <RootRef rootRef={imageRef}>
+              <Box className={style.image}>
+                <Image
+                  setImageBlob={setImageBlob}
+                  preImage={
+                    userData.isImgWrong ? '' : userData.data?.imgURL ?? ''
+                  }
+                  imageRequired={imageRequired}
+                  setImageRequired={setImageRequired}
+                  isImgWrong={userData.isImgWrong || !userData.data}
+                />
+              </Box>
+            </RootRef>
+            <Box className={style.formInput}>
+              <FormInput />
+            </Box>
+          </Box>
+          <Box className={style.confirmContainer}>
+            {userData.data && userData.currentBaan !== -1 && (
+              <Button className={style.leaveMobile} onClick={openLeaveDialog}>
+                {t('leaveButton')}
+              </Button>
+            )}
+            <Box className={style.submitContainer}>
+              <Button
+                classes={{ root: style.submitButton }}
+                type="submit"
+                onClick={onSubmitClick}
+              >
+                {t('submit')}
+              </Button>
+              <Typography className={style.submitNote}>
+                {t('submitNote')}
+              </Typography>
+            </Box>
+          </Box>
+        </FormikForm>
       </Formik>
     </Box>
   )
