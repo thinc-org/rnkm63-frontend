@@ -39,16 +39,8 @@ function Footer() {
           flexDirection="row"
           justifyContent="center"
         >
-          <SkeletonImage
-            src={SGCUIcon}
-            alt="SGCUIcon"
-            className={classes.icon}
-          />
-          <SkeletonImage
-            src={THINCIcon}
-            alt="THINCIcon"
-            className={classes.icon}
-          />
+          <SkeletonImage src={SGCUIcon} alt="" className={classes.icon} />
+          <SkeletonImage src={THINCIcon} alt="" className={classes.icon} />
         </Box>
         <Box
           display="flex"
@@ -56,10 +48,10 @@ function Footer() {
           flexDirection="row"
           justifyContent="center"
         >
-          <SkeletonImage src={EISA} alt="EISA" className={classes.icon} />
-          <SkeletonImage src={kohkae} alt="kohkae" className={classes.icon} />
-          <SkeletonImage src={Major} alt="Major" className={classes.icon} />
-          <SkeletonImage src={SPT} alt="SPT" className={classes.icon} />
+          <SkeletonImage src={EISA} alt="" className={classes.icon} />
+          <SkeletonImage src={kohkae} alt="" className={classes.icon} />
+          <SkeletonImage src={Major} alt="" className={classes.icon} />
+          <SkeletonImage src={SPT} alt="" className={classes.icon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
           {t('firstline')}
