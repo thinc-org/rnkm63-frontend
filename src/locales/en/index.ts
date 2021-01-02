@@ -1,4 +1,4 @@
-import { importMDX } from 'mdx.macro'
+//import { importMDX } from 'mdx.macro'
 
 import baan from './baan.json'
 import covidJson from './covid.json'
@@ -14,7 +14,7 @@ import shell from './shell.json'
 
 const covid = {
   ...covidJson,
-  content: () => importMDX('./Covid.mdx'),
+  //content: () => importMDX('./Covid.mdx'),
 }
 
 const en = {
