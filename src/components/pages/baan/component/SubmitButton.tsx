@@ -21,9 +21,9 @@ const SubmitButton = React.memo(function FormDialog(props: ISubmitButton) {
     forceRefresh: true,
   })
 
-  const sendToProfile = async (id: number) => {
+  const sendToProfile = async () => {
     try {
-      await postRequestBaan(id)
+      await postRequestBaan(ID)
       history.push('/')
     } catch (err) {
       fail(err)
@@ -35,7 +35,7 @@ const SubmitButton = React.memo(function FormDialog(props: ISubmitButton) {
       className={classes.button_select_card}
       variant="contained"
       disabled={disabled}
-      onClick={() => sendToProfile(ID)}
+      onClick={sendToProfile}
       color="primary"
       style={{ color: color }}
     >
