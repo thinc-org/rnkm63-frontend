@@ -1,4 +1,5 @@
 import { Box, makeStyles, Theme, Typography } from '@material-ui/core'
+import SkeletonImage from 'components/common/SkeletonImage'
 import { withSuspense } from 'components/hoc'
 import EISA from 'local/EISA.svg'
 import kohkae from 'local/kohkae.svg' //Left
@@ -38,8 +39,8 @@ function Footer() {
           flexDirection="row"
           justifyContent="center"
         >
-          <img src={SGCUIcon} alt="" className={classes.icon} />
-          <img src={THINCIcon} alt="" className={classes.icon} />
+          <SkeletonImage src={SGCUIcon} alt="" className={classes.icon} />
+          <SkeletonImage src={THINCIcon} alt="" className={classes.icon} />
         </Box>
         <Box
           display="flex"
@@ -47,10 +48,10 @@ function Footer() {
           flexDirection="row"
           justifyContent="center"
         >
-          <img src={EISA} alt="" className={classes.icon} />
-          <img src={kohkae} alt="" className={classes.icon} />
-          <img src={Major} alt="" className={classes.icon} />
-          <img src={SPT} alt="" className={classes.icon} />
+          <SkeletonImage src={EISA} alt="" className={classes.icon} />
+          <SkeletonImage src={kohkae} alt="" className={classes.icon} />
+          <SkeletonImage src={Major} alt="" className={classes.icon} />
+          <SkeletonImage src={SPT} alt="" className={classes.icon} />
         </Box>
         <Typography variant="body1" className={classes.footerFont}>
           {t('firstline')}

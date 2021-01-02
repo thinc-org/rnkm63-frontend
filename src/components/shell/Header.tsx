@@ -81,7 +81,7 @@ function Header(props: IHeader) {
       alignItems="center"
     >
       <Box flex="1" className={classes.headerPart}>
-        <Link to={allowedRoutes[0]} className={classes.rnkmLogoLink}>
+        <Link to={'/'} className={classes.rnkmLogoLink}>
           <img src={RnkmLogo} alt="" className={classes.rnkmLogo} />
         </Link>
       </Box>
