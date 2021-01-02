@@ -13,9 +13,9 @@ import Reenter from './reenter'
 import { profileStyles } from './styles/profileStyles'
 
 function Profile() {
-  const { user: userInfo } = React.useContext(UserContext)
+  const { user: userInfo, error } = React.useContext(UserContext)
   const { t, i18n } = useTranslation('profile')
-  if (!userInfo) return fail({})
+  if (!userInfo) return fail(error)
   const userPic = userInfo?.data?.imgURL ?? ''
   const baanEng = getBaan(userInfo?.currentBaan ?? 0)['name-en']
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
