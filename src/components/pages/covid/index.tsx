@@ -37,9 +37,9 @@ function Covid() {
   */
   return (
     <Box flexDirection="column" alignItems="stretch" textAlign="center">
-      <Typography variant="h2">{t('title')}</Typography>
       <Paper elevation={3}>
         <Box padding="2rem">
+          <Typography variant="h4">{t('title')}</Typography>
           <Typography className={classes.content}>{/*<Content />*/}</Typography>
         </Box>
       </Paper>
