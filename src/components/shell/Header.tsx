@@ -53,10 +53,15 @@ interface IHeader {
 function Header(props: IHeader) {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const { user: userInfo } = React.useContext(UserContext)
+
+  const { allowedRoutes, isLoggedOut } = props
+
+  console.log('allow', allowedRoutes)
+  console.log('logout!', isLoggedOut)
 
   //logic for style for navbar in desktop size.
-  let menuStyle: string
+  let menuStyle
   if (userInfo?.isConfirm) {
     if (userInfo?.phaseCount === 2) {
       menuStyle = 'center'
@@ -66,10 +71,6 @@ function Header(props: IHeader) {
   } else {
     menuStyle = 'flex-end'
   }
-  const { allowedRoutes, isLoggedOut } = props
-
-  console.log('allow', allowedRoutes)
-  console.log('logout!', isLoggedOut)
 
   return (
     <Box
@@ -92,21 +93,23 @@ function Header(props: IHeader) {
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {!userError && userInfo?.isConfirm && (
+          {allowedRoutes.includes('/') && (
+            <LinkPage name={t('home')} link={'/'} />
+          )}
+          {userInfo?.phaseCount === 2 && (
             <>
-              <LinkPage name={t('home')} link={allowedRoutes[0]} />
-              {userInfo.phaseCount === 2 && (
-                <>
-                  <LinkPage
-                    name={
-                      userInfo?.currentBaan !== 0
-                        ? t('changeBaan')
-                        : t('joinBaan')
-                    }
-                    link={allowedRoutes[1]}
-                  />
-                  <LinkPage name={t('schedule')} link={allowedRoutes[2]} />
-                </>
+              {allowedRoutes.includes('/baan') && (
+                <LinkPage
+                  name={
+                    userInfo?.currentBaan !== 0
+                      ? t('changeBaan')
+                      : t('joinBaan')
+                  }
+                  link={'/baan'}
+                />
+              )}
+              {allowedRoutes.includes('/schedule') && (
+                <LinkPage name={t('schedule')} link={'/schedule'} />
               )}
             </>
           )}

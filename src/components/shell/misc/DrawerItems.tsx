@@ -48,58 +48,56 @@ const ItemDrawer = (props: IHeader) => {
   const { allowedRoutes, isLoggedOut } = props
 
   const { t } = useTranslation('shell')
-  const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const { user: userInfo } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
       <List>
-        {!userError && userInfo?.isConfirm && (
+        {allowedRoutes.includes('/') && (
+          <ListItem>
+            <Button className={classes.eachList} component={Link} to={'/'}>
+              <ListItemIcon>
+                <HomeOutlinedIcon style={{ color: 'white' }} />
+              </ListItemIcon>
+              <Box fontSize={16} fontWeight="fontWeightBold">
+                {t('home')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
+
+        {userInfo?.phaseCount === 2 && (
           <>
-            <ListItem>
-              <Button
-                className={classes.eachList}
-                component={Link}
-                to={allowedRoutes[0]}
-              >
-                <ListItemIcon>
-                  <HomeOutlinedIcon style={{ color: 'white' }} />
-                </ListItemIcon>
-                <Box fontSize={16} fontWeight="fontWeightBold">
-                  {t('home')}
-                </Box>
-              </Button>
-            </ListItem>
+            {allowedRoutes.includes('/baan') && (
+              <ListItem component={Link} to={'/baan'}>
+                <Button className={classes.eachList}>
+                  <ListItemIcon className={classes.selectBaan}>
+                    <img alt="" src={iconSelectBaan} />
+                  </ListItemIcon>
+                  <Box
+                    fontSize={16}
+                    fontWeight="fontWeightBold"
+                    className={classes.selectBaan}
+                  >
+                    {userInfo?.currentBaan !== 0
+                      ? t('changeBaan')
+                      : t('joinBaan')}
+                  </Box>
+                </Button>
+              </ListItem>
+            )}
 
-            {userInfo.phaseCount === 2 && (
-              <>
-                <ListItem component={Link} to={allowedRoutes[1]}>
-                  <Button className={classes.eachList}>
-                    <ListItemIcon className={classes.selectBaan}>
-                      <img alt="" src={iconSelectBaan} />
-                    </ListItemIcon>
-                    <Box
-                      fontSize={16}
-                      fontWeight="fontWeightBold"
-                      className={classes.selectBaan}
-                    >
-                      {userInfo?.currentBaan !== 0
-                        ? t('changeBaan')
-                        : t('joinBaan')}
-                    </Box>
-                  </Button>
-                </ListItem>
-
-                <ListItem component={Link} to={allowedRoutes[2]}>
-                  <Button className={classes.eachList}>
-                    <ListItemIcon>
-                      <EventNoteRoundedIcon style={{ color: 'white' }} />
-                    </ListItemIcon>
-                    <Box fontSize={16} fontWeight="fontWeightBold">
-                      {t('schedule')}
-                    </Box>
-                  </Button>
-                </ListItem>
-              </>
+            {allowedRoutes.includes('/schedule') && (
+              <ListItem component={Link} to={'/schedule'}>
+                <Button className={classes.eachList}>
+                  <ListItemIcon>
+                    <EventNoteRoundedIcon style={{ color: 'white' }} />
+                  </ListItemIcon>
+                  <Box fontSize={16} fontWeight="fontWeightBold">
+                    {t('schedule')}
+                  </Box>
+                </Button>
+              </ListItem>
             )}
           </>
         )}
