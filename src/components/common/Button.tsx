@@ -28,30 +28,29 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: '1.5rem',
     fontSize: '1.125rem',
     fontWeight: 700,
-    [theme.breakpoints.up('sm')]: {
-      button: {
-        width: '12rem',
-        height: '3rem',
-      },
-    },
   },
 }))
 
-const Button = React.memo(function Button(props: ButtonProps) {
+interface IStylableButton extends ButtonProps {
+  className?: string | undefined
+}
+
+const Button = React.memo(function Button(props: IStylableButton) {
+  const { className, ...rest } = props
   const classes = useStyles()
   return (
     <ThemeProvider theme={buttonTheme}>
       <MUIButton
-        className={classes.button}
+        className={`${classes.button} ${className}`}
         color="primary"
         variant="contained"
-        {...props}
+        {...rest}
       />
     </ThemeProvider>
   )
 })
 
-export interface LinkButtonProps extends ButtonProps {
+export interface LinkButtonProps extends IStylableButton {
   target: string
   href: string
   navigate?: Function

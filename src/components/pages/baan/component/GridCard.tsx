@@ -27,16 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
       paddingBottom: theme.spacing(2),
     },
     actionArea: {
+      padding: theme.spacing(1),
       '&:hover $focusHighlight': {
         opacity: 0,
       },
     },
     focusHighlight: {},
     paper: {
-      padding: theme.spacing(1),
       margin: 'auto',
-      width: '500',
-      height: '150px',
       backgroundColor: theme.palette.primary.main,
       borderRadius: '20px',
     },
@@ -93,7 +91,6 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
   const urlLogo = getLogo(data.ID)
   const { t, i18n } = useTranslation('selectbaan')
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
-  const color = disabled ? '#A9A9A9' : 'white'
 
   return (
     <div className={classes.root}>
@@ -181,8 +178,8 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
             </Grid>
           </Grid>
         </CardActionArea>
-        <Box paddingTop={1} alignItems="right">
-          <SubmitButton color={color} disabled={disabled} ID={data.ID} />
+        <Box paddingTop={1} textAlign="center">
+          <SubmitButton disabled={disabled} ID={data.ID} />
         </Box>
       </Card>
     </div>

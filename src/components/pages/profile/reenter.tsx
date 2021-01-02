@@ -1,5 +1,5 @@
 import { Typography } from '@material-ui/core'
-import { Button } from '@material-ui/core'
+import { LinkButton } from 'components/common'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -14,14 +14,14 @@ function Reenter() {
       <Typography variant="h2" className={classes.round}>
         {t('enterAct')}
       </Typography>
-      <Button
-        variant="contained"
-        className={`${classes.change} ${classes.select}`}
-        component={Link}
+      <Link
         to="/form"
+        color="primary"
+        className={classes.select}
+        component={LinkButton}
       >
         {t('enterActButton')}
-      </Button>
+      </Link>
     </>
   )
 }

@@ -33,19 +33,10 @@ const imageStyle = makeStyles(
         },
       },
       submitButton: {
-        margin: theme.spacing(2),
-        borderRadius: '40px',
         alignSelf: 'center',
+        margin: theme.spacing(2),
         width: '50%',
-        minHeight: '30px',
-        backgroundColor: theme.palette.success.main,
-        '&:hover': {
-          background: theme.palette.success.main,
-        },
-        [theme.breakpoints.up('sm')]: {
-          minHeight: '40px',
-          width: '30%',
-        },
+        maxWidth: '30rem',
       },
       image: {
         borderRadius: '30px',

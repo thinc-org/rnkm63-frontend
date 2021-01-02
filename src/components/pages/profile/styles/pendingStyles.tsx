@@ -94,32 +94,20 @@ export const pendingStyles = makeStyles((theme: Theme) => ({
   button: {
     fontSize: '1.125rem',
     fontWeight: 700,
-    borderRadius: '20px',
-    height: '40px',
     width: '94px',
     textTransform: 'none',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     [theme.breakpoints.down('xs')]: {
       height: '26px',
       maxWidth: '115px',
       width: '47%',
       fontSize: '0.875rem',
       marginLeft: theme.spacing(0),
+      marginRight: theme.spacing(0),
     },
     [theme.breakpoints.down(600)]: {
       marginTop: theme.spacing(2),
-    },
-  },
-  change: {
-    marginLeft: theme.spacing(3),
-    background: theme.palette.success.main,
-    '&:hover': {
-      backgroundColor: theme.palette.success.main,
-    },
-  },
-  cancel: {
-    background: theme.palette.error.main,
-    '&:hover': {
-      backgroundColor: theme.palette.error.main,
     },
   },
 }))

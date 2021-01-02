@@ -1,4 +1,5 @@
-import { Box, Button } from '@material-ui/core'
+import { Box } from '@material-ui/core'
+import { Button, LinkButton } from 'components/common'
 import { fail } from 'components/ErrorProvider'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,35 +26,26 @@ function RoundSelector(props: Props) {
     return (
       // if user has baan
       <Box>
-        <Button
-          variant="contained"
-          className={classes.exit}
-          onClick={() => leave()}
-        >
+        <Button color="secondary" onClick={() => leave()}>
           {t('exitHouse')}
         </Button>
-        <Button
-          variant="contained"
-          className={classes.change}
-          component={Link}
-          to="/baan"
-        >
+        <Link color="primary" component={LinkButton} to="/baan">
           {t('changeHouse')}
-        </Button>
+        </Link>
       </Box>
     )
   } else {
     return (
       // if user doesn't have baan
       <Box>
-        <Button
-          variant="contained"
-          className={`${classes.change} ${classes.select}`}
-          component={Link}
+        <Link
+          color="primary"
+          className={classes.select}
+          component={LinkButton}
           to="/baan"
         >
           {t('selectHouse')}
-        </Button>
+        </Link>
       </Box>
     )
   }

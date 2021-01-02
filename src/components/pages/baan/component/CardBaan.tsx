@@ -25,7 +25,6 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
   const classes = useStyles()
   const { t, i18n } = useTranslation('selectbaan')
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
-  const color = disabled ? '#A9A9A9' : 'white'
 
   const urlLogo = getLogo(data.ID)
   const value = getBaan(data.ID)
@@ -66,7 +65,7 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <SubmitButton color={color} disabled={disabled} ID={value.ID} />
+        <SubmitButton disabled={disabled} ID={value.ID} />
       </Card>
     </React.Fragment>
   )

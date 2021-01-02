@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from '@material-ui/core'
+import { Box, Typography } from '@material-ui/core'
+import { Button, LinkButton } from 'components/common'
 import SkeletonImage from 'components/common/SkeletonImage'
 import { fail } from 'components/ErrorProvider'
 import React, { useCallback, useEffect, useState } from 'react'
@@ -99,19 +100,20 @@ function Pending(props: Props) {
           </Box>
           <Box className={classes.buttonContainer}>
             <Button
-              className={classes.button + ' ' + classes.cancel}
+              className={classes.button}
               onClick={cancel}
+              color="secondary"
             >
               {t('cancel')}
             </Button>
             {preferBaan !== 0 && (
-              <Button
-                component={Link}
+              <Link
                 to="/baan"
-                className={classes.button + ' ' + classes.change}
+                component={LinkButton}
+                className={classes.button}
               >
                 {t('change')}
-              </Button>
+              </Link>
             )}
           </Box>
         </Box>

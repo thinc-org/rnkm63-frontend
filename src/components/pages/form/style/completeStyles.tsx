@@ -8,6 +8,7 @@ const completeStyle = makeStyles(
       left: '50%',
       width: '100%',
       transform: 'translate(-50%, -50%)',
+      textAlign: 'center',
     },
     title: {
       fontWeight: 700,
@@ -32,19 +33,11 @@ const completeStyle = makeStyles(
       },
     },
     button: {
-      margin: 'auto',
-      display: 'block',
-      textAlign: 'center',
       width: '206px',
-      borderRadius: '40px',
       fontWeight: 700,
       fontSize: '1.375rem',
       textTransform: 'none',
       marginTop: theme.spacing(3),
-      backgroundColor: theme.palette.success.main,
-      '&:hover': {
-        backgroundColor: theme.palette.success.main,
-      },
       [theme.breakpoints.up('sm')]: {
         marginTop: theme.spacing(5),
         fontSize: '1.125rem',

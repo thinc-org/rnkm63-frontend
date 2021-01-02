@@ -6,6 +6,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: '#383838',
     height: 'auto',
     width: '207px',
+    textAlign: 'center',
   },
   actionArea: {
     '&:hover $focusHighlight': {
@@ -18,20 +19,9 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 'auto',
     marginRight: 'auto',
   },
-  button_select_card: {
-    display: 'block',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    color: 'white',
-    fontSize: '1.125rem',
+  submitButton: {
     marginBottom: '20px',
     width: '171px',
-    borderRadius: '40px',
-    height: '40px',
-    backgroundColor: '#44AD53',
-    '&:hover': {
-      backgroundColor: theme.palette.success.main,
-    },
   },
   dialog_title: {
     textAlign: 'center',

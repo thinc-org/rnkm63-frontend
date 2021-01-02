@@ -38,23 +38,9 @@ const indexStyle = makeStyles(
         flexGrow: 1,
       },
     },
-    submitButton: {
-      background: theme.palette.success.main,
-      borderRadius: '40px',
-      width: '50%',
-      height: '43px',
-      display: 'block',
-      fontSize: '1rem',
-      fontWeight: 700,
-      margin: 'auto',
-      textTransform: 'none',
-      '&:hover': {
-        background: theme.palette.success.main,
-      },
-      [theme.breakpoints.up('md')]: {
-        width: '434px',
-        fontSize: '1.125rem',
-      },
+    confirmButton: {
+      width: '40%',
+      maxWidth: '30rem',
     },
     dialog: {
       background: '#383838',
@@ -83,28 +69,8 @@ const indexStyle = makeStyles(
       margin: 0,
       marginBottom: theme.spacing(2),
     },
-    button: {
+    dialogButton: {
       width: '129px',
-      color: 'white',
-      borderRadius: '20px',
-      fontSize: '0.875rem',
-      fontWeight: 700,
-      textTransform: 'none',
-      [theme.breakpoints.up('sm')]: {
-        width: '207px',
-      },
-    },
-    confirm: {
-      background: theme.palette.success.main,
-      '&:hover': {
-        backgroundColor: theme.palette.success.main,
-      },
-    },
-    cancel: {
-      background: theme.palette.error.main,
-      '&:hover': {
-        backgroundColor: theme.palette.error.main,
-      },
     },
     dialogAction: {
       display: 'flex',
@@ -134,28 +100,7 @@ const indexStyle = makeStyles(
       fontSize: '12px',
     },
     confirmContainer: {
-      [theme.breakpoints.down('sm')]: {
-        display: 'flex',
-      },
-    },
-    leaveMobile: {
-      width: '50%',
-      height: '43px',
-      textTransform: 'none',
-      fontWeight: 700,
-      background: theme.palette.error.main,
-      borderRadius: '40px',
-      fontSize: '1rem',
-      marginRight: theme.spacing(1.5),
-      '&:hover': {
-        backgroundColor: theme.palette.error.main,
-      },
-      [theme.breakpoints.down(320)]: {
-        fontSize: '0.8rem',
-      },
-      [theme.breakpoints.up('md')]: {
-        display: 'none',
-      },
+      textAlign: 'center',
     },
   }),
   { index: 1 }

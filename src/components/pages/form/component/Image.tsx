@@ -1,6 +1,6 @@
 import {
   Box,
-  Button,
+  Button as MUIButton,
   DialogContentText,
   DialogTitle,
   IconButton,
@@ -12,6 +12,7 @@ import { TransitionProps } from '@material-ui/core/transitions/transition'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
+import { Button } from 'components/common'
 import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
@@ -211,9 +212,9 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
                 type="file"
               />
               <label htmlFor="contained-button-file">
-                <Button className={style.imageUploadButton} component="span">
+                <MUIButton className={style.imageUploadButton} component="span">
                   {t('uploadInstruction')}
-                </Button>
+                </MUIButton>
               </label>
             </Box>
           </Box>
@@ -254,12 +255,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
       )}
       <Box display="flex" alignItems="center" flexDirection="column">
         {isImgWrong && (
-          <Button
-            variant="contained"
-            color="primary"
-            className={style.button}
-            onClick={resetCropState}
-          >
+          <Button variant="contained" color="primary" onClick={resetCropState}>
             {t('uploadTextButton')}
           </Button>
         )}

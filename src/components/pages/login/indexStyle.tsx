@@ -30,9 +30,8 @@ const indexStyle = makeStyles((theme: Theme) => ({
   },
   checkbox: {},
   button: {
-    borderRadius: '1.75rem',
     border: 0,
-    height: '2.5rem',
+    margin: 0,
     textTransform: 'none',
     fontSize: '1rem',
     fontWeight: 700,

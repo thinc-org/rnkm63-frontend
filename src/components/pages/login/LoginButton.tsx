@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core'
+import { Button } from 'components/common'
 import { Connect } from 'controllers/LoginController'
 import React from 'react'
 
@@ -18,7 +18,6 @@ function LoginButton({ agree, children }: Props) {
       disabled={!agree}
       className={style.button}
       color="primary"
-      variant="contained"
       onClick={Connect}
     >
       {children}

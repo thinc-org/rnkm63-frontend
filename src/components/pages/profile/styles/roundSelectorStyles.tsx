@@ -11,37 +11,8 @@ export const roundStyles = makeStyles((theme: Theme) => ({
       display: 'none',
     },
   },
-  exit: {
-    color: 'white',
-    backgroundColor: theme.palette.error.main,
-    width: '320px',
-    borderRadius: '20px',
-    margin: '20px 10px',
-    textTransform: 'none',
-    [theme.breakpoints.down('sm')]: {
-      margin: '10px 10px',
-      width: '220px',
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.error.main,
-    },
-  },
-  change: {
-    color: 'white',
-    backgroundColor: theme.palette.success.main,
-    width: '320px',
-    borderRadius: '20px',
-    margin: '20px 10px',
-    textTransform: 'none',
-    [theme.breakpoints.down('sm')]: {
-      margin: '10px 10px',
-      width: '220px',
-    },
-    '&:hover': {
-      backgroundColor: theme.palette.success.main,
-    },
-  },
   select: {
+    width: '320px',
     [theme.breakpoints.up('sm')]: {
       width: '433px',
     },

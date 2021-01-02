@@ -36,6 +36,8 @@ const DialogActions = withStyles((theme: Theme) => ({
   root: {
     margin: 0,
     padding: theme.spacing(1),
+    display: 'block',
+    textAlign: 'center',
   },
 }))(MuiDialogActions)
 
@@ -50,7 +52,6 @@ const CardDialog = function CardDialog(props: ICardDialog) {
   const { ID, open, handleClose, disabled } = props
   const classes = useStyles()
   const lang = i18n.language.startsWith('th') ? 'th' : 'en'
-  const color = disabled ? '#A9A9A9' : 'white'
   const urlLogo = getLogo(ID)
   const value = getBaan(ID)
 
@@ -115,7 +116,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
         </Box>
       </DialogContent>
       <DialogActions>
-        <SubmitButton color={color} disabled={disabled} ID={value.ID} />
+        <SubmitButton disabled={disabled} ID={value.ID} />
       </DialogActions>
     </BlurBehindDialog>
   )

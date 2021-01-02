@@ -1,4 +1,5 @@
-import { Box, Button, RootRef, Typography } from '@material-ui/core'
+import { Box, RootRef, Typography } from '@material-ui/core'
+import { Button } from 'components/common'
 import { indexStyle } from 'components/pages/form/style'
 import { IUser, IUserData } from 'contexts/UserContext'
 import { Form as FormikForm, Formik } from 'formik'
@@ -108,14 +109,19 @@ const FormUI = React.memo(function FormUI(props: IFormUI) {
           </Box>
           <Box className={style.confirmContainer}>
             {userData.data && userData.currentBaan !== -1 && (
-              <Button className={style.leaveMobile} onClick={openLeaveDialog}>
+              <Button
+                color="secondary"
+                onClick={openLeaveDialog}
+                className={style.confirmButton}
+              >
                 {t('leaveButton')}
               </Button>
             )}
             <Button
-              classes={{ root: style.submitButton }}
+              color="primary"
               type="submit"
               onClick={onSubmitClick}
+              className={style.confirmButton}
             >
               {t('submit')}
             </Button>

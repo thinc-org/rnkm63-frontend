@@ -1,10 +1,10 @@
 import {
-  Button,
   DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
 } from '@material-ui/core'
+import { Button } from 'components/common'
 import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -43,14 +43,12 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
       <DialogActions classes={{ root: style.dialogAction }}>
         <Button
           onClick={closeDialog}
-          classes={{ root: `${style.button} ${style.cancel}` }}
+          color="secondary"
+          className={style.dialogButton}
         >
           {t('cancel')}
         </Button>
-        <Button
-          onClick={submit}
-          classes={{ root: `${style.button} ${style.confirm}` }}
-        >
+        <Button onClick={submit} color="primary" className={style.dialogButton}>
           {t('confirm')}
         </Button>
       </DialogActions>
