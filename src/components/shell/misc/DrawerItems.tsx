@@ -50,9 +50,6 @@ const ItemDrawer = (props: IHeader) => {
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
-  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
-  const currentTime = new Date().valueOf()
-
   return (
     <React.Fragment>
       <List>
@@ -73,7 +70,7 @@ const ItemDrawer = (props: IHeader) => {
               </Button>
             </ListItem>
 
-            {startSelect < currentTime && ( //round 2
+            {userInfo.phaseCount === 2 && (
               <>
                 <ListItem component={Link} to={allowedRoutes[1]}>
                   <Button className={classes.eachList}>

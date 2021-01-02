@@ -55,13 +55,10 @@ function Header(props: IHeader) {
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
-  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
-  const currentTime = new Date().valueOf()
-
   //logic for style for navbar in desktop size.
   let menuStyle: string
   if (userInfo?.isConfirm) {
-    if (startSelect < currentTime) {
+    if (userInfo?.phaseCount === 2) {
       menuStyle = 'center'
     } else {
       menuStyle = 'space-between'
@@ -98,7 +95,7 @@ function Header(props: IHeader) {
           {!userError && userInfo?.isConfirm && (
             <>
               <LinkPage name={t('home')} link={allowedRoutes[0]} />
-              {startSelect < currentTime && ( //round 2
+              {userInfo.phaseCount === 2 && (
                 <>
                   <LinkPage
                     name={
