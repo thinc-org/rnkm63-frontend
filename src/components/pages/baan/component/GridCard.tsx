@@ -14,6 +14,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { IFilterData } from '../@types/data'
+import AvatarImage from './AvatarImage'
 import SubmitButton from './SubmitButton'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -88,11 +89,13 @@ interface IGridCard {
 const GridCard = React.memo(function GridCard(props: IGridCard) {
   const classes = useStyles()
   const { disabled, data } = props
-  const value = getBaan(data.ID)
-  const urlLogo = getLogo(data.ID)
+
   const { t, i18n } = useTranslation('selectbaan')
+
   const lang = i18n.language.startsWith('en') ? 'en' : 'th'
   const color = disabled ? '#A9A9A9' : 'white'
+  const value = getBaan(data.ID)
+  const urlLogo = getLogo(data.ID)
 
   return (
     <div className={classes.root}>
@@ -110,7 +113,11 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
           <Grid container spacing={2}>
             <Grid item xs={4} container className={classes.center_img}>
               <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src={urlLogo} />
+                <AvatarImage
+                  value={value['name-en']}
+                  style={classes.img}
+                  urlLogo={urlLogo}
+                />
               </ButtonBase>
             </Grid>
             <Grid

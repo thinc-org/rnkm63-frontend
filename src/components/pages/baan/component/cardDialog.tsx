@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Link,
-  Theme,
-  Typography,
-  withStyles,
-} from '@material-ui/core'
+import { Box, Link, Theme, Typography, withStyles } from '@material-ui/core'
 import MuiDialogActions from '@material-ui/core/DialogActions'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import FacebookIcon from '@material-ui/icons/Facebook'
@@ -16,6 +9,7 @@ import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 
 import useStyles from '../style/cardDialogStyle'
+import AvatarImage from './AvatarImage'
 import DialogTitle from './dialogComponent'
 import SubmitButton from './SubmitButton'
 
@@ -53,7 +47,6 @@ const CardDialog = function CardDialog(props: ICardDialog) {
   const color = disabled ? '#A9A9A9' : 'white'
   const urlLogo = getLogo(ID)
   const value = getBaan(ID)
-
   return (
     <BlurBehindDialog
       onClose={handleClose}
@@ -64,7 +57,11 @@ const CardDialog = function CardDialog(props: ICardDialog) {
         },
       }}
     >
-      <Avatar className={classes.avatar_picture} src={urlLogo} />
+      <AvatarImage
+        value={value['name-en']}
+        urlLogo={urlLogo}
+        style={classes.avatar_picture}
+      />
       <DialogTitle onClose={handleClose} classes={classes}>
         {value[`name-${lang}` as 'name-th' | 'name-en']}
       </DialogTitle>

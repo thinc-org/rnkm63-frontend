@@ -1,5 +1,4 @@
 import {
-  Avatar,
   Card,
   CardActionArea,
   CardContent,
@@ -11,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 
 import { IFilterData } from '../@types/data'
 import useStyles from '../style/cardDialogStyle'
+import AvatarImage from './AvatarImage'
 import SubmitButton from './SubmitButton'
 
 interface IComponentData {
@@ -49,10 +49,10 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             <Typography className={classes.card_title}>
               {value[`name-${lang}` as 'name-en' | 'name-th']}
             </Typography>
-            <Avatar
-              alt={value['name-en']}
-              className={classes.avatar_picture_card}
-              src={urlLogo}
+            <AvatarImage
+              value={value['name-en']}
+              style={classes.avatar_picture_card}
+              urlLogo={urlLogo}
             />
             <Typography className={classes.card_text}>
               {t('size')}: {value.size}
