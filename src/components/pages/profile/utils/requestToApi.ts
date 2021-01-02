@@ -8,11 +8,6 @@ interface ReqInfo {
   capacity: number
   memberCount: number
 }
-const getRound = function (): AxiosPromise<number> {
-  return apiClient.get('/global/round').catch((err) => {
-    throw intoFailure(err)
-  })
-}
 
 const getAllRequestCount = function (): AxiosPromise<ReqInfo[]> {
   return apiClient.get('/user/getAllUserPreferBaan').catch((err) => {
@@ -30,5 +25,5 @@ const postBaanChange = function (
     throw intoFailure(err)
   })
 }
-export { getAllRequestCount, getRound, postBaanChange }
+export { getAllRequestCount, postBaanChange }
 export type { ReqInfo }

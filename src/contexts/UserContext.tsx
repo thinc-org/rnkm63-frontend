@@ -33,6 +33,8 @@ export interface IUser {
   currentBaan: number
   preferBaan: number | null
   facultyID: string
+  phaseCount: number
+  roundCount: number
 }
 
 /*TYPE GUARDS*/

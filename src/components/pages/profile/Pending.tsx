@@ -33,11 +33,10 @@ function Pending(props: Props) {
   const baanInfo = getBaan(preferBaan === 0 ? currentBaan : preferBaan)
   const baanLogo = getLogo(preferBaan === 0 ? currentBaan : preferBaan)
   const [reqCount, setReqCount] = useState(0)
-  const [reqPercent, setReqPercent] = useState(0)
+  const [reqColor, setReqColor] = useState('Green')
   const styleProps = {
-    baanNameColor: preferBaan === 0 ? '#D34949' : '#F2C94C',
-    requestColor:
-      reqPercent < 80 ? '#44AD53' : reqPercent <= 100 ? '#F2C94C' : '#D34949',
+    baanNameColor: preferBaan === 0 ? 'Red' : 'Yellow',
+    requestColor: reqColor,
   }
   const classes = pendingStyles(styleProps)
 
@@ -59,9 +58,13 @@ function Pending(props: Props) {
         })
         if (reqInfo) {
           setReqCount(reqInfo.requestCount)
-          setReqPercent(
-            (reqInfo.requestCount * 100) /
-              (reqInfo.capacity - reqInfo.memberCount)
+          const seat = reqInfo.capacity - reqInfo.memberCount
+          setReqColor(
+            reqInfo.requestCount < (80 / 100) * seat
+              ? 'Green'
+              : reqInfo.requestCount <= seat
+              ? 'Yellow'
+              : 'Red'
           )
         }
       } catch (e) {
