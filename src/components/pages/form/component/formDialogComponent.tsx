@@ -1,11 +1,11 @@
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
 } from '@material-ui/core'
+import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -23,13 +23,12 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
   const { t } = useTranslation('form')
   const { confirmOpen, closeDialog, submit, text } = props
   return (
-    <Dialog
+    <BlurBehindDialog
       open={confirmOpen}
       onClose={closeDialog}
       PaperProps={{
         classes: { root: style.dialog },
       }}
-      style={{ backdropFilter: 'blur(8px)' }}
     >
       <DialogTitle classes={{ root: style.dialogTitle }}>
         <Typography className={style.dialogTitle}>
@@ -55,7 +54,7 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
           {t('confirm')}
         </Button>
       </DialogActions>
-    </Dialog>
+    </BlurBehindDialog>
   )
 })
 
