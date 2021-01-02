@@ -62,7 +62,11 @@ const ItemDrawer = () => {
             <ListItem component={Link} to={'/baan'}>
               <Button className={classes.eachList}>
                 <ListItemIcon className={classes.selectBaan}>
-                  <img alt="" src={iconSelectBaan} />
+                  <img
+                    alt=""
+                    src={iconSelectBaan}
+                    style={{ width: '24px', height: '20px' }}
+                  />
                 </ListItemIcon>
                 <Box
                   fontSize={16}
