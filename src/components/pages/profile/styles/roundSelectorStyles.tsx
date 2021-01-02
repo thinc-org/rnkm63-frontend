@@ -12,9 +12,10 @@ export const roundStyles = makeStyles((theme: Theme) => ({
     },
   },
   select: {
-    width: '320px',
-    [theme.breakpoints.up('sm')]: {
-      width: '433px',
+    width: '433px',
+    margin: theme.spacing(2),
+    [theme.breakpoints.down('sm')]: {
+      width: '220px',
     },
   },
 }))
