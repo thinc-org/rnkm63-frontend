@@ -4,37 +4,23 @@ import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
 import getFaculty from 'local/facultyInfo'
 import { getEndTime, getStartTime } from 'local/RoundInfo'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import BaanRender from './BaanRender'
 import CountdownTimer from './Countdown'
 import Reenter from './reenter'
 import { profileStyles } from './styles/profileStyles'
-import { getRound } from './utils/requestToApi'
 
 function Profile() {
   const { user: userInfo } = React.useContext(UserContext)
+  const { t, i18n } = useTranslation('profile')
+  if (!userInfo) return fail({})
   const userPic = userInfo?.data?.imgURL ?? ''
   const baanEng = getBaan(userInfo?.currentBaan ?? 0)['name-en']
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
+  const round = userInfo.roundCount
   const classes = profileStyles()
-  const { t, i18n } = useTranslation('profile')
-  const [round, setRound] = useState(0)
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const res = await getRound()
-        setRound(res.data)
-      } catch (e) {
-        fail(e)
-      }
-    }
-    fetchData()
-  }, [])
-
-  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
-  const endOfSelect = new Date('2021-01-13T12:00:00+07:00').valueOf()
   const currentTime = new Date().valueOf()
 
   const endTimeString = getEndTime(round)
@@ -43,7 +29,6 @@ function Profile() {
   let secs = endTime - currentTime
   let process = secs < 0 ? true : false
 
-  if (!userInfo) return fail({})
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
@@ -84,34 +69,32 @@ function Profile() {
           </Typography>
         </Box>
       </Box>
-      {currentTime < startSelect && userInfo?.currentBaan === -1 ? ( //non-participant, display reenter button
+      {userInfo?.currentBaan === -1 ? (
+        //non-participant, display reenter button
         <Reenter />
+      ) : userInfo.phaseCount === 1 ? (
+        //phase 1, display countdown
+        <CountdownTimer
+          timeLeft={getStartTime(1)}
+          roundCount={false}
+          processing={false}
+        />
       ) : (
-        currentTime < startSelect && ( //participant, display countdown before round 2
-          <CountdownTimer
-            timeLeft={getStartTime(1)}
-            roundCount={false}
-            processing={false}
+        // phase 2
+        <>
+          <BaanRender
+            round={round}
+            secs={secs}
+            preferBaan={userInfo.preferBaan}
+            currentBaan={userInfo.currentBaan}
           />
-        )
+          <CountdownTimer
+            timeLeft={secs < 0 ? nextStartTime : endTimeString}
+            roundCount={true}
+            processing={process}
+          />
+        </>
       )}
-      {userInfo?.currentBaan !== -1 &&
-        currentTime < endOfSelect &&
-        startSelect < currentTime && ( // round 2
-          <>
-            <BaanRender
-              round={round}
-              secs={secs}
-              preferBaan={userInfo.preferBaan}
-              currentBaan={userInfo.currentBaan}
-            />
-            <CountdownTimer
-              timeLeft={secs < 0 ? nextStartTime : endTimeString}
-              roundCount={true}
-              processing={process}
-            />
-          </>
-        )}
     </body>
   )
 }
