@@ -70,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
   avatar_picture: {
     height: '100px',
     width: '100px',
+    borderRadius: '50%',
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
