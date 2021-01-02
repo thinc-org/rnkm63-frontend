@@ -50,6 +50,21 @@ function Header() {
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
+  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
+  const currentTime = new Date().valueOf()
+
+  //logic for style for navbar in desktop size.
+  let menuStyle: string
+  if (userInfo?.isConfirm) {
+    if (startSelect < currentTime) {
+      menuStyle = 'center'
+    } else {
+      menuStyle = 'space-between'
+    }
+  } else {
+    menuStyle = 'flex-end'
+  }
+
   return (
     <Box
       className={classes.header}
@@ -67,20 +82,26 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={userInfo?.isConfirm ? 'center' : 'flex-end'}
+        justifyContent={menuStyle}
         className={classes.headerPart}
       >
         <Hidden xsDown>
           {!userError && userInfo?.isConfirm && (
             <>
               <LinkPage name={t('home')} link={'/'} />
-              <LinkPage
-                name={
-                  userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')
-                }
-                link={'/baan'}
-              />
-              <LinkPage name={t('schedule')} link={'/schedule'} />
+              {startSelect < currentTime && ( //round 2
+                <>
+                  <LinkPage
+                    name={
+                      userInfo?.currentBaan !== 0
+                        ? t('changeBaan')
+                        : t('joinBaan')
+                    }
+                    link={'/baan'}
+                  />
+                  <LinkPage name={t('schedule')} link={'/schedule'} />
+                </>
+              )}
             </>
           )}
           <ReportIssue />

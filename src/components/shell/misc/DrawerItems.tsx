@@ -43,6 +43,9 @@ const ItemDrawer = () => {
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
+  const startSelect = new Date('2021-01-09T12:00:00+07:00').valueOf()
+  const currentTime = new Date().valueOf()
+
   return (
     <React.Fragment>
       <List>
@@ -59,33 +62,37 @@ const ItemDrawer = () => {
               </Button>
             </ListItem>
 
-            <ListItem component={Link} to={'/baan'}>
-              <Button className={classes.eachList}>
-                <ListItemIcon className={classes.selectBaan}>
-                  <img alt="" src={iconSelectBaan} />
-                </ListItemIcon>
-                <Box
-                  fontSize={16}
-                  fontWeight="fontWeightBold"
-                  className={classes.selectBaan}
-                >
-                  {userInfo?.currentBaan !== 0
-                    ? t('changeBaan')
-                    : t('joinBaan')}
-                </Box>
-              </Button>
-            </ListItem>
+            {startSelect < currentTime && ( //round 2
+              <>
+                <ListItem component={Link} to={'/baan'}>
+                  <Button className={classes.eachList}>
+                    <ListItemIcon className={classes.selectBaan}>
+                      <img alt="" src={iconSelectBaan} />
+                    </ListItemIcon>
+                    <Box
+                      fontSize={16}
+                      fontWeight="fontWeightBold"
+                      className={classes.selectBaan}
+                    >
+                      {userInfo?.currentBaan !== 0
+                        ? t('changeBaan')
+                        : t('joinBaan')}
+                    </Box>
+                  </Button>
+                </ListItem>
 
-            <ListItem component={Link} to={'/schedule'}>
-              <Button className={classes.eachList}>
-                <ListItemIcon>
-                  <EventNoteRoundedIcon style={{ color: 'white' }} />
-                </ListItemIcon>
-                <Box fontSize={16} fontWeight="fontWeightBold">
-                  {t('schedule')}
-                </Box>
-              </Button>
-            </ListItem>
+                <ListItem component={Link} to={'/schedule'}>
+                  <Button className={classes.eachList}>
+                    <ListItemIcon>
+                      <EventNoteRoundedIcon style={{ color: 'white' }} />
+                    </ListItemIcon>
+                    <Box fontSize={16} fontWeight="fontWeightBold">
+                      {t('schedule')}
+                    </Box>
+                  </Button>
+                </ListItem>
+              </>
+            )}
           </>
         )}
 
