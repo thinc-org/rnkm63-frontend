@@ -71,33 +71,37 @@ const CardDialog = function CardDialog(props: ICardDialog) {
       </DialogTitle>
 
       <DialogContent>
-        <Box className={classes.fbandigicon_item} hidden={!value.instagram}>
-          <InstagramIcon style={{ color: 'white' }} />
-          <Typography className={classes.fbandigicon_text}>
-            <Link
-              href={value.iglink}
-              color="inherit"
-              style={{ pointerEvents: value?.iglink ? 'auto' : 'none' }}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {value.instagram}
-            </Link>
-          </Typography>
+        <Box hidden={!value.instagram}>
+          <Box className={classes.fbandigicon_item}>
+            <InstagramIcon style={{ color: 'white' }} />
+            <Typography className={classes.fbandigicon_text}>
+              <Link
+                href={value.iglink}
+                color="inherit"
+                style={{ pointerEvents: value?.iglink ? 'auto' : 'none' }}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {value.instagram}
+              </Link>
+            </Typography>
+          </Box>
         </Box>
-        <Box className={classes.fbandigicon_item} hidden={!value.facebook}>
-          <FacebookIcon style={{ color: 'white' }} />
-          <Typography className={classes.fbandigicon_text}>
-            <Link
-              href={value.fblink}
-              color="inherit"
-              style={{ pointerEvents: value?.fblink ? 'auto' : 'none' }}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {value.facebook}
-            </Link>
-          </Typography>
+        <Box hidden={!value.facebook}>
+          <Box className={classes.fbandigicon_item}>
+            <FacebookIcon style={{ color: 'white' }} />
+            <Typography className={classes.fbandigicon_text}>
+              <Link
+                href={value.fblink}
+                color="inherit"
+                style={{ pointerEvents: value?.fblink ? 'auto' : 'none' }}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {value.facebook}
+              </Link>
+            </Typography>
+          </Box>
         </Box>
         <Box style={{ marginTop: '10px' }}>
           {value[`caption-${lang}` as 'caption-en' | 'caption-th'].map(

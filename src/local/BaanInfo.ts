@@ -567,8 +567,6 @@ export function getBaan(baanNumber: number): Baan {
     return item.ID === baanNumber
   })
   if (sent) {
-    sent.facebook = sent.facebook || '-'
-    sent.instagram = sent.instagram || '-'
     return sent
   } else {
     return {
