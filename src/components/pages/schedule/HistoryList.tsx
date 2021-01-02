@@ -1,4 +1,5 @@
 import { Box, Chip, Grid, Typography } from '@material-ui/core'
+import { IUser } from 'contexts/UserContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -7,9 +8,10 @@ import indexStyle from './indexStyle'
 
 type Props = {
   data: Array<AssignmentLog> | null
+  user: IUser | null
 }
 
-function HistoryList({ data }: Props) {
+function HistoryList({ data, user }: Props) {
   let { t } = useTranslation(['schedule', 'baan'])
   const style = indexStyle()
 
@@ -18,6 +20,18 @@ function HistoryList({ data }: Props) {
   }
 
   function GetAction(history: AssignmentLog) {
+    // phase 1 with no data
+    if (user) {
+      if (user.phaseCount === 1) {
+        return (
+          <Grid item>
+            <Typography className={style.noRequest}>
+              {t('no_assignment_history')}
+            </Typography>
+          </Grid>
+        )
+      }
+    }
     // no request
     if (history.preferBaan === null) {
       return (

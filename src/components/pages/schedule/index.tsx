@@ -1,5 +1,6 @@
 import { Card, Grid, Typography } from '@material-ui/core'
 import { fail } from 'components/ErrorProvider'
+import { UserContext } from 'contexts/UserContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
@@ -14,8 +15,10 @@ import { ScheduleTable } from './ScheduleTable'
 function SchedulePage() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
-
+  const { user: userInfo, error: contextError } = React.useContext(UserContext)
   const { data, error } = useSWR('/assignment/getHistory', GetHistory)
+
+  if (contextError) return fail(contextError)
   if (error) return fail(error)
   if (!data) return <Loading />
   return (
@@ -36,7 +39,7 @@ function SchedulePage() {
           <Typography className={style.historyTitle}>
             {t('history_title')}
           </Typography>
-          <HistoryList data={data} />
+          <HistoryList data={data} user={userInfo} />
         </Card>
       </Grid>
     </Grid>

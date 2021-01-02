@@ -44,7 +44,7 @@ function ActivityTable() {
                   {act.date} {t(act.month)}
                 </TableCell>
                 <TableCell className={style.tableText} align="center">
-                  {act.time}
+                  {act.time} {act.time !== '-' ? t('time_unit') : ''}
                 </TableCell>
                 <TableCell className={style.tableText} align="left">
                   {t(act.activity)}
