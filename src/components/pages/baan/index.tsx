@@ -26,7 +26,7 @@ import {
 import CardBaan from './component/CardBaan'
 import CardDialog from './component/cardDialog'
 import GridCard from './component/GridCard'
-import StatusColor from './StatusColor'
+import StatusColor from './component/StatusColor'
 import { indexStyle } from './style/indexStyle'
 import { getCapacityData } from './utils/apiService'
 import { searchBaan } from './utils/baanUtils'

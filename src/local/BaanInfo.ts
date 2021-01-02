@@ -87,6 +87,10 @@ export const baanInfo: Baan[] = [
       '',
       'Only you can help us! See you on February 13-14.',
     ],
+    facebook: 'Baanyim Chula',
+    instagram: 'baanyimchula',
+    fblink: 'https://www.facebook.com/baanyimchula',
+    iglink: 'https://www.instagram.com/baanyimchula/',
   },
   {
     ID: 6,
@@ -110,6 +114,10 @@ export const baanInfo: Baan[] = [
       '',
       '-REAL STICK WITH REAL-',
     ],
+    facebook: 'Baan fyo',
+    instagram: 'baanfyo.official',
+    fblink: 'https://www.facebook.com/BaanFYO',
+    iglink: 'https://www.instagram.com/baanfyo.official/',
   },
   {
     ID: 7,
@@ -153,6 +161,11 @@ export const baanInfo: Baan[] = [
       'KOOM Needs to revolution.',
       'Our new empire is beginning.',
     ],
+    facebook: 'บ้านคุ้ม',
+    instagram: 'baankoom.chula',
+    fblink:
+      'https://www.facebook.com/%E0%B8%9A%E0%B9%89%E0%B8%B2%E0%B8%99%E0%B8%84%E0%B8%B8%E0%B9%89%E0%B8%A1-127164760810245',
+    iglink: 'https://www.instagram.com/baankoom.chula/',
   },
   {
     ID: 9,
@@ -338,6 +351,10 @@ export const baanInfo: Baan[] = [
       'ทุกคนอาจจะงงว่าบ้านโคะคือบ้านแบบไหน👀และเหมาะกับใคร ตอบได้เลยว่าบ้านโคะเป็นบ้านแห่งความหลากหลายทางความคิดสร้างสรรค์และความสนุกสนาน แล้วมาสุดมันส์ไปด้วยกันนน🤟🏼',
     ],
     'caption-en': ['Live like we’re drunk'],
+    facebook: 'บ้านโคะ chula',
+    instagram: 'baankohchula',
+    fblink: 'https://www.facebook.com/BaanKoh',
+    iglink: 'https://www.instagram.com/baankohchula/',
   },
   {
     ID: 19,
@@ -452,6 +469,10 @@ export const baanInfo: Baan[] = [
       '',
       'So, are you ready?? Put your hands up!🙌🏻',
     ],
+    facebook: 'AB NORMAL HOUSE',
+    instagram: 'abnormal.chula',
+    fblink: 'https://www.facebook.com/abnormalhouse',
+    iglink: 'https://www.instagram.com/abnormal.chula/',
   },
   {
     ID: 24,
@@ -489,6 +510,10 @@ export const baanInfo: Baan[] = [
       'พร้อมเดินทางไปด้วยกัน!!!',
     ],
     'caption-en': ['Indiana’s Journey in Giza — you are our treasure.'],
+    facebook: 'Baan Indiana',
+    instagram: 'baanindiana.official',
+    fblink: 'https://www.facebook.com/BaanIndiana',
+    iglink: 'https://www.instagram.com/baanindiana.official/',
   },
   {
     ID: 29,
@@ -504,6 +529,10 @@ export const baanInfo: Baan[] = [
       'Welcome, all wizards and witches to Rubnongkaomai.🎉🎉🎉',
       'Prepare yourself for new adventures, activities, and games that are waiting for you. Let the wizards and witches of all 4 houses get ready to join the story of Harry Potter and define the end of our story together.',
     ],
+    facebook: 'Baankhunnoo',
+    instagram: 'baankhunnoo_official',
+    fblink: 'https://www.facebook.com/BaanKhunNooCU',
+    iglink: 'https://www.instagram.com/baankhunnoo_official/',
   },
   {
     ID: 34,
@@ -526,6 +555,10 @@ export const baanInfo: Baan[] = [
     'caption-en': [
       'Working from home won’t be boring anymore if you come to join us.',
     ],
+    facebook: 'Baan Work at CU',
+    instagram: 'baanwork.cu',
+    fblink: 'https://www.facebook.com/BaanWorkAtCu',
+    iglink: 'https://www.instagram.com/baanwork.cu/',
   },
 ]
 
