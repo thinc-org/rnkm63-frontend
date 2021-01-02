@@ -119,7 +119,7 @@ function Header(props: IHeader) {
 
       <Box>
         <LanguageSwitcher />
-        {(!userError || (userError?.status && userError.status >= 500)) && (
+        {!isLoggedOut && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}
@@ -131,7 +131,7 @@ function Header(props: IHeader) {
           </Hidden>
         )}
         <Hidden smUp>
-          <Drawer />
+          <Drawer allowedRoutes={allowedRoutes} isLoggedOut={isLoggedOut} />
         </Hidden>
       </Box>
     </Box>

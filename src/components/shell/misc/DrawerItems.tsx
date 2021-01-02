@@ -38,8 +38,15 @@ const useStyles = makeStyles({
   },
 })
 
-const ItemDrawer = () => {
+interface IHeader {
+  allowedRoutes: string[]
+  isLoggedOut: boolean
+}
+
+const ItemDrawer = (props: IHeader) => {
   const classes = useStyles()
+  const { allowedRoutes, isLoggedOut } = props
+
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
 
@@ -52,7 +59,11 @@ const ItemDrawer = () => {
         {!userError && userInfo?.isConfirm && (
           <>
             <ListItem>
-              <Button className={classes.eachList} component={Link} to={'/'}>
+              <Button
+                className={classes.eachList}
+                component={Link}
+                to={allowedRoutes[0]}
+              >
                 <ListItemIcon>
                   <HomeOutlinedIcon style={{ color: 'white' }} />
                 </ListItemIcon>
@@ -64,7 +75,7 @@ const ItemDrawer = () => {
 
             {startSelect < currentTime && ( //round 2
               <>
-                <ListItem component={Link} to={'/baan'}>
+                <ListItem component={Link} to={allowedRoutes[1]}>
                   <Button className={classes.eachList}>
                     <ListItemIcon className={classes.selectBaan}>
                       <img alt="" src={iconSelectBaan} />
@@ -81,7 +92,7 @@ const ItemDrawer = () => {
                   </Button>
                 </ListItem>
 
-                <ListItem component={Link} to={'/schedule'}>
+                <ListItem component={Link} to={allowedRoutes[2]}>
                   <Button className={classes.eachList}>
                     <ListItemIcon>
                       <EventNoteRoundedIcon style={{ color: 'white' }} />
@@ -111,7 +122,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userError || (userError?.status && userError.status >= 500)) && (
+        {!isLoggedOut && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>
