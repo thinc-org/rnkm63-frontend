@@ -1,6 +1,8 @@
 import { AxiosError } from 'axios'
 import { FailureDisplay } from 'components/common/Error'
 import React from 'react'
+import { useLocation } from 'react-router-dom'
+
 const errorProviderRef: React.RefObject<ErrorProvider> = React.createRef()
 
 /*
@@ -22,6 +24,11 @@ export function fail(failure: IIntoFailure) {
   else {
     // we're in real deep trouble if even the ref isn't available
     // just reload the page
+
+    // add an alert before reloading
+    // otherwise we might get stuck in a reload loop if things go really wrong
+    alert('You should NEVER see this.')
+
     window.location.reload()
   }
   // return null so we can do `return fail(adsf)` to fail and render nothing.
@@ -57,6 +64,7 @@ export function intoFailure(error: IIntoFailure): IFailure {
 
 interface IErrorProviderProps {
   children: React.ReactNode
+  location: ReturnType<typeof useLocation>
 }
 
 interface IErrorProviderStates {
@@ -84,6 +92,16 @@ class ErrorProvider extends React.Component<
     console.warn(error)
     this.setError(intoFailure(error))
   }
+  componentDidUpdate(prevProps: IErrorProviderProps) {
+    if (prevProps.location !== this.props.location) {
+      if (this.state.failure) {
+        console.warn('Trying to navigate away from an error?')
+        // If the user tries to navigate somewhere whil there is an error,
+        //   reload the page, jsut to be safe.
+        window.location.reload()
+      }
+    }
+  }
   render() {
     const { children } = this.props
     const { failure } = this.state
@@ -94,5 +112,10 @@ class ErrorProvider extends React.Component<
 }
 
 export default function E({ children }: { children: React.ReactNode }) {
-  return <ErrorProvider ref={errorProviderRef}>{children}</ErrorProvider>
+  const location = useLocation()
+  return (
+    <ErrorProvider location={location} ref={errorProviderRef}>
+      {children}
+    </ErrorProvider>
+  )
 }
