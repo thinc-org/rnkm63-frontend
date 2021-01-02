@@ -71,7 +71,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
       </DialogTitle>
 
       <DialogContent>
-        <Box className={classes.fbandigicon_item}>
+        <Box className={classes.fbandigicon_item} hidden={!value.instagram}>
           <InstagramIcon style={{ color: 'white' }} />
           <Typography className={classes.fbandigicon_text}>
             <Link
@@ -85,7 +85,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
             </Link>
           </Typography>
         </Box>
-        <Box className={classes.fbandigicon_item}>
+        <Box className={classes.fbandigicon_item} hidden={!value.facebook}>
           <FacebookIcon style={{ color: 'white' }} />
           <Typography className={classes.fbandigicon_text}>
             <Link
