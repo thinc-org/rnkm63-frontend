@@ -11,5 +11,13 @@
   "could_not_moved_to": "Couldn't move to",
   "instead_join": "Instead joined",
   "no_request": "No request",
-  "jan": "Jan"
+  "jan": "Jan",
+  "feb": "Feb",
+  "s_open_registration": "Open registration system",
+  "s_open_change_baan": "Open the first round for changing Baan system",
+  "s_close_change_baan": "Last time for changing Baan",
+  "s_close_for_mantainance": "Close Rubnongkaomai website for update the system",
+  "s_open_for_inspection": "Open Rubnongkaomai website again. All participants have to recheck their information and fill the COVID-19 risk assessment form",
+  "s_start_rnkm2563": "Rubnongkaomai day"
+
 }

@@ -10,7 +10,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import indexStyle from './indexStyle'
-import { scheduleData } from './ScheduleData'
+import { scheduleRoundData } from './ScheduleData'
 
 function ScheduleTable() {
   const { t } = useTranslation('schedule')
@@ -37,7 +37,7 @@ function ScheduleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {scheduleData.map((act, index: number) => {
+          {scheduleRoundData.map((act, index: number) => {
             return (
               <TableRow key={index}>
                 <TableCell className={style.tableText} align="center">

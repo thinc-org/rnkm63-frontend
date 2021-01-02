@@ -1,4 +1,43 @@
-const scheduleData = [
+const scheduleActivityData = [
+  {
+    date: '4',
+    month: 'jan',
+    time: '12:00',
+    activity: 's_open_registration',
+  },
+  {
+    date: '9',
+    month: 'jan',
+    time: '12:00',
+    activity: 's_open_change_baan',
+  },
+  {
+    date: '13',
+    month: 'jan',
+    time: '12:00',
+    activity: 's_close_change_baan',
+  },
+  {
+    date: '16',
+    month: 'jan',
+    time: '23:59',
+    activity: 's_close_for_mantainance',
+  },
+  {
+    date: '6',
+    month: 'feb',
+    time: '12:00',
+    activity: 's_open_for_inspection',
+  },
+  {
+    date: '13-14',
+    month: 'feb',
+    time: '-',
+    activity: 's_start_rnkm2563',
+  },
+]
+
+const scheduleRoundData = [
   {
     round: 1,
     date: '9',
@@ -97,4 +136,4 @@ const scheduleData = [
   },
 ]
 
-export { scheduleData }
+export { scheduleActivityData, scheduleRoundData }

@@ -6,6 +6,7 @@ import useSWR from 'swr'
 
 import { GetHistory } from '../../../controllers/GetHistory'
 import Loading from '../../common/Loading'
+import { ActivityTable } from './ActivityTable'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
 import { ScheduleTable } from './ScheduleTable'
@@ -20,6 +21,9 @@ function SchedulePage() {
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
+        <Card className={style.scheduleContainer}>
+          <ActivityTable />
+        </Card>
         <Typography className={style.scheduleTitle}>
           {t('schedule_title')}
         </Typography>
