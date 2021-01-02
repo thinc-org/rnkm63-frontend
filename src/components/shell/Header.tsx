@@ -45,7 +45,12 @@ const useStyles = makeStyles({
   },
 })
 
-function Header() {
+interface IHeader {
+  allowedRoutes: string[]
+  isLoggedOut: boolean
+}
+
+function Header(props: IHeader) {
   const classes = useStyles()
   const { t } = useTranslation('shell')
   const { error: userError, user: userInfo } = React.useContext(UserContext)
@@ -64,6 +69,10 @@ function Header() {
   } else {
     menuStyle = 'flex-end'
   }
+  const { allowedRoutes, isLoggedOut } = props
+
+  console.log('allow', allowedRoutes)
+  console.log('logout!', isLoggedOut)
 
   return (
     <Box
@@ -74,7 +83,7 @@ function Header() {
       alignItems="center"
     >
       <Box flex="1" className={classes.headerPart}>
-        <Link to="/" className={classes.rnkmLogoLink}>
+        <Link to={allowedRoutes[0]} className={classes.rnkmLogoLink}>
           <img src={RnkmLogo} alt="" className={classes.rnkmLogo} />
         </Link>
       </Box>
@@ -88,7 +97,7 @@ function Header() {
         <Hidden xsDown>
           {!userError && userInfo?.isConfirm && (
             <>
-              <LinkPage name={t('home')} link={'/'} />
+              <LinkPage name={t('home')} link={allowedRoutes[0]} />
               {startSelect < currentTime && ( //round 2
                 <>
                   <LinkPage
@@ -97,9 +106,9 @@ function Header() {
                         ? t('changeBaan')
                         : t('joinBaan')
                     }
-                    link={'/baan'}
+                    link={allowedRoutes[1]}
                   />
-                  <LinkPage name={t('schedule')} link={'/schedule'} />
+                  <LinkPage name={t('schedule')} link={allowedRoutes[2]} />
                 </>
               )}
             </>
