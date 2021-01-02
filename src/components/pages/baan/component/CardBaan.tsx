@@ -30,14 +30,16 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
   const urlLogo = getLogo(data.ID)
   const value = getBaan(data.ID)
 
+  const setDialog = React.useCallback(() => {
+    handleClickOpen()
+    setDialogData(data.ID)
+  }, [data.ID, handleClickOpen, setDialogData])
+
   return (
     <React.Fragment>
       <Card className={classes.root}>
         <CardActionArea
-          onClick={() => {
-            handleClickOpen()
-            setDialogData(data.ID)
-          }}
+          onClick={setDialog}
           classes={{
             root: classes.actionArea,
             focusHighlight: classes.focusHighlight,
