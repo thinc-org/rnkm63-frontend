@@ -1,10 +1,10 @@
 import {
-  Avatar,
   Card,
   CardActionArea,
   CardContent,
   Typography,
 } from '@material-ui/core'
+import SkeletionImage from 'components/common/SkeletonImage'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -49,7 +49,7 @@ const CardBaan = React.memo(function CardBaan(props: IComponentData) {
             <Typography className={classes.card_title}>
               {value[`name-${lang}` as 'name-en' | 'name-th']}
             </Typography>
-            <Avatar
+            <SkeletionImage
               alt={value['name-en']}
               className={classes.avatar_picture_card}
               src={urlLogo}

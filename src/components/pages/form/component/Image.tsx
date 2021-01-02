@@ -247,7 +247,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
 
       {finalImg ? (
         <Box>
-          <img src={finalImg} className={style.image} alt=""></img>
+          <img src={finalImg} className={style.image} alt="" />
         </Box>
       ) : (
         <Box className={style.image} />

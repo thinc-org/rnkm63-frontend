@@ -9,6 +9,7 @@ import {
   Theme,
   Typography,
 } from '@material-ui/core'
+import SkeletonImage from 'components/common/SkeletonImage'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -110,7 +111,11 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
           <Grid container spacing={2}>
             <Grid item xs={4} container className={classes.center_img}>
               <ButtonBase className={classes.image}>
-                <img className={classes.img} alt="complex" src={urlLogo} />
+                <SkeletonImage
+                  className={classes.img}
+                  alt="complex"
+                  src={urlLogo}
+                />
               </ButtonBase>
             </Grid>
             <Grid

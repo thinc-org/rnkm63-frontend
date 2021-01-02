@@ -81,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     marginLeft: 'auto',
     marginRight: 'auto',
+    borderRadius: '100%',
     [theme.breakpoints.down('xs')]: {
       height: '75px',
       width: '75px',

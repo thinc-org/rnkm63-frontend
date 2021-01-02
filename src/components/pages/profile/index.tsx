@@ -1,4 +1,5 @@
 import { Box, Typography } from '@material-ui/core'
+import SkeletonImage from 'components/common/SkeletonImage'
 import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
@@ -32,7 +33,8 @@ function Profile() {
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
-        <img
+        <div>www</div>
+        <SkeletonImage
           className={classes.imageSize}
           src={userPic}
           alt={userInfo.data?.nickname ?? '-'}

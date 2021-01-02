@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@material-ui/core'
+import SkeletonImage from 'components/common/SkeletonImage'
 import { fail } from 'components/ErrorProvider'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -83,7 +84,7 @@ function Pending(props: Props) {
       <Box className={classes.container}>
         <Box className={classes.content}>
           <Box display="flex" alignItems="center" flexGrow="2">
-            <img src={baanLogo} className={classes.logo} alt="logo" />
+            <SkeletonImage src={baanLogo} className={classes.logo} alt="logo" />
             <Box textAlign="left">
               <Typography className={classes.baanName}>
                 {i18n.language.startsWith('en')
