@@ -46,7 +46,7 @@ export function intoFailure(error: IIntoFailure): IFailure {
   const requestID =
     error?.requestID ?? error?.response?.headers['x-request-id'] ?? null
   const title = error?.title ?? null
-  const detail = error?.title ?? null
+  const detail = error?.detail ?? null
   return {
     status,
     requestID,

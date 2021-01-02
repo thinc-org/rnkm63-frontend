@@ -110,7 +110,7 @@ export function getEndTime(numRound: number): string {
   if (sent) {
     return `${sent.date}T${sent.endTime}+07:00`
   } else {
-    return '2021-01-12T12:00:00+07:00'
+    return '2021-01-13T12:15:00+07:00'
   }
 }
 
@@ -121,6 +121,17 @@ export function getStartTime(numRound: number): string {
   if (sent) {
     return `${sent.date}T${sent.startTime}+07:00`
   } else {
-    return '2021-01-12T12:00:00+07:00'
+    return '2021-01-13T12:15:00+07:00'
   }
+}
+
+export function getLocalRound(): number {
+  const currentTime = new Date().valueOf()
+  for (var round of roundInfo) {
+    const endTime = new Date(`${round.date}T${round.endTime}+07:00`).valueOf()
+    if (currentTime < endTime + 900000) {
+      return round.round
+    }
+  }
+  return 17
 }
