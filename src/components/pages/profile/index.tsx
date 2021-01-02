@@ -33,7 +33,6 @@ function Profile() {
   return (
     <body className={classes.profile}>
       <Box className={classes.image}>
-        <div>www</div>
         <SkeletonImage
           className={classes.imageSize}
           src={userPic}
