@@ -21,12 +21,12 @@ const buttonTheme = createMuiTheme({
 
 const useStyles = makeStyles((theme: Theme) => ({
   button: {
-    width: '15rem',
     height: '3rem',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    textAlign: 'center',
     borderRadius: '1.5rem',
     fontSize: '1.125rem',
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
     fontWeight: 700,
     [theme.breakpoints.up('sm')]: {
       button: {

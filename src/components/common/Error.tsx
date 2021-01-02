@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   buttonsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'stretch',
   },
 }))
 
