@@ -4,7 +4,7 @@ import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { getBaan } from 'local/BaanInfo'
 import getFaculty from 'local/facultyInfo'
-import { getEndTime, getStartTime } from 'local/RoundInfo'
+import { getEndTime, getLocalRound, getStartTime } from 'local/RoundInfo'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -20,7 +20,8 @@ function Profile() {
   const userPic = userInfo?.data?.imgURL ?? ''
   const baanEng = getBaan(userInfo?.currentBaan ?? 0)['name-en']
   const baanThai = getBaan(userInfo?.currentBaan ?? 0)['name-th']
-  const round = userInfo.roundCount
+  const globalRound = userInfo.roundCount
+  const round = getLocalRound()
   const classes = profileStyles()
   const currentTime = new Date().valueOf()
 
@@ -29,6 +30,15 @@ function Profile() {
   const endTime = new Date(endTimeString).valueOf()
   let secs = endTime - currentTime
   let process = secs < 0 ? true : false
+
+  if (round > globalRound) {
+    // localRound is more than globalRound, something wrong
+    // still processing or user changed device time
+    return fail({
+      title: 'Still processing, please wait...',
+      requestID: 'localRoundMoreThanGlobalRound:' + error?.requestID,
+    })
+  }
 
   return (
     <body className={classes.profile}>
@@ -81,20 +91,22 @@ function Profile() {
           processing={false}
         />
       ) : (
-        // phase 2
-        <>
-          <BaanRender
-            round={round}
-            secs={secs}
-            preferBaan={userInfo.preferBaan}
-            currentBaan={userInfo.currentBaan}
-          />
-          <CountdownTimer
-            timeLeft={secs < 0 ? nextStartTime : endTimeString}
-            roundCount={true}
-            processing={process}
-          />
-        </>
+        userInfo.phaseCount === 2 && (
+          // phase 2
+          <>
+            <BaanRender
+              round={round}
+              secs={secs}
+              preferBaan={userInfo.preferBaan}
+              currentBaan={userInfo.currentBaan}
+            />
+            <CountdownTimer
+              timeLeft={secs < 0 ? nextStartTime : endTimeString}
+              roundCount={true}
+              processing={process}
+            />
+          </>
+        )
       )}
     </body>
   )
