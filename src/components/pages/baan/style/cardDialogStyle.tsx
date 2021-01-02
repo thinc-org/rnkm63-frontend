@@ -86,12 +86,6 @@ const useStyles = makeStyles((theme) => ({
       width: '75px',
     },
   },
-  dialog_popup: {
-    backdropFilter: 'blur(8px)',
-    position: 'absolute',
-    right: '50px',
-    top: '105px',
-  },
 }))
 
 export default useStyles

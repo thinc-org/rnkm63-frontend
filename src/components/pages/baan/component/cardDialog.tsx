@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Dialog,
   Link,
   Theme,
   Typography,
@@ -11,6 +10,7 @@ import MuiDialogActions from '@material-ui/core/DialogActions'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import FacebookIcon from '@material-ui/icons/Facebook'
 import InstagramIcon from '@material-ui/icons/Instagram'
+import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import i18n from 'i18next'
 import { getBaan, getLogo } from 'local/BaanInfo'
 import React from 'react'
@@ -55,10 +55,9 @@ const CardDialog = function CardDialog(props: ICardDialog) {
   const value = getBaan(ID)
 
   return (
-    <Dialog
+    <BlurBehindDialog
       onClose={handleClose}
       open={open}
-      className={classes.dialog_popup}
       PaperProps={{
         style: {
           backgroundColor: '#383838',
@@ -118,7 +117,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
       <DialogActions>
         <SubmitButton color={color} disabled={disabled} ID={value.ID} />
       </DialogActions>
-    </Dialog>
+    </BlurBehindDialog>
   )
 }
 

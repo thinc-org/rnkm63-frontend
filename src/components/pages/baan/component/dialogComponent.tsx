@@ -34,7 +34,6 @@ const styles = (theme: Theme) =>
     fbandigicon_text: {},
     avatar_picture: {},
     avatar_picture_card: {},
-    dialog_popup: {},
     focusHighlight: {},
     actionArea: {},
   })

@@ -1,11 +1,11 @@
 import {
   Button,
-  Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Typography,
 } from '@material-ui/core'
+import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -13,6 +13,7 @@ import { indexStyle } from '../style'
 
 interface IFormDialog {
   confirmOpen: boolean
+  text: string
   closeDialog: () => void
   submit: () => void
 }
@@ -20,15 +21,14 @@ interface IFormDialog {
 const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
   const style = indexStyle()
   const { t } = useTranslation('form')
-  const { confirmOpen, closeDialog, submit } = props
+  const { confirmOpen, closeDialog, submit, text } = props
   return (
-    <Dialog
+    <BlurBehindDialog
       open={confirmOpen}
       onClose={closeDialog}
       PaperProps={{
         classes: { root: style.dialog },
       }}
-      style={{ backdropFilter: 'blur(8px)' }}
     >
       <DialogTitle classes={{ root: style.dialogTitle }}>
         <Typography className={style.dialogTitle}>
@@ -37,7 +37,7 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
       </DialogTitle>
       <DialogContent>
         <Typography className={style.dialogContent}>
-          {t('confirmDescription')}
+          {t(`${text}DialogDescription`)}
         </Typography>
       </DialogContent>
       <DialogActions classes={{ root: style.dialogAction }}>
@@ -54,7 +54,7 @@ const FormDialog = React.memo(function FormDialog(props: IFormDialog) {
           {t('confirm')}
         </Button>
       </DialogActions>
-    </Dialog>
+    </BlurBehindDialog>
   )
 })
 

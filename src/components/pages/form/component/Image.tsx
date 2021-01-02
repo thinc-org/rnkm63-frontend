@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Dialog,
   DialogContentText,
   DialogTitle,
   IconButton,
@@ -13,6 +12,7 @@ import { TransitionProps } from '@material-ui/core/transitions/transition'
 import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
+import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
@@ -137,7 +137,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
 
   return (
     <Box display="flex" alignItems="center" flexDirection="column" m={0}>
-      <Dialog
+      <BlurBehindDialog
         open={cropState}
         maxWidth="sm"
         fullWidth={true}
@@ -148,7 +148,6 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         TransitionComponent={Transition}
         keepMounted
         onClose={closeDialog}
-        style={{ backdropFilter: 'blur(8px)' }}
       >
         <DialogTitle>
           <IconButton
@@ -244,7 +243,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
             {t('confirmCrop')}
           </Button>
         ) : null}
-      </Dialog>
+      </BlurBehindDialog>
 
       {finalImg ? (
         <Box>
