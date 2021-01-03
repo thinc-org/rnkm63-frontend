@@ -57,9 +57,6 @@ function Header(props: IHeader) {
 
   const { allowedRoutes, isLoggedOut } = props
 
-  console.log('allow', allowedRoutes)
-  console.log('logout!', isLoggedOut)
-
   //logic for style for navbar in desktop size.
   let menuStyle
   if (userInfo?.isConfirm) {
