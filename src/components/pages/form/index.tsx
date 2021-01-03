@@ -58,11 +58,14 @@ class Form extends React.PureComponent<FormProps, FormState> {
       !userData?.data ||
       userData?.data.nickname !== data.nickname
 
+    let uploadFail = false
+
     if (imageBlob !== 0) {
       try {
         const resPolicy = await getPolicyStorage()
         await uploadImageToStorage(imageBlob, resPolicy.data)
       } catch (e) {
+        uploadFail = true
         this.setState({
           submitError: e,
           isSubmitLoading: false,
@@ -70,9 +73,11 @@ class Form extends React.PureComponent<FormProps, FormState> {
       }
     }
     try {
-      await postUserData(data, edit)
-      loadUser()
-      history.push('/form/complete')
+      if (!uploadFail) {
+        await postUserData(data, edit)
+        loadUser()
+        history.push('/form/complete')
+      }
     } catch (e) {
       this.setState({
         submitError: e,
