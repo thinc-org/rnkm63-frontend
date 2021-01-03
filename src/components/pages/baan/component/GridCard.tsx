@@ -1,6 +1,5 @@
 import {
   Box,
-  ButtonBase,
   Card,
   CardActionArea,
   createStyles,
@@ -30,13 +29,14 @@ const useStyles = makeStyles((theme: Theme) =>
       '&:hover $focusHighlight': {
         opacity: 0,
       },
+      paddingTop: theme.spacing(1),
     },
     focusHighlight: {},
     paper: {
-      padding: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
       margin: 'auto',
       width: '500',
-      height: '150px',
+      height: '160px',
       backgroundColor: theme.palette.primary.main,
       borderRadius: '20px',
     },
@@ -49,6 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     img: {
       margin: 'auto',
+      marginLeft: theme.spacing(1),
       width: '100px',
       height: '100px',
       borderRadius: '50%',
@@ -110,13 +111,11 @@ const GridCard = React.memo(function GridCard(props: IGridCard) {
         >
           <Grid container spacing={2}>
             <Grid item xs={4} container className={classes.center_img}>
-              <ButtonBase className={classes.image}>
-                <SkeletonImage
-                  className={classes.img}
-                  alt="complex"
-                  src={urlLogo}
-                />
-              </ButtonBase>
+              <SkeletonImage
+                className={classes.img}
+                alt="complex"
+                src={urlLogo}
+              />
             </Grid>
             <Grid
               item
