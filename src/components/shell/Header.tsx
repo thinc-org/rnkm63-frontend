@@ -105,11 +105,12 @@ function Header(props: IHeader) {
                   link={'/baan'}
                 />
               )}
-              {allowedRoutes.includes('/schedule') && (
-                <LinkPage name={t('schedule')} link={'/schedule'} />
-              )}
             </>
           )}
+          {allowedRoutes.includes('/schedule') && (
+            <LinkPage name={t('schedule')} link={'/schedule'} />
+          )}
+
           <ReportIssue />
         </Hidden>
       </Box>

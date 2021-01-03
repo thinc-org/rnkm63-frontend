@@ -90,20 +90,19 @@ const ItemDrawer = (props: IHeader) => {
                 </Button>
               </ListItem>
             )}
-
-            {allowedRoutes.includes('/schedule') && (
-              <ListItem component={Link} to={'/schedule'}>
-                <Button className={classes.eachList}>
-                  <ListItemIcon>
-                    <EventNoteRoundedIcon style={{ color: 'white' }} />
-                  </ListItemIcon>
-                  <Box fontSize={16} fontWeight="fontWeightBold">
-                    {t('schedule')}
-                  </Box>
-                </Button>
-              </ListItem>
-            )}
           </>
+        )}
+        {allowedRoutes.includes('/schedule') && (
+          <ListItem component={Link} to={'/schedule'}>
+            <Button className={classes.eachList}>
+              <ListItemIcon>
+                <EventNoteRoundedIcon style={{ color: 'white' }} />
+              </ListItemIcon>
+              <Box fontSize={16} fontWeight="fontWeightBold">
+                {t('schedule')}
+              </Box>
+            </Button>
+          </ListItem>
         )}
 
         <ListItem>
