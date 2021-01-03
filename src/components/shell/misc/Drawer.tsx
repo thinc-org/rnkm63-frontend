@@ -17,8 +17,15 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-export default function DrawerButton() {
+interface IHeader {
+  allowedRoutes: string[]
+  isLoggedOut: boolean
+}
+
+export default function DrawerButton(props: IHeader) {
   const classes = useStyles()
+  const { allowedRoutes, isLoggedOut } = props
+
   const [state, setState] = React.useState(false)
 
   const openDrawer = React.useCallback(() => {
@@ -35,7 +42,7 @@ export default function DrawerButton() {
       </IconButton>
       <Drawer anchor={'right'} open={state} onClose={closeDrawer}>
         <Box role="presentation" onClick={closeDrawer}>
-          <ItemDrawer />
+          <ItemDrawer allowedRoutes={allowedRoutes} isLoggedOut={isLoggedOut} />
         </Box>
       </Drawer>
     </React.Fragment>

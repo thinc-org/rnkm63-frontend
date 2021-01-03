@@ -60,7 +60,8 @@
     "rules": {
       "simple-import-sort/imports": "warn",
       "simple-import-sort/exports": "warn",
-      "react/display-name": "off"
+      "react/display-name": "off",
+      "no-throw-literal": "off"
     }
   },
   "browserslist": {

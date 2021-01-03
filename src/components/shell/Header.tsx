@@ -45,10 +45,29 @@ const useStyles = makeStyles({
   },
 })
 
-function Header() {
+interface IHeader {
+  allowedRoutes: string[]
+  isLoggedOut: boolean
+}
+
+function Header(props: IHeader) {
   const classes = useStyles()
   const { t } = useTranslation('shell')
-  const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const { user: userInfo } = React.useContext(UserContext)
+
+  const { allowedRoutes, isLoggedOut } = props
+
+  //logic for style for navbar in desktop size.
+  let menuStyle
+  if (userInfo?.isConfirm) {
+    if (userInfo?.phaseCount === 2) {
+      menuStyle = 'center'
+    } else {
+      menuStyle = 'space-between'
+    }
+  } else {
+    menuStyle = 'flex-end'
+  }
 
   return (
     <Box
@@ -59,7 +78,7 @@ function Header() {
       alignItems="center"
     >
       <Box flex="1" className={classes.headerPart}>
-        <Link to="/" className={classes.rnkmLogoLink}>
+        <Link to={'/'} className={classes.rnkmLogoLink}>
           <img src={RnkmLogo} alt="" className={classes.rnkmLogo} />
         </Link>
       </Box>
@@ -67,20 +86,28 @@ function Header() {
       <Box
         display="flex"
         flex="6"
-        justifyContent={userInfo?.isConfirm ? 'center' : 'flex-end'}
+        justifyContent={menuStyle}
         className={classes.headerPart}
       >
         <Hidden xsDown>
-          {!userError && userInfo?.isConfirm && (
+          {allowedRoutes.includes('/') && (
+            <LinkPage name={t('home')} link={'/'} />
+          )}
+          {userInfo?.phaseCount === 2 && (
             <>
-              <LinkPage name={t('home')} link={'/'} />
-              <LinkPage
-                name={
-                  userInfo?.currentBaan !== 0 ? t('changeBaan') : t('joinBaan')
-                }
-                link={'/baan'}
-              />
-              <LinkPage name={t('schedule')} link={'/schedule'} />
+              {allowedRoutes.includes('/baan') && (
+                <LinkPage
+                  name={
+                    userInfo?.currentBaan !== 0
+                      ? t('changeBaan')
+                      : t('joinBaan')
+                  }
+                  link={'/baan'}
+                />
+              )}
+              {allowedRoutes.includes('/schedule') && (
+                <LinkPage name={t('schedule')} link={'/schedule'} />
+              )}
             </>
           )}
           <ReportIssue />
@@ -89,7 +116,7 @@ function Header() {
 
       <Box>
         <LanguageSwitcher />
-        {(!userError || (userError?.status && userError.status >= 500)) && (
+        {!isLoggedOut && (
           <Hidden xsDown>
             <LogOutButton
               className={classes.logOutButton}
@@ -101,7 +128,7 @@ function Header() {
           </Hidden>
         )}
         <Hidden smUp>
-          <Drawer />
+          <Drawer allowedRoutes={allowedRoutes} isLoggedOut={isLoggedOut} />
         </Hidden>
       </Box>
     </Box>

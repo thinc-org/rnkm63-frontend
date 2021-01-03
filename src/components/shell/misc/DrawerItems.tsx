@@ -38,58 +38,71 @@ const useStyles = makeStyles({
   },
 })
 
-const ItemDrawer = () => {
+interface IHeader {
+  allowedRoutes: string[]
+  isLoggedOut: boolean
+}
+
+const ItemDrawer = (props: IHeader) => {
   const classes = useStyles()
+  const { allowedRoutes, isLoggedOut } = props
+
   const { t } = useTranslation('shell')
-  const { error: userError, user: userInfo } = React.useContext(UserContext)
+  const { user: userInfo } = React.useContext(UserContext)
 
   return (
     <React.Fragment>
       <List>
-        {!userError && userInfo?.isConfirm && (
+        {allowedRoutes.includes('/') && (
+          <ListItem>
+            <Button className={classes.eachList} component={Link} to={'/'}>
+              <ListItemIcon>
+                <HomeOutlinedIcon style={{ color: 'white' }} />
+              </ListItemIcon>
+              <Box fontSize={16} fontWeight="fontWeightBold">
+                {t('home')}
+              </Box>
+            </Button>
+          </ListItem>
+        )}
+
+        {userInfo?.phaseCount === 2 && (
           <>
-            <ListItem>
-              <Button className={classes.eachList} component={Link} to={'/'}>
-                <ListItemIcon>
-                  <HomeOutlinedIcon style={{ color: 'white' }} />
-                </ListItemIcon>
-                <Box fontSize={16} fontWeight="fontWeightBold">
-                  {t('home')}
-                </Box>
-              </Button>
-            </ListItem>
+            {allowedRoutes.includes('/baan') && (
+              <ListItem component={Link} to={'/baan'}>
+                <Button className={classes.eachList}>
+                  <ListItemIcon className={classes.selectBaan}>
+                    <img
+                      alt=""
+                      src={iconSelectBaan}
+                      style={{ width: '24px', height: '20px' }}
+                    />
+                  </ListItemIcon>
+                  <Box
+                    fontSize={16}
+                    fontWeight="fontWeightBold"
+                    className={classes.selectBaan}
+                  >
+                    {userInfo?.currentBaan !== 0
+                      ? t('changeBaan')
+                      : t('joinBaan')}
+                  </Box>
+                </Button>
+              </ListItem>
+            )}
 
-            <ListItem component={Link} to={'/baan'}>
-              <Button className={classes.eachList}>
-                <ListItemIcon className={classes.selectBaan}>
-                  <img
-                    alt=""
-                    src={iconSelectBaan}
-                    style={{ width: '24px', height: '20px' }}
-                  />
-                </ListItemIcon>
-                <Box
-                  fontSize={16}
-                  fontWeight="fontWeightBold"
-                  className={classes.selectBaan}
-                >
-                  {userInfo?.currentBaan !== 0
-                    ? t('changeBaan')
-                    : t('joinBaan')}
-                </Box>
-              </Button>
-            </ListItem>
-
-            <ListItem component={Link} to={'/schedule'}>
-              <Button className={classes.eachList}>
-                <ListItemIcon>
-                  <EventNoteRoundedIcon style={{ color: 'white' }} />
-                </ListItemIcon>
-                <Box fontSize={16} fontWeight="fontWeightBold">
-                  {t('schedule')}
-                </Box>
-              </Button>
-            </ListItem>
+            {allowedRoutes.includes('/schedule') && (
+              <ListItem component={Link} to={'/schedule'}>
+                <Button className={classes.eachList}>
+                  <ListItemIcon>
+                    <EventNoteRoundedIcon style={{ color: 'white' }} />
+                  </ListItemIcon>
+                  <Box fontSize={16} fontWeight="fontWeightBold">
+                    {t('schedule')}
+                  </Box>
+                </Button>
+              </ListItem>
+            )}
           </>
         )}
 
@@ -108,7 +121,7 @@ const ItemDrawer = () => {
           </Button>
         </ListItem>
 
-        {(!userError || (userError?.status && userError.status >= 500)) && (
+        {!isLoggedOut && (
           <ListItem>
             <LogOutButton className={classes.eachList}>
               <ListItemIcon className={classes.logOut}>
