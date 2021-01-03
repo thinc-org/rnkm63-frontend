@@ -1,10 +1,11 @@
 import { Button } from '@material-ui/core'
 import { fail } from 'components/ErrorProvider'
 import { createBrowserHistory } from 'history'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import useStyles from '../style/cardDialogStyle'
+import { SubmitContext } from '../SubmitContext'
 import { postRequestBaan } from '../utils/apiService'
 
 interface ISubmitButton {
@@ -21,8 +22,11 @@ const SubmitButton = React.memo(function FormDialog(props: ISubmitButton) {
     forceRefresh: true,
   })
 
+  const { setSubmit } = useContext(SubmitContext)
+
   const sendToProfile = async () => {
     try {
+      setSubmit(true)
       await postRequestBaan(ID)
       history.push('/')
     } catch (err) {
