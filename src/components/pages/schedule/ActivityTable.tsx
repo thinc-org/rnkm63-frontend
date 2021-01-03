@@ -10,13 +10,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import indexStyle from './indexStyle'
-import { scheduleRoundData } from './ScheduleData'
+import { scheduleActivityData } from './ScheduleData'
 
-type Props = {
-  currentRound: number
-}
-
-function ScheduleTable({ currentRound }: Props) {
+function ActivityTable() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
 
@@ -30,33 +26,28 @@ function ScheduleTable({ currentRound }: Props) {
               className={style.tableText}
               align="center"
             >
-              {t('table_round_title')}
-            </TableCell>
-            <TableCell className={style.tableText} align="center">
               {t('table_date_title')}
             </TableCell>
             <TableCell className={style.tableText} align="center">
               {t('table_time_title')}
             </TableCell>
+            <TableCell className={style.tableText} align="center">
+              {t('schedule_title')}
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {scheduleRoundData.map((act, index: number) => {
+          {scheduleActivityData.map((act, index: number) => {
             return (
-              <TableRow
-                key={index}
-                className={
-                  index + 1 === currentRound ? style.currentRound : undefined
-                }
-              >
+              <TableRow key={index}>
                 <TableCell className={style.tableText} align="center">
-                  {act.round}
+                  {act.date} {t(act.month)}
                 </TableCell>
                 <TableCell className={style.tableText} align="center">
-                  {act.date} {t('jan')}
+                  {act.time} {act.time !== '-' ? t('time_unit') : ''}
                 </TableCell>
-                <TableCell className={style.tableText} align="center">
-                  {act.start} - {act.end}
+                <TableCell className={style.tableText} align="left">
+                  {t(act.activity)}
                 </TableCell>
               </TableRow>
             )
@@ -67,4 +58,4 @@ function ScheduleTable({ currentRound }: Props) {
   )
 }
 
-export { ScheduleTable }
+export { ActivityTable }

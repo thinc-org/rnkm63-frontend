@@ -7,9 +7,10 @@ import indexStyle from './indexStyle'
 
 type Props = {
   data: Array<AssignmentLog> | null
+  phase: number
 }
 
-function HistoryList({ data }: Props) {
+function HistoryList({ data, phase }: Props) {
   let { t } = useTranslation(['schedule', 'baan'])
   const style = indexStyle()
 
@@ -128,6 +129,15 @@ function HistoryList({ data }: Props) {
         </>
       )
     }
+  }
+
+  // phase 1 with no data
+  if (phase === 1) {
+    return (
+      <Grid item>
+        <Typography>{t('no_assignment_history')}</Typography>
+      </Grid>
+    )
   }
 
   const List = data

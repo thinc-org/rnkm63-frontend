@@ -68,6 +68,9 @@ const style = makeStyles((theme: Theme) => ({
       fontSize: '1.2rem',
     },
   },
+  currentRound: {
+    background: theme.palette.success.main,
+  },
 }))
 
 export default style

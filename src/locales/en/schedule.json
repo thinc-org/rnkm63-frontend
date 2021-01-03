@@ -11,5 +11,15 @@
   "could_not_moved_to": "Couldn't move to",
   "instead_join": "Instead joined",
   "no_request": "No request",
-  "jan": "Jan"
+  "no_assignment_history": "No assignment history",
+  "jan": "Jan",
+  "feb": "Feb",
+  "time_unit": "PM",
+  "s_open_registration": "Open the registration system",
+  "s_open_change_baan": "First round for Baan reassignment",
+  "s_close_change_baan": "Last round for Baan reassignment",
+  "s_close_for_mantainance": "Close Rubnongkaomai website for maintenance",
+  "s_open_for_inspection": "Reopen Rubnongkaomai website for checking information and filling the COVID-19 risk assessment form",
+  "s_start_rnkm2563": "Rubnongkaomai day"
+
 }
