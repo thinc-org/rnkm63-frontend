@@ -1,5 +1,7 @@
+import { Container, makeStyles } from '@material-ui/core'
 import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
+import ErrorProvider from 'components/ErrorProvider'
 import {
   Baan,
   Covid,
@@ -9,21 +11,32 @@ import {
   Profile,
   Schedule,
 } from 'components/pages'
+import { Header } from 'components/shell'
 import { UserContext } from 'contexts/UserContext'
 import React from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
+
+const useStyles = makeStyles({
+  PageContainer: {
+    flex: 1,
+  },
+})
 
 function RedirectTo(to: string): React.FC {
   return () => <Redirect to={to} />
 }
 
 export default function Routes() {
-  const { user, isLoaded, error } = React.useContext(UserContext)
-  if (!isLoaded) return <Loading />
+  const classes = useStyles()
 
+  const { user, isLoaded, error } = React.useContext(UserContext)
   const status = error?.status ?? 0
-  const isLoggedOut = status >= 401 && status <= 404
-  if (error && !isLoggedOut) return fail(error) // If there is an error that isn't 401-404, fail.
+  const isLoggedOut = status >= 401 && status <= 404 && isLoaded
+
+  // show failure if there is an error and that error isn't just that the user is not logged in.
+  React.useEffect(() => {
+    if (error && !isLoggedOut && isLoaded) fail(error)
+  }, [error, isLoggedOut, isLoaded])
 
   const isConfirm = user?.isConfirm
   const currentBaan = user?.currentBaan
@@ -37,23 +50,37 @@ export default function Routes() {
   const routes = [
         {path: '/login',          component: Login,          condition: isLoggedOut                                         },
         {path: '/',               component: Profile,        condition: isConfirm || currentBaan === -1                     },
-        {path: '/form',           component: Form,           condition: !isLoggedOut && !isConfirm                          },
-        {path: '/covid',          component: Covid,          condition: !isLoggedOut && !isConfirm && currentBaan !== -1    },
+        {path: '/form',           component: Form,           condition: user && !isConfirm                                  },
+        {path: '/covid',          component: Covid,          condition: user && !isConfirm && currentBaan !== -1            },
         {path: '/baan',           component: Baan,           condition: isConfirm                                           },
         {path: '/schedule',       component: Schedule,       condition: isConfirm                                           },
         {path: '/form/complete',  component: FormComplete,   condition: isConfirm                                           },
-  ]
+  ].filter(({condition}) => condition)
 
-  const firstMatchPath = routes.find((r) => r.condition)?.path ?? '/' // There would always be a match for the find(). The ?? "/" is just to placate typescript.
+  const firstMatchPath = routes[0]?.path ?? '/'
 
   return (
-    <Switch>
-      {routes
-        .filter((r) => r.condition)
-        .map(({ path, component }) => (
-          <Route path={path} exact component={component} key={path} />
-        ))}
-      <Route component={RedirectTo(firstMatchPath)} />
-    </Switch>
+    <>
+      <Header
+        allowedRoutes={routes.map(({ path }) => path)}
+        isLoggedOut={isLoggedOut}
+      />
+      <Container className={classes.PageContainer}>
+        <ErrorProvider>
+          {!isLoaded ? (
+            <Loading />
+          ) : (
+            routes.length > 0 && (
+              <Switch>
+                {routes.map(({ path, component }) => (
+                  <Route path={path} exact component={component} key={path} />
+                ))}
+                <Route component={RedirectTo(firstMatchPath)} />
+              </Switch>
+            )
+          )}
+        </ErrorProvider>
+      </Container>
+    </>
   )
 }

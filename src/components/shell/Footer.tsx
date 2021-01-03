@@ -2,10 +2,11 @@ import { Box, makeStyles, Theme, Typography } from '@material-ui/core'
 import SkeletonImage from 'components/common/SkeletonImage'
 import { withSuspense } from 'components/hoc'
 import EISA from 'local/EISA.svg'
-import kohkae from 'local/kohkae.svg' //Left
-import Major from 'local/Major.svg' //Right
+import kohkae from 'local/kohkae.svg'
+import Major from 'local/Major.svg'
 import SGCUIcon from 'local/SGCU.svg'
 import SPT from 'local/SPT.svg'
+import ThaiBev from 'local/ThaiBev_BW.svg'
 import THINCIcon from 'local/thinc_logo.svg'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -42,12 +43,13 @@ function Footer() {
           <SkeletonImage src={SGCUIcon} alt="" className={classes.icon} />
           <SkeletonImage src={THINCIcon} alt="" className={classes.icon} />
         </Box>
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent="center"
-        >
+        <Box display="flex" flexDirection="row" justifyContent="center">
+          <SkeletonImage
+            src={ThaiBev}
+            alt=""
+            className={classes.icon}
+            style={{ height: '27px', marginTop: '3px' }}
+          />
           <SkeletonImage src={EISA} alt="" className={classes.icon} />
           <SkeletonImage src={kohkae} alt="" className={classes.icon} />
           <SkeletonImage src={Major} alt="" className={classes.icon} />

@@ -50,6 +50,10 @@ const uploadImageToStorage = function (blobImg: Blob, policy: Policy) {
       },
     })
     .catch((err) => {
+      const logMsg = err.response.data
+      const beginIdx = logMsg.indexOf('<Code>')
+      const endIdx = logMsg.indexOf('</Code>')
+      err.requestID = `UploadImage-${logMsg.slice(beginIdx + 6, endIdx)}`
       throw intoFailure(err)
     })
 }

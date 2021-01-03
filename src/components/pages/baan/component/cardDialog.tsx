@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Link,
-  Theme,
-  Typography,
-  withStyles,
-} from '@material-ui/core'
+import { Box, Link, Theme, Typography, withStyles } from '@material-ui/core'
 import MuiDialogActions from '@material-ui/core/DialogActions'
 import MuiDialogContent from '@material-ui/core/DialogContent'
 import FacebookIcon from '@material-ui/icons/Facebook'
@@ -64,7 +57,7 @@ const CardDialog = function CardDialog(props: ICardDialog) {
         },
       }}
     >
-      <Avatar className={classes.avatar_picture} src={urlLogo} />
+      <img alt="" className={classes.avatar_picture} src={urlLogo} />
       <DialogTitle onClose={handleClose} classes={classes}>
         {value[`name-${lang}` as 'name-th' | 'name-en']}
       </DialogTitle>

@@ -1,4 +1,4 @@
-import { fail, IFailure } from 'components/ErrorProvider'
+import { IFailure } from 'components/ErrorProvider'
 import getUser from 'controllers/GetUserController'
 import React from 'react'
 
@@ -149,7 +149,7 @@ export class UserProvider extends React.Component<any, IUserState> {
           // If the result doesn't pass the type check above,
           //   than backend is wrong.
           if (!(u && isIUser(u))) {
-            fail(null)
+            throw {} // Will be caught below
           }
 
           // Only use the load result if it is the last load called.
