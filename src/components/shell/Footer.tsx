@@ -43,12 +43,7 @@ function Footer() {
           <SkeletonImage src={SGCUIcon} alt="" className={classes.icon} />
           <SkeletonImage src={THINCIcon} alt="" className={classes.icon} />
         </Box>
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          flexDirection="row"
-          justifyContent="center"
-        >
+        <Box display="flex" flexDirection="row" justifyContent="center">
           <SkeletonImage
             src={ThaiBev}
             alt=""
