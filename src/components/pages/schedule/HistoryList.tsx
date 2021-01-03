@@ -1,5 +1,4 @@
 import { Box, Chip, Grid, Typography } from '@material-ui/core'
-import { IUser } from 'contexts/UserContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -8,10 +7,10 @@ import indexStyle from './indexStyle'
 
 type Props = {
   data: Array<AssignmentLog> | null
-  user: IUser | null
+  phase: number
 }
 
-function HistoryList({ data, user }: Props) {
+function HistoryList({ data, phase }: Props) {
   let { t } = useTranslation(['schedule', 'baan'])
   const style = indexStyle()
 
@@ -133,14 +132,12 @@ function HistoryList({ data, user }: Props) {
   }
 
   // phase 1 with no data
-  if (user) {
-    if (user.phaseCount === 1) {
-      return (
-        <Grid item>
-          <Typography>{t('no_assignment_history')}</Typography>
-        </Grid>
-      )
-    }
+  if (phase === 1) {
+    return (
+      <Grid item>
+        <Typography>{t('no_assignment_history')}</Typography>
+      </Grid>
+    )
   }
 
   const List = data

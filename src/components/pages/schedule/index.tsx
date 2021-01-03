@@ -46,7 +46,10 @@ function SchedulePage() {
           <Typography className={style.historyTitle}>
             {t('history_title')}
           </Typography>
-          <HistoryList data={data ? data : null} user={userInfo} />
+          <HistoryList
+            data={data ? data : null}
+            phase={userInfo?.phaseCount ? userInfo.phaseCount : -1}
+          />
         </Card>
       </Grid>
     </Grid>
