@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     img: {
       margin: 'auto',
-      marginLeft: theme.spacing(1),
+      marginLeft: theme.spacing(2),
       width: '100px',
       height: '100px',
       borderRadius: '50%',

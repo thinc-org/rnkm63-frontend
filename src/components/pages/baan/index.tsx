@@ -28,6 +28,7 @@ import CardDialog from './component/cardDialog'
 import GridCard from './component/GridCard'
 import StatusColor from './component/StatusColor'
 import { indexStyle } from './style/indexStyle'
+import { SubmitContext } from './SubmitContext'
 import { getCapacityData } from './utils/apiService'
 import { searchBaan } from './utils/baanUtils'
 
@@ -48,6 +49,9 @@ function Baan() {
   const [currentFilterData, setCurrentFilterData] = useState<
     IFilterData[] | null
   >(null)
+
+  const [isSubmit, setSubmit] = useState(false)
+
   const { t } = useTranslation('selectbaan')
   const style = indexStyle()
 
@@ -85,127 +89,129 @@ function Baan() {
   }, [searchValue, filterSize, capacityData])
 
   if (!userInfo) return null
-  else if (!currentFilterData) return <Loading />
+  else if (!currentFilterData || isSubmit) return <Loading />
   else {
     return (
-      <Box className={style.container}>
-        <Box className={style.title} textAlign="center">
-          <Typography variant="h2">
-            {userInfo.currentBaan !== 0
-              ? t('titleMoveBaan')
-              : t('titleJoinBaan')}
-          </Typography>
-          <Typography variant="h5" className={style.titleDescription}>
-            {t('titleDescription')}
-          </Typography>
-        </Box>
-        <Box display="flex" width="100%" className={style.searchContainer}>
-          <Paper className={style.paperSearch}>
-            <SearchIcon className={style.searchIcon} />
-            <InputBase
-              placeholder={t('searchPlaceholder')}
-              fullWidth
-              className={style.inputBase}
-              onChange={(e) => setSearchValue(e.target.value)}
-            />
-          </Paper>
-        </Box>
-        <FormGroup>
+      <SubmitContext.Provider value={{ isSubmit, setSubmit }}>
+        <Box className={style.container}>
+          <Box className={style.title} textAlign="center">
+            <Typography variant="h2">
+              {userInfo.currentBaan !== 0
+                ? t('titleMoveBaan')
+                : t('titleJoinBaan')}
+            </Typography>
+            <Typography variant="h5" className={style.titleDescription}>
+              {t('titleDescription')}
+            </Typography>
+          </Box>
+          <Box display="flex" width="100%" className={style.searchContainer}>
+            <Paper className={style.paperSearch}>
+              <SearchIcon className={style.searchIcon} />
+              <InputBase
+                placeholder={t('searchPlaceholder')}
+                fullWidth
+                className={style.inputBase}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+            </Paper>
+          </Box>
+          <FormGroup>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              className={style.filterContainer}
+            >
+              {['S', 'M', 'L', 'XL'].map((value, idx: number) => (
+                <Box key={idx}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={filterSize[value as BaanSize]}
+                        onChange={(e) =>
+                          setFilterSize({
+                            ...filterSize,
+                            [e.target.name]: e.target.checked,
+                          })
+                        }
+                        color="default"
+                        className={style.checkBox}
+                        name={value}
+                      />
+                    }
+                    label={
+                      <React.Fragment>
+                        <Typography className={style.formControl}>
+                          {t(`size${value}.text`)}
+                        </Typography>
+                        <Typography className={style.formControlMobile}>
+                          {t(`size${value}.mobile`)}
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                  <FormHelperText className={style.formHelperText}>
+                    {t(`size${value}.size`)}
+                  </FormHelperText>
+                </Box>
+              ))}
+              <Box className={style.valueContainer}>
+                <Typography display="inline" className={style.filterValue}>
+                  {currentFilterData.length}
+                </Typography>{' '}
+                <Typography display="inline" className={style.maxValue}>
+                  / {baanInfo.length - 1}
+                </Typography>
+              </Box>
+            </Box>
+          </FormGroup>
+          <StatusColor />
           <Box
             display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            className={style.filterContainer}
+            flexWrap="wrap"
+            justifyContent="center"
+            className={style.cardContainer}
           >
-            {['S', 'M', 'L', 'XL'].map((value, idx: number) => (
-              <Box key={idx}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={filterSize[value as BaanSize]}
-                      onChange={(e) =>
-                        setFilterSize({
-                          ...filterSize,
-                          [e.target.name]: e.target.checked,
-                        })
-                      }
-                      color="default"
-                      className={style.checkBox}
-                      name={value}
-                    />
-                  }
-                  label={
-                    <React.Fragment>
-                      <Typography className={style.formControl}>
-                        {t(`size${value}.text`)}
-                      </Typography>
-                      <Typography className={style.formControlMobile}>
-                        {t(`size${value}.mobile`)}
-                      </Typography>
-                    </React.Fragment>
+            {currentFilterData.map((val) => (
+              <React.Fragment key={val.ID}>
+                <CardBaan
+                  data={val}
+                  handleClickOpen={handleClickOpen}
+                  setDialogData={setDialogData}
+                  disabled={
+                    val.ID === userInfo.currentBaan ||
+                    val.ID === userInfo.preferBaan
                   }
                 />
-                <FormHelperText className={style.formHelperText}>
-                  {t(`size${value}.size`)}
-                </FormHelperText>
-              </Box>
+              </React.Fragment>
             ))}
-            <Box className={style.valueContainer}>
-              <Typography display="inline" className={style.filterValue}>
-                {currentFilterData.length}
-              </Typography>{' '}
-              <Typography display="inline" className={style.maxValue}>
-                / {baanInfo.length - 1}
-              </Typography>
-            </Box>
           </Box>
-        </FormGroup>
-        <StatusColor />
-        <Box
-          display="flex"
-          flexWrap="wrap"
-          justifyContent="center"
-          className={style.cardContainer}
-        >
-          {currentFilterData.map((val) => (
-            <React.Fragment key={val.ID}>
-              <CardBaan
-                data={val}
-                handleClickOpen={handleClickOpen}
-                setDialogData={setDialogData}
-                disabled={
-                  val.ID === userInfo.currentBaan ||
-                  val.ID === userInfo.preferBaan
-                }
-              />
-            </React.Fragment>
-          ))}
+          <Grid container className={style.gridContainer}>
+            {currentFilterData.map((val) => (
+              <React.Fragment key={val.ID}>
+                <GridCard
+                  data={val}
+                  handleClickOpen={handleClickOpen}
+                  setDialogData={setDialogData}
+                  disabled={
+                    val.ID === userInfo.currentBaan ||
+                    val.ID === userInfo.preferBaan
+                  }
+                />
+              </React.Fragment>
+            ))}
+          </Grid>
+          <CardDialog
+            ID={dialogDataID}
+            open={open}
+            handleClose={handleClose}
+            disabled={
+              dialogDataID === userInfo.currentBaan ||
+              dialogDataID === userInfo.preferBaan
+            }
+          />
         </Box>
-        <Grid container className={style.gridContainer}>
-          {currentFilterData.map((val) => (
-            <React.Fragment key={val.ID}>
-              <GridCard
-                data={val}
-                handleClickOpen={handleClickOpen}
-                setDialogData={setDialogData}
-                disabled={
-                  val.ID === userInfo.currentBaan ||
-                  val.ID === userInfo.preferBaan
-                }
-              />
-            </React.Fragment>
-          ))}
-        </Grid>
-        <CardDialog
-          ID={dialogDataID}
-          open={open}
-          handleClose={handleClose}
-          disabled={
-            dialogDataID === userInfo.currentBaan ||
-            dialogDataID === userInfo.preferBaan
-          }
-        />
-      </Box>
+      </SubmitContext.Provider>
     )
   }
 }
