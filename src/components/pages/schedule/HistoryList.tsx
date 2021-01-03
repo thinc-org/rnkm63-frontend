@@ -7,7 +7,7 @@ import { AssignmentLog } from '../../../controllers/GetHistory'
 import indexStyle from './indexStyle'
 
 type Props = {
-  data: Array<AssignmentLog> | null | undefined
+  data: Array<AssignmentLog> | null
   user: IUser | null
 }
 

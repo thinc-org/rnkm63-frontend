@@ -1,7 +1,7 @@
 import { Card, Grid, Typography } from '@material-ui/core'
 import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
-import { IUser, UserContext } from 'contexts/UserContext'
+import { UserContext } from 'contexts/UserContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
@@ -12,28 +12,19 @@ import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
 import { ScheduleTable } from './ScheduleTable'
 
-function isPhaseOne(user: IUser | null): boolean {
-  if (user) {
-    if (user.phaseCount === 1) {
-      return true
-    }
-  }
-  return false
-}
-
 function SchedulePage() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
   const { user: userInfo, error: contextError } = React.useContext(UserContext)
   const { data, error } = useSWR(
-    !isPhaseOne(userInfo) ? '/assignment/getHistory' : null,
+    userInfo?.phaseCount !== 1 ? '/assignment/getHistory' : null,
     GetHistory
   )
 
   if (contextError) return fail(contextError)
   if (error) return fail(error)
 
-  if (!isPhaseOne(userInfo) && !data) return <Loading />
+  if (userInfo?.phaseCount !== 1 && !data) return <Loading />
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
@@ -52,7 +43,7 @@ function SchedulePage() {
           <Typography className={style.historyTitle}>
             {t('history_title')}
           </Typography>
-          <HistoryList data={data} user={userInfo} />
+          <HistoryList data={data ? data : null} user={userInfo} />
         </Card>
       </Grid>
     </Grid>
