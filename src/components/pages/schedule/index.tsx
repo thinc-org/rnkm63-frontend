@@ -1,26 +1,39 @@
 import { Card, Grid, Typography } from '@material-ui/core'
+import { Loading } from 'components/common'
 import { fail } from 'components/ErrorProvider'
-import { UserContext } from 'contexts/UserContext'
+import { IUser, UserContext } from 'contexts/UserContext'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
 
 import { GetHistory } from '../../../controllers/GetHistory'
-import Loading from '../../common/Loading'
 import { ActivityTable } from './ActivityTable'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
 import { ScheduleTable } from './ScheduleTable'
 
+function isPhaseOne(user: IUser | null): boolean {
+  if (user) {
+    if (user.phaseCount === 1) {
+      return true
+    }
+  }
+  return false
+}
+
 function SchedulePage() {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
   const { user: userInfo, error: contextError } = React.useContext(UserContext)
-  const { data, error } = useSWR('/assignment/getHistory', GetHistory)
+  const { data, error } = useSWR(
+    !isPhaseOne(userInfo) ? '/assignment/getHistory' : null,
+    GetHistory
+  )
 
   if (contextError) return fail(contextError)
   if (error) return fail(error)
-  if (!data) return <Loading />
+
+  if (!isPhaseOne(userInfo) && !data) return <Loading />
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={8}>
