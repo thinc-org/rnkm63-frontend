@@ -1,30 +1,40 @@
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core'
+import { Box, makeStyles, Paper, Theme, Typography } from '@material-ui/core'
 import { LinkButton } from 'components/common'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    padding: '1.25rem',
+    [theme.breakpoints.up('sm')]: {
+      padding: '2rem',
+    },
+  },
+  title: {
+    textAlign: 'center',
+  },
   content: {
     textAlign: 'start',
     '& li': {
-      listStyle: 'none',
-      display: 'table',
-      '&:before': {
-        display: 'table-cell',
-        paddingEnd: '0.5em',
-        content: 'counters(item, ".")". "',
-        counterIncrement: 'item',
-      },
       '& p': {
         display: 'inline',
       },
+      paddingTop: '0.25rem',
+      paddingBottom: '0.25rem',
     },
     '& ul': {
       counterReset: 'item',
+      paddingInlineStart: '1.5em',
+      [theme.breakpoints.up('sm')]: {
+        paddingInlineStart: '2em',
+      },
+    },
+    '& > ul': {
+      paddingInlineStart: '1em',
     },
   },
-})
+}))
 
 function Covid() {
   const classes = useStyles()
@@ -33,8 +43,10 @@ function Covid() {
   return (
     <Box flexDirection="column" alignItems="stretch" textAlign="center">
       <Paper elevation={3}>
-        <Box padding="2rem">
-          <Typography variant="h4">{t('title')}</Typography>
+        <Box className={classes.container}>
+          <Typography variant="h5" className={classes.title}>
+            {t('title')}
+          </Typography>
           <Typography className={classes.content} component="div">
             <Content />
           </Typography>
