@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
 
 import { GetHistory } from '../../../controllers/GetHistory'
+import { getLocalRound } from '../../../local/RoundInfo'
 import { ActivityTable } from './ActivityTable'
 import { HistoryList } from './HistoryList'
 import indexStyle from './indexStyle'
@@ -21,7 +22,6 @@ function SchedulePage() {
     GetHistory
   )
 
-  console.log(userInfo)
   if (contextError) return fail(contextError)
   if (error) return fail(error)
 
@@ -37,7 +37,8 @@ function SchedulePage() {
         </Typography>
         <Card className={style.scheduleContainer}>
           <ScheduleTable
-            currentRound={userInfo?.roundCount ? userInfo.roundCount : -1}
+            currentRound={getLocalRound()}
+            phase={userInfo?.phaseCount ? userInfo.phaseCount : -1}
           />
         </Card>
       </Grid>

@@ -14,9 +14,10 @@ import { scheduleRoundData } from './ScheduleData'
 
 type Props = {
   currentRound: number
+  phase: number
 }
 
-function ScheduleTable({ currentRound }: Props) {
+function ScheduleTable({ currentRound, phase }: Props) {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
 
@@ -46,7 +47,9 @@ function ScheduleTable({ currentRound }: Props) {
               <TableRow
                 key={index}
                 className={
-                  index + 1 === currentRound ? style.currentRound : undefined
+                  index + 1 === currentRound && phase === 2
+                    ? style.currentRound
+                    : undefined
                 }
               >
                 <TableCell className={style.tableText} align="center">
