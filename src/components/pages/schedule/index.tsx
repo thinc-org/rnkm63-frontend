@@ -21,6 +21,7 @@ function SchedulePage() {
     GetHistory
   )
 
+  console.log(userInfo)
   if (contextError) return fail(contextError)
   if (error) return fail(error)
 
@@ -35,7 +36,9 @@ function SchedulePage() {
           {t('schedule_title')}
         </Typography>
         <Card className={style.scheduleContainer}>
-          <ScheduleTable />
+          <ScheduleTable
+            currentRound={userInfo?.roundCount ? userInfo.roundCount : -1}
+          />
         </Card>
       </Grid>
       <Grid item xs={12} md={4}>

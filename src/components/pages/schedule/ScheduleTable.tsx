@@ -12,7 +12,11 @@ import { useTranslation } from 'react-i18next'
 import indexStyle from './indexStyle'
 import { scheduleRoundData } from './ScheduleData'
 
-function ScheduleTable() {
+type Props = {
+  currentRound: number
+}
+
+function ScheduleTable({ currentRound }: Props) {
   const { t } = useTranslation('schedule')
   const style = indexStyle()
 
@@ -39,7 +43,12 @@ function ScheduleTable() {
         <TableBody>
           {scheduleRoundData.map((act, index: number) => {
             return (
-              <TableRow key={index}>
+              <TableRow
+                key={index}
+                className={
+                  index + 1 === currentRound ? style.currentRound : undefined
+                }
+              >
                 <TableCell className={style.tableText} align="center">
                   {act.round}
                 </TableCell>
