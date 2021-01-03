@@ -60,13 +60,13 @@ function Header(props: IHeader) {
   //logic for style for navbar in desktop size.
   let menuStyle
   if (userInfo?.isConfirm) {
-    if (userInfo?.phaseCount === 2) {
-      menuStyle = 'center'
-    } else {
-      menuStyle = 'space-between'
-    }
+    menuStyle = 'center'
   } else {
-    menuStyle = 'flex-end'
+    if (userInfo?.currentBaan === -1) {
+      menuStyle = 'space-between'
+    } else {
+      menuStyle = 'flex-end'
+    }
   }
 
   return (
