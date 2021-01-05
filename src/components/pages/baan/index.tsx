@@ -92,7 +92,7 @@ function Baan() {
   else if (!currentFilterData || isSubmit) return <Loading />
   else {
     return (
-      <SubmitContext.Provider value={{ isSubmit, setSubmit }}>
+      <SubmitContext.Provider value={{ setSubmit }}>
         <Box className={style.container}>
           <Box className={style.title} textAlign="center">
             <Typography variant="h2">
