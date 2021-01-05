@@ -1,11 +1,11 @@
 import { Button } from '@material-ui/core'
 import { fail } from 'components/ErrorProvider'
+import { SubmitContext } from 'contexts/SubmitContext'
 import { createBrowserHistory } from 'history'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import useStyles from '../style/cardDialogStyle'
-import { SubmitContext } from '../SubmitContext'
 import { postRequestBaan } from '../utils/apiService'
 
 interface ISubmitButton {

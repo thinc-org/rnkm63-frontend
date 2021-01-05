@@ -1,11 +1,12 @@
 import { Box, Button, Typography } from '@material-ui/core'
 import SkeletonImage from 'components/common/SkeletonImage'
 import { fail } from 'components/ErrorProvider'
-import React, { useCallback, useEffect, useState } from 'react'
+import { SubmitContext } from 'contexts/SubmitContext'
+import { getBaan, getLogo } from 'local/BaanInfo'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
-import { getBaan, getLogo } from '../../../local/BaanInfo'
 import { pendingStyles } from './styles/pendingStyles'
 import {
   getAllRequestCount,
@@ -40,15 +41,16 @@ function Pending(props: Props) {
     requestColor: reqColor,
   }
   const classes = pendingStyles(styleProps)
-
+  const { setSubmit } = useContext(SubmitContext)
   const cancel = useCallback(async () => {
     try {
+      setSubmit(true)
       await postBaanChange(null)
       window.location.reload()
     } catch (e) {
       fail(e)
     }
-  }, [])
+  }, [setSubmit])
 
   useEffect(() => {
     async function fetchData() {

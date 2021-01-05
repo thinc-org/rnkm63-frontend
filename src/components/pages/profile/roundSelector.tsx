@@ -1,6 +1,7 @@
 import { Box, Button } from '@material-ui/core'
 import { fail } from 'components/ErrorProvider'
-import React, { useCallback } from 'react'
+import { SubmitContext } from 'contexts/SubmitContext'
+import React, { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
@@ -12,14 +13,16 @@ interface Props {
 function RoundSelector(props: Props) {
   const { t } = useTranslation('profile')
   const classes = roundStyles()
+  const { setSubmit } = useContext(SubmitContext)
   const leave = useCallback(async () => {
     try {
+      setSubmit(true)
       await postBaanChange(0)
       window.location.reload()
     } catch (e) {
       fail(e)
     }
-  }, [])
+  }, [setSubmit])
 
   if (props.isBaanExist) {
     return (
