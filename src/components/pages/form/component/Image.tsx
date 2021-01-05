@@ -1,5 +1,4 @@
 import {
-  Backdrop,
   Box,
   Button,
   DialogContentText,
@@ -14,7 +13,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
 import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
-import Loading from 'components/common/Loading'
+import LoadingOnPage from 'components/common/LoadingOnPage'
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
@@ -278,9 +277,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           {t('uploadReason')}
         </Typography>
       </Box>
-      <Backdrop className={style.backdrop} open={onProcess}>
-        <Loading />
-      </Backdrop>
+      <LoadingOnPage onProcess={onProcess} />
     </Box>
   )
 })

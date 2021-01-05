@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import { Loading } from 'components/common'
+import LoadingOnPage from 'components/common/LoadingOnPage'
 import { fail } from 'components/ErrorProvider'
 import { UserContext } from 'contexts/UserContext'
 import { baanInfo } from 'local/BaanInfo'
@@ -89,7 +90,7 @@ function Baan() {
   }, [searchValue, filterSize, capacityData])
 
   if (!userInfo) return null
-  else if (!currentFilterData || isSubmit) return <Loading />
+  else if (!currentFilterData) return <Loading />
   else {
     return (
       <SubmitContext.Provider value={{ setSubmit }}>
@@ -211,6 +212,7 @@ function Baan() {
             }
           />
         </Box>
+        <LoadingOnPage onProcess={isSubmit} />
       </SubmitContext.Provider>
     )
   }
