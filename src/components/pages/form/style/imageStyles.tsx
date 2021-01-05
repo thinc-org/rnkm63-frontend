@@ -144,6 +144,10 @@ const imageStyle = makeStyles(
           lineHeight: '24px',
         },
       },
+      backdrop: {
+        zIndex: theme.zIndex.modal + 1,
+        backdropFilter: 'blur(2px)',
+      },
     }),
   { index: 1 }
 )

@@ -1,4 +1,5 @@
 import {
+  Backdrop,
   Box,
   Button,
   DialogContentText,
@@ -13,6 +14,7 @@ import CloseIcon from '@material-ui/icons/Close'
 import ZoomInIcon from '@material-ui/icons/ZoomIn'
 import ZoomOutIcon from '@material-ui/icons/ZoomOut'
 import { BlurBehindDialog } from 'components/common/BlurBehindDialog'
+import Loading from 'components/common/Loading'
 import React, { useCallback, useEffect, useState } from 'react'
 import Cropper from 'react-easy-crop'
 import { useTranslation } from 'react-i18next'
@@ -65,17 +67,20 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
   const [finalImg, setFinalImg] = useState(preImage)
   const [editStatus, setEditStatus] = useState(false)
+  const [onProcess, setOnProcess] = useState(false)
 
   const style = imageStyle({ editStatus: imageRequired })
 
   const onSelectFile = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.files && e.target.files.length > 0) {
+        setOnProcess(true)
         const reader = new FileReader()
         const file = e.target.files[0]
 
         if (!checkImageSize(file, true, 10240)) {
           setFileSizeError(true)
+          setOnProcess(false)
           return
         }
 
@@ -94,6 +99,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
         setMaxZoom(Math.min(widthImg / 180, heightImg / 240))
         setZoom(1)
         setFileSizeError(false)
+        setOnProcess(false)
       }
     },
     []
@@ -104,6 +110,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
   }, [])
 
   const makeCroppedImage = useCallback(async () => {
+    setOnProcess(true)
     if (!upImg) {
       return
     }
@@ -111,6 +118,7 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
     setCropState(false)
     setFinalImg(img.urlFile)
     setImageBlob(img.blob)
+    setOnProcess(false)
     setEditStatus(true)
     setImageRequired(false)
   }, [upImg, croppedAreaPixels, setImageBlob, setImageRequired])
@@ -270,6 +278,9 @@ const Image = React.memo(function Image(props: React.PropsWithRef<any>) {
           {t('uploadReason')}
         </Typography>
       </Box>
+      <Backdrop className={style.backdrop} open={onProcess}>
+        <Loading />
+      </Backdrop>
     </Box>
   )
 })
